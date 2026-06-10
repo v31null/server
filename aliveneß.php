@@ -30,6 +30,9 @@ if (is_file($log)) {
 <div class="acta-card">
 <p class="acta-body" id="vigiliae">Nulla adhuc vigilia.</p>
 </div>
+<div class="acta-card">
+<p class="acta-body"><a href="https://stats.uptimerobot.com/Y1UqdausP4/803270927">Hiis qui probare voluerint</a></p>
+</div>
 </div>
 <script src="/assets/js/time.js"></script>
 <script>
