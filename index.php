@@ -92,6 +92,60 @@
       <p><a href="/links.txt">Click ‘iðer for to be Re‑direkten to see keys Publik fileses.</a></p>
     </footer>
 
+<?php
+    $acta = @json_decode(@file_get_contents(__DIR__ . '/indexd.json'), true);
+    if (is_array($acta) && count($acta)) :
+?>
+    <div class="acta-container">
+<?php foreach ($acta as $a) :
+        $l = isset($a['latin']) ? $a['latin'] : array();
+        $sig = isset($a['sig']) ? $a['sig'] : array();
+        $header = array('invocatio', 'intitulatio');
+        $body = array('arenga', 'promulgatio', 'narratio', 'dispositio', 'additio', 'corroboratio', 'datatio');
+?>
+      <div class="acta-card">
+
+        <div class="acta-header">
+<?php if (!empty($l['invocatio'])) : ?>
+          <p class="acta-invocatio"><?php echo htmlspecialchars($l['invocatio'], ENT_QUOTES, 'UTF-8'); ?></p>
+<?php endif; ?>
+<?php if (!empty($l['intitulatio'])) : ?>
+          <p class="acta-intitulatio"><?php echo htmlspecialchars($l['intitulatio'], ENT_QUOTES, 'UTF-8'); ?></p>
+<?php endif; ?>
+        </div>
+
+<?php if (!empty($l['inscriptio'])) : ?>
+        <p class="acta-inscriptio"><?php echo htmlspecialchars($l['inscriptio'], ENT_QUOTES, 'UTF-8'); ?></p>
+<?php endif; ?>
+
+        <p class="acta-body">
+<?php
+        $lines = array();
+        foreach ($body as $k) {
+            if (!empty($l[$k])) {
+                $lines[] = htmlspecialchars($l[$k], ENT_QUOTES, 'UTF-8');
+            }
+        }
+        echo implode("<br><br>\n", $lines);
+?>
+        </p>
+
+<?php if (!empty($l['subscriptio'])) : ?>
+        <p class="acta-subscriptio"><?php echo htmlspecialchars($l['subscriptio'], ENT_QUOTES, 'UTF-8'); ?></p>
+<?php endif; ?>
+
+<?php if (!empty($sig['value'])) : ?>
+        <div class="acta-sigillum">
+          <p class="acta-sigillum-titulus">Certificatio authenticitatis huius actae, sigillo nostro <?php echo htmlspecialchars(isset($sig['alg']) ? $sig['alg'] : 'sigillum', ENT_QUOTES, 'UTF-8'); ?> munita.</p>
+          <p class="acta-sigillum-valor"><?php echo htmlspecialchars($sig['value'], ENT_QUOTES, 'UTF-8'); ?></p>
+        </div>
+<?php endif; ?>
+
+      </div>
+<?php endforeach; ?>
+    </div>
+<?php endif; ?>
+
   </div>
 
   <script>window.V31N_MODE = 'upload';</script>

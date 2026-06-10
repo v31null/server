@@ -1,0 +1,23 @@
+[
+    {
+        "id": "n001",
+        "latin": {
+            "invocatio": "In nomine mei supremi et indubitabilis.",
+            "intitulatio": "V, triginta et uno nihilis cinctus, gratia Naturae Evolutor et Codator huius servitii,",
+            "inscriptio": "omnibus fidelibus utentibus nostris salutem et in perpetuum.",
+            "arenga": "Quoniam decet sollicitudinem nostram contra insidias et occulta vitia iugiter vigilare, ut fides et securitas utentium in hoc servitio inconcussa permaneat, et quoniam ordinatam progressionem ad decorem servitii pertinere ex ipsa Natura constat, nova pariter et utilia instituere curavimus.",
+            "promulgatio": "Notum sit igitur universitati vestrae, quod,",
+            "narratio": "cum custodiam nostram ad fabricam machinae convertissemus, plura invenimus quibus celeres et callidi irrepere poterant, haec videlicet: portam sine obice relictam, lucernam publicam tabularia nostra praetereuntibus illuminantem, manum scriptoris quae in via adulterari posset, nuntium qui ad murum civitatis averti valeret. Quae omnia, labore aliquot horarum impenso, obstruximus atque firmavimus.",
+            "dispositio": "Eapropter, cura nostra adhibita, decernimus ut portis moderatio imponatur, qua nimius accessuum impetus temperetur; ut lucerna publica claudatur et occultae ianuae obserentur, indice rerum extincto et vestigiis operis nostri a conspectu sublatis, pagina insuper ianuae vacua reddita quae nihil de arte nostra prodat; ut sigillum fidei singulis scriptis quae mittimus imprimatur, lampade peregrina intra domum reducta et vallo murorum undique circumdato; ut ipsa denique custodia stabiliatur, origine accessus ex solo fido limite cognita, erroribus ad silentium redactis, sera tabularii patiente reddita, custodeque ianuae singulari atque indiviso facto, ne ullo turbarum impetu opprimatur.",
+            "additio": "Insuper, ad decorem servitii, novum quiddam et utile instituimus: tabulam publicam fidei in narthece systematis suspendendam, manifesto signato et indice nexuum proprio sigillo nostro communito, qua unusquisque utens per se probare valeat ea quae mittimus integra et incorrupta permanere.",
+            "corroboratio": "Ut autem haec nostra notificatio firma et inconcussa perpetuis temporibus permaneat, praesentem paginam conscribi et sigilli nostri impressione muniri fecimus, eamque in publico systematis narthece proponi iussimus.",
+            "datatio": "Datum apud Mare Nostrum, per manum ipsius servitii, quod pro se loquitur, die 10 mensis 6, anno ministerii nostri 2026, 11:45:21 AM.",
+            "subscriptio": "PROPONATUR."
+        },
+        "sig": {
+            "alg": "RSA-SHA256",
+            "key": "publickey.pem",
+            "value": "YmaJM9gxvKM3wlvW3S6X0E32aCqA1GW2Qpb8teuZfqvOupgx8d7h1Tzt5sQ5yCnf+4oqIMkWaXwgAfs7H2cxKqtMD4Blyn46r7NV83/tcx1/tO42HqIF5+oqE+U8mDLUlA1KHS/+oKysEcWVT/7gSceGj8U4fJHqzH7qQnbPBEHZXS2Whp1w2B685bblNSX8NqF4F9IPq5b4DeIk7wbuZykAJRkg5uVcfnxmScmT4LMNxlIoe0LMQ3+vdl+35T6lOS+14dfJ6pn2ayOyo7XwgIb5PMnsbxIY8xQUQ4qeepq+83X4SoW34FrNt4Z8+GwaXyo0WP0E1h1FwZjuFZyh9E4GAm4ASUSJjZeodiUftWgILVD755pG4Jux88dnihP68wSEZxRXnM9hqUeD+GGxPwQdxs7UWc3dPOjknT65QJQJQKTipiSnP1zyjN7t+QR+Mx4UlZ/RYdheEGhHybU8x6gWBvkAyW6p0MiTwaaqkt82yGULfK2gcel3g4al3O0G"
+        }
+    }
+]
