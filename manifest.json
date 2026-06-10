@@ -3,7 +3,7 @@
     "algo": "RSA ／ SHA‑256 De‑attachen‑signature ( manifest.sig is base64 of sign( SHA-256(manifest.json) ) )",
     "pubkey": "publickey.pem",
     "pubkey_spki_sha256": "261AF6EA33A67825250326CC64E5BC735BF3C010FCC4F4132D83F19B28D1DAD5",
-    "count": 89,
+    "count": 90,
     "files": {
         ".gitattributes": {
             "sha256": "3273581722446ffa8ba538c07adc08da799a77df208360a9c0ae1bad97c412ff",
@@ -14,6 +14,11 @@
             "sha256": "482181d6f6a06cb19b41d8d8b7e50e6afcd7e69daf19eb4366780348c5b3d79b",
             "sha384": "sha384-MdDH64gJR8c6GDQFVO1oXc6cYesfcnK8Jv8TPvwCiZaCmp1GL0S0z48lrG8N9Uuz",
             "size": 1053
+        },
+        "README.md": {
+            "sha256": "572eafe510b9de716c505468ff4c3fa920163e514fa9d26f096a633386335ff5",
+            "sha384": "sha384-dcyBB7Fdk0HEnfvygxFRojbJpX9cbAXx3Bsm1gM194RSGu/IpEjFOrOOD3z4uG6X",
+            "size": 5105
         },
         "api/chunk.php": {
             "sha256": "fba88ec36982d93f2b4e0fc975314ff2530a87680a88cad6bab440b66316304d",
@@ -361,9 +366,9 @@
             "size": 26728
         },
         "assets/css/style.css": {
-            "sha256": "7357163f57672c09c232d7d965910d7c41f3546323987be5e6abc13ddf8614ff",
-            "sha384": "sha384-I3LToIEYGMOGBXE9KRdmlqWerQTvZB2yw3/3nrRKROmnnci6ltnReBOhyHjC9/Oa",
-            "size": 9013
+            "sha256": "0db5a7537663304876bf08f9b3b99e79743edfe0b603cc3499914a69edf14f51",
+            "sha384": "sha384-9xsA7gMHpavZjF/BGSfaXQR5UFWZ9Kaib70GMNulxyLH+pPPkn22suz78ZW+RuEJ",
+            "size": 9117
         },
         "assets/js/app.js": {
             "sha256": "be33d1b6ec214fa02856e6c5cbd49bee56f029a10a9173bb83ef0b4a987b2721",

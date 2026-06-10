@@ -1,12 +1,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap');
 
-*,
-*::before,
-*::after {
+*:not(.katex):not(.katex *),
+*:not(.katex):not(.katex *)::before,
+*:not(.katex):not(.katex *)::after {
   box-sizing: border-box;
 }
-* {
+*:not(.katex):not(.katex *) {
     font-family: Junicode, 'Times New Roman', Times, serif, 'nullpunktsenergiefont';
 	padding: 0;
 	margin: 0;

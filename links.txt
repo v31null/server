@@ -34,6 +34,7 @@ Take þe Finger‑print from an Trusten Official‑source , e.g./ github.com/v3
 Per-file sha256s ;
   3273581722446ffa8ba538c07adc08da799a77df208360a9c0ae1bad97c412ff  .gitattributes
   482181d6f6a06cb19b41d8d8b7e50e6afcd7e69daf19eb4366780348c5b3d79b  .htaccess
+  572eafe510b9de716c505468ff4c3fa920163e514fa9d26f096a633386335ff5  README.md
   fba88ec36982d93f2b4e0fc975314ff2530a87680a88cad6bab440b66316304d  api/chunk.php
   d1a24968d204e1d45aa5d3adfc983a73cc42bad0796338449fd146028a3558e0  api/status.php
   d8bb747b3fdccd84a60bd0aa56bb90937270d0bd15f1101cd8f2a5a3709dd0a3  assets/css/fonts/BabelStoneHan.ttf
@@ -103,7 +104,7 @@ Per-file sha256s ;
   776ac4ef4b53b46e2b38698818361ecd4f6926dfa4eb79bf1113c456785695bd  assets/css/fonts/nullpunktsenergiefont-Regular.ttf
   38d32567380fdcee9e76bb5127c38b9109fa6f27de984bc108f559ff4e8b2a08  assets/css/fonts/regular.ttf
   fb2157ab0eb24f9abc00320655e7dfa3d6c92e66b9e2639ae14cd3abe9046dc4  assets/css/katex.css
-  7357163f57672c09c232d7d965910d7c41f3546323987be5e6abc13ddf8614ff  assets/css/style.css
+  0db5a7537663304876bf08f9b3b99e79743edfe0b603cc3499914a69edf14f51  assets/css/style.css
   be33d1b6ec214fa02856e6c5cbd49bee56f029a10a9173bb83ef0b4a987b2721  assets/js/app.js
   a1316ded7951625841ba9f81890315465ef798ce6864079670c6c6e2f774677f  assets/js/auto-render.js
   07770af90943a1de1a1010794bc78c6a7346d46d48fb63e35cc76ba76b827604  assets/js/copy-tex.min.js
