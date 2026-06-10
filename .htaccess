@@ -27,7 +27,7 @@ RewriteRule ^incoming/ - [F,L]
 
 RewriteRule ^init_storage\.php$ - [F,L]
 
-RewriteRule ^embed/([a-f0-9]{8})(.*)\.[a-zA-Z0-9]+$ embed.php?id=$1&PASS=$2 [L,QSA]
+RewriteRule ^embed/([a-f0-9]{8})(.*)\.[a-zA-Z0-9]+$ embed.php?id=$1&PASS=$2 [L,QSA,B]
 
 <FilesMatch "^\.">
     Require all denied
