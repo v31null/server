@@ -2,23 +2,28 @@
     "name": "Manifest for files Publik",
     "algo": "RSA ／ SHA‑256 De‑attachen‑signature ( manifest.sig is base64 of sign( SHA-256(manifest.json) ) )",
     "pubkey": "publickey.pem",
-    "pubkey_sha256": "AEA7FA16965AED3DE3803A270F1E2973D600C852511ECF04B59ACE1A9026E13E",
-    "count": 88,
+    "pubkey_spki_sha256": "261AF6EA33A67825250326CC64E5BC735BF3C010FCC4F4132D83F19B28D1DAD5",
+    "count": 89,
     "files": {
+        ".gitattributes": {
+            "sha256": "3273581722446ffa8ba538c07adc08da799a77df208360a9c0ae1bad97c412ff",
+            "sha384": "sha384-3M29gIBel8ar7xbQHmpIdKm0QfViJmf1xazb3y6oK63eSzVT7YMcp+3VwJxTygT5",
+            "size": 75
+        },
         ".htaccess": {
             "sha256": "482181d6f6a06cb19b41d8d8b7e50e6afcd7e69daf19eb4366780348c5b3d79b",
             "sha384": "sha384-MdDH64gJR8c6GDQFVO1oXc6cYesfcnK8Jv8TPvwCiZaCmp1GL0S0z48lrG8N9Uuz",
             "size": 1053
         },
         "api/chunk.php": {
-            "sha256": "9d884386b0d781ab5f5d342da39af76035ccc065d29400c109097d072936337e",
-            "sha384": "sha384-EHmYuIK3XnIEERqmI6SwV3hcy8V/Bgb0wQQQlYS2Kavzl93CnB5Ls+GOfTGkeGCQ",
-            "size": 1687
+            "sha256": "fba88ec36982d93f2b4e0fc975314ff2530a87680a88cad6bab440b66316304d",
+            "sha384": "sha384-uYsUwUMrzPrYQEsfIXck0IeBFWOh1zylPcZinS4NEbPiSvD/YAaOG3d8yk6Htgq2",
+            "size": 1760
         },
         "api/status.php": {
-            "sha256": "451163da1796d3b46e49f3f3183dfa53b7e819868d060e7c361819ef523ccc58",
-            "sha384": "sha384-1yPyeiINcqIGFpyiWfO8V0JT7uTRldTDp2aY2o8yZX1bNy/4sALxz8mliDoB3Wao",
-            "size": 1052
+            "sha256": "d1a24968d204e1d45aa5d3adfc983a73cc42bad0796338449fd146028a3558e0",
+            "sha384": "sha384-HPd2i89abp6R834ZWsx9T9WQR/SV4WzmtYOX33LrY+thOgNIoYg+aMORwMdl3n0c",
+            "size": 1125
         },
         "assets/css/fonts/BabelStoneHan.ttf": {
             "sha256": "d8bb747b3fdccd84a60bd0aa56bb90937270d0bd15f1101cd8f2a5a3709dd0a3",
@@ -396,24 +401,24 @@
             "size": 217
         },
         "db.php": {
-            "sha256": "001bb92ee352b8c62433b9398fbf8e5e1c6f41b1fd4584e3f3b797ce180a3870",
-            "sha384": "sha384-D+4Xkj/BV6cro6mz6lqj3RXL50wbf4E5i0Oj8J/EeZ9UNwGmSeSfuhxwkiEpfiWu",
-            "size": 2808
+            "sha256": "f3ef93bbc71d2a2df9bee3a3e5e7b1caa45c19d7772f274591640a61622f1a31",
+            "sha384": "sha384-mzQ6hFDdjfGbGwv/zAt8J8W4CJjzw57ci8PeuQWdtT2rzG3myPPPSZPAi8Rl7Vg7",
+            "size": 2878
         },
         "download.php": {
-            "sha256": "c593e6da3de341b6a5ae7ffdc071d0224d9b36f22f2c4b540cd85385fdabd7f6",
-            "sha384": "sha384-CnCRRLUBTHF2VQYAVsVrgMSAq+7IDgwRBKGy2eBTH5mdfyPwrZ43sGukFyKRIwPa",
-            "size": 4205
+            "sha256": "1d0eae57754e9efdd43abb1233d7730c92c1f31ebfcb24cc30f24803d8eef7e6",
+            "sha384": "sha384-SPnuQpQztUq1ZEjBnYXiN62nn9p+9CU3zZ4GYEj64BELYAysh+ETXUNch9QcYZ8h",
+            "size": 4275
         },
         "embed.php": {
-            "sha256": "39dadf1e4344c390910ec5b12b7b989f3b851442040576a2aad22c82505c6085",
-            "sha384": "sha384-5PzRWUV2PI6RcZzyVwTo8qplsXsHWbF2BfJYfqYST6/zoc0Z+5LYLhwKcmWMJAcZ",
-            "size": 5613
+            "sha256": "a30f3a9955edfd9ae32bf39866f0fca3d13654aee07866d46e168cbaca46adda",
+            "sha384": "sha384-94uCPuGLkr6epe9tPt7Rn9DkVANjAKqUePS+ZdYM4tqvBuxNyhlL9V4VCQFs6GME",
+            "size": 5683
         },
         "index.php": {
-            "sha256": "6a502339b29e8f5fd86f2167a99792155c11edce16f1020a3ba504e7b6c00b97",
-            "sha384": "sha384-4rin32gczXf+ICbWP+zBhYJM5YDOGnKu6t88Vx/g6faznG1mLCwK2r7BYzDXxloe",
-            "size": 6798
+            "sha256": "eca6fe155c9af43b2f91cf70e8248c6b16622a4047fe1d99ec2d1c73bac82332",
+            "sha384": "sha384-HHG3jAOoNuPxPvhsFtZZQ9KpHWFl+TBGSe2b32DLB4jp54yjqdyKdU8L5+PthJFH",
+            "size": 6876
         },
         "indexd.json": {
             "sha256": "b5a94ef16e66abe0234aae9103086ff8dc9b34813ff70af1cba4adc2164d17c4",
@@ -421,14 +426,14 @@
             "size": 9285
         },
         "init_storage.php": {
-            "sha256": "b9920c4b2954285d6fabc9e7bddd4aecd07a7e494e64b5317c0b65933439a9e5",
-            "sha384": "sha384-CRPBIqXrKdrZymDT/ZsHw+/uqebAHT/RKzRPeVGMevCU6IuYKTTW24oL8rJyHgoB",
-            "size": 692
+            "sha256": "417ef536a8f627b0cbefff91b68d754cb68c081acb1ca16bcd5dcab41f85406b",
+            "sha384": "sha384-fdU1FhUXJktcNXNVz8EnjlUko0uei76X9SS7AmK1x9o1XqFbVZIGO5MTxzUOnCHv",
+            "size": 762
         },
-        "links.txt": {
-            "sha256": "5bf02fe515d7ad7fe9ed12d4a575bfadfa0014ce6ed666282146dd6da230ffb3",
-            "sha384": "sha384-QJNQzTmjCGdYXjNWPCWKtiV9FYPPUx6hK3dNT6IO6pwhMhrVXQwL4SMAZTglPSRn",
-            "size": 10681
+        "integritie.php": {
+            "sha256": "a089e81d9ff91dc623de95a4b60dfbed9a82ab7f8cd5955f1a0b0c08d3d468ee",
+            "sha384": "sha384-8M17rHWxSodBtpY4TGXbvrwSsQyU7CLFMX1F7rzDw4lMydIxCqA3cT3LtXSkY2i8",
+            "size": 2784
         },
         "publickey.pem": {
             "sha256": "aea7fa16965aed3de3803a270f1e2973d600c852511ecf04b59ace1a9026e13e",
@@ -436,14 +441,14 @@
             "size": 636
         },
         "ratelimit.php": {
-            "sha256": "d2268283eda1a528887160835080d39031b02ccc280d27863faed912768dd103",
-            "sha384": "sha384-5hBL5Y/lcCTD2MWDD8DigwGukXDIZO4nqwqUIvgGmhRSrti+Liq7TkFFMx7kUePQ",
-            "size": 2382
+            "sha256": "8dc230cdc5df9d31aec2b75664dd1d63357b84a5f0986dee4f2f620bb591eaea",
+            "sha384": "sha384-gk+pCeARivRDJ1Q5iqG3GksHXgNWs1gv/eR4b0DOy0w2uA076VtAmbfAZ5327Usj",
+            "size": 2452
         },
         "upload.php": {
-            "sha256": "0eedfb9f3be1d4876a4221e1ab774ecffb0fb06592cd81a3120857eed6fc1a8e",
-            "sha384": "sha384-X4qb98LRE1evnAlprH2kY6PzLR8RaFSfjndFgJ3Exa+t1aOX08b4cXa9DVgmtIgy",
-            "size": 4569
+            "sha256": "ca4780f3dceae026e4bfaccdc2f89363fcd78d31c4f4aa562fdf00e82db3b5ce",
+            "sha384": "sha384-oMx2esqxecT1H3Pv0EICZuLY4MaEzQIjzVEIwJqn0MTVOnqCUSAC90C2N11ujwgA",
+            "size": 4639
         }
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/integritie.php'; integritie_gate(__FILE__);
+
 header('Content-Type: application/json');
 header('X-Content-Type-Options: nosniff');
 

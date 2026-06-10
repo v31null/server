@@ -1,0 +1,4 @@
+publickey.pem -text
+manifest.json -text
+manifest.sig -text
+links.txt -text

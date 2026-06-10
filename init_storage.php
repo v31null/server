@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/integritie.php'; integritie_gate(__FILE__);
+
 require_once __DIR__ . '/db.php';
 
 function initStorage() {

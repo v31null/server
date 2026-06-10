@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/integritie.php'; integritie_gate(__FILE__);
+
 ini_set('display_errors', '0');
 ini_set('log_errors', '1');
 

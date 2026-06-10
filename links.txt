@@ -19,8 +19,9 @@ Artifakts ;
   manifest.json   sha256 , sha384 , et size
   manifest.sig    base64 De‑attachen SHA‑256 signature manifest.jsones
 
-publickey.pem sha256 fingerprint:
-  AEA7FA16965AED3DE3803A270F1E2973D600C852511ECF04B59ACE1A9026E13E
+publickey.pem key fingerprint (SPKI DER sha256, CRLF／LF／BOM independent — matches the GitHub copy):
+  261AF6EA33A67825250326CC64E5BC735BF3C010FCC4F4132D83F19B28D1DAD5
+  ( openssl pkey -pubin -in publickey.pem -outform DER | openssl dgst -sha256 )
 
 Verifie via openssl ;
   openssl base64 -d -A -in manifest.sig -out manifest.sig.bin
@@ -31,9 +32,10 @@ Browser as‑so pins crypto.js / app.js / katex via SRI integrity= attributes in
 Take þe Finger‑print from an Trusten Official‑source , e.g./ github.com/v31null/server , not onely Þis server.
 
 Per-file sha256s ;
+  3273581722446ffa8ba538c07adc08da799a77df208360a9c0ae1bad97c412ff  .gitattributes
   482181d6f6a06cb19b41d8d8b7e50e6afcd7e69daf19eb4366780348c5b3d79b  .htaccess
-  9d884386b0d781ab5f5d342da39af76035ccc065d29400c109097d072936337e  api/chunk.php
-  451163da1796d3b46e49f3f3183dfa53b7e819868d060e7c361819ef523ccc58  api/status.php
+  fba88ec36982d93f2b4e0fc975314ff2530a87680a88cad6bab440b66316304d  api/chunk.php
+  d1a24968d204e1d45aa5d3adfc983a73cc42bad0796338449fd146028a3558e0  api/status.php
   d8bb747b3fdccd84a60bd0aa56bb90937270d0bd15f1101cd8f2a5a3709dd0a3  assets/css/fonts/BabelStoneHan.ttf
   8a8719fff8a515d7b501c7073f1d7fe4a934fbbfe577d67a531d547cf5d080c9  assets/css/fonts/JunicodeVF-Roman.woff2
   479c8788e05d188c708214c72d2b1d03a0834b035cf621fd26ecc2a048e97d9b  assets/css/fonts/KaTeX_AMS-Regular.ttf
@@ -109,13 +111,13 @@ Per-file sha256s ;
   9fb9503bb30d9460986e520a6c8949ead78b306e44704a644b8921083a98a989  assets/js/katex.js
   31f6ed30dac98fa991f4b762304546a75ee34de1f080848846148e4fa9d142dd  assets/js/time.js
   7f09c4161db5a021dc82d924dd346c1c99f388bdb4e097c758ce91f649f7e77a  blocken.html
-  001bb92ee352b8c62433b9398fbf8e5e1c6f41b1fd4584e3f3b797ce180a3870  db.php
-  c593e6da3de341b6a5ae7ffdc071d0224d9b36f22f2c4b540cd85385fdabd7f6  download.php
-  39dadf1e4344c390910ec5b12b7b989f3b851442040576a2aad22c82505c6085  embed.php
-  6a502339b29e8f5fd86f2167a99792155c11edce16f1020a3ba504e7b6c00b97  index.php
+  f3ef93bbc71d2a2df9bee3a3e5e7b1caa45c19d7772f274591640a61622f1a31  db.php
+  1d0eae57754e9efdd43abb1233d7730c92c1f31ebfcb24cc30f24803d8eef7e6  download.php
+  a30f3a9955edfd9ae32bf39866f0fca3d13654aee07866d46e168cbaca46adda  embed.php
+  eca6fe155c9af43b2f91cf70e8248c6b16622a4047fe1d99ec2d1c73bac82332  index.php
   b5a94ef16e66abe0234aae9103086ff8dc9b34813ff70af1cba4adc2164d17c4  indexd.json
-  b9920c4b2954285d6fabc9e7bddd4aecd07a7e494e64b5317c0b65933439a9e5  init_storage.php
-  5bf02fe515d7ad7fe9ed12d4a575bfadfa0014ce6ed666282146dd6da230ffb3  links.txt
+  417ef536a8f627b0cbefff91b68d754cb68c081acb1ca16bcd5dcab41f85406b  init_storage.php
+  a089e81d9ff91dc623de95a4b60dfbed9a82ab7f8cd5955f1a0b0c08d3d468ee  integritie.php
   aea7fa16965aed3de3803a270f1e2973d600c852511ecf04b59ace1a9026e13e  publickey.pem
-  d2268283eda1a528887160835080d39031b02ccc280d27863faed912768dd103  ratelimit.php
-  0eedfb9f3be1d4876a4221e1ab774ecffb0fb06592cd81a3120857eed6fc1a8e  upload.php
+  8dc230cdc5df9d31aec2b75664dd1d63357b84a5f0986dee4f2f620bb591eaea  ratelimit.php
+  ca4780f3dceae026e4bfaccdc2f89363fcd78d31c4f4aa562fdf00e82db3b5ce  upload.php
