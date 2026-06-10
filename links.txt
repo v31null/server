@@ -28,12 +28,12 @@ Verifie via openssl ;
   -> „ Verified OK „ means manifest.json is as expekten as‑þus þen compare Each‑file’s sha256 to manifest.json.
 
 Browser as‑so pins crypto.js / app.js / katex via SRI integrity= attributes in þe H.‑t.M.‑u.l..
-Take þe Finger‑print from an Trusten Official‑source , e.g./ github.com/v31null/fileserver , not onely Þis server.
+Take þe Finger‑print from an Trusten Official‑source , e.g./ github.com/v31null/server , not onely Þis server.
 
 Per-file sha256s ;
   4978d286a487c0416fe00f95015da8a7c3c9b309fd835d42a349f4e589c5ddc7  .htaccess
   9d884386b0d781ab5f5d342da39af76035ccc065d29400c109097d072936337e  api/chunk.php
-  bfae8302073aac5691af4091be6d7e01039cd0feb933abdb93ec043301df99ed  api/status.php
+  451163da1796d3b46e49f3f3183dfa53b7e819868d060e7c361819ef523ccc58  api/status.php
   d8bb747b3fdccd84a60bd0aa56bb90937270d0bd15f1101cd8f2a5a3709dd0a3  assets/css/fonts/BabelStoneHan.ttf
   8a8719fff8a515d7b501c7073f1d7fe4a934fbbfe577d67a531d547cf5d080c9  assets/css/fonts/JunicodeVF-Roman.woff2
   479c8788e05d188c708214c72d2b1d03a0834b035cf621fd26ecc2a048e97d9b  assets/css/fonts/KaTeX_AMS-Regular.ttf
@@ -109,10 +109,11 @@ Per-file sha256s ;
   9fb9503bb30d9460986e520a6c8949ead78b306e44704a644b8921083a98a989  assets/js/katex.js
   7f09c4161db5a021dc82d924dd346c1c99f388bdb4e097c758ce91f649f7e77a  blocken.html
   e38e5e661bffbe96a21f1c399aaf4abb9f254a36f8f85811f70ac54c7ea6fa98  db.php
-  8a4b1cdae424474d6a117f85959db0ba89b6ddbb71eaa78893578d0bb8ec4730  download.php
+  c593e6da3de341b6a5ae7ffdc071d0224d9b36f22f2c4b540cd85385fdabd7f6  download.php
   1f3938ee5626f607bcf4897d1c507127711a7ba6f4563bde0ddc4b62f2fa0489  embed.php
   0b97d5083feca2612cf513f4b29eacf93c2e2a14254ddfc2136ba61262685af8  index.php
   b9920c4b2954285d6fabc9e7bddd4aecd07a7e494e64b5317c0b65933439a9e5  init_storage.php
-  4458a6e4cd032d2c9d3c76f41c11c625a045dd7e57d7f2640f6b1b99ca44a69c  links.txt
+  a3e3e36cccddd91b0e4c72b7b75a6932a921d74bd291f08749b9ffd572257d22  links.txt
   aea7fa16965aed3de3803a270f1e2973d600c852511ecf04b59ace1a9026e13e  publickey.pem
-  01859c80be6f8080b7128a25f7d825adbbef14e75f9d1fdb8b51a215d670a1f9  upload.php
+  c622f2bafc58ba4c2900b02711dd594d7d17c664d025230778c83a46da6a2965  ratelimit.php
+  0eedfb9f3be1d4876a4221e1ab774ecffb0fb06592cd81a3120857eed6fc1a8e  upload.php

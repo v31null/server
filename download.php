@@ -1,6 +1,8 @@
 <?php
 
 require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/ratelimit.php';
+rl_enforce('download', 30);
 
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 

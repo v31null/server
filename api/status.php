@@ -9,6 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+require_once __DIR__ . '/../ratelimit.php';
+rl_enforce('status', 20);
+
 $raw = file_get_contents('php://input');
 $input = json_decode($raw, true);
 

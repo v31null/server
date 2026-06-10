@@ -9,6 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+require_once __DIR__ . '/ratelimit.php';
+rl_enforce('upload', 10);
+
 $maxPostBytes = 75 * 1024 * 1024;
 $contentLength = isset($_SERVER['CONTENT_LENGTH']) ? (int)$_SERVER['CONTENT_LENGTH'] : 0;
 if ($contentLength > $maxPostBytes) {
