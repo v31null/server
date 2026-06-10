@@ -1,20 +1,26 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap');
 
-*:not(.katex):not(.katex *),
-*:not(.katex):not(.katex *)::before,
-*:not(.katex):not(.katex *)::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
-*:not(.katex):not(.katex *) {
-    font-family: Junicode, 'Times New Roman', Times, serif, 'nullpunktsenergiefont';
+*{
+  
 	padding: 0;
 	margin: 0;
-	box-sizing: border-box;
-	font-variant-ligatures: discretionary-ligatures contextual common-ligatures;
-    font-feature-settings: "ss17", "cv01", "cv02", "cv22" 2, "cv48", "cv57" 9, "cv33" 4;
-	font-variant-numeric: lining-nums;
 }
+*:not(.katex):not(.katex *) {
+    font-family: 'Junicode', 'nullpunktsenergiefont', 'BabelStone Han';
+    letter-spacing: 0;
+    text-rendering: auto;
+    image-rendering: optimizeQuality !important;
+    font-variant-ligatures:discretionary-ligatures contextual common-ligatures;
+    font-feature-settings: "ss17", "cv01", "cv02", "cv22" 2, "cv48", "cv33" 4;
+    font-variant-numeric: lining-nums;
+}
+
 
 @font-face {
 	font-family: regularor;
