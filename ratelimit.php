@@ -1,13 +1,18 @@
 <?php
 
+ini_set('display_errors', '0');
+ini_set('log_errors', '1');
+
 function rl_client_ip() {
     $remote = $_SERVER['REMOTE_ADDR'] ?? '';
     $loopback = ($remote === '127.0.0.1' || $remote === '::1' || $remote === '0:0:0:0:0:0:0:1');
     $xff = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? '';
     if ($loopback && $xff !== '') {
-        $first = trim(explode(',', $xff)[0]);
-        if ($first !== '') {
-            return $first;
+        $parts = array_values(array_filter(array_map('trim', explode(',', $xff)), function ($p) {
+            return $p !== '';
+        }));
+        if (!empty($parts)) {
+            return end($parts);
         }
     }
     return $remote !== '' ? $remote : 'unknown';

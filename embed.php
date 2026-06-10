@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/ratelimit.php';
 
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 $pass = isset($_GET['PASS']) ? $_GET['PASS'] : '';
@@ -26,12 +27,7 @@ if (file_exists($cacheFile) && file_exists($cacheFile . '.meta')) {
     exit;
 }
 
-$banStmt = $db->prepare('SELECT 1 FROM embed_bans WHERE file_id = ?');
-$banStmt->execute([$id]);
-if ($banStmt->fetch()) {
-    header('Location: /v/' . $id);
-    exit;
-}
+rl_enforce('embed', 10);
 
 $mapStmt = $db->prepare('SELECT encrypted_payload, payload_iv, salt FROM maps WHERE file_id = ?');
 $mapStmt->execute([$id]);
@@ -39,6 +35,13 @@ $mapData = $mapStmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$mapData) {
     http_response_code(404);
+    exit;
+}
+
+$claimStmt = $db->prepare('INSERT OR IGNORE INTO embed_bans (file_id, banned_at) VALUES (?, ?)');
+$claimStmt->execute([$id, time()]);
+if ($claimStmt->rowCount() === 0) {
+    header('Location: /v/' . $id);
     exit;
 }
 
@@ -66,11 +69,10 @@ if (!$payloadObj || !isset($payloadObj['map'])) {
     } else {
         echo random_bytes(256);
     }
-
-    $banInsert = $db->prepare('INSERT OR IGNORE INTO embed_bans (file_id, banned_at) VALUES (?, ?)');
-    $banInsert->execute([$id, time()]);
     exit;
 }
+
+$db->prepare('DELETE FROM embed_bans WHERE file_id = ?')->execute([$id]);
 
 $slugPath = __DIR__ . '/storage/slug.v31n';
 $slugHandle = fopen($slugPath, 'rb');

@@ -1,5 +1,7 @@
 <?php
 
+ini_set('display_errors', '0');
+ini_set('log_errors', '1');
 
 function getDb() {
     static $pdo = null;
@@ -14,6 +16,7 @@ function getDb() {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->exec('PRAGMA journal_mode=WAL');
     $pdo->exec('PRAGMA foreign_keys=ON');
+    $pdo->exec('PRAGMA busy_timeout=5000');
 
     if ($isNew) {
         createSchema($pdo);
