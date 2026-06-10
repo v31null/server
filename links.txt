@@ -35,6 +35,7 @@ Per-file sha256s ;
   3273581722446ffa8ba538c07adc08da799a77df208360a9c0ae1bad97c412ff  .gitattributes
   482181d6f6a06cb19b41d8d8b7e50e6afcd7e69daf19eb4366780348c5b3d79b  .htaccess
   572eafe510b9de716c505468ff4c3fa920163e514fa9d26f096a633386335ff5  README.md
+  cebcb0eb8bfc3bf88b83f350acf5a65dd70492dab775b8b1d98fcc163788e7ee  aliveneß.php
   fba88ec36982d93f2b4e0fc975314ff2530a87680a88cad6bab440b66316304d  api/chunk.php
   d1a24968d204e1d45aa5d3adfc983a73cc42bad0796338449fd146028a3558e0  api/status.php
   d8bb747b3fdccd84a60bd0aa56bb90937270d0bd15f1101cd8f2a5a3709dd0a3  assets/css/fonts/BabelStoneHan.ttf
@@ -115,7 +116,7 @@ Per-file sha256s ;
   f3ef93bbc71d2a2df9bee3a3e5e7b1caa45c19d7772f274591640a61622f1a31  db.php
   1d0eae57754e9efdd43abb1233d7730c92c1f31ebfcb24cc30f24803d8eef7e6  download.php
   a30f3a9955edfd9ae32bf39866f0fca3d13654aee07866d46e168cbaca46adda  embed.php
-  eca6fe155c9af43b2f91cf70e8248c6b16622a4047fe1d99ec2d1c73bac82332  index.php
+  d8f9d403756b2e682f71623eb8bcf0d31cd517b48cc80b44c16741ec6b137d7f  index.php
   98e4c766ce26fdb86e1b0f5cef6a339b43f6312006fcf0cd02f6fbc66c91a247  indexd.json
   417ef536a8f627b0cbefff91b68d754cb68c081acb1ca16bcd5dcab41f85406b  init_storage.php
   a089e81d9ff91dc623de95a4b60dfbed9a82ab7f8cd5955f1a0b0c08d3d468ee  integritie.php

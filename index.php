@@ -91,6 +91,7 @@
 
     <footer>
       <p><a href="/links.txt">Click ‘iðer for to be Re‑direkten to see keys Publik fileses.</a></p>
+      <p><a href="/aliveneß.php">Aliveneß logs.</a></p>
     </footer>
 
 <?php
