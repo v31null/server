@@ -19,7 +19,7 @@ Artifakts ;
   manifest.json   sha256 , sha384 , et size
   manifest.sig    base64 De‑attachen SHA‑256 signature manifest.jsones
 
-publickey.pem key fingerprint (SPKI DER sha256, CRLF／LF／BOM independent — matches the GitHub copy):
+publickey.pem key fingerprint:
   261AF6EA33A67825250326CC64E5BC735BF3C010FCC4F4132D83F19B28D1DAD5
   ( openssl pkey -pubin -in publickey.pem -outform DER | openssl dgst -sha256 )
 
@@ -116,7 +116,7 @@ Per-file sha256s ;
   1d0eae57754e9efdd43abb1233d7730c92c1f31ebfcb24cc30f24803d8eef7e6  download.php
   a30f3a9955edfd9ae32bf39866f0fca3d13654aee07866d46e168cbaca46adda  embed.php
   eca6fe155c9af43b2f91cf70e8248c6b16622a4047fe1d99ec2d1c73bac82332  index.php
-  b5a94ef16e66abe0234aae9103086ff8dc9b34813ff70af1cba4adc2164d17c4  indexd.json
+  98e4c766ce26fdb86e1b0f5cef6a339b43f6312006fcf0cd02f6fbc66c91a247  indexd.json
   417ef536a8f627b0cbefff91b68d754cb68c081acb1ca16bcd5dcab41f85406b  init_storage.php
   a089e81d9ff91dc623de95a4b60dfbed9a82ab7f8cd5955f1a0b0c08d3d468ee  integritie.php
   aea7fa16965aed3de3803a270f1e2973d600c852511ecf04b59ace1a9026e13e  publickey.pem
