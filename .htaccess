@@ -1,0 +1,42 @@
+Options -Indexes
+ServerSignature Off
+
+ErrorDocument 400 /blocken.html
+ErrorDocument 403 /blocken.html
+ErrorDocument 404 /blocken.html
+ErrorDocument 500 /blocken.html
+
+<IfModule mod_headers.c>
+    Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+    Header always set Referrer-Policy "no-referrer"
+    Header always set Server "Blocken"
+    Header unset X-Powered-By
+</IfModule>
+
+RewriteEngine On
+
+RewriteRule ^v/([^/]+)$ download.php?id=$1 [L,QSA]
+
+RewriteRule (?i)(^|/)\.git(/|$) - [F,L]
+
+RewriteRule ^storage/ - [F,L]
+
+RewriteRule ^incoming/ - [F,L]
+
+RewriteRule ^init_storage\.php$ - [F,L]
+
+RewriteRule ^embed/([a-f0-9]{8})(.*)\.[a-zA-Z0-9]+$ embed.php?id=$1&PASS=$2 [L,QSA]
+
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "(?i)\.(sqlite3|v31n|bak|orig|sql|log|ini)$">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "^(db|init_storage)\.php$">
+    Require all denied
+</FilesMatch>

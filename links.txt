@@ -1,0 +1,118 @@
+﻿-----BEGIN PUBLIC KEY-----
+MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAxCLy6oHTH7uTAkG0vEb3
+oRxk3bEzondD9W3CSEldk80lLmuYc/X2MulUknMccn7tY1eAR1kfH4HFC1hVAQAS
+W3Ls9oiCiiFQG69kPTNxHFzJaPfpSicJ5cFELtFigyo6o2TJrJZ3ekk+crZ1rp9s
+XtvsbL0IIP9N2cDhvXZnasU31CE8nbnF0NoRlkYHnh2aD3OGBAMsvFlnBnWUoYm1
+IYuqupT5CMKB6JeOB16MwLXMa1kjRezqgtxKPxSx8mHbDIHNxU/FmB+ysJUusTx7
++KjdojnBdtmphrjaBHIoh46E/sJw5caqYrXr7tP/B5Q+Ri21IXWVx5MW/syNzQAu
+U6aly/qJBXHL0m1L5Ix6EaVVysch6/C07cK9CsfBcz945IOJBKrecfeFcFm0G1kM
+CbAsJZ0IaHB5z4hnFjLjTReIZIbJeZmBaZ4bydxmpwTCQn/RwCMDqkADjv4hPQ3I
+PrzrnEJHFoXNBohkZzPuqUumESevqEOLIXG2IxnM4ieJAgMBAAE=
+-----END PUBLIC KEY-----
+
+Integritie checks
+
+All Publik files are proceßen so one may verifie þat Þey in Oney‑way changen are not.
+
+Artifakts ;
+  publickey.pem   RSA key Publik
+  manifest.json   sha256 , sha384 , et size
+  manifest.sig    base64 De‑attachen SHA‑256 signature manifest.jsones
+
+publickey.pem sha256 fingerprint:
+  AEA7FA16965AED3DE3803A270F1E2973D600C852511ECF04B59ACE1A9026E13E
+
+Verifie via openssl ;
+  openssl base64 -d -A -in manifest.sig -out manifest.sig.bin
+  openssl dgst -sha256 -verify publickey.pem -signature manifest.sig.bin manifest.json
+  -> „ Verified OK „ means manifest.json is as expekten as‑þus þen compare Each‑file’s sha256 to manifest.json.
+
+Browser as‑so pins crypto.js / app.js / katex via SRI integrity= attributes in þe H.‑t.M.‑u.l..
+Take þe Finger‑print from an Trusten Official‑source , e.g./ github.com/v31null/fileserver , not onely Þis server.
+
+Per-file sha256s ;
+  4978d286a487c0416fe00f95015da8a7c3c9b309fd835d42a349f4e589c5ddc7  .htaccess
+  9d884386b0d781ab5f5d342da39af76035ccc065d29400c109097d072936337e  api/chunk.php
+  bfae8302073aac5691af4091be6d7e01039cd0feb933abdb93ec043301df99ed  api/status.php
+  d8bb747b3fdccd84a60bd0aa56bb90937270d0bd15f1101cd8f2a5a3709dd0a3  assets/css/fonts/BabelStoneHan.ttf
+  8a8719fff8a515d7b501c7073f1d7fe4a934fbbfe577d67a531d547cf5d080c9  assets/css/fonts/JunicodeVF-Roman.woff2
+  479c8788e05d188c708214c72d2b1d03a0834b035cf621fd26ecc2a048e97d9b  assets/css/fonts/KaTeX_AMS-Regular.ttf
+  f5b0e1ff158f892d45bbd24799d83b3f046ea492b248674a7d2e26787ff9f5bd  assets/css/fonts/KaTeX_AMS-Regular.woff
+  15df487e2d49d960851524efb8c1fcca6b1197890cf4309f05c29d5010adcf32  assets/css/fonts/KaTeX_AMS-Regular.woff2
+  697b1c9f6e11e42800664b58d06173e96548f87ad8b96a37cb01fa4b897dff9b  assets/css/fonts/KaTeX_Caligraphic-Bold.ttf
+  3cc9328f43e5092aaaebd6b32902e53b6d770b4ff17e8b2c47708d7b2c83a2ce  assets/css/fonts/KaTeX_Caligraphic-Bold.woff
+  4b4d0fa429e52f14c25e781e6dc8651e60e2c27a610ab07ca81aa49217250cd5  assets/css/fonts/KaTeX_Caligraphic-Bold.woff2
+  b40a2796e46b2f558dcb5158bc76ffd7d5a7cbe35c0662a7599c9e1a88ae4e3c  assets/css/fonts/KaTeX_Caligraphic-Regular.ttf
+  283580ac91c54b6fa655842bfccf5ca0b5406e187d4f81c3b59ef2fd1dd31366  assets/css/fonts/KaTeX_Caligraphic-Regular.woff
+  86f923f6b2ba9aa499e76a8e85c9516a19fa824b5f19b0279bb7079a4dac672c  assets/css/fonts/KaTeX_Caligraphic-Regular.woff2
+  f7184e0f0eb9ebd69d81acbd01bbd2519b82f4a4701530d40e47154680d07a02  assets/css/fonts/KaTeX_Fraktur-Bold.ttf
+  cb6b7776d09864b2dc99c1ae5ee3659a7115db75b6ed660def2161968a2437c2  assets/css/fonts/KaTeX_Fraktur-Bold.woff
+  f1527a373f9e2f3b9b9a44d5a9f4fcc225fe15b9c64735b434de8a5d93fcdf12  assets/css/fonts/KaTeX_Fraktur-Bold.woff2
+  ae44802f0b88aca9a5b0150990c7dbd2c51bcf725da05cfb71f878c476017711  assets/css/fonts/KaTeX_Fraktur-Regular.ttf
+  10914c41ecc86f46941584f301555614fe8c59463e0452bef84dfd999a56adcc  assets/css/fonts/KaTeX_Fraktur-Regular.woff
+  df5e2dff7ff874a1c50566b93ea32bdf9b219fb1646240ad61ad332c950cfa9d  assets/css/fonts/KaTeX_Fraktur-Regular.woff2
+  deba64bdc3911c01e7bee8c1c9c736d3f5859eaea0d91d5a793a140b21d6b1c6  assets/css/fonts/KaTeX_Main-Bold.ttf
+  eebf6eacab4b4238f927271da3bc942970ba7dcdeb6226a0b893dba3f73801ef  assets/css/fonts/KaTeX_Main-Bold.woff
+  2eb5660215fd2009a794b550df1b19df65acda11f4dff65d91a684f061214b55  assets/css/fonts/KaTeX_Main-Bold.woff2
+  a70a4daf27a074dbc86ca6b186306b852792929da734394fbc62ad3b788aefe5  assets/css/fonts/KaTeX_Main-BoldItalic.ttf
+  120253ea1310e3b80891610430105b0226766a4fa3d2c80f22c2cf887d84fd79  assets/css/fonts/KaTeX_Main-BoldItalic.woff
+  27fccaf740860a615575c6af8549677fdb33401266cab7caa1765f16e0d57a42  assets/css/fonts/KaTeX_Main-BoldItalic.woff2
+  06af0fba8798a625f89e5c605569a3a44828e2677fa9481fe06205d2062c7ba9  assets/css/fonts/KaTeX_Main-Italic.ttf
+  a4f24d9b4244d4341ba0214cac621ec5727218df842af6de8e228aae985b5512  assets/css/fonts/KaTeX_Main-Italic.woff
+  e5d73a831c38e3782f1698d94716025e26a59d34272bcf9ac7ab188d2cc9af16  assets/css/fonts/KaTeX_Main-Italic.woff2
+  eab76eab40c7dd342bc38c05d008b96a3a603f6c0bf635701ed1c6b2f0c12fcd  assets/css/fonts/KaTeX_Main-Regular.ttf
+  0b9f6662c0c07fbd4c68949975aa6cb8d3881a86f9e6375af5b3bc3742f25273  assets/css/fonts/KaTeX_Main-Regular.woff
+  7b7be7af132561e043a429328fcde231634bfeace1c9e3024887fc4a6f09b6bf  assets/css/fonts/KaTeX_Main-Regular.woff2
+  23d872b2185ce3c530e32c25bbad141de622dcc3171e939f33b2b1b55086396e  assets/css/fonts/KaTeX_Math-BoldItalic.ttf
+  82880d882256c6098e5c4a8bdb8f67fbbccb42bf33a5b68e3662bd9bf1f34448  assets/css/fonts/KaTeX_Math-BoldItalic.woff
+  3467e032f722c3b5e0254862103bd24182049cd8781b86ffe2a9c8d77511e43f  assets/css/fonts/KaTeX_Math-BoldItalic.woff2
+  517b4b11866ae3d18e74168ebb179f88cb56668de40ea1e23fff0a61f78ef04a  assets/css/fonts/KaTeX_Math-Italic.ttf
+  252ec45ca7d1b70a8ee070ed0b8863f5554e2c5190cf409a6b3179a0ebe0cf26  assets/css/fonts/KaTeX_Math-Italic.woff
+  9339484861f622622c4d4fecffcb05da810407cc23305e8799bc1100329223b9  assets/css/fonts/KaTeX_Math-Italic.woff2
+  e818e3cd8065e949ca547607045e1cca24912d02f1b44d3efcac67ba6320f619  assets/css/fonts/KaTeX_SansSerif-Bold.ttf
+  08f69ff860ef323f559c5a640b7ec5f3dc469a01b7159cddfa4286acb629c360  assets/css/fonts/KaTeX_SansSerif-Bold.woff
+  f6f61cab7740ef34b23a8e941760bf54a5c3e8975d70d5cea3c244bbf699fad9  assets/css/fonts/KaTeX_SansSerif-Bold.woff2
+  60b247213ad93691bcdb19438cb0b67c7ea2fb4b3a72e82078beb791dd2b941a  assets/css/fonts/KaTeX_SansSerif-Italic.ttf
+  1182f7b49fead9d22f3f14541e71e3331977a0441643c56664806949b96bed5a  assets/css/fonts/KaTeX_SansSerif-Italic.woff
+  66034ad79f0f68739b7be69771748a1c61d524d4dbba570905318595151377ad  assets/css/fonts/KaTeX_SansSerif-Italic.woff2
+  081f08cf7e0a8a68cdbb29977fb0bb10a1dc71f7ae9b53648f79e98532ee26fe  assets/css/fonts/KaTeX_SansSerif-Regular.ttf
+  dc8093175e397ea58bed6a7bcc810e05e2125742763f1599babaa926461a32cb  assets/css/fonts/KaTeX_SansSerif-Regular.woff
+  2673b817a2a74139b1d9bd2f9d70148426346cbae579a5141abd839436126e2e  assets/css/fonts/KaTeX_SansSerif-Regular.woff2
+  cc796f5fea153a7134e5050fad1bcccadee89d52ace60d498f6fc1f1e069032e  assets/css/fonts/KaTeX_Script-Regular.ttf
+  611edea9609d5b7728e2df2cb6034ea0aea459c7c06e6d8b8f83ca21a9f440d2  assets/css/fonts/KaTeX_Script-Regular.woff
+  2227c4c4953e65cbf7f67e83c12a27243478265619aae313353fda3b1458ed2c  assets/css/fonts/KaTeX_Script-Regular.woff2
+  5293e7e9ac564ccd10deceec3a4cf3fa0754d3ce53ba3a4af21ae215686af001  assets/css/fonts/KaTeX_Size1-Regular.ttf
+  41e4c13808366d1e102f771dd3efcad922395b52c23fd68c2e3a1adf417056e7  assets/css/fonts/KaTeX_Size1-Regular.woff
+  01e074cc3dcd7140710315dc18102897bae0c0771841bc326bfe8f934276cb82  assets/css/fonts/KaTeX_Size1-Regular.woff2
+  48c988b76e6f36614ca627c3c1ff550fa02da781a97364475374b5c02912f2a2  assets/css/fonts/KaTeX_Size2-Regular.ttf
+  38e966e4ea4cc3f91f7044ec8cb4ff86808af096f74997c683b708f83e2a32d5  assets/css/fonts/KaTeX_Size2-Regular.woff
+  579306c793600772ef7171c2a304aec8d6de7bc30ab2b4598ace25699ee6d1e2  assets/css/fonts/KaTeX_Size2-Regular.woff2
+  230588b650d4d4d4e47127f7d6d6a0f88ae73dabc10948928eb20ea850f26ad9  assets/css/fonts/KaTeX_Size3-Regular.ttf
+  14c6e060c8735876e3cd66fc3c490856097cc149279656c53e54557bea47d5c3  assets/css/fonts/KaTeX_Size3-Regular.woff
+  325df4744e9e1c1e978c78242048eb5462e37d64db2e6da435a730befee8ccbc  assets/css/fonts/KaTeX_Size3-Regular.woff2
+  114d46ba510a4d816884afcd2b98a4d6cebd5ea7afdeb6f849fe5abf9b727ee9  assets/css/fonts/KaTeX_Size4-Regular.ttf
+  9d4aa93853e15f82ea86daf02568c7bf32986f7af33bcb810b86da39b712f5a5  assets/css/fonts/KaTeX_Size4-Regular.woff
+  0b27467a453fa09303e015943b8869d9bf7ab8b97b437a95b8331fa4f8f2aab0  assets/css/fonts/KaTeX_Size4-Regular.woff2
+  c3d1c2c8c0455af0db352e704e4fd4c5ae692cb3b895b6be752f5a89bf3b93f5  assets/css/fonts/KaTeX_Typewriter-Regular.ttf
+  15978c32403fa18a1843e66b0f0f5a9ca3c6a33aa128c6dfb4aa07251ab6990b  assets/css/fonts/KaTeX_Typewriter-Regular.woff
+  af1d60bcfc57febf32ab10cc5467219f76117ef82fa663f92db22194f376b424  assets/css/fonts/KaTeX_Typewriter-Regular.woff2
+  e801cc3579568a9243821d251056ac89c24f3736336e451fa7b1ded15daa6566  assets/css/fonts/ZENANTIQUESOFT-REGULAR.TTF
+  5089693f81ed5b83435be7167bf2f93c2608ce92fb3a7e13f6be238a733c38f2  assets/css/fonts/cmunrm.otf
+  776ac4ef4b53b46e2b38698818361ecd4f6926dfa4eb79bf1113c456785695bd  assets/css/fonts/nullpunktsenergiefont-Regular.ttf
+  38d32567380fdcee9e76bb5127c38b9109fa6f27de984bc108f559ff4e8b2a08  assets/css/fonts/regular.ttf
+  fb2157ab0eb24f9abc00320655e7dfa3d6c92e66b9e2639ae14cd3abe9046dc4  assets/css/katex.css
+  f502a95f19e6674fd5a01929033d8e8322002eec014060487c07d8afaea7d510  assets/css/style.css
+  be33d1b6ec214fa02856e6c5cbd49bee56f029a10a9173bb83ef0b4a987b2721  assets/js/app.js
+  a1316ded7951625841ba9f81890315465ef798ce6864079670c6c6e2f774677f  assets/js/auto-render.js
+  07770af90943a1de1a1010794bc78c6a7346d46d48fb63e35cc76ba76b827604  assets/js/copy-tex.min.js
+  fd2bb71faa41ee772de8f0881fdfccea0ff730590d4d56461032f4732856a1bf  assets/js/crypto.js
+  9fb9503bb30d9460986e520a6c8949ead78b306e44704a644b8921083a98a989  assets/js/katex.js
+  7f09c4161db5a021dc82d924dd346c1c99f388bdb4e097c758ce91f649f7e77a  blocken.html
+  e38e5e661bffbe96a21f1c399aaf4abb9f254a36f8f85811f70ac54c7ea6fa98  db.php
+  8a4b1cdae424474d6a117f85959db0ba89b6ddbb71eaa78893578d0bb8ec4730  download.php
+  1f3938ee5626f607bcf4897d1c507127711a7ba6f4563bde0ddc4b62f2fa0489  embed.php
+  0b97d5083feca2612cf513f4b29eacf93c2e2a14254ddfc2136ba61262685af8  index.php
+  b9920c4b2954285d6fabc9e7bddd4aecd07a7e494e64b5317c0b65933439a9e5  init_storage.php
+  4458a6e4cd032d2c9d3c76f41c11c625a045dd7e57d7f2640f6b1b99ca44a69c  links.txt
+  aea7fa16965aed3de3803a270f1e2973d600c852511ecf04b59ace1a9026e13e  publickey.pem
+  01859c80be6f8080b7128a25f7d825adbbef14e75f9d1fdb8b51a215d670a1f9  upload.php

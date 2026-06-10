@@ -1,0 +1,5 @@
+/storage/*
+!/storage/.htaccess
+/securitietests/*
+/.claude/*
+.gitignore
