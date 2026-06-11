@@ -381,9 +381,9 @@
             "size": 3890
         },
         "assets/js/app.js": {
-            "sha256": "c3dc1f75b30173115aaa1732df02cbf4bc8693977bd0ed69906518daf4811d9d",
-            "sha384": "sha384-cMd3GMfMkQdcznjomP9IctdoKNKXnrs5O5Mxgb1vYSRtVhmQEhobyCNRu8F0NTRM",
-            "size": 20913
+            "sha256": "fb96fabf398e5e600ae171af9183c7120903509e301576c5e9118d10c5d937a4",
+            "sha384": "sha384-zSsPlpBWabzwKsNeIcBKd7OaNN0tpSg25aofY0kq6rcLYBv/OV+rzdqIeNncPtcE",
+            "size": 20796
         },
         "assets/js/auto-render.js": {
             "sha256": "a1316ded7951625841ba9f81890315465ef798ce6864079670c6c6e2f774677f",
@@ -421,8 +421,8 @@
             "size": 2878
         },
         "download.php": {
-            "sha256": "2cd6abdbf85b3f9b94d24d5bf522f313c78874b169cc9b742e2055f5d0640359",
-            "sha384": "sha384-XekOpwdeRCCxpQvwMbT/QMrOelNrnJqrVigvKlHiwig3NkNa6cFzCerDRlXWLcQE",
+            "sha256": "8d67ec7b3a8e4951800c104c718eeed912ecb5108dc5010cb539b2c18774c1e1",
+            "sha384": "sha384-PGyuOyi7mbnG/P9O4OhK0itcVdb88s3lFqCKM67kMeHyVJ1n6ynYpedGxdUsPRDH",
             "size": 4386
         },
         "embed.php": {
@@ -431,8 +431,8 @@
             "size": 5767
         },
         "index.php": {
-            "sha256": "ce9237f222cbb65a759d5436935a2c12ee55d00b0a6f27953f1d2c0da75f741a",
-            "sha384": "sha384-NFZrGOp9zE4DW1xv1hSfJroJ/9Bbq1jABq+iG4+5FQQ7ODnGRmLcouVUsi5xCauJ",
+            "sha256": "50058c542119f9f383280046313790230a214c99422acab4ad5f2bc43539e988",
+            "sha384": "sha384-5MKv3CXqQxN9jme6/tzA1pSZxECqAvk/JLvLf7GhZG4Kq6HgupGyxGYLmtUNNmkC",
             "size": 7166
         },
         "indexd.json": {

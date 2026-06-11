@@ -208,7 +208,7 @@ function initUpload() {
         uploadBtn.disabled = true;
         progressContainer.style.display = 'block';
         progressFill.style.width = '0%';
-        progressText.textContent = 'Encrypting... 0%';
+        progressText.textContent = 'En‑krypting. 0%';
         resultContainer.style.display = 'none';
         hideError();
 
@@ -236,12 +236,12 @@ function initUpload() {
 
             const result = await V31nCrypto.chunkAndEncryptFile(file, password, decoyHashes, (progress) => {
                 progressFill.style.width = (progress * 40) + '%';
-                progressText.textContent = 'Encrypting... ' + Math.round(progress * 100) + '%';
+                progressText.textContent = 'En‑krypting. ' + Math.round(progress * 100) + '%';
             });
 
             const STORE_BATCH = 40;
 
-            progressText.textContent = 'Checking what is already there...';
+            progressText.textContent = 'Checking.';
             const realHashes = result.chunks.map(c => c.hash);
 
             const statusResp = await v31nFetchRetry(BASE_URL + 'api/status.php', {
@@ -277,7 +277,7 @@ function initUpload() {
 
             const totalToStore = Math.max(1, toUpload.length);
             let storedSoFar = 0;
-            progressText.textContent = 'Uploading...';
+            progressText.textContent = 'Up‑loading.';
 
             let round = 0;
             while (true) {
@@ -295,9 +295,8 @@ function initUpload() {
                         storedSoFar += batch.length;
                         const frac = Math.min(1, storedSoFar / totalToStore);
                         progressFill.style.width = (40 + frac * 45) + '%';
-                        progressText.textContent = 'Uploading... ' + Math.round(frac * 100) + '%';
+                        progressText.textContent = 'Up‑loading. ' + Math.round(frac * 100) + '%';
                     } catch (e) {
-                        // batch exhausted its retries; the status recheck below will requeue it
                     }
                 }
 
@@ -321,7 +320,7 @@ function initUpload() {
                 await v31nSleep(2000 + Math.floor(Math.random() * 1500));
             }
 
-            progressText.textContent = 'Sealing...';
+            progressText.textContent = 'Sealing.';
             progressFill.style.width = '90%';
 
             const finalizeResp = await v31nFetchRetry(BASE_URL + 'upload.php', {
@@ -438,7 +437,7 @@ function initDownload() {
         downloadBtn.disabled = true;
         progressContainer.style.display = 'block';
         progressFill.style.width = '0%';
-        progressText.textContent = 'Requesting metadata...';
+        progressText.textContent = 'Requesting Meta‑data.';
         hideError();
 
         try {
@@ -458,7 +457,7 @@ function initDownload() {
             const payloadIv = V31nCrypto.base64ToBytes(data.payload_iv);
             const salt = V31nCrypto.base64ToBytes(data.salt);
 
-            progressText.textContent = 'Authenticating password...';
+            progressText.textContent = 'Auðentikating.';
             const permissive = await V31nCrypto.decryptPayloadPermissive(encPayload, payloadIv, password, salt);
 
             let hashesToFetch = [];
@@ -487,7 +486,7 @@ function initDownload() {
                 }
             }
 
-            progressText.textContent = `Downloading ${hashesToFetch.length} encrypted chunks...`;
+            progressText.textContent = `Down‑loading ${hashesToFetch.length} En‑crypten‑chunks.`;
             progressFill.style.width = '20%';
 
             let loadedCount = 0;
@@ -502,7 +501,7 @@ function initDownload() {
                 
                 loadedCount++;
                 progressFill.style.width = (20 + (loadedCount / hashesToFetch.length) * 60) + '%';
-                progressText.textContent = `Downloading chunks... ${Math.round((loadedCount / hashesToFetch.length) * 100)}%`;
+                progressText.textContent = `Down‑loading chunks. ${Math.round((loadedCount / hashesToFetch.length) * 100)}%`;
 
                 return {
                     hash,
@@ -513,7 +512,7 @@ function initDownload() {
 
             const fetchedChunks = await Promise.all(chunkPromises);
 
-            progressText.textContent = 'Assembling file...';
+            progressText.textContent = 'Aſsembling þͤ file.';
             progressFill.style.width = '90%';
 
             const file = await V31nCrypto.decryptAndAssembleFile(
