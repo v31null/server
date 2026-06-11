@@ -39,7 +39,7 @@ if (is_file($log)) {
 <div class="acta-header">
 <p class="acta-intitulatio">Summa</p>
 </div>
-<p class="acta-inscriptio">Notum sit lectori huius rationis quae infra sequitur : vigiliam explorationem dicimus, statis temporibus per limen publicum emissam, quae an machina nostra respondeat inquirit. Exploratio quae machinam praesentem invenit prospera vocatur ; quae vacua redit, cassa. Ideo subicimus quot explorationes emissae sint, quot prosperae, quot cassae. Portionem vero servatae vigiliae ad totam more antiquorum ex asse per uncias reddimus, asse vigilia integra et inconcussa existente.</p>
+<p class="acta-inscriptio">Notum sit lectori huius rationis quae infra sequitur : vigiliam explorationem dicimus, statis temporibus per limen publicum emissam, quae an machina nostra respondeat inquirit. Exploratio quae machinam praesentem invenit prospera vocatur ; quae vacua redit, cassa. Ideo subicimus quot explorationes emissae sint, quot prosperae, quot cassae.</p>
 <p class="acta-body" id="summa-publica">Nulla adhuc summa.</p>
 <p class="acta-body" id="summa-propria">Summa viae nostrae propriae, non publicae;<span id="summa-propria-body">Nulla adhuc summa.</span></p>
 </div>
