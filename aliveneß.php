@@ -9,11 +9,13 @@ if (isset($_GET['data'])) {
 }
 
 $log = __DIR__ . '/storage/aliveness.csv';
-$rows = [];
+$zrok = [];
+$onion = [];
 if (is_file($log)) {
     foreach (file($log, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $ln) {
-        $cols = explode('|', $ln, 2);
-        $rows[] = isset($cols[1]) ? trim($cols[1]) : '';
+        $cols = explode('|', $ln);
+        $zrok[]  = isset($cols[1]) ? trim($cols[1]) : '';
+        $onion[] = isset($cols[2]) ? trim($cols[2]) : '';
     }
 }
 ?>
@@ -23,10 +25,13 @@ if (is_file($log)) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vigiliae</title>
-<link rel="stylesheet" href="/assets/css/style.css" integrity="sha384-uqXawRQ17X8dzJ3eeq+4vPTUL2cJhgd106v0ojq+YiGj6DWLVN8R0M2o+So5OUV+">
+<link rel="stylesheet" href="/assets/css/style.css" integrity="sha384-I5BMPe0ktzGjaqQYJ19HI1oB3RSwRyOXnmDe5KskEjfaTpuABzvRv4N5r2VvKswI">
 </head>
 <body>
 <div class="container">
+<div class="acta-card">
+<p class="acta-body" id="vigiliae-onion">De viis nostris propriis, quas regimus :‍— Acta earum sic se habent — Tempora apertionis earum ; <span id="vigiliae-onion-body">Nulla adhuc vigilia.</span></p>
+</div>
 <div class="acta-card">
 <p class="acta-body" id="vigiliae">Nulla adhuc vigilia.</p>
 </div>
@@ -37,11 +42,15 @@ if (is_file($log)) {
 <script src="/assets/js/time.js"></script>
 <script>
 (function () {
-    var rows = <?php echo json_encode($rows); ?>;
-    var el = document.getElementById('vigiliae');
+    var zrokRows = <?php echo json_encode($zrok); ?>;
+    var onionRows = <?php echo json_encode($onion); ?>;
     var TOL = 10, LIVE = 500;
 
-    function show(p) { try { return p.toString(); } catch (e) { return p.year + ' ' + p.month + '/' + p.day + ' ' + p.hr + ':' + p.min + ':' + p.sec + ' ' + p.ampm; } }
+    function show(p) {
+        var s;
+        try { s = p.toString(); } catch (e) { s = p.year + ' ' + p.month + '/' + p.day + ' ' + p.hr + ':' + p.min + ':' + p.sec + ' ' + p.ampm; }
+        return s.replace(/(20\d{2})\s/g, '$1 ');
+    }
     function epoch(p) {
         var h = parseInt(p.hr, 10);
         if (p.ampm === 'PM') { h += 12; }
@@ -59,45 +68,54 @@ if (is_file($log)) {
         if (!list.length) { return ''; }
         var noun = (list.length === 1) ? 'instabilitate' : 'instabilitatibus';
         var shown = list.map(show);
-        var fmt = (shown.length === 1) ? ' ' + shown[0] : ' : ' + fmtList(shown);
+        var fmt = (shown.length === 1) ? ' ' + shown[0] : ' : ' + fmtList(shown);
         return ' cum ' + noun + ' circa' + fmt;
     }
 
-    var intervals = [];
-    var cur = null, prevPresent = null;
-    for (var i = 0; i < rows.length; i++) {
-        var s = rows[i];
-        if (s === '') {
-            if (cur) { intervals.push(cur); cur = null; prevPresent = null; }
-            continue;
+    function buildIntervals(rows) {
+        var intervals = [], cur = null, prevPresent = null;
+        for (var i = 0; i < rows.length; i++) {
+            var s = rows[i];
+            if (s === '') {
+                if (cur) { intervals.push(cur); cur = null; prevPresent = null; }
+                continue;
+            }
+            var pt;
+            try { pt = propertime(s); } catch (e) { continue; }
+            if (!cur) {
+                cur = { from: pt, to: pt, unstable: [] };
+            } else {
+                var expected = prevPresent.add(300, 'SEC');
+                if (Math.abs(epoch(pt) - epoch(expected)) > TOL) { cur.unstable.push(pt); }
+                cur.to = pt;
+            }
+            prevPresent = pt;
         }
-        var pt;
-        try { pt = propertime(s); } catch (e) { continue; }
-        if (!cur) {
-            cur = { from: pt, to: pt, unstable: [] };
-        } else {
-            var expected = prevPresent.add(300, 'SEC');
-            if (Math.abs(epoch(pt) - epoch(expected)) > TOL) { cur.unstable.push(pt); }
-            cur.to = pt;
+        if (cur) { intervals.push(cur); }
+        return intervals;
+    }
+
+    function renderProse(rows) {
+        var intervals = buildIntervals(rows);
+        if (!intervals.length) { return null; }
+        var now = null;
+        try { now = propertime(); } catch (e) {}
+        var lastRowPresent = rows.length > 0 && rows[rows.length - 1] !== '';
+        var parts = [];
+        for (var k = 0; k < intervals.length; k++) {
+            var iv = intervals[k];
+            var lead = (k === 0) ? 'Vigil ab ' : 'dehinc ab ';
+            var open = (k === intervals.length - 1) && lastRowPresent && now && (epoch(now) - epoch(iv.to) <= LIVE);
+            var base = open ? (lead + show(iv.from) + ' adhuc') : (lead + show(iv.from) + ' usque ad ' + show(iv.to));
+            parts.push(base + instab(iv.unstable));
         }
-        prevPresent = pt;
+        return parts.join('; ') + '.';
     }
-    if (cur) { intervals.push(cur); }
-    if (!intervals.length) { return; }
 
-    var now = null;
-    try { now = propertime(); } catch (e) {}
-    var lastRowPresent = rows.length > 0 && rows[rows.length - 1] !== '';
-
-    var parts = [];
-    for (var k = 0; k < intervals.length; k++) {
-        var iv = intervals[k];
-        var lead = (k === 0) ? 'Vigil ab ' : 'dehinc ab ';
-        var open = (k === intervals.length - 1) && lastRowPresent && now && (epoch(now) - epoch(iv.to) <= LIVE);
-        var base = open ? (lead + show(iv.from) + ' adhuc') : (lead + show(iv.from) + ' usque ad ' + show(iv.to));
-        parts.push(base + instab(iv.unstable));
-    }
-    el.textContent = parts.join('; ') + '.';
+    var zp = renderProse(zrokRows);
+    if (zp !== null) { document.getElementById('vigiliae').textContent = zp; }
+    var op = renderProse(onionRows);
+    if (op !== null) { document.getElementById('vigiliae-onion-body').textContent = op; }
 })();
 </script>
 </body>
