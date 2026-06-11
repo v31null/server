@@ -5,13 +5,13 @@
   <meta charset="UTF-8">
     <title>v31nfiles</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/assets/css/style.css">
-  
-		<link rel="stylesheet" href="/assets/css/katex.css" />
+  <link rel="stylesheet" href="/assets/css/style.css" integrity="sha384-6MId1dq/we1bpKELlGhIuKnr0PHvn1YZxcJGz/bFmOG+Fkjbm9WuTd6PnssBHdkc">
+
+		<link rel="stylesheet" href="/assets/css/katex.css" integrity="sha384-SDhS2XmGfhu2j8zW3P66SdGPyhekPD7vRAl7zMnMYbSu94g/F4xtfJuR2P2XLWgg" />
 		<script defer src="/assets/js/katex.js" integrity="sha384-tMzugJpfLv7v0f+KXzNMqNCC6sVzLMM3sCnZDgzy0lcO/0h3sAkEBg/URFcV0JpE"></script>
 		<script defer src="/assets/js/auto-render.js" integrity="sha384-xPmXPBvcxK/y8ReZ6Bqqc2xLa3i/2NHkhfeKYWS2sIfCbizZU2B2AsusEWhU1yOV"></script>
 		<script defer src="/assets/js/copy-tex.min.js" integrity="sha384-HORx6nWi8j5/mYA+y57/9/CZc5z8HnEw4WUZWy5yOn9ToKBv1l58vJaufFAn9Zzi"></script>
-
+    <link rel="shortcut icon" href="/assets/img/logomonochrome.ico" type="image/x-icon">
 		<script>
 			window.onload = function () {
 				renderMathInElement(document.body, {
@@ -31,7 +31,6 @@
 <body>
   <div class="container">
 
-    <!-- Branding -->
     <header class="header">
       <h1>$$\underline{\raisebox{-0.74ex}{V}\kern{-0.15em}31\raisebox{-0.74ex}{\kern{-0.08em}$n$}}$$</h1>
     </header>
@@ -152,6 +151,6 @@
 
   <script>window.V31N_MODE = 'upload';</script>
   <script src="assets/js/crypto.js" integrity="sha384-w9GiC6ltG0puiUuhr/G608/S9HJf5ZfAAxan3zEu36iH4Ceo0wklSd9cfxfP3riU"></script>
-  <script src="assets/js/app.js" integrity="sha384-YcMKdvMlLsWJpN9YzB0unYhDIkp2JSkRlQto05iwmvPyvzDx/IPRrjx1ckpUKsZs"></script>
+  <script src="assets/js/app.js" integrity="sha384-cMd3GMfMkQdcznjomP9IctdoKNKXnrs5O5Mxgb1vYSRtVhmQEhobyCNRu8F0NTRM"></script>
 </body>
 </html>

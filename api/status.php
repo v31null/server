@@ -7,7 +7,7 @@ header('X-Content-Type-Options: nosniff');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
-    echo json_encode(['error' => 'Meþod not allowen']);
+    echo json_encode(['error' => 'No.']);
     exit;
 }
 
@@ -19,7 +19,7 @@ $input = json_decode($raw, true);
 
 if (!$input || !isset($input['hashes']) || !is_array($input['hashes'])) {
     http_response_code(400);
-    echo json_encode(['error' => 'In‑valid request.']);
+    echo json_encode(['error' => 'No.']);
     exit;
 }
 

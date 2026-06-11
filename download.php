@@ -14,7 +14,7 @@ if (!preg_match('/^[a-f0-9]{8}$/', $id)) {
         showErrorPage("File could not be finden", "Given \u{2018}yper\u{2011}link exists not in Our storage , pray ; do turn whence You kame back.");
     } else {
         header('Content-Type: application/json');
-        echo json_encode(['error' => 'File could not be finden']);
+        echo json_encode(['error' => 'No.']);
     }
     exit;
 }
@@ -30,7 +30,7 @@ if (!$mapData) {
         showErrorPage("File could not be finden", "Given \u{2018}yper\u{2011}link exists not in Our storage , pray ; do turn whence You kame.");
     } else {
         header('Content-Type: application/json');
-        echo json_encode(['error' => 'File could not be finden']);
+        echo json_encode(['error' => 'No.']);
     }
     exit;
 }
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>v31nfiles</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css" integrity="sha384-6MId1dq/we1bpKELlGhIuKnr0PHvn1YZxcJGz/bFmOG+Fkjbm9WuTd6PnssBHdkc">
 </head>
 <body>
     <div class="container">
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         window.V31N_FILE_ID = '<?php echo htmlspecialchars($id, ENT_QUOTES, 'UTF-8'); ?>';
     </script>
     <script src="../assets/js/crypto.js" integrity="sha384-w9GiC6ltG0puiUuhr/G608/S9HJf5ZfAAxan3zEu36iH4Ceo0wklSd9cfxfP3riU"></script>
-    <script src="../assets/js/app.js" integrity="sha384-YcMKdvMlLsWJpN9YzB0unYhDIkp2JSkRlQto05iwmvPyvzDx/IPRrjx1ckpUKsZs"></script>
+    <script src="../assets/js/app.js" integrity="sha384-cMd3GMfMkQdcznjomP9IctdoKNKXnrs5O5Mxgb1vYSRtVhmQEhobyCNRu8F0NTRM"></script>
 </body>
 </html>
 <?php
@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 http_response_code(405);
 header('Content-Type: application/json');
-echo json_encode(['error' => 'Meþod not allowen']);
+echo json_encode(['error' => 'No.']);
 exit;
 
 
@@ -110,7 +110,7 @@ function showErrorPage($title, $message) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>v31nfiles</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css" integrity="sha384-6MId1dq/we1bpKELlGhIuKnr0PHvn1YZxcJGz/bFmOG+Fkjbm9WuTd6PnssBHdkc">
 </head>
 <body>
     <div class="container">

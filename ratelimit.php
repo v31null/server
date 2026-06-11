@@ -68,7 +68,7 @@ function rl_enforce($bucket, $limit, $window = 60) {
             http_response_code(429);
             header('Retry-After: ' . $window);
             header('Content-Type: application/json; charset=utf-8');
-            echo json_encode(['error' => 'Too many requests. Try again later.']);
+            echo json_encode(['error' => 'No.']);
             exit;
         }
 

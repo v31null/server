@@ -23,7 +23,7 @@ if (is_file($log)) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vigiliae</title>
-<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/style.css" integrity="sha384-6MId1dq/we1bpKELlGhIuKnr0PHvn1YZxcJGz/bFmOG+Fkjbm9WuTd6PnssBHdkc">
 </head>
 <body>
 <div class="container">

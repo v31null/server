@@ -33,6 +33,69 @@ function formatFileSize(bytes) {
 }
 
 
+function v31nSleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+
+function v31nWaitForOnline(maxWait) {
+    if (navigator.onLine !== false) return Promise.resolve();
+    return new Promise((resolve) => {
+        let done = false;
+        const finish = () => {
+            if (done) return;
+            done = true;
+            window.removeEventListener('online', finish);
+            resolve();
+        };
+        window.addEventListener('online', finish);
+        setTimeout(finish, maxWait || 30000);
+    });
+}
+
+
+async function v31nFetchRetry(url, options, cfg) {
+    cfg = cfg || {};
+    const maxAttempts = cfg.maxAttempts || 10;
+    const timeout = cfg.timeout || 120000;
+    const maxDelay = 30000;
+    let delay = cfg.baseDelay || 1500;
+    let attempt = 0;
+    let lastErr = null;
+
+    while (attempt < maxAttempts) {
+        attempt++;
+        await v31nWaitForOnline();
+
+        const ctrl = new AbortController();
+        const timer = setTimeout(() => ctrl.abort(), timeout);
+        try {
+            const resp = await fetch(url, Object.assign({}, options, { signal: ctrl.signal }));
+            clearTimeout(timer);
+
+            if (resp.status === 429 || (resp.status >= 500 && resp.status < 600)) {
+                if (attempt >= maxAttempts) return resp;
+                const ra = parseInt(resp.headers.get('Retry-After') || '0', 10);
+                const wait = (ra > 0 ? ra * 1000 : delay) + Math.floor(Math.random() * 750);
+                await v31nSleep(wait);
+                delay = Math.min(delay * 2, maxDelay);
+                continue;
+            }
+
+            return resp;
+        } catch (e) {
+            clearTimeout(timer);
+            lastErr = e;
+            if (attempt >= maxAttempts) break;
+            await v31nSleep(delay + Math.floor(Math.random() * 750));
+            delay = Math.min(delay * 2, maxDelay);
+        }
+    }
+
+    throw lastErr || new Error('Network request failed after retries');
+}
+
+
 function initUpload() {
     const BASE_URL = getBaseUrl();
 
@@ -172,17 +235,19 @@ function initUpload() {
             }
 
             const result = await V31nCrypto.chunkAndEncryptFile(file, password, decoyHashes, (progress) => {
-                progressFill.style.width = (progress * 100) + '%';
+                progressFill.style.width = (progress * 40) + '%';
                 progressText.textContent = 'Encrypting... ' + Math.round(progress * 100) + '%';
             });
 
-            progressText.textContent = 'Checking for duplicates...';
-            const hashes = result.chunks.map(c => c.hash);
+            const STORE_BATCH = 40;
 
-            const statusResp = await fetch(BASE_URL + 'api/status.php', {
+            progressText.textContent = 'Checking what is already there...';
+            const realHashes = result.chunks.map(c => c.hash);
+
+            const statusResp = await v31nFetchRetry(BASE_URL + 'api/status.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ hashes })
+                body: JSON.stringify({ hashes: realHashes })
             });
 
             if (!statusResp.ok) {
@@ -190,42 +255,90 @@ function initUpload() {
             }
 
             const status = await statusResp.json();
+            const missingSet = new Set(status.missing);
 
-            const newChunks = result.chunks.filter(c => status.missing.includes(c.hash));
+            const realMissing = result.chunks
+                .filter(c => missingSet.has(c.hash))
+                .map(c => ({
+                    hash: c.hash,
+                    iv: V31nCrypto.bytesToBase64(c.iv),
+                    data: V31nCrypto.bytesToBase64(c.data)
+                }));
 
+            const requiredHashes = realMissing.map(c => c.hash);
+
+            let toUpload = realMissing.concat(decoyChunks);
+            for (let i = toUpload.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                const tmp = toUpload[i];
+                toUpload[i] = toUpload[j];
+                toUpload[j] = tmp;
+            }
+
+            const totalToStore = Math.max(1, toUpload.length);
+            let storedSoFar = 0;
             progressText.textContent = 'Uploading...';
+
+            let round = 0;
+            while (true) {
+                round++;
+
+                for (let i = 0; i < toUpload.length; i += STORE_BATCH) {
+                    const batch = toUpload.slice(i, i + STORE_BATCH);
+                    try {
+                        const r = await v31nFetchRetry(BASE_URL + 'upload.php', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ chunks: batch })
+                        });
+                        if (!r.ok) throw new Error('store HTTP ' + r.status);
+                        storedSoFar += batch.length;
+                        const frac = Math.min(1, storedSoFar / totalToStore);
+                        progressFill.style.width = (40 + frac * 45) + '%';
+                        progressText.textContent = 'Uploading... ' + Math.round(frac * 100) + '%';
+                    } catch (e) {
+                        // batch exhausted its retries; the status recheck below will requeue it
+                    }
+                }
+
+                if (!requiredHashes.length) break;
+
+                const recheck = await v31nFetchRetry(BASE_URL + 'api/status.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ hashes: requiredHashes })
+                });
+                const recheckJson = recheck.ok ? await recheck.json() : { missing: requiredHashes };
+                const stillMissing = new Set(recheckJson.missing);
+                const remainingReal = realMissing.filter(c => stillMissing.has(c.hash));
+
+                if (!remainingReal.length) break;
+                if (round >= 6) {
+                    throw new Error('Connection too unstable to finish. Progress was saved — re-upload the same file to resume.');
+                }
+
+                toUpload = remainingReal;
+                await v31nSleep(2000 + Math.floor(Math.random() * 1500));
+            }
+
+            progressText.textContent = 'Sealing...';
             progressFill.style.width = '90%';
 
-            const preparedChunks = newChunks.map(c => ({
-                hash: c.hash,
-                iv: V31nCrypto.bytesToBase64(c.iv),
-                data: V31nCrypto.bytesToBase64(c.data)
-            }));
-
-            for (const dc of decoyChunks) {
-                preparedChunks.push(dc);
-            }
-
-            preparedChunks.sort(() => Math.random() - 0.5);
-
-            const uploadBody = {
-                chunks: preparedChunks,
-                encrypted_payload: V31nCrypto.bytesToBase64(result.encrypted_payload),
-                payload_iv: V31nCrypto.bytesToBase64(result.payload_iv),
-                salt: V31nCrypto.bytesToBase64(result.salt)
-            };
-
-            const uploadResp = await fetch(BASE_URL + 'upload.php', {
+            const finalizeResp = await v31nFetchRetry(BASE_URL + 'upload.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(uploadBody)
-            });
+                body: JSON.stringify({
+                    encrypted_payload: V31nCrypto.bytesToBase64(result.encrypted_payload),
+                    payload_iv: V31nCrypto.bytesToBase64(result.payload_iv),
+                    salt: V31nCrypto.bytesToBase64(result.salt)
+                })
+            }, { maxAttempts: 12 });
 
-            if (!uploadResp.ok) {
-                throw new Error('Upload failed (HTTP ' + uploadResp.status + ')');
+            if (!finalizeResp.ok) {
+                throw new Error('Upload failed (HTTP ' + finalizeResp.status + ')');
             }
 
-            const uploadResult = await uploadResp.json();
+            const uploadResult = await finalizeResp.json();
 
             if (uploadResult.error) {
                 throw new Error(uploadResult.error);
