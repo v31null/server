@@ -160,8 +160,9 @@ if (is_file($log)) {
             if (b <= 1) {
                 run.reached++;
             } else {
+                run.before += (b - 1);
                 items.push(summaItem(run));
-                run = { start: present[k], reached: 1, before: b - 1 };
+                run = { start: present[k], reached: 1, before: 0 };
             }
         }
         items.push(summaItem(run));
