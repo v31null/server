@@ -13,6 +13,7 @@ ErrorDocument 500 /blocken.html
     Header always set Referrer-Policy "no-referrer"
     Header always set Server "Blocken"
     Header unset X-Powered-By
+    Header always set Onion-Location "http://fileprtejlf5mpnrgs5isoknpg6zmidwvc2jtpotepkfeocx4zltm2ad.onion%{REQUEST_URI}e" "expr=%{HTTPS} == 'on'"
 </IfModule>
 
 RewriteEngine On

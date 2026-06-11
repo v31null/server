@@ -33,7 +33,7 @@ Take þe Finger‑print from an Trusten Official‑source , e.g./ github.com/v3
 
 Per-file sha256s ;
   3273581722446ffa8ba538c07adc08da799a77df208360a9c0ae1bad97c412ff  .gitattributes
-  482181d6f6a06cb19b41d8d8b7e50e6afcd7e69daf19eb4366780348c5b3d79b  .htaccess
+  2eff9fe6968c825842ba4e6a47fc7cfeecfa3a42940b28574fca0ef2701b8117  .htaccess
   572eafe510b9de716c505468ff4c3fa920163e514fa9d26f096a633386335ff5  README.md
   7f1c87c3696cd417fb97113515f99f9006b01d01008768a5897248e0531cda0f  aliveneß.php
   309384a0847927925e3ce7fda1c418db1a9d8bafbc7e85cd931d0c73c772b985  api/chunk.php
@@ -118,9 +118,10 @@ Per-file sha256s ;
   4c978929689278ca79d5f489f87d07f190b6448913ee52b39f52d3457c2d510b  download.php
   be47ca540c03deb3d72ee648244f8c557771f3474e6ed02c0d1adec858b6cec8  embed.php
   b005fc403e31728fa28be741fbe9805932e2ed2f61d11eee800f636ff9dfa786  index.php
-  98e4c766ce26fdb86e1b0f5cef6a339b43f6312006fcf0cd02f6fbc66c91a247  indexd.json
+  e1bd6a9b2d1ded8799d6a0fc464f9acd2c28735e1f29cd40834a0a9f114adf20  indexd.json
   417ef536a8f627b0cbefff91b68d754cb68c081acb1ca16bcd5dcab41f85406b  init_storage.php
   a089e81d9ff91dc623de95a4b60dfbed9a82ab7f8cd5955f1a0b0c08d3d468ee  integritie.php
+  9e454f2ae8df4f4029d4f389b4cf3cbc02bde7d6d8be7cf711c9804ab8dfe8c7  onion.txt
   aea7fa16965aed3de3803a270f1e2973d600c852511ecf04b59ace1a9026e13e  publickey.pem
   198c3b1f173a6a82c90d7ca8ab6710ed6d667d8a11a59631c76a50a3db24e9aa  ratelimit.php
   983dd0a36fbd049aa646ec0406970b5e06faa4e468c41022fa9dddca174056aa  upload.php
