@@ -426,9 +426,9 @@
             "size": 4386
         },
         "embed.php": {
-            "sha256": "bd0f91beed6f03208d31a407dd7b87264d4cc8b6893a69909570252239f31e6d",
-            "sha384": "sha384-SEQnyzj1hE4qXF755ebv27IO5Jt1ej1kn+sCMbB9mVZVUV1PH6MmC8ePFlUh6ExM",
-            "size": 5767
+            "sha256": "be47ca540c03deb3d72ee648244f8c557771f3474e6ed02c0d1adec858b6cec8",
+            "sha384": "sha384-sHooAQPMLiXTmPND0mfdrI4DYIzLfCWD3CsL01anFUpyTO9qAriziWhmmE4qVnzd",
+            "size": 5794
         },
         "index.php": {
             "sha256": "50058c542119f9f383280046313790230a214c99422acab4ad5f2bc43539e988",

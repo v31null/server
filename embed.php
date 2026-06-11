@@ -149,7 +149,7 @@ function serveFile($filePath, $mime, $fileId, $meta) {
         header('Content-Length: ' . filesize($filePath));
         header('Cache-Control: public, max-age=31536000');
         header('X-Content-Type-Options: nosniff');
-        header("Content-Security-Policy: default-src 'none'");
+        header("Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'");
         readfile($filePath);
     } else {
         $fileName = isset($meta['name']) ? $meta['name'] : 'file';
