@@ -2912,6 +2912,7 @@ const propertime = (function () {
 	ptFunc.jdnDiff = function (cy1, m1, d1, cy2, m2, d2) {
 		return ymdToJdn(cy2, m2, d2) - ymdToJdn(cy1, m1, d1);
 	};
+	ptFunc.propertime_now = function () { return ptFunc(); };
 
 	return ptFunc;
 })();
