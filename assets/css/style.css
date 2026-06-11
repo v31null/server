@@ -1,5 +1,4 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap');
 
 *,
 *::before,
@@ -24,19 +23,19 @@
 
 @font-face {
 	font-family: regularor;
-	src: url(/css/fonts/regular.ttf);
+	src: url(/assets/css/fonts/regular.ttf);
 }
 @font-face {
 	font-family: Junicode;
-	src: url(/css/fonts/JunicodeVF-Roman.woff2);
+	src: url(/assets/css/fonts/JunicodeVF-Roman.woff2);
 }
 @font-face {
 	font-family: nullpunktsenergiefont;
-	src: url(/css/fonts/nullpunktsenergiefont-Regular.ttf);
+	src: url(/assets/css/fonts/nullpunktsenergiefont-Regular.ttf);
 }
 @font-face {
 	font-family: BabelStone Han;
-	src: url(/css/fonts/BabelStoneHan.ttf);
+	src: url(/assets/css/fonts/BabelStoneHan.ttf);
 }
 .container {
   max-width: 600px;

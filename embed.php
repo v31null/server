@@ -163,7 +163,7 @@ function serveFile($filePath, $mime, $fileId, $meta) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>v31nfiles</title>
-    <link rel="stylesheet" href="/assets/css/style.css" integrity="sha384-6MId1dq/we1bpKELlGhIuKnr0PHvn1YZxcJGz/bFmOG+Fkjbm9WuTd6PnssBHdkc">
+    <link rel="stylesheet" href="/assets/css/style.css" integrity="sha384-uqXawRQ17X8dzJ3eeq+4vPTUL2cJhgd106v0ojq+YiGj6DWLVN8R0M2o+So5OUV+">
 </head>
 <body>
     <div class="container">
