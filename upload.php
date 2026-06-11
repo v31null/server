@@ -110,12 +110,15 @@ if ($hasChunks && $totalChunks > 0) {
     fwrite($slugHandle, chr($byte0));
     fflush($slugHandle);
 
-    $existsStmt = $db->prepare('SELECT 1 FROM chunks WHERE hash = ?');
+    $existsStmt   = $db->prepare('SELECT 1 FROM chunks WHERE hash = ?');
+    $occupantStmt = $db->prepare('SELECT hash FROM chunks WHERE offset = ?');
+
+    $SLOT = 4160;
+    $HEADER_LEN = 3;
 
     fseek($slugHandle, 0, SEEK_END);
-    $currentOffset = ftell($slugHandle);
-
-    $newChunkRecords = [];
+    $fileSize = ftell($slugHandle);
+    $slotCount = intdiv($fileSize - $HEADER_LEN, $SLOT);
 
     foreach ($input['chunks'] as $chunk) {
         if (!isset($chunk['hash'], $chunk['iv'], $chunk['data'])) {
@@ -150,15 +153,57 @@ if ($hasChunks && $totalChunks > 0) {
 
         $entry = $hashBytes . $lengthBytes . $iv . $data;
         $entryLength = strlen($entry);
+        if ($entryLength > $SLOT) {
+            continue;
+        }
+        $slotBytes = $entry . str_repeat("\0", $SLOT - $entryLength);
 
-        $bytesWritten = fwrite($slugHandle, $entry);
-        if ($bytesWritten !== $entryLength) {
-            break;
+        $j = random_int(0, $slotCount);
+        $targetOffset = $HEADER_LEN + $j * $SLOT;
+        $endOffset = $HEADER_LEN + $slotCount * $SLOT;
+
+        if ($j === $slotCount) {
+            fseek($slugHandle, $endOffset);
+            if (fwrite($slugHandle, $slotBytes) !== $SLOT) {
+                break;
+            }
+            $db->beginTransaction();
+            $insertStmt = $db->prepare('INSERT OR IGNORE INTO chunks (hash, offset, length) VALUES (?, ?, ?)');
+            $insertStmt->execute([$hash, $targetOffset, $entryLength]);
+            $db->commit();
+        } else {
+            fseek($slugHandle, $targetOffset);
+            $occupantBytes = fread($slugHandle, $SLOT);
+            if (strlen($occupantBytes) !== $SLOT) {
+                break;
+            }
+
+            fseek($slugHandle, $endOffset);
+            if (fwrite($slugHandle, $occupantBytes) !== $SLOT) {
+                break;
+            }
+
+            $occupantStmt->execute([$targetOffset]);
+            $occHash = $occupantStmt->fetchColumn();
+
+            $db->beginTransaction();
+            if ($occHash !== false) {
+                $db->prepare('UPDATE chunks SET offset = ? WHERE hash = ?')->execute([$endOffset, $occHash]);
+            }
+            $db->commit();
+
+            fseek($slugHandle, $targetOffset);
+            if (fwrite($slugHandle, $slotBytes) !== $SLOT) {
+                break;
+            }
+
+            $db->beginTransaction();
+            $db->prepare('INSERT OR IGNORE INTO chunks (hash, offset, length) VALUES (?, ?, ?)')->execute([$hash, $targetOffset, $entryLength]);
+            $db->commit();
         }
 
-        $newChunkRecords[] = [$hash, $currentOffset, $entryLength];
-
-        $currentOffset += $entryLength;
+        fflush($slugHandle);
+        $slotCount++;
         $newChunksWritten++;
     }
 
@@ -168,15 +213,6 @@ if ($hasChunks && $totalChunks > 0) {
     fseek($slugHandle, 0);
     fwrite($slugHandle, chr($byte0));
     fflush($slugHandle);
-
-    if (!empty($newChunkRecords)) {
-        $db->beginTransaction();
-        $insertStmt = $db->prepare('INSERT OR IGNORE INTO chunks (hash, offset, length) VALUES (?, ?, ?)');
-        foreach ($newChunkRecords as $rec) {
-            $insertStmt->execute($rec);
-        }
-        $db->commit();
-    }
 
     flock($slugHandle, LOCK_UN);
     fclose($slugHandle);
@@ -196,13 +232,16 @@ do {
     $idStmt->execute([$uploadId]);
 } while ($idStmt->fetch());
 
+$JST_OFFSET = 9 * 3600;
+$createdAtDay = intdiv(time() + $JST_OFFSET, 86400) * 86400 - $JST_OFFSET;
+
 $mapStmt = $db->prepare('INSERT INTO maps (file_id, encrypted_payload, payload_iv, salt, created_at) VALUES (?, ?, ?, ?, ?)');
 $mapStmt->execute([
     $uploadId,
     $input['encrypted_payload'],
     $input['payload_iv'],
     $input['salt'],
-    time()
+    $createdAtDay
 ]);
 
 echo json_encode([
