@@ -491,10 +491,10 @@ function initDownload() {
 
             let loadedCount = 0;
             const chunkPromises = hashesToFetch.map(async (hash) => {
-                const chunkResp = await fetch(BASE_URL + 'api/chunk.php?hash=' + encodeURIComponent(hash), {
+                const chunkResp = await fetch(BASE_URL + 'api/chunk.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({})
+                    body: JSON.stringify({ hash: hash })
                 });
                 if (!chunkResp.ok) throw new Error('Chunk download failed');
                 const chunkJson = await chunkResp.json();

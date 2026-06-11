@@ -151,6 +151,6 @@
 
   <script>window.V31N_MODE = 'upload';</script>
   <script src="assets/js/crypto.js" integrity="sha384-w9GiC6ltG0puiUuhr/G608/S9HJf5ZfAAxan3zEu36iH4Ceo0wklSd9cfxfP3riU"></script>
-  <script src="assets/js/app.js" integrity="sha384-zSsPlpBWabzwKsNeIcBKd7OaNN0tpSg25aofY0kq6rcLYBv/OV+rzdqIeNncPtcE"></script>
+  <script src="assets/js/app.js" integrity="sha384-b4R7uUfxHZLQ5d9Ks2owhTSN33X+h6vO1og3K+EWviEIboeubolabEiYnraVJBen"></script>
 </body>
 </html>

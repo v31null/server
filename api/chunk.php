@@ -5,7 +5,8 @@ require_once __DIR__ . '/../integritie.php'; integritie_gate(__FILE__);
 header('Content-Type: application/json');
 header('X-Content-Type-Options: nosniff');
 
-$hash = isset($_GET['hash']) ? $_GET['hash'] : '';
+$in = json_decode(file_get_contents('php://input'), true);
+$hash = (is_array($in) && isset($in['hash'])) ? $in['hash'] : (isset($_GET['hash']) ? $_GET['hash'] : '');
 
 if (!preg_match('/^[a-f0-9]{64}$/', $hash)) {
     $hash = hash('sha256', $hash);
