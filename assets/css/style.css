@@ -478,11 +478,16 @@ a:hover {
 }
 
 .acta-container {
-    margin-top: 40px;
-    max-height: 600vh;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    scrollbar-width: none;
+    width: 98vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    column-width: 360px;
+    column-gap: 20px;
+    max-height: none;
+    overflow: visible;
+    padding: 0 1vw;
+    box-sizing: border-box;
 }
 
 .acta-card {
@@ -491,6 +496,8 @@ a:hover {
   border-radius: 9px;
   padding: 28px 32px;
   margin-bottom: 20px;
+  break-inside: avoid;
+  word-wrap: break-word;
 }
 
 .acta-card + .acta-card {

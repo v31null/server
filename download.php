@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>v31nfiles</title>
-    <link rel="stylesheet" href="/assets/css/style.css" integrity="sha384-I5BMPe0ktzGjaqQYJ19HI1oB3RSwRyOXnmDe5KskEjfaTpuABzvRv4N5r2VvKswI">
+    <link rel="stylesheet" href="/assets/css/style.css" integrity="sha384-XpkoMdA/xoiIJJhPMyhyUBtAxGFjk9vhCWO7HvJc91DvTA3ym/iJOLd7nHJRWcxE">
 </head>
 <body>
     <div class="container">
@@ -110,7 +110,7 @@ function showErrorPage($title, $message) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>v31nfiles</title>
-    <link rel="stylesheet" href="../assets/css/style.css" integrity="sha384-I5BMPe0ktzGjaqQYJ19HI1oB3RSwRyOXnmDe5KskEjfaTpuABzvRv4N5r2VvKswI">
+    <link rel="stylesheet" href="../assets/css/style.css" integrity="sha384-XpkoMdA/xoiIJJhPMyhyUBtAxGFjk9vhCWO7HvJc91DvTA3ym/iJOLd7nHJRWcxE">
 </head>
 <body>
     <div class="container">

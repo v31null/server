@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
     <title>v31nfiles</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/assets/css/style.css" integrity="sha384-I5BMPe0ktzGjaqQYJ19HI1oB3RSwRyOXnmDe5KskEjfaTpuABzvRv4N5r2VvKswI">
+  <link rel="stylesheet" href="/assets/css/style.css" integrity="sha384-XpkoMdA/xoiIJJhPMyhyUBtAxGFjk9vhCWO7HvJc91DvTA3ym/iJOLd7nHJRWcxE">
 
 		<link rel="stylesheet" href="/assets/css/katex.css" integrity="sha384-SDhS2XmGfhu2j8zW3P66SdGPyhekPD7vRAl7zMnMYbSu94g/F4xtfJuR2P2XLWgg" />
 		<script defer src="/assets/js/katex.js" integrity="sha384-tMzugJpfLv7v0f+KXzNMqNCC6sVzLMM3sCnZDgzy0lcO/0h3sAkEBg/URFcV0JpE"></script>
@@ -22,7 +22,7 @@
 					throwOnError: false,
 					trust: true,
 					preProcess: function (math) {
-						return math.replace(/Ș̈/g, "\\ddot{S}\\rlap{\\hspace{-1em}\\raisebox{-0.4ex}{\\textit{,}}}").replace(/Ț̈/g, "\\ddot{T}\\rlap{\\hspace{-1em}\\raisebox{-0.4ex}{\\textit{,}}}").replace(/ș̈/g, "\\ddot{s}\\rlap{\\hspace{-0.5em}\\raisebox{-0.4ex}{\\textit{,}}}").replace(/ț̈/g, "\\ddot{t}\\rlap{\\hspace{-0.5em}\\raisebox{-0.4ex}{\\textit{,}}}").replace(/ș/g, "s\\rlap{\\hspace{-0.5em}\\raisebox{-0.4ex}{\\textit{,}}}").replace(/Ș/g, "S\\rlap{\\hspace{-1em}\\raisebox{-0.4ex}{\\textit{,}}}").replace(/Ț/g, "T\\rlap{\\hspace{-1em}\\raisebox{-0.4ex}{\\textit{,}}}").replace(/ț/g, "t\\rlap{\\hspace{-0.5em}\\raisebox{-0.4ex}{\\textit{,}}}").replace(/í̈/g, "\\ddot{\\acute{\\imath}}").replace(/Í̈/g, "\\ddot{\\acute{I}}").replace(/í/g, "\\acute{\\imath}").replace(/Í/g, "\\acute{I}").replace(/ï/g, "\\ddot{\\imath}");
+						return math.replace(/Ș̈/g, "\\ddot{S}\\rlap{\\hspace{-1em}\\raisebox{-0.4ex}{\\textit{,}}}").replace(/Ț̈/g, "\\ddot{T}\\rlap{\\hspace{-1em}\\raisebox{-0.4ex}{\\textit{,}}}").replace(/ș̈/g, "\\ddot{s}\\rlap{\\hspace{-0.5em}\\raisebox{-0.4ex}{\\textit{,}}}").replace(/ț̈/g, "\\ddot{t}\\rlap{\\hspace{-0.5em}\\raisebox{-0.4ex}{\\textit{,}}}").replace(/ș/g, "s\\rlap{\\hspace{-0.5em}\\raisebox{-0.4ex}{\\textit{,}}}").replace(/Ș/g, "S\\rlap{\\hspace{-1em}\\raisebox{-0.4ex}{\\textit{,}}}").replace(/Ț/g, "T\\rlap{\\hspace{-1em}\\raisebox{-0.4ex}{\\textit{,}}}").replace(/ț/g, "t\\rlap{\\hspace{-0.5em}\\raisebox{-0.4ex}{\\textit{,}}}").replace(/í̈/g, "\\ddot{\\acute{\\imath}}").replace(/Í̈/g, "\\ddot{\\acute{I}}").replace(/í/g, "\\acute{\\imath}").replace(/Í/g, "\\acute{I}").replace(/ï/g, "\\ddot{\\imath}");
 					},
 				});
 			};
