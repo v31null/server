@@ -46,15 +46,12 @@ if (is_file($log)) {
     var onionRows = <?php echo json_encode($onion); ?>;
     var TOL = 10, LIVE = 500;
 
-    function show(p) {
-        var s;
-        try { s = p.toString(); } catch (e) { s = p.year + ' ' + p.month + '/' + p.day + ' ' + p.hr + ':' + p.min + ':' + p.sec + ' ' + p.ampm; }
-        return s.replace(/(20\d{2})\s/g, '$1 ');
-    }
-    function epoch(p) {
-        var h = parseInt(p.hr, 10);
-        if (p.ampm === 'PM') { h += 12; }
-        return Date.UTC(parseInt(p.year, 10), parseInt(p.month, 10) - 1, parseInt(p.day, 10), h, parseInt(p.min, 10) - 1, parseInt(p.sec, 10) - 1) / 1000;
+    function show(p) { try { return p.toString(); } catch (e) { return p.year + ' ' + p.month + '⁄' + p.day + ' ' + p.hr + ':' + p.min + ':' + p.sec + ' ' + p.ampm; } }
+    function key(p) { return p.year + p.month + p.day + p.hr + p.min + p.sec + p.ampm; }
+    function within(anchor, target, lo, hi) {
+        var k = key(target);
+        for (var d = lo; d <= hi; d++) { if (key(anchor.add(d, 'SEC')) === k) { return true; } }
+        return false;
     }
     function fmtList(items) {
         var NBSP = ' ', L = '⸄', R = '⸅';
@@ -85,8 +82,7 @@ if (is_file($log)) {
             if (!cur) {
                 cur = { from: pt, to: pt, unstable: [] };
             } else {
-                var expected = prevPresent.add(300, 'SEC');
-                if (Math.abs(epoch(pt) - epoch(expected)) > TOL) { cur.unstable.push(pt); }
+                if (!within(prevPresent, pt, 300 - TOL, 300 + TOL)) { cur.unstable.push(pt); }
                 cur.to = pt;
             }
             prevPresent = pt;
@@ -105,7 +101,7 @@ if (is_file($log)) {
         for (var k = 0; k < intervals.length; k++) {
             var iv = intervals[k];
             var lead = (k === 0) ? 'Vigil ab ' : 'dehinc ab ';
-            var open = (k === intervals.length - 1) && lastRowPresent && now && (epoch(now) - epoch(iv.to) <= LIVE);
+            var open = (k === intervals.length - 1) && lastRowPresent && now && within(iv.to, now, 0, LIVE);
             var base = open ? (lead + show(iv.from) + ' adhuc') : (lead + show(iv.from) + ' usque ad ' + show(iv.to));
             parts.push(base + instab(iv.unstable));
         }

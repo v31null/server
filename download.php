@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
             <div class="form-group">
                 <input type="password" id="download-password-input"
-                       placeholder="Enter decryption password" autocomplete="off">
+                       placeholder="Paſs‑word" autocomplete="off">
             </div>
 
             <button id="download-btn" class="btn">Akseſs þͤ file</button>

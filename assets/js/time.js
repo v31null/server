@@ -2207,7 +2207,7 @@ const propertime = (function () {
 				let alts = this.toAltFormats(is_he, force_roman);
 				return alts[0];
 			}
-			return `${meta.displayYear} ${this.month}${FS}${this.day} ${this.hr}:${this.min}:${this.sec} ${this.ampm}${meta.suffix}`;
+			return `${meta.displayYear} ${this.month}${FS}${this.day} ${this.hr}:${this.min}:${this.sec} ${this.ampm}${meta.suffix}`;
 		}
 
 		toAltFormats(is_he = false, force_roman = false) {
@@ -2247,7 +2247,7 @@ const propertime = (function () {
 			const m = parseInt(this.month).toString(),
 				dy = parseInt(this.day).toString();
 				
-			const TURKIC_ANIMALS_TR = ["BIČIN", "TAKAGU", "WT", "TONGUZ", "SIČKAN", "UD", "BARS", "TABWȘKAN", "LU", "YILAN", "YUNT", "KONY"];
+			const TURKIC_ANIMALS_TR = ["BIČIN", "TAKAGU", "WT", "TONGUZ", "SWČKAN", "UD", "BARS", "TABWȘKAN", "LU", "YWLAN", "YUNT", "KONY"];
 			const TURKIC_ANIMALS_EN = ["MONKEY", "ROOSTER", "DOG", "PIG", "RAT", "OX", "TIGER", "RABBIT", "DRAGON", "SNAKE", "HORSE", "SHEEP"];
 			
 			function getEnOrdinal(n) {
