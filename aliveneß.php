@@ -9,11 +9,13 @@ if (isset($_GET['data'])) {
 }
 
 $log = __DIR__ . '/storage/aliveness.csv';
+$left = [];
 $zrok = [];
 $onion = [];
 if (is_file($log)) {
     foreach (file($log, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $ln) {
         $cols = explode('|', $ln);
+        $left[]  = isset($cols[0]) ? trim($cols[0]) : '';
         $zrok[]  = isset($cols[1]) ? trim($cols[1]) : '';
         $onion[] = isset($cols[2]) ? trim($cols[2]) : '';
     }
@@ -50,6 +52,7 @@ if (is_file($log)) {
 <script src="/assets/js/time.js"></script>
 <script>
 (function () {
+    var leftRows = <?php echo json_encode($left); ?>;
     var zrokRows = <?php echo json_encode($zrok); ?>;
     var onionRows = <?php echo json_encode($onion); ?>;
     var TOL = 10, LIVE = 500, PERIOD = 300, SLACK = 60, BREAK = 600, JIT = 2, MAXGAP = 3600;
@@ -61,17 +64,12 @@ if (is_file($log)) {
         for (var d = 0; d <= max; d++) { if (key(a.add(d, 'SEC')) === kb) { return d; } }
         return -1;
     }
-    function classify(a, b) {
+    function isRestart(a, b) {
         var g = gapSec(a, b, MAXGAP);
-        if (g < 0) { return { restart: true, missed: 0, unstable: false }; }
+        if (g < 0) { return true; }
         var k = Math.round(g / PERIOD);
-        if (k <= 1) {
-            return { restart: false, missed: 0, unstable: (g < PERIOD - TOL || g > PERIOD + SLACK) };
-        }
-        if (Math.abs(g - k * PERIOD) <= TOL + (k - 1) * JIT) {
-            return { restart: false, missed: k - 1, unstable: true };
-        }
-        return { restart: true, missed: 0, unstable: false };
+        if (k <= 1) { return false; }
+        return Math.abs(g - k * PERIOD) > TOL + (k - 1) * JIT;
     }
     function fmtList(items) {
         var NBSP = ' ', L = '⸄', R = '⸅';
@@ -89,14 +87,6 @@ if (is_file($log)) {
         return ' cum ' + noun + ' circa' + fmt;
     }
 
-    function presentTimes(rows) {
-        var present = [];
-        for (var i = 0; i < rows.length; i++) {
-            if (rows[i] === '') { continue; }
-            try { present.push(propertime(rows[i])); } catch (e) {}
-        }
-        return present;
-    }
     function buildIntervals(rows) {
         var intervals = [], cur = null, prevPresent = null;
         for (var i = 0; i < rows.length; i++) {
@@ -152,31 +142,39 @@ if (is_file($log)) {
                'Ex explorationibus ' + expected + ', prosperae ' + run.reached + ', cassae ' + run.before + '. ' +
                'Ex asse, ' + uncia(n) + '.';
     }
-    function renderSumma(chan) {
-        var present = presentTimes(chan);
-        if (!present.length) { return null; }
-        var items = [], run = { start: present[0], reached: 1, before: 0 };
-        for (var k = 1; k < present.length; k++) {
-            var c = classify(present[k - 1], present[k]);
-            if (c.restart) {
+    function renderSumma(left, chan) {
+        var n = left.length, firstPresent = -1;
+        for (var i = 0; i < n; i++) { if (chan[i] !== '') { firstPresent = i; break; } }
+        if (firstPresent < 0) { return null; }
+        var items = [], run = null, prevLeft = null, totR = 0, totB = 0;
+        for (var i = 0; i < n; i++) {
+            var lt;
+            try { lt = propertime(left[i]); } catch (e) { continue; }
+            var restarted = (prevLeft !== null) && isRestart(prevLeft, lt);
+            prevLeft = lt;
+            if (i < firstPresent) { continue; }
+            if (run === null) {
+                run = { start: lt, reached: 0, before: 0 };
+            } else if (restarted) {
                 items.push(summaItem(run));
-                run = { start: present[k], reached: 1, before: 0 };
-            } else {
-                run.reached++;
-                run.before += c.missed;
+                run = { start: lt, reached: 0, before: 0 };
             }
+            if (chan[i] !== '') { run.reached++; totR++; } else { run.before++; totB++; }
         }
-        items.push(summaItem(run));
-        return items.join(' ');
+        if (run) { items.push(summaItem(run)); }
+        if (!items.length) { return null; }
+        var tot = totR + totB;
+        var en = (totB <= 0) ? 12 : Math.min(11, Math.max(0, Math.round((totR / tot) * 12)));
+        return items.join(' ').replace(/\.$/, '') + '; in pleno, cassae ' + totB + ', prosperae reliquae ' + totR + ', ex asse, ' + uncia(en) + '.';
     }
 
     var zp = renderProse(zrokRows);
     if (zp !== null) { document.getElementById('vigiliae').textContent = zp; }
     var op = renderProse(onionRows);
     if (op !== null) { document.getElementById('vigiliae-onion-body').textContent = op; }
-    var sp = renderSumma(zrokRows);
+    var sp = renderSumma(leftRows, zrokRows);
     if (sp !== null) { document.getElementById('summa-publica').textContent = sp; }
-    var so = renderSumma(onionRows);
+    var so = renderSumma(leftRows, onionRows);
     if (so !== null) { document.getElementById('summa-propria-body').textContent = so; }
 })();
 </script>
