@@ -52,7 +52,7 @@ if (is_file($log)) {
 (function () {
     var zrokRows = <?php echo json_encode($zrok); ?>;
     var onionRows = <?php echo json_encode($onion); ?>;
-    var TOL = 10, LIVE = 500, PERIOD = 300, SLACK = 60, BREAK = 600;
+    var TOL = 10, LIVE = 500, PERIOD = 300, SLACK = 60, BREAK = 600, JIT = 2, MAXGAP = 3600;
 
     function show(p) { try { return p.toString(); } catch (e) { return p.year + ' ' + p.month + '⁄' + p.day + ' ' + p.hr + ':' + p.min + ':' + p.sec + ' ' + p.ampm; } }
     function key(p) { return p.year + p.month + p.day + p.hr + p.min + p.sec + p.ampm; }
@@ -60,6 +60,18 @@ if (is_file($log)) {
         var kb = key(b);
         for (var d = 0; d <= max; d++) { if (key(a.add(d, 'SEC')) === kb) { return d; } }
         return -1;
+    }
+    function classify(a, b) {
+        var g = gapSec(a, b, MAXGAP);
+        if (g < 0) { return { restart: true, missed: 0, unstable: false }; }
+        var k = Math.round(g / PERIOD);
+        if (k <= 1) {
+            return { restart: false, missed: 0, unstable: (g < PERIOD - TOL || g > PERIOD + SLACK) };
+        }
+        if (Math.abs(g - k * PERIOD) <= TOL + (k - 1) * JIT) {
+            return { restart: false, missed: k - 1, unstable: true };
+        }
+        return { restart: true, missed: 0, unstable: false };
     }
     function fmtList(items) {
         var NBSP = ' ', L = '⸄', R = '⸅';
@@ -77,6 +89,14 @@ if (is_file($log)) {
         return ' cum ' + noun + ' circa' + fmt;
     }
 
+    function presentTimes(rows) {
+        var present = [];
+        for (var i = 0; i < rows.length; i++) {
+            if (rows[i] === '') { continue; }
+            try { present.push(propertime(rows[i])); } catch (e) {}
+        }
+        return present;
+    }
     function buildIntervals(rows) {
         var intervals = [], cur = null, prevPresent = null;
         for (var i = 0; i < rows.length; i++) {
@@ -125,24 +145,6 @@ if (is_file($log)) {
     function uncia(n) {
         return ['nihil', 'uncia', 'sextans', 'quadrans', 'triens', 'quincunx', 'semis', 'septunx', 'bes', 'dodrans', 'dextans', 'deunx', 'as'][n];
     }
-    function before(a, b) {
-        var f = ['year', 'month', 'day'];
-        for (var i = 0; i < f.length; i++) {
-            var av = parseInt(a[f[i]], 10), bv = parseInt(b[f[i]], 10);
-            if (av !== bv) { return av < bv; }
-        }
-        var ah = parseInt(a.hr, 10) + (a.ampm === 'PM' ? 12 : 0);
-        var bh = parseInt(b.hr, 10) + (b.ampm === 'PM' ? 12 : 0);
-        if (ah !== bh) { return ah < bh; }
-        var am = parseInt(a.min, 10), bm = parseInt(b.min, 10);
-        if (am !== bm) { return am < bm; }
-        return parseInt(a.sec, 10) < parseInt(b.sec, 10);
-    }
-    function beats(a, b) {
-        var steps = 0, t = a;
-        while (steps < 100000 && before(t.add(PERIOD / 2, 'SEC'), b)) { t = t.add(PERIOD, 'SEC'); steps++; }
-        return steps;
-    }
     function summaItem(run) {
         var expected = run.reached + run.before;
         var n = (run.before <= 0) ? 12 : Math.min(11, Math.max(0, Math.round((run.reached / expected) * 12)));
@@ -151,18 +153,17 @@ if (is_file($log)) {
                'Ex asse, ' + uncia(n) + '.';
     }
     function renderSumma(chan) {
-        var present = [];
-        for (var i = 0; i < chan.length; i++) { if (chan[i] !== '') { present.push(propertime(chan[i])); } }
+        var present = presentTimes(chan);
         if (!present.length) { return null; }
         var items = [], run = { start: present[0], reached: 1, before: 0 };
         for (var k = 1; k < present.length; k++) {
-            var b = beats(present[k - 1], present[k]);
-            if (b <= 1) {
-                run.reached++;
-            } else {
-                run.before += (b - 1);
+            var c = classify(present[k - 1], present[k]);
+            if (c.restart) {
                 items.push(summaItem(run));
                 run = { start: present[k], reached: 1, before: 0 };
+            } else {
+                run.reached++;
+                run.before += c.missed;
             }
         }
         items.push(summaItem(run));
