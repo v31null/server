@@ -49,7 +49,7 @@ if (is_file($log)) {
 <p class="acta-body"><a href="https://stats.uptimerobot.com/Y1UqdausP4/803270927">Hiis qui probare voluerint ( HTTPS stats.uptimerobot COM )</a></p>
 </div>
 </div>
-<script src="/assets/js/time.js" integrity="sha384-VeTNu4zhK+yhNmwnEo2JSd3UhdF2mh1Bc5iv7Ir4j9wUsLSC/AhEAC9n4eGRTukr"></script>
+<script src="/assets/js/time.js" integrity="sha384-OAwpV+3zOtzydxsvAamZHByhDH+97geb3qDEGEhKTCc/DN8hZPRqE0E0XiV28nMm"></script>
 <script>
 (function () {
     var leftRows = <?php echo json_encode($left); ?>;

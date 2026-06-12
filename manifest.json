@@ -16,8 +16,8 @@
             "size": 1201
         },
         "aliveneß.php": {
-            "sha256": "50a261d3880ab3b1e88d1e32ae951b74c2663c7205955740178278426f444744",
-            "sha384": "sha384-PV9vvbmfLxg+8LLB8WL0fO96s5czKSDGtndttHJjz2CRIBhrvGc2ZuK2Z35+JFNb",
+            "sha256": "17de4f9c7d6e238daccd9258001bc41c10256390050c887acebc7def8328dde8",
+            "sha384": "sha384-+v3Ssnsdudnt+ES5LzPr2CoIMXxlCDPti77MFhBUc8J5pkNzMhD0lHWTBsOxpRl9",
             "size": 8405
         },
         "api/chunk.php": {
@@ -401,9 +401,9 @@
             "size": 629713
         },
         "assets/js/time.js": {
-            "sha256": "ca4b1035d99865001d8425953a701615dbbdd265215b7580b24489c35966884e",
-            "sha384": "sha384-VeTNu4zhK+yhNmwnEo2JSd3UhdF2mh1Bc5iv7Ir4j9wUsLSC/AhEAC9n4eGRTukr",
-            "size": 167510
+            "sha256": "2509f0dfff12b2412d05d8f5cd259b24a4e246f078b4d00b62977bb3d290daa8",
+            "sha384": "sha384-OAwpV+3zOtzydxsvAamZHByhDH+97geb3qDEGEhKTCc/DN8hZPRqE0E0XiV28nMm",
+            "size": 167449
         },
         "blocken.html": {
             "sha256": "7f09c4161db5a021dc82d924dd346c1c99f388bdb4e097c758ce91f649f7e77a",

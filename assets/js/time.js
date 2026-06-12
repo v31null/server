@@ -1617,18 +1617,18 @@ const propertime = (function () {
         { prima: 'WILLIAM III', secunda: '', jdnstr: 2340153, jdnend: 2342780 },
         { prima: 'ANNE', secunda: '', jdnstr: 2342780, jdnend: 2347309 },
         { prima: 'GEORGE I', secunda: '', jdnstr: 2347309, jdnend: 2352006 },
-        { prima: 'GEORGE II', secunda: '', jdnstr: 2352006, jdnend: 2364174 },
-        { prima: 'GEORGE III', secunda: '', jdnstr: 2364174, jdnend: 2382537 },
-        { prima: 'GEORGE III', secunda: 'PRINCE REGENT', jdnstr: 2382537, jdnend: 2385817 },
-        { prima: 'GEORGE IV', secunda: '', jdnstr: 2385817, jdnend: 2389618 },
-        { prima: 'WILLIAM IV', secunda: '', jdnstr: 2389618, jdnend: 2392169 },
-        { prima: 'VICTORIA', secunda: '', jdnstr: 2392169, jdnend: 2415394 },
-        { prima: 'EDWARD VII', secunda: '', jdnstr: 2415394, jdnend: 2418785 },
-        { prima: 'GEORGE V', secunda: '', jdnstr: 2418785, jdnend: 2428175 },
-        { prima: 'EDWARD VIII', secunda: '', jdnstr: 2428175, jdnend: 2428501 },
-        { prima: 'GEORGE VI', secunda: '', jdnstr: 2428501, jdnend: 2434036 },
-        { prima: 'ELIZABETH II', secunda: '', jdnstr: 2434036, jdnend: 2459818 },
-        { prima: 'CHARLES III', secunda: '', jdnstr: 2459818, jdnend: Infinity }
+        { prima: 'GEORGE II', secunda: '', jdnstr: 2352006, jdnend: 2364185 },
+        { prima: 'GEORGE III', secunda: '', jdnstr: 2364185, jdnend: 2382549 },
+        { prima: 'GEORGE III', secunda: 'PRINCE REGENT', jdnstr: 2382549, jdnend: 2385829 },
+        { prima: 'GEORGE IV', secunda: '', jdnstr: 2385829, jdnend: 2389630 },
+        { prima: 'WILLIAM IV', secunda: '', jdnstr: 2389630, jdnend: 2392181 },
+        { prima: 'VICTORIA', secunda: '', jdnstr: 2392181, jdnend: 2415407 },
+        { prima: 'EDWARD VII', secunda: '', jdnstr: 2415407, jdnend: 2418798 },
+        { prima: 'GEORGE V', secunda: '', jdnstr: 2418798, jdnend: 2428188 },
+        { prima: 'EDWARD VIII', secunda: '', jdnstr: 2428188, jdnend: 2428514 },
+        { prima: 'GEORGE VI', secunda: '', jdnstr: 2428514, jdnend: 2434049 },
+        { prima: 'ELIZABETH II', secunda: '', jdnstr: 2434049, jdnend: 2459831 },
+        { prima: 'CHARLES III', secunda: '', jdnstr: 2459831, jdnend: Infinity }
 	];
 
 	function jdnToSumerian(jdn) {
@@ -2207,7 +2207,7 @@ const propertime = (function () {
 				let alts = this.toAltFormats(is_he, force_roman);
 				return alts[0];
 			}
-			return `${meta.displayYear} ${this.month}${FS}${this.day} ${this.hr}:${this.min}:${this.sec} ${this.ampm}${meta.suffix}`;
+			return `${meta.displayYear} ${this.month}${FS}${this.day} ${this.hr}:${this.min}:${this.sec} ${this.ampm}${meta.suffix}`;
 		}
 
 		toAltFormats(is_he = false, force_roman = false) {
@@ -2247,7 +2247,7 @@ const propertime = (function () {
 			const m = parseInt(this.month).toString(),
 				dy = parseInt(this.day).toString();
 				
-			const TURKIC_ANIMALS_TR = ["BIČIN", "TAKAGU", "WT", "TONGUZ", "SWČKAN", "UD", "BARS", "TABWȘKAN", "LU", "YWLAN", "YUNT", "KONY"];
+			const TURKIC_ANIMALS_TR = ["BIČIN", "TAKAGU", "WT", "TONGUZ", "SIČKAN", "UD", "BARS", "TABWȘKAN", "LU", "YILAN", "YUNT", "KONY"];
 			const TURKIC_ANIMALS_EN = ["MONKEY", "ROOSTER", "DOG", "PIG", "RAT", "OX", "TIGER", "RABBIT", "DRAGON", "SNAKE", "HORSE", "SHEEP"];
 			
 			function getEnOrdinal(n) {
@@ -2912,7 +2912,6 @@ const propertime = (function () {
 	ptFunc.jdnDiff = function (cy1, m1, d1, cy2, m2, d2) {
 		return ymdToJdn(cy2, m2, d2) - ymdToJdn(cy1, m1, d1);
 	};
-	ptFunc.propertime_now = function () { return ptFunc(); };
 
 	return ptFunc;
 })();
