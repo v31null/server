@@ -2106,17 +2106,11 @@ const propertime = (function () {
 				day = parseInt(this.day);
 			let py = ay;
 			
-			if (this.tag === "O.S." && ay === 1752 && (m === 1 || m === 2 || (m === 3 && day < 25))) {
-				py = 1751;
+			if ((this.tag === "O.S." || this.tag === "") && ay >= 1155 && ay <= 1751 && (m === 1 || m === 2 || (m === 3 && day < 25))) {
+				py = ay - 1;
 			}
-			if (this.tag === "O.S." && ay === 1155 && (m === 1 || m === 2 || (m === 3 && day < 25))) {
-				py = 1154;
-			}
-			if (ay === 1752 && this.tag === "") {
-				if (m === 1 || m === 2 || (m === 3 && day < 25)) py = 1751;
-			}
-			
-			if (this.tag === "N.S." && ay < 1155) {
+
+			if (this.tag === "N.S." && ay < 1) {
 				py += 1;
 				if (py === 0) py = -1;
 			}
@@ -2640,7 +2634,7 @@ const propertime = (function () {
 			}
 
 			let applyParserLadyDayShift = false;
-			if (resolvedTag === "O.S." && py <= 1751) {
+			if (resolvedTag === "O.S." && py <= 1750) {
 				applyParserLadyDayShift = true;
 			}
 			
@@ -2654,6 +2648,10 @@ const propertime = (function () {
 			if (py === 1752 && resolvedTag === "N.S." && month === 1 && day === 1) {
 				targetMonth = 9;
 				targetDay = 14;
+			}
+			if (py === 1751 && resolvedTag === "O.S." && month === 1 && day === 1) {
+				targetMonth = 3;
+				targetDay = 25;
 			}
 			
 			let jdnCheck = ymdToJdn(ay, targetMonth, targetDay);
