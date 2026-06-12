@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
     <title>v31nfiles</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/assets/css/style.css" integrity="sha384-XpkoMdA/xoiIJJhPMyhyUBtAxGFjk9vhCWO7HvJc91DvTA3ym/iJOLd7nHJRWcxE">
+  <link rel="stylesheet" href="/assets/css/style.css" integrity="sha384-vTsgM4UsWV/kltY/1TyO09JoeBisiuN8LHElVVfQ+gAVB0F9mOEp2cuXEJpj5tTw">
 
 		<link rel="stylesheet" href="/assets/css/katex.css" integrity="sha384-SDhS2XmGfhu2j8zW3P66SdGPyhekPD7vRAl7zMnMYbSu94g/F4xtfJuR2P2XLWgg" />
 		<script defer src="/assets/js/katex.js" integrity="sha384-tMzugJpfLv7v0f+KXzNMqNCC6sVzLMM3sCnZDgzy0lcO/0h3sAkEBg/URFcV0JpE"></script>
@@ -148,6 +148,27 @@
 <?php endif; ?>
 
   </div>
+
+  <script>
+  (function () {
+    document.querySelectorAll('.acta-intitulatio').forEach(function (el) {
+      el.innerHTML = el.innerHTML.replace(
+        'V, triginta et uno nihilis cinctus,',
+        '<span class="acta-sigil">V, triginta et uno nihilis cinctus,</span>'
+      );
+    });
+    document.querySelectorAll('.acta-body').forEach(function (el) {
+      var parts = el.innerHTML.split(/<br\s*\/?>\s*<br\s*\/?>/i);
+      el.innerHTML = parts.map(function (p, i) {
+        p = p.trim();
+        if (i > 0) {
+          p = p.replace(/^(\S)/, '<span class="acta-initial">$1</span>');
+        }
+        return p;
+      }).join('<br>');
+    });
+  })();
+  </script>
 
   <script>window.V31N_MODE = 'upload';</script>
   <script src="assets/js/crypto.js" integrity="sha384-w9GiC6ltG0puiUuhr/G608/S9HJf5ZfAAxan3zEu36iH4Ceo0wklSd9cfxfP3riU"></script>

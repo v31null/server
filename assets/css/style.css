@@ -521,6 +521,32 @@ a:hover {
   font-weight: 600;
   color: #111;
   margin: 0;
+  line-height: 2.8em;
+}
+
+.acta-sigil {
+  transform: scale(1, 4.1);
+  transform-origin: left;
+  display: inline-block;
+}
+
+p.acta-body::first-letter {
+  font-size: 3.4rem;
+  font-weight: bold;
+  float: left;
+  line-height: 1;
+  color: #ff0000;
+  margin-bottom: -8px;
+}
+
+
+.acta-initial {
+  font-size: 1.9rem;
+  font-weight: bold;
+  float: left;
+  line-height: 1;
+  margin-bottom: -8px;
+  color: #ff0000;
 }
 
 .acta-inscriptio {
