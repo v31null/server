@@ -46,10 +46,10 @@ if (is_file($log)) {
 <p class="acta-body" id="summa-propria">Summa viae nostrae propriae, non publicae;<span id="summa-propria-body">Nulla adhuc summa.</span></p>
 </div>
 <div class="acta-card">
-<p class="acta-body"><a href="https://stats.uptimerobot.com/Y1UqdausP4/803270927">Hiis qui probare voluerint</a></p>
+<p class="acta-body"><a href="https://stats.uptimerobot.com/Y1UqdausP4/803270927">Hiis qui probare voluerint ( HTTPS stats.uptimerobot COM )</a></p>
 </div>
 </div>
-<script src="/assets/js/time.js"></script>
+<script src="/assets/js/time.js" integrity="sha384-VeTNu4zhK+yhNmwnEo2JSd3UhdF2mh1Bc5iv7Ir4j9wUsLSC/AhEAC9n4eGRTukr"></script>
 <script>
 (function () {
     var leftRows = <?php echo json_encode($left); ?>;
