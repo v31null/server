@@ -1632,6 +1632,7 @@ const propertime = (function () {
 	];
 
 	function jdnToSumerian(jdn) {
+		if (typeof jdn === 'bigint') return null;
 		let endJdn = currentEgyptianEpoch - 1;
 		if (jdn > endJdn) return null;
 		
@@ -1665,6 +1666,37 @@ const propertime = (function () {
 	}
 
 	function jdnToRegnal(jdn) {
+		if (typeof jdn === 'bigint') {
+			if (jdn < 0n) return null; 
+			
+			let lastKing = KINGS[KINGS.length - 1];
+			let current = jdnToYmd(jdn);
+			let start = jdnToYmd(lastKing.jdnstr);
+			
+			let yDiff = BigInt(current.y) - BigInt(start.y);
+			let mDiff = current.m - start.m;
+			let dDiff = current.d - start.d;
+			if (dDiff < 0) {
+				mDiff -= 1;
+				let prevM = current.m - 1;
+				let prevY = BigInt(current.y);
+				if (prevM < 1) { prevM = 12; prevY -= 1n; }
+				let ayStr = prevY > 0n ? prevY.toString() : (prevY + 1n).toString();
+				dDiff += getDaysInMonth(ayStr, prevM);
+			}
+			if (mDiff < 0) {
+				yDiff -= 1n;
+				mDiff += 12;
+			}
+			return {
+				prima: lastKing.prima,
+				secunda: lastKing.secunda,
+				year: (yDiff + 1n).toString(),
+				month: mDiff + 1,
+				day: dDiff + 1
+			};
+		}
+
 		if (jdn < currentEgyptianEpoch) {
 			let sumerianObj = jdnToSumerian(jdn);
 			if (sumerianObj) {
@@ -1677,9 +1709,9 @@ const propertime = (function () {
 		if (jdn >= currentEgyptianEpoch && jdn < 1446501) {
 			let currentEgJdn = currentEgyptianEpoch;
 			let totalAssignedYears = 0;
-            for (let i = 0; i < EGYPTIAN_KINGS.length; i++) { totalAssignedYears += EGYPTIAN_KINGS[i][1]; }
+			for (let i = 0; i < EGYPTIAN_KINGS.length; i++) { totalAssignedYears += EGYPTIAN_KINGS[i][1]; }
 			
-            for (let i = 0; i < EGYPTIAN_KINGS.length; i++) {
+			for (let i = 0; i < EGYPTIAN_KINGS.length; i++) {
 				let reignDays = Math.floor((EGYPTIAN_KINGS[i][1] / totalAssignedYears) * (1446501 - currentEgyptianEpoch));
 				if (i === EGYPTIAN_KINGS.length - 1) {
 					reignDays = 1446501 - currentEgJdn;
@@ -1763,21 +1795,30 @@ const propertime = (function () {
 		};
 	}
 
+
 	function jdnToStonehenge(jdn) {
 		let sumerianStartJdn = currentEgyptianEpoch - (SUMERIAN_TOTAL_YEARS * 360);
-		if (jdn >= sumerianStartJdn) return null;
+		if (typeof jdn === 'bigint') {
+			if (jdn >= BigInt(sumerianStartJdn)) return null;
+			const cycleLength = 20454n;
+			let diffBack = BigInt(UNIVERSAL_ANCHOR) - jdn;
+			let lapse = (diffBack / cycleLength) + 1n;
+			let daysWithinLap = diffBack % cycleLength;
+			let absoluteDays = cycleLength - daysWithinLap;
+			if (absoluteDays === cycleLength) absoluteDays = 0n;
+			let h = (absoluteDays * 4n + 3n) / 1461n;
+			let hole = h + 1n;
+			let holeStartDay = (h * 1461n) / 4n;
+			let days = absoluteDays - holeStartDay + 1n;
+			return { lapse: lapse.toString(), hole: Number(hole), days: Number(days) };
+		}
 
+		if (jdn >= sumerianStartJdn) return null;
+		
 		const cycleLength = 20454;
-		
-		let firstStonehengeDay = sumerianStartJdn - 1;
-		
-		let daysBeforeBoundary = firstStonehengeDay - jdn;
-		let lapse = Math.floor(daysBeforeBoundary / cycleLength) + 1;
-		
 		let diffBack = UNIVERSAL_ANCHOR - jdn;
+		let lapse = Math.floor(diffBack / cycleLength) + 1;
 		let daysWithinLap = diffBack % cycleLength;
-		if (daysWithinLap < 0) daysWithinLap += cycleLength;
-		
 		let absoluteDays = cycleLength - daysWithinLap;
 		if (absoluteDays === cycleLength) absoluteDays = 0;
 		
@@ -1786,10 +1827,11 @@ const propertime = (function () {
 		let holeStartDay = Math.floor((h * 1461) / 4);
 		let days = absoluteDays - holeStartDay + 1;
 		
-		return { lapse, hole, days };
+		return { lapse: lapse.toString(), hole, days };
 	}
 
 	function jdnToEgyptian(jdn) {
+		if (typeof jdn === 'bigint') return null; 
 		let daysSinceEpoch = jdn - currentEgyptianEpoch;
 		if (daysSinceEpoch < 0) return null;
 		
@@ -1809,16 +1851,28 @@ const propertime = (function () {
 		}
 	}
 
-	function stonehengeToJdn(lapse, hole, days) {
-		const cycleLength = 20454;
-		let absoluteDays = Math.floor(((hole - 1) * 1461) / 4) + days - 1;
-		let daysWithinLap = cycleLength - absoluteDays;
-		if (daysWithinLap === cycleLength) daysWithinLap = 0;
-		let firstStonehengeDay = currentEgyptianEpoch - (SUMERIAN_TOTAL_YEARS * 360) - 1;
-		let phase = (((UNIVERSAL_ANCHOR - firstStonehengeDay) % cycleLength) + cycleLength) % cycleLength;
-		let rem = (((daysWithinLap - phase) % cycleLength) + cycleLength) % cycleLength;
-		let daysBeforeBoundary = (lapse - 1) * cycleLength + rem;
-		return firstStonehengeDay - daysBeforeBoundary;
+	function stonehengeToJdn(lapseInput, holeInput, daysInput) {
+		let lapseStr = lapseInput.toString();
+		let isMassive = lapseStr.length > 14;
+		if (isMassive) {
+			let lapse = BigInt(lapseStr);
+			let hole = BigInt(holeInput);
+			let days = BigInt(daysInput);
+			let absoluteDays = ((hole - 1n) * 1461n) / 4n + days - 1n;
+			let daysWithinLap = 20454n - absoluteDays;
+			if (daysWithinLap === 20454n) daysWithinLap = 0n;
+			let diffBack = (lapse - 1n) * 20454n + daysWithinLap;
+			return BigInt(UNIVERSAL_ANCHOR) - diffBack;
+		} else {
+			let lapse = parseInt(lapseInput);
+			let hole = parseInt(holeInput);
+			let days = parseInt(daysInput);
+			let absoluteDays = Math.floor(((hole - 1) * 1461) / 4) + days - 1;
+			let daysWithinLap = 20454 - absoluteDays;
+			if (daysWithinLap === 20454) daysWithinLap = 0;
+			let diffBack = (lapse - 1) * 20454 + daysWithinLap;
+			return UNIVERSAL_ANCHOR - diffBack;
+		}
 	}
 
 	function sumerianToJdn(kingIndex, year, month, day) {
@@ -1861,6 +1915,30 @@ const propertime = (function () {
 	}
 
 	function ymdToJdn(ay, m, d) {
+		
+		if (typeof ay === 'string' && ay.length <= 14) {
+			ay = parseInt(ay, 10);
+		}
+		
+		if (typeof ay === 'bigint' || (typeof ay === 'string' && ay.length > 14)) {
+			let Y = BigInt(ay); let M = BigInt(m); let D = BigInt(d);
+			let astroY = Y < 0n ? Y + 1n : Y;
+			
+			let shiftCycles = 0n;
+			if (astroY < 0n) {
+				shiftCycles = (astroY / 400n) - 1n;
+				astroY = astroY - shiftCycles * 400n;
+			}
+
+			let Y2 = astroY + 4800n - (14n - M) / 12n;
+			let M2 = M + 12n * ((14n - M) / 12n) - 3n;
+			let calcJdn = D + (153n * M2 + 2n) / 5n + 365n * Y2 + Y2 / 4n - Y2 / 100n + Y2 / 400n - 32045n;
+			
+			calcJdn += shiftCycles * 146097n;
+			return calcJdn;
+		}
+
+
 		if (ay <= -46) {
 			let jdn = startOfAncientYear(ay);
 			let mOrder;
@@ -1890,6 +1968,29 @@ const propertime = (function () {
 	}
 
 	function jdnToYmd(jdn) {
+		if (typeof jdn === 'bigint') {
+			let shiftCycles = 0n;
+			let tempJdn = jdn;
+			if (tempJdn < 0n) {
+				shiftCycles = (tempJdn / 146097n) - 1n;
+				tempJdn = tempJdn - shiftCycles * 146097n;
+			}
+
+			let f = tempJdn + 1401n;
+			f += (((4n * tempJdn + 274277n) / 146097n) * 3n) / 4n - 38n;
+			let e = (4n * f + 3n) / 1461n;
+			let g = (1461n * e) / 4n;
+			let h = 5n * (f - g) + 2n;
+			let D = (h % 153n) / 5n + 1n;
+			let M = ((h / 153n + 2n) % 12n) + 1n;
+			let Y = e - 4716n + (14n - M) / 12n;
+			
+			Y += shiftCycles * 400n;
+			
+			let ay = Y <= 0n ? Y - 1n : Y;
+			return { y: ay.toString(), m: Number(M), d: Number(D) };
+		}
+
 		if (jdn < 1704987) {
 			let Y = -46 - Math.floor((1704542 - jdn) / 365.2425);
 			if (Y > -46) Y = -46;
@@ -1930,6 +2031,14 @@ const propertime = (function () {
 	}
 
 	function getDaysInMonth(ay, m) {
+		if (typeof ay === 'bigint' || (typeof ay === 'string' && ay.length > 14)) {
+			let Y = BigInt(ay);
+			let isLeap = Y % 4n === 0n && (Y % 100n !== 0n || Y % 400n === 0n);
+			if (m === 2) return isLeap ? 29 : 28;
+			if ([4, 6, 9, 11].includes(m)) return 30;
+			return 31;
+		}
+
 		if (ay <= -46) {
 			if (ay <= -713) {
 				if (m === 1 || m === 3 || m === 5 || m === 8) return 31;
@@ -1971,8 +2080,11 @@ const propertime = (function () {
 	}
 
 	function _addStep(d, n, unit) {
-		let y = parseInt(d.year),
-			m = parseInt(d.month),
+		let yStr = d.year;
+		let isMassive = yStr.length > 14;
+		let y = isMassive ? BigInt(yStr) : parseInt(yStr);
+
+		let m = parseInt(d.month),
 			day = parseInt(d.day),
 			h = parseInt(d.hr);
 		if (d.ampm === "PM" && h !== 12) h += 12;
@@ -1989,23 +2101,28 @@ const propertime = (function () {
 		if (["YRS", "CEN", "MIL", "YWL"].includes(unit) || (unit === "DEC" && !isEgyptianEra)) {
 			let addY = n * (["YRS", "YWL"].includes(unit) ? 1 : (unit === "DEC" && !isEgyptianEra) ? 10 : unit === "CEN" ? 100 : 1000);
 			let oldY = y;
-			y += addY;
-			if (oldY < 0 && y >= 0) y += 1;
-			if (oldY > 0 && y <= 0) y -= 1;
+			y += isMassive ? BigInt(addY) : addY;
+			if (isMassive) {
+				if (oldY < 0n && y >= 0n) y += 1n;
+				if (oldY > 0n && y <= 0n) y -= 1n;
+			} else {
+				if (oldY < 0 && y >= 0) y += 1;
+				if (oldY > 0 && y <= 0) y -= 1;
+			}
 		} else if (unit === "MON" || unit === "AY") {
 			let step = n > 0 ? 1 : -1;
 			let absN = Math.abs(n);
 			for (let i = 0; i < absN; i++) {
 				m += step;
-				let maxM = y <= -46 ? 10 : 12;
+				let maxM = (isMassive ? y <= -46n : y <= -46) ? 10 : 12;
 				if (m > maxM) {
 					m = 1;
-					y++;
-					if (y === 0) y = 1;
+					y += isMassive ? 1n : 1;
+					if (y === (isMassive ? 0n : 0)) y = isMassive ? 1n : 1;
 				} else if (m < 1) {
-					y--;
-					if (y === 0) y = -1;
-					m = y <= -46 ? 10 : 12;
+					y -= isMassive ? 1n : 1;
+					if (y === (isMassive ? 0n : 0)) y = isMassive ? -1n : -1;
+					maxM = (isMassive ? y <= -46n : y <= -46) ? 10 : 12;
 				}
 			}
 		}
@@ -2019,8 +2136,12 @@ const propertime = (function () {
 			let jdn = ymdToJdn(y, m, day);
 			let totalSec = sec + (min - 1) * 60 + h * 3600;
 
-			if (unit === "DAYS" || unit === "KUEN") jdn += n;
-			if (unit === "WEEK") jdn += n * 7;
+			if (unit === "DAYS" || unit === "KUEN") {
+				if (typeof jdn === 'bigint') jdn += BigInt(n); else jdn += n;
+			}
+			if (unit === "WEEK") {
+				if (typeof jdn === 'bigint') jdn += BigInt(n * 7); else jdn += n * 7;
+			}
 			if (unit === "DEC" && isEgyptianEra) jdn += n * 10;
 			if (unit === "HOL") jdn += Math.floor(n * 365.25);
 			if (unit === "LAP") jdn += n * 20454;
@@ -2028,7 +2149,7 @@ const propertime = (function () {
 			if (unit === "HRS") {
 				h += n;
 				let addDays = Math.floor(h / 24);
-				jdn += addDays;
+				if (typeof jdn === 'bigint') jdn += BigInt(addDays); else jdn += addDays;
 				h = h % 24;
 				if (h < 0) h += 24;
 				totalSec = sec + (min - 1) * 60 + h * 3600;
@@ -2041,7 +2162,10 @@ const propertime = (function () {
 
 			function getDayLen(j) {
 				let len = 86400;
-				if (j % 11 === 0) len += 1;
+				if (typeof j === 'bigint') {
+					if (j % 11n === 0n) len += 1;
+					return len;
+				}
 
 				let dp = jdnToYmd(j);
 				if (dp.m === 1 && dp.d === 1 &&[1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1988, 1990, 1991, 1996, 1999, 2006, 2009, 2017].includes(dp.y)) len += 1;
@@ -2099,105 +2223,130 @@ const propertime = (function () {
 			newPt.verbose = this.verbose;
 			return newPt;
 		}
-
-		getMeta(is_he = false) {
-			let ay = parseInt(this.year),
-				m = parseInt(this.month),
+getMeta(is_he = false) {
+			let ayStr = this.year;
+			let isMassive = ayStr.length > 14;
+			let ayNum = isMassive ? BigInt(ayStr) : parseInt(ayStr);
+			let m = parseInt(this.month),
 				day = parseInt(this.day);
-			let py = ay;
 			
-			if ((this.tag === "O.S." || this.tag === "") && ay >= 1155 && ay <= 1751 && (m === 1 || m === 2 || (m === 3 && day < 25))) {
-				py = ay - 1;
-			}
+			let pyNum = ayNum;
+			
+			if (!isMassive) {
+				if ((this.tag === "O.S." || this.tag === "") && ayNum >= 1155 && ayNum <= 1751 && (m === 1 || m === 2 || (m === 3 && day < 25))) {
+					pyNum = ayNum - 1;
+				}
 
-			if (this.tag === "N.S." && ay < 1) {
-				py += 1;
-				if (py === 0) py = -1;
-			}
-			
-			if (this.tag === "N.S." && ay === 1155 && (m === 1 || m === 2 || (m === 3 && day < 25))) {
-				py = 1154;
+				if (this.tag === "N.S." && ayNum < 1) {
+					pyNum += 1;
+					if (pyNum === 0) pyNum = -1;
+				}
+				
+				if (this.tag === "N.S." && ayNum === 1155 && (m === 1 || m === 2 || (m === 3 && day < 25))) {
+					pyNum = 1154;
+				}
 			}
 			
 			let isBeforeBirth = false;
-			if (py < -4) {
-				isBeforeBirth = true;
-			} else if (py === -4) {
-				if (m < 12) isBeforeBirth = true;
-				else if (m === 12 && day < 24) isBeforeBirth = true;
+			if (isMassive) {
+				if (pyNum < 0n) isBeforeBirth = true;
+			} else {
+				if (pyNum < -4) {
+					isBeforeBirth = true;
+				} else if (pyNum === -4) {
+					if (m < 12) isBeforeBirth = true;
+					else if (m === 12 && day < 24) isBeforeBirth = true;
+				}
 			}
 			
 			let suffix = "";
 			
 			if (is_he) {
-				let heY = py + 10000;
 				let heStr;
-				
-				if (heY <= 0) {
-					let absHe = Math.abs(heY - 1);
-					heStr = absHe.toString();
-					suffix = " A.C. I.P.";
+				if (isMassive) {
+					let heY = pyNum + 10000n;
+					if (heY <= 0n) {
+						let absHe = 1n - heY;
+						heStr = absHe.toString();
+						suffix = " A.C. I.P.";
+					} else {
+						heStr = heY.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "\u00A0");
+						if (isBeforeBirth) suffix = " A.C.";
+					}
 				} else {
-					heStr = heY.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "\u00A0");
-					if (isBeforeBirth) suffix = " A.C.";
+					let heY = pyNum + 10000;
+					if (heY <= 0) {
+						let absHe = Math.abs(heY - 1);
+						heStr = absHe.toString();
+						suffix = " A.C. I.P.";
+					} else {
+						heStr = heY.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "\u00A0");
+						if (isBeforeBirth) suffix = " A.C.";
+					}
 				}
 				
-				let absY = Math.abs(py);
-				if (py < 0) {
-					if (absY >= 46 && absY <= 80) suffix += " O.S.";
-					else if (absY >= 20 && absY <= 45) suffix += " N.S.";
-				} else if (ay === 1752) {
-					if (m < 9 || (m === 9 && day <= 2)) suffix += " O.S.";
-					else suffix += " N.S.";
-				} else if (this.tag === "O.S." || this.tag === "N.S.") {
-					suffix += " " + this.tag;
-				} else if (ay >= 1740 && ay <= 1760) {
-					if (ay < 1752) suffix += " O.S.";
-					else suffix += " N.S.";
-				} else if (ay >= 1145 && ay <= 1165) {
-					if (ay < 1155) suffix += " N.S.";
-					else suffix += " O.S.";
+				if (!isMassive) {
+					let absY = Math.abs(pyNum);
+					if (pyNum < 0) {
+						if (absY >= 46 && absY <= 80) suffix += " O.S.";
+						else if (absY >= 20 && absY <= 45) suffix += " N.S.";
+					} else if (ayNum === 1752) {
+						if (m < 9 || (m === 9 && day <= 2)) suffix += " O.S.";
+						else suffix += " N.S.";
+					} else if (this.tag === "O.S." || this.tag === "N.S.") {
+						suffix += " " + this.tag;
+					} else if (ayNum >= 1740 && ayNum <= 1760) {
+						if (ayNum < 1752) suffix += " O.S.";
+						else suffix += " N.S.";
+					} else if (ayNum >= 1145 && ayNum <= 1165) {
+						if (ayNum < 1155) suffix += " N.S.";
+						else suffix += " O.S.";
+					}
 				}
 				
 				return { displayYear: heStr, suffix: suffix };
 			}
 			
-			if (ay < 0 || py < 0) {
-				let absY = Math.abs(py);
-				
-				if (absY >= 1 && absY <= 25) {
-					if (isBeforeBirth) {
-						suffix = " A.C. I.P.";
+			if (isMassive) {
+				if (pyNum < 0n) suffix = " A.C.";
+			} else {
+				if (ayNum < 0 || pyNum < 0) {
+					let absY = Math.abs(pyNum);
+					
+					if (absY >= 1 && absY <= 25) {
+						if (isBeforeBirth) {
+							suffix = " A.C. I.P.";
+						} else {
+							suffix = " I.P.";
+						}
 					} else {
-						suffix = " I.P.";
+						suffix = " A.C.";
+						if (absY >= 46 && absY <= 80) suffix += " O.S.";
+						else if (absY >= 20 && absY <= 45) suffix += " N.S.";
 					}
-				} else {
-					suffix = " A.C.";
-					if (absY >= 46 && absY <= 80) suffix += " O.S.";
-					else if (absY >= 20 && absY <= 45) suffix += " N.S.";
+				} else if (ayNum === 1752) {
+					if (m < 9 || (m === 9 && day <= 2)) suffix = " O.S.";
+					else suffix = " N.S.";
+				} else if (this.tag === "O.S." || this.tag === "N.S.") {
+					suffix = " " + this.tag;
+				} else if (ayNum >= 1740 && ayNum <= 1760) {
+					if (ayNum < 1752) suffix = " O.S.";
+					else suffix = " N.S.";
+				} else if (ayNum >= 1145 && ayNum <= 1165) {
+					if (ayNum < 1155) suffix = " N.S.";
+					else suffix = " O.S.";
 				}
-			} else if (ay === 1752) {
-				if (m < 9 || (m === 9 && day <= 2)) suffix = " O.S.";
-				else suffix = " N.S.";
-			} else if (this.tag === "O.S." || this.tag === "N.S.") {
-				suffix = " " + this.tag;
-			} else if (ay >= 1740 && ay <= 1760) {
-				if (ay < 1752) suffix = " O.S.";
-				else suffix = " N.S.";
-			} else if (ay >= 1145 && ay <= 1165) {
-				if (ay < 1155) suffix = " N.S.";
-				else suffix = " O.S.";
 			}
 
-			return { displayYear: Math.abs(py).toString(), suffix };
+			let dispY = isMassive ? (pyNum < 0n ? -pyNum : pyNum).toString() : Math.abs(pyNum).toString();
+			return { displayYear: dispY, suffix };
 		}
 
 		toString(is_he = false, force_roman = false) {
 			const meta = this.getMeta(is_he);
-			let ay = parseInt(this.year);
-			let jdn = ymdToJdn(ay, parseInt(this.month), parseInt(this.day));
+			let jdn = ymdToJdn(this.year, parseInt(this.month), parseInt(this.day));
 			
-			if (meta.useCanon || (!force_roman && jdn < 1460920)) {
+			if (meta.useCanon || (!force_roman && typeof jdn === 'number' && jdn < 1460920)) {
 				let alts = this.toAltFormats(is_he, force_roman);
 				return alts[0];
 			}
@@ -2206,12 +2355,14 @@ const propertime = (function () {
 
 		toAltFormats(is_he = false, force_roman = false) {
 			const meta = this.getMeta(is_he);
-			let ay = parseInt(this.year);
+			let ayStr = this.year;
+			let isMassive = ayStr.length > 14;
+			let ayNum = isMassive ? BigInt(ayStr) : parseInt(ayStr);
 			let mi = parseInt(this.month);
 
-			let mf = "",
-				ms = "";
-			if (ay <= -46) {
+			let mf = "", ms = "";
+			let isAncient = isMassive ? (ayNum <= -46n) : (ayNum <= -46);
+			if (isAncient) {
 				const ancientNames = {
 					1: "martius",
 					2: "aprilis",
@@ -2245,18 +2396,20 @@ const propertime = (function () {
 			const TURKIC_ANIMALS_EN = ["MONKEY", "ROOSTER", "DOG", "PIG", "RAT", "OX", "TIGER", "RABBIT", "DRAGON", "SNAKE", "HORSE", "SHEEP"];
 			
 			function getEnOrdinal(n) {
-				let v = n % 100;
-				if (v >= 11 && v <= 13) return n + "ᵗʰ";
-				let last = n % 10;
-				if (last === 1) return n + "ˢᵗ";
-				if (last === 2) return n + "ⁿᵈ";
-				if (last === 3) return n + "ʳᵈ";
-				return n + "ᵗʰ";
+				let sStr = n.toString();
+				let v = parseInt(sStr.slice(-2) || sStr);
+				if (v >= 11 && v <= 13) return sStr + "ᵗʰ";
+				let last = parseInt(sStr.slice(-1));
+				if (last === 1) return sStr + "ˢᵗ";
+				if (last === 2) return sStr + "ⁿᵈ";
+				if (last === 3) return sStr + "ʳᵈ";
+				return sStr + "ᵗʰ";
 			}
 			
 			function getTrOrdinal(n) {
-				let last = n % 10;
-				let lastTwo = n % 100;
+				let str = n.toString();
+				let last = parseInt(str.slice(-1));
+				let lastTwo = parseInt(str.slice(-2) || str);
 				let s = "INČ";
 				if ([1, 5, 8].includes(last)) s = "INČ";
 				else if ([2, 6, 7].includes(last)) s = "NČ";
@@ -2268,9 +2421,8 @@ const propertime = (function () {
 					else if ([40, 60].includes(lastTwo)) s = "WNČ";
 					else s = "UENČ";
 				}
-				return n + s;
+				return str + s;
 			}
-			
 			function getTurkicMonth(m) {
 				const months = {
 					1: "ARAM", 2: "IKINTI", 3: "UEČUENČ", 4: "TOERTWNČ",
@@ -2284,20 +2436,30 @@ const propertime = (function () {
 			let m_raw = parseInt(this.month);
 			let d_raw = parseInt(this.day);
 			
-			let t_py = ay;
+			let t_py = ayNum;
 			let t_m = m_raw;
 
-			if (ay > -46) {
+			let isPost46 = isMassive ? (ayNum > -46n) : (ayNum > -46);
+			if (isPost46) {
 				t_m = m_raw - 2;
 				if (t_m <= 0) {
 					t_m += 12;
-					t_py -= 1;
-					if (t_py === 0) t_py = -1;
+					t_py -= isMassive ? 1n : 1;
+					if (t_py === (isMassive ? 0n : 0)) t_py = isMassive ? -1n : -1;
 				}
 			}
 			
-			let animalIndex = t_py > 0 ? (t_py % 12) : ((1 - (Math.abs(t_py) % 12) + 12) % 12);
-			let iteration = Math.ceil(Math.abs(t_py) / 12);
+			let animalIndex;
+			let iteration;
+			if (isMassive) {
+				let zero = 0n, one = 1n, twelve = 12n, eleven = 11n;
+				let absTpy = t_py < zero ? -t_py : t_py;
+				animalIndex = Number(t_py > zero ? (t_py % twelve) : ((one - (absTpy % twelve) + twelve) % twelve));
+				iteration = Number((absTpy + eleven) / twelve);
+			} else {
+				animalIndex = t_py > 0 ? (t_py % 12) : ((1 - (Math.abs(t_py) % 12) + 12) % 12);
+				iteration = Math.ceil(Math.abs(t_py) / 12);
+			}
 			let suffix = meta.suffix;
 			
 			let timeSuffix = ` ${this.hr}:${this.min}:${this.sec} ${this.ampm}`;
@@ -2305,8 +2467,8 @@ const propertime = (function () {
 			let trFormat = `${getTrOrdinal(iteration)} ${TURKIC_ANIMALS_TR[animalIndex]} YWL , ${getTurkicMonth(t_m)} AY , ${getTrOrdinal(d_raw)} KUEN${timeSuffix}${suffix}`;
 			let enFormat = `${getEnOrdinal(iteration)} ${TURKIC_ANIMALS_EN[animalIndex]} YRS , ${getEnOrdinal(t_m)} MON , ${getEnOrdinal(d_raw)} DAY${timeSuffix}${suffix}`;
 
-			let jdn = ymdToJdn(parseInt(this.year), parseInt(this.month), parseInt(this.day));
-			let eg = jdnToEgyptian(jdn);
+			let jdn = ymdToJdn(ayStr, parseInt(this.month), parseInt(this.day));
+			let eg = (typeof jdn === 'number') ? jdnToEgyptian(jdn) : null;
 			let egFormal = "—";
 			let egShort = "—";
 
@@ -2348,7 +2510,7 @@ const propertime = (function () {
 				}
 			}
 
-			let su = jdnToSumerian(jdn);
+			let su = (typeof jdn === 'number') ? jdnToSumerian(jdn) : null;
 			let suFormal = "—";
 			let suShort = "—";
 			
@@ -2366,7 +2528,7 @@ const propertime = (function () {
 				suShort = `${su.kingId} ${su.year}\u2011${su.month}${FS}${su.day}`;
 			}
 
-			let sh = jdnToStonehenge(jdn);
+			let sh = (typeof jdn === 'number') ? jdnToStonehenge(jdn) : null;
 			let shFormal = "—";
 			let shShort = "—";
 			
@@ -2384,7 +2546,7 @@ const propertime = (function () {
 				shShort = `${sh.lapse}\u2011${sh.hole}${FS}${sh.days}`;
 			}
 
-			let er = jdnToRegnal(jdn);
+			let er = (typeof jdn === 'number') ? jdnToRegnal(jdn) : null;
 			let erFormal = "—";
 			let erShort = "—";
 
@@ -2444,13 +2606,14 @@ const propertime = (function () {
 				}
 				
 				function getEnOrdinal(n) {
-					let v = n % 100;
-					if (v >= 11 && v <= 13) return n + "ᵗʰ";
-					let last = n % 10;
-					if (last === 1) return n + "ˢᵗ";
-					if (last === 2) return n + "ⁿᵈ";
-					if (last === 3) return n + "ʳᵈ";
-					return n + "ᵗʰ";
+					let sStr = n.toString();
+					let v = parseInt(sStr.slice(-2) || sStr);
+					if (v >= 11 && v <= 13) return sStr + "ᵗʰ";
+					let last = parseInt(sStr.slice(-1));
+					if (last === 1) return sStr + "ˢᵗ";
+					if (last === 2) return sStr + "ⁿᵈ";
+					if (last === 3) return sStr + "ʳᵈ";
+					return sStr + "ᵗʰ";
 				}
 				
 				if (u.LAP !== undefined || u.HOL !== undefined) {
@@ -2480,7 +2643,14 @@ const propertime = (function () {
 						input = `${getEnOrdinal(y)} YRS’s ${season}’s ${getEnOrdinal(mon)} MON’s ${getEnOrdinal(dec)} DEC’s ${getEnOrdinal(d)} DAYS ${hrNum}:${m}:${s} ${ampm}`;
 					}
 				} else {
-					let y = (u.YRS !== undefined ? u.YRS : new Date().getFullYear()).toString().trim();
+					let yVal;
+					if (u.YRS !== undefined) {
+						yVal = u.YRS;
+					} else {
+						let tzParts = new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Tokyo", year: "numeric" }).formatToParts(new Date());
+						yVal = tzParts.find(p => p.type === "year").value;
+					}
+					let y = yVal.toString().trim();
 					let mon = u.MON !== undefined ? u.MON : 1;
 					let d = u.DAYS !== undefined ? u.DAYS : 1;
 					let hr = (u.HRS !== undefined ? u.HRS : "00AM").toString().trim();
@@ -2520,10 +2690,10 @@ const propertime = (function () {
 			let match;
 
 			if ((match = normInput.match(PATTERNS.shFormal))) {
-				jdnFound = stonehengeToJdn(parseInt(match[1]), parseInt(match[2]), parseInt(match[3]));
+				jdnFound = stonehengeToJdn(match[1], match[2], match[3]);
 				tMatch = match.slice(4);
 			} else if ((match = normInput.match(PATTERNS.shShort))) {
-				jdnFound = stonehengeToJdn(parseInt(match[1]), parseInt(match[2]), parseInt(match[3]));
+				jdnFound = stonehengeToJdn(match[1], match[2], match[3]);
 				tMatch = match.slice(4);
 			} else if ((match = normInput.match(PATTERNS.suFormal))) {
 				let kName = match[1].toUpperCase();
@@ -2600,7 +2770,10 @@ const propertime = (function () {
 
 			const day = parseInt(dateStr.slice(-2));
 			const month = parseInt(dateStr.slice(-4, -2));
-			let py = parseInt(dateStr.slice(0, -4));
+			
+			let pyStr = dateStr.slice(0, -4);
+			let isMassive = pyStr.length > 14;
+			let py = isMassive ? BigInt(pyStr) : parseInt(pyStr);
 
 			if (isBC) py = -py;
 
@@ -2634,29 +2807,29 @@ const propertime = (function () {
 			}
 
 			let applyParserLadyDayShift = false;
-			if (resolvedTag === "O.S." && py <= 1750) {
+			if (resolvedTag === "O.S." && (!isMassive && py <= 1750)) {
 				applyParserLadyDayShift = true;
 			}
 			
 			let ay = py;
 			if (applyParserLadyDayShift && (month === 1 || month === 2 || (month === 3 && day < 25))) {
-				ay = py + 1;
+				ay = py + 1; 
 			}
 			
 			let targetMonth = month;
 			let targetDay = day;
-			if (py === 1752 && resolvedTag === "N.S." && month === 1 && day === 1) {
+			if (!isMassive && py === 1752 && resolvedTag === "N.S." && month === 1 && day === 1) {
 				targetMonth = 9;
 				targetDay = 14;
 			}
-			if (py === 1751 && resolvedTag === "O.S." && month === 1 && day === 1) {
+			if (!isMassive && py === 1751 && resolvedTag === "O.S." && month === 1 && day === 1) {
 				targetMonth = 3;
 				targetDay = 25;
 			}
 			
 			let jdnCheck = ymdToJdn(ay, targetMonth, targetDay);
 			let rt = jdnToYmd(jdnCheck);
-			if (rt.y !== ay || rt.m !== targetMonth || rt.d !== targetDay) {
+			if (rt.y.toString() !== ay.toString() || rt.m !== targetMonth || rt.d !== targetDay) {
 				throw new Error(`Invalid date.`);
 			}
 
@@ -2720,17 +2893,18 @@ const propertime = (function () {
 
 	ptFunc.getclndr = function(input, targetEra = "AUTO", is_he = false) {
 		function getEnOrdinal(n) {
-			let v = n % 100;
-			if (v >= 11 && v <= 13) return n + "ᵗʰ";
-			let last = n % 10;
-			if (last === 1) return n + "ˢᵗ";
-			if (last === 2) return n + "ⁿᵈ";
-			if (last === 3) return n + "ʳᵈ";
-			return n + "ᵗʰ";
+			let sStr = n.toString();
+			let v = parseInt(sStr.slice(-2) || sStr);
+			if (v >= 11 && v <= 13) return sStr + "ᵗʰ";
+			let last = parseInt(sStr.slice(-1));
+			if (last === 1) return sStr + "ˢᵗ";
+			if (last === 2) return sStr + "ⁿᵈ";
+			if (last === 3) return sStr + "ʳᵈ";
+			return sStr + "ᵗʰ";
 		}
 		
 		let t = ptFunc(input);
-		let jdn = ymdToJdn(parseInt(t.year), parseInt(t.month), parseInt(t.day));
+		let jdn = ymdToJdn(t.year, parseInt(t.month), parseInt(t.day));
 		
 		let era = targetEra.toUpperCase();
 		if (era === "AUTO") {
@@ -2741,7 +2915,7 @@ const propertime = (function () {
 		}
 		
 		function getPeriodIdentifier(pt) {
-			let j = ymdToJdn(parseInt(pt.year), parseInt(pt.month), parseInt(pt.day));
+			let j = ymdToJdn(pt.year, parseInt(pt.month), parseInt(pt.day));
 			if (era === "STONEHENGE") {
 				let sh = jdnToStonehenge(j);
 				return sh ? `${sh.lapse}-${sh.hole}` : pt.getMeta(is_he).displayYear;
@@ -2777,7 +2951,7 @@ const propertime = (function () {
 			let isEpag = false;
 			let dayNum = "?";
 			
-			let j = ymdToJdn(parseInt(currentDay.year), parseInt(currentDay.month), parseInt(currentDay.day));
+			let j = ymdToJdn(currentDay.year, parseInt(currentDay.month), parseInt(currentDay.day));
 			
 			if (era === "STONEHENGE") {
 				let sh = jdnToStonehenge(j);
@@ -2836,12 +3010,18 @@ const propertime = (function () {
 
 	ptFunc.getclndrmodern = function(input) {
 		let t = ptFunc(input);
-		let y = parseInt(t.year);
-		if (y < 1800) {
+		let yStr = t.year;
+		let isMassive = yStr.length > 14;
+		let y = isMassive ? BigInt(yStr) : parseInt(yStr);
+
+		if ((isMassive && y < 1800n) || (!isMassive && y < 1800)) {
 			throw new Error("Invalid date.");
 		}
 		
-		let isLeap = (y % 4 === 0 && (y % 100 !== 0 || y % 400 === 0));
+		let isLeap = isMassive ? 
+			(y % 4n === 0n && (y % 100n !== 0n || y % 400n === 0n)) : 
+			(y % 4 === 0 && (y % 100 !== 0 || y % 400 === 0));
+			
 		let monthDays = [31, isLeap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 		let monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 		let dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -2855,8 +3035,9 @@ const propertime = (function () {
 			let weekendCols = [];
 			
 			for (let d = 1; d <= 7; d++) {
-				let jsDate = new Date(y, m, d);
-				let dayOfWeek = jsDate.getDay();
+				let jdn = ymdToJdn(yStr, m + 1, d);
+				let dayOfWeek = Number((BigInt(jdn) + 1n) % 7n);
+				
 				weekdays.push(dayNames[dayOfWeek]);
 				if (dayOfWeek === 0 || dayOfWeek === 6) {
 					weekendCols.push(d - 1);
@@ -2902,7 +3083,8 @@ const propertime = (function () {
 	};
 
 	ptFunc.toJDN = function (civilYear, month, day) {
-		return ymdToJdn(parseInt(civilYear), parseInt(month), parseInt(day));
+		let cy = typeof civilYear === 'number' ? civilYear.toString() : civilYear;
+		return ymdToJdn(cy, parseInt(month), parseInt(day));
 	};
 	ptFunc.fromJDN = function (jdn) {
 		return jdnToYmd(parseInt(jdn));
