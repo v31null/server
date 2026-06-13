@@ -34,7 +34,7 @@ Take þe Finger‑print from an Trusten Official‑source , e.g./ github.com/v3
 Per-file sha256s ;
   3273581722446ffa8ba538c07adc08da799a77df208360a9c0ae1bad97c412ff  .gitattributes
   2eff9fe6968c825842ba4e6a47fc7cfeecfa3a42940b28574fca0ef2701b8117  .htaccess
-  ac560ac79ecec14cafb5ae08dd6b1f08ea2f3951959b32b11b35fc6e9056376d  aliveneß.php
+  ddcbfb7c3d5c5b609edb2f5d657b73495dcb9c781abb345e2a78e93eb9d3196c  aliveneß.php
   309384a0847927925e3ce7fda1c418db1a9d8bafbc7e85cd931d0c73c772b985  api/chunk.php
   7124157ffa3fb5f9a5e73a9a66efd5b4bcc931247ca2bcc72a2386d0ed447888  api/status.php
   d8bb747b3fdccd84a60bd0aa56bb90937270d0bd15f1101cd8f2a5a3709dd0a3  assets/css/fonts/BabelStoneHan.ttf
@@ -104,7 +104,7 @@ Per-file sha256s ;
   776ac4ef4b53b46e2b38698818361ecd4f6926dfa4eb79bf1113c456785695bd  assets/css/fonts/nullpunktsenergiefont-Regular.ttf
   38d32567380fdcee9e76bb5127c38b9109fa6f27de984bc108f559ff4e8b2a08  assets/css/fonts/regular.ttf
   fb2157ab0eb24f9abc00320655e7dfa3d6c92e66b9e2639ae14cd3abe9046dc4  assets/css/katex.css
-  f0047896ed9c8791b97f0c51a9594bae1b0a77395198ada3133ebdc11472130e  assets/css/style.css
+  9ce8a65f2d869e4919d38afc30b41c660a43de30cd2aa7a4c5fb478a7d505b24  assets/css/style.css
   1f93978f886b09cc937982b40e669a915f968506d56abd8d287b84f433f188e8  assets/img/Services for þe General populace Ministeria custodiae filaciorum ( Secura ) , aßervatio.png
   9d2578af7a872b3ce1f9641406b08e8496093ef6de18fa9142ba004eb61148c7  assets/img/logomonochrome.ico
   cb88579c5459b6930f124eaf06ad325da8e733821598d17f064dcef4a84c1f7c  assets/js/app.js
@@ -115,9 +115,9 @@ Per-file sha256s ;
   b354ad5afbfa5083cdeed51728d73a2c5a3e0fdf92de97b2d19aaaa551cc4a23  assets/js/time.js
   7f09c4161db5a021dc82d924dd346c1c99f388bdb4e097c758ce91f649f7e77a  blocken.html
   f3ef93bbc71d2a2df9bee3a3e5e7b1caa45c19d7772f274591640a61622f1a31  db.php
-  8ac0b80c7637e065a6135dcc8c83dfb23d968dfcc4925b2d76d676206ac3db99  download.php
-  fbf024e78bd6a7608b41d998d84b3c7636b949c4001cec55b74911bd7d8a2929  embed.php
-  cbaf2715fc1ddfca4e1e19ec442b666b3963849da7ada8bbdd1e1566c8d5a1f6  index.php
+  54af282917255490e31acb23bea403bb1f498f61b657bc9b25cd0a08152d3ebb  download.php
+  9c0a5c70c97ddb74e17d2f03e599415a183655a9ed86d1861052e35310f10a0f  embed.php
+  a514bcf7e5a03a266d096d6eb25e77f559c2dad825f20eb26ecf55e3339e6910  index.php
   e1bd6a9b2d1ded8799d6a0fc464f9acd2c28735e1f29cd40834a0a9f114adf20  indexd.json
   417ef536a8f627b0cbefff91b68d754cb68c081acb1ca16bcd5dcab41f85406b  init_storage.php
   a089e81d9ff91dc623de95a4b60dfbed9a82ab7f8cd5955f1a0b0c08d3d468ee  integritie.php

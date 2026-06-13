@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
     <title>v31nfiles</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/assets/css/style.css" integrity="sha384-vTsgM4UsWV/kltY/1TyO09JoeBisiuN8LHElVVfQ+gAVB0F9mOEp2cuXEJpj5tTw">
+  <link rel="stylesheet" href="/assets/css/style.css" integrity="sha384-vkUMYVHo2DIftBUDGjFayMhenL4FQwi/pjSOQleqswVLpuBIVIh3JTj9W/kcULzd">
 
 		<link rel="stylesheet" href="/assets/css/katex.css" integrity="sha384-SDhS2XmGfhu2j8zW3P66SdGPyhekPD7vRAl7zMnMYbSu94g/F4xtfJuR2P2XLWgg" />
 		<script defer src="/assets/js/katex.js" integrity="sha384-tMzugJpfLv7v0f+KXzNMqNCC6sVzLMM3sCnZDgzy0lcO/0h3sAkEBg/URFcV0JpE"></script>
