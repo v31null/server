@@ -3,7 +3,7 @@
     "algo": "RSA ／ SHA‑256 De‑attachen‑signature ( manifest.sig is base64 of sign( SHA-256(manifest.json) ) )",
     "pubkey": "publickey.pem",
     "pubkey_spki_sha256": "261AF6EA33A67825250326CC64E5BC735BF3C010FCC4F4132D83F19B28D1DAD5",
-    "count": 92,
+    "count": 93,
     "files": {
         ".gitattributes": {
             "sha256": "3273581722446ffa8ba538c07adc08da799a77df208360a9c0ae1bad97c412ff",
@@ -370,6 +370,11 @@
             "sha384": "sha384-vTsgM4UsWV/kltY/1TyO09JoeBisiuN8LHElVVfQ+gAVB0F9mOEp2cuXEJpj5tTw",
             "size": 9624
         },
+        "assets/img/Services for þe General populace Ministeria custodiae filaciorum ( Secura ) , aßervatio.png": {
+            "sha256": "1f93978f886b09cc937982b40e669a915f968506d56abd8d287b84f433f188e8",
+            "sha384": "sha384-ZU63WI76nerYMbW8IKTfCepsW/hzav4mmboatPWP5mXKwVo+8mgazfj7Jf7bqPqP",
+            "size": 274413
+        },
         "assets/img/logomonochrome.ico": {
             "sha256": "9d2578af7a872b3ce1f9641406b08e8496093ef6de18fa9142ba004eb61148c7",
             "sha384": "sha384-idWqso+xHeOr0CXTuPluWCMB468wNN33ZUTLDp+Cr5zU0oErFyFpcnGa/UOYo+2w",
@@ -426,9 +431,9 @@
             "size": 5794
         },
         "index.php": {
-            "sha256": "5f3e25763d3e422efcfe9a953da06aaa260e47cd059a0c40e390211f3537c1b4",
-            "sha384": "sha384-fkvjds58KaMUsH9f+oOJjhmtMiQ5igfnzxb3Xf93X3ypBVvh9BYTDJFMG4P17z9C",
-            "size": 7833
+            "sha256": "cbaf2715fc1ddfca4e1e19ec442b666b3963849da7ada8bbdd1e1566c8d5a1f6",
+            "sha384": "sha384-ul+3nmPwgJ2dr93O/hc7uE0kr7kZpTWs5Sb15AHkGeuTm0pO90Iyvo7iHeapADg3",
+            "size": 8044
         },
         "indexd.json": {
             "sha256": "e1bd6a9b2d1ded8799d6a0fc464f9acd2c28735e1f29cd40834a0a9f114adf20",

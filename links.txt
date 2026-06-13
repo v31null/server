@@ -105,6 +105,7 @@ Per-file sha256s ;
   38d32567380fdcee9e76bb5127c38b9109fa6f27de984bc108f559ff4e8b2a08  assets/css/fonts/regular.ttf
   fb2157ab0eb24f9abc00320655e7dfa3d6c92e66b9e2639ae14cd3abe9046dc4  assets/css/katex.css
   f0047896ed9c8791b97f0c51a9594bae1b0a77395198ada3133ebdc11472130e  assets/css/style.css
+  1f93978f886b09cc937982b40e669a915f968506d56abd8d287b84f433f188e8  assets/img/Services for þe General populace Ministeria custodiae filaciorum ( Secura ) , aßervatio.png
   9d2578af7a872b3ce1f9641406b08e8496093ef6de18fa9142ba004eb61148c7  assets/img/logomonochrome.ico
   cb88579c5459b6930f124eaf06ad325da8e733821598d17f064dcef4a84c1f7c  assets/js/app.js
   a1316ded7951625841ba9f81890315465ef798ce6864079670c6c6e2f774677f  assets/js/auto-render.js
@@ -116,7 +117,7 @@ Per-file sha256s ;
   f3ef93bbc71d2a2df9bee3a3e5e7b1caa45c19d7772f274591640a61622f1a31  db.php
   8ac0b80c7637e065a6135dcc8c83dfb23d968dfcc4925b2d76d676206ac3db99  download.php
   fbf024e78bd6a7608b41d998d84b3c7636b949c4001cec55b74911bd7d8a2929  embed.php
-  5f3e25763d3e422efcfe9a953da06aaa260e47cd059a0c40e390211f3537c1b4  index.php
+  cbaf2715fc1ddfca4e1e19ec442b666b3963849da7ada8bbdd1e1566c8d5a1f6  index.php
   e1bd6a9b2d1ded8799d6a0fc464f9acd2c28735e1f29cd40834a0a9f114adf20  indexd.json
   417ef536a8f627b0cbefff91b68d754cb68c081acb1ca16bcd5dcab41f85406b  init_storage.php
   a089e81d9ff91dc623de95a4b60dfbed9a82ab7f8cd5955f1a0b0c08d3d468ee  integritie.php

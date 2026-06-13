@@ -29,12 +29,13 @@
 		</script>
 </head>
 <body>
+      <img src="/assets/img/Services for þe General populace Ministeria custodiae filaciorum ( Secura ) , aßervatio.png" alt="" style="height: 2cm;margin: 0.5cm;float:left;z-index: 9999;position: absolute;">
   <div class="container">
 
     <header class="header">
       <h1>$$\underline{\raisebox{-0.74ex}{V}\kern{-0.15em}31\raisebox{-0.74ex}{\kern{-0.08em}$n$}}$$</h1>
     </header>
-
+    
     <main>
 
       <div id="drop-zone" class="drop-zone">
