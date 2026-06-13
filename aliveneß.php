@@ -55,7 +55,7 @@ if (is_file($log)) {
     var leftRows = <?php echo json_encode($left); ?>;
     var zrokRows = <?php echo json_encode($zrok); ?>;
     var onionRows = <?php echo json_encode($onion); ?>;
-    var TOL = 10, LIVE = 500, PERIOD = 300, SLACK = 60, BREAK = 600, JIT = 2, MAXGAP = 3600;
+    var TOL = 10, LIVE = 500, PERIOD = 300, SLACK = 60, BREAK = 900, JIT = 2, MAXGAP = 3600;
 
     function show(p) { try { return p.toString(); } catch (e) { return p.year + ' ' + p.month + '⁄' + p.day + ' ' + p.hr + ':' + p.min + ':' + p.sec + ' ' + p.ampm; } }
     function key(p) { return p.year + p.month + p.day + p.hr + p.min + p.sec + p.ampm; }

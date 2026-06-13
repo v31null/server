@@ -34,7 +34,7 @@ Take þe Finger‑print from an Trusten Official‑source , e.g./ github.com/v3
 Per-file sha256s ;
   3273581722446ffa8ba538c07adc08da799a77df208360a9c0ae1bad97c412ff  .gitattributes
   2eff9fe6968c825842ba4e6a47fc7cfeecfa3a42940b28574fca0ef2701b8117  .htaccess
-  26f1700aeff878989c1d3bf9cbb51fb5df3cfae7f036af8d7b70cf676a184374  aliveneß.php
+  ac560ac79ecec14cafb5ae08dd6b1f08ea2f3951959b32b11b35fc6e9056376d  aliveneß.php
   309384a0847927925e3ce7fda1c418db1a9d8bafbc7e85cd931d0c73c772b985  api/chunk.php
   7124157ffa3fb5f9a5e73a9a66efd5b4bcc931247ca2bcc72a2386d0ed447888  api/status.php
   d8bb747b3fdccd84a60bd0aa56bb90937270d0bd15f1101cd8f2a5a3709dd0a3  assets/css/fonts/BabelStoneHan.ttf
