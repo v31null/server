@@ -88,13 +88,15 @@ if (is_file($log)) {
     }
 
     function buildIntervals(rows) {
-        var intervals = [], cur = null, prevPresent = null;
+        var intervals = [], cur = null, prevPresent = null, emptyStreak = 0;
         for (var i = 0; i < rows.length; i++) {
             var s = rows[i];
             if (s === '') {
-                if (cur) { intervals.push(cur); cur = null; prevPresent = null; }
+                emptyStreak++;
+                if (emptyStreak >= 2 && cur) { intervals.push(cur); cur = null; prevPresent = null; }
                 continue;
             }
+            emptyStreak = 0;
             var pt;
             try { pt = propertime(s); } catch (e) { continue; }
             if (!cur) {
@@ -120,7 +122,8 @@ if (is_file($log)) {
         if (!intervals.length) { return null; }
         var now = null;
         try { now = propertime(); } catch (e) {}
-        var lastRowPresent = rows.length > 0 && rows[rows.length - 1] !== '';
+        var n = rows.length;
+        var lastRowPresent = n > 0 && !(rows[n-1] === '' && n >= 2 && rows[n-2] === '');
         var parts = [];
         for (var k = 0; k < intervals.length; k++) {
             var iv = intervals[k];
