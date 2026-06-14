@@ -197,7 +197,7 @@
  * [B] TIME TRAVEL (ADDING/SUBTRACTING)
  *   Use the .add() method. Negative numbers go backward in time.
  *   
- *   let nextDay = past.add(1, "DAYS");
+ *   let nextDay = past.add(1, "DAYS" );
  *   let lastSec = past.add(-1, "SEC");
  *
  * [C] OUTPUTTING DATA & THE `is_he` FLAG
@@ -819,6 +819,20 @@ const propertime = (function () {
 	let currentEgyptianEpoch = EGYPTIAN_EPOCH_2776;
 
 	const UNIVERSAL_ANCHOR = 2460705;
+
+	const DRAG_DAYS_PER_YEAR = 365.25;
+	const DRAG_EARTH_FORMATION_JDN = 2460705n - BigInt(Math.round(4.5e9 * DRAG_DAYS_PER_YEAR));
+	const DRAG_SUN_ENGULF_JDN = 2460705n + BigInt(Math.round(7.6e9 * DRAG_DAYS_PER_YEAR));
+	const DRAG_LOD_ANCHORS = [
+		[-7.6e9, 32.0],
+		[-1.0e9, 26.0],
+		[0, 23.93447],  
+		[4.0e8, 21.95], 
+		[6.0e8, 19.5],  
+		[2.0e9, 19.5], 
+		[2.5e9, 18.5],     
+		[4.5e9, 6.0],      
+	];
 
 	const EGYPTIAN_SEASONS = ["AKHET", "AKHET", "AKHET", "AKHET", "PERET", "PERET", "PERET", "PERET", "SHEMU", "SHEMU", "SHEMU", "SHEMU"];
 
@@ -2079,6 +2093,74 @@ const propertime = (function () {
 		return 31;
 	}
 
+	function dragLodHours(yearsBP) {
+		const A = DRAG_LOD_ANCHORS;
+		if (yearsBP <= A[0][0]) return A[0][1];
+		if (yearsBP >= A[A.length - 1][0]) return A[A.length - 1][1];
+		for (let i = 0; i < A.length - 1; i++) {
+			const x0 = A[i][0], y0 = A[i][1], x1 = A[i + 1][0], y1 = A[i + 1][1];
+			if (yearsBP >= x0 && yearsBP <= x1) {
+				return y0 + ((yearsBP - x0) / (x1 - x0)) * (y1 - y0);
+			}
+		}
+		return A[A.length - 1][1];
+	}
+
+	function dragYearsBP(j) {
+		return (typeof j === 'bigint' ? Number(2460705n - j) : (UNIVERSAL_ANCHOR - j)) / DRAG_DAYS_PER_YEAR;
+	}
+
+	function dragDayLenSeconds(j) {
+		return Math.round(dragLodHours(dragYearsBP(j)) * 3600);
+	}
+
+	function dragAssertInBounds(j) {
+		const jb = (typeof j === 'bigint') ? j : BigInt(Math.round(j));
+		if (jb < DRAG_EARTH_FORMATION_JDN) throw new Error("Invalid date.");
+		if (jb > DRAG_SUN_ENGULF_JDN) throw new Error("Invalid date.");
+	}
+
+	function dragLodIntegral(Y) {
+		if (Y === 0) return 0;
+		const A = DRAG_LOD_ANCHORS;
+		let lo = Math.min(0, Y), hi = Math.max(0, Y);
+		let pts = [lo];
+		for (let i = 0; i < A.length; i++) {
+			if (A[i][0] > lo && A[i][0] < hi) pts.push(A[i][0]);
+		}
+		pts.push(hi);
+		let area = 0;
+		for (let i = 0; i < pts.length - 1; i++) {
+			let a = pts[i], b = pts[i + 1];
+			area += (dragLodHours(a) + dragLodHours(b)) / 2 * (b - a);
+		}
+		return (Y < 0 ? -1 : 1) * area;
+	}
+
+	function dragLodIntegralInverse(target) {
+		if (target === 0) return 0;
+		const A = DRAG_LOD_ANCHORS;
+		let sign = target < 0 ? -1 : 1, rem = Math.abs(target);
+		let bps = [0];
+		if (sign > 0) { for (let i = 0; i < A.length; i++) if (A[i][0] > 0) bps.push(A[i][0]); bps.push(Infinity); }
+		else { for (let i = A.length - 1; i >= 0; i--) if (A[i][0] < 0) bps.push(A[i][0]); bps.push(-Infinity); }
+		for (let i = 0; i < bps.length - 1; i++) {
+			let a = bps[i], b = bps[i + 1];
+			let hA = dragLodHours(a);
+			if (!isFinite(b)) return a + sign * (rem / hA);
+			let hB = dragLodHours(b);
+			let width = Math.abs(b - a);
+			let segArea = (hA + hB) / 2 * width;
+			if (rem <= segArea) {
+				let m = (hB - hA) / width;
+				let t = Math.abs(m) < 1e-15 ? rem / hA : (-hA + Math.sqrt(hA * hA + 2 * m * rem)) / m;
+				return a + sign * t;
+			}
+			rem -= segArea;
+		}
+		return bps[bps.length - 1];
+	}
+
 	function _addStep(d, n, unit) {
 		let yStr = d.year;
 		let isMassive = yStr.length > 14;
@@ -2087,8 +2169,10 @@ const propertime = (function () {
 		let m = parseInt(d.month),
 			day = parseInt(d.day),
 			h = parseInt(d.hr);
-		if (d.ampm === "PM" && h !== 12) h += 12;
-		if (d.ampm === "AM" && h === 12) h = 0;
+		if (!d.drag) {
+			if (d.ampm === "PM" && h !== 12) h += 12;
+			if (d.ampm === "AM" && h === 12) h = 0;
+		}
 		let min = parseInt(d.min),
 			sec = parseInt(d.sec);
 
@@ -2133,6 +2217,32 @@ const propertime = (function () {
 		}
 
 		if (["SEC", "MIN", "HRS", "DAYS", "WEEK", "KUEN", "HOL", "LAP"].includes(unit) || (unit === "DEC" && isEgyptianEra)) {
+			if (d.drag) {
+				let jdn = ymdToJdn(y, m, day);
+				dragAssertInBounds(jdn);
+				let mer0 = Math.floor(dragDayLenSeconds(jdn) / 2);
+				let tempSec = (d.ampm === "PM" ? mer0 : 0) + h * 3600 + (min - 1) * 60 + (sec - 1);
+				if (unit === "SEC") tempSec += n;
+				else if (unit === "MIN") tempSec += n * 60;
+				else if (unit === "HRS") tempSec += n * 3600;
+				else if (unit === "DAYS" || unit === "KUEN") jdn += n;
+				else if (unit === "WEEK") jdn += n * 7;
+				else if (unit === "HOL") jdn += Math.floor(n * 365.25);
+				else if (unit === "LAP") jdn += n * 20454;
+				else if (unit === "DEC") jdn += n * 10;
+				dragAssertInBounds(jdn);
+				let len = dragDayLenSeconds(jdn);
+				while (tempSec >= len) { tempSec -= len; jdn++; dragAssertInBounds(jdn); len = dragDayLenSeconds(jdn); }
+				while (tempSec < 0) { jdn--; dragAssertInBounds(jdn); len = dragDayLenSeconds(jdn); tempSec += len; }
+				let dragDate = jdnToYmd(jdn);
+				let mer = Math.floor(len / 2);
+				let dragAp = tempSec < mer ? "AM" : "PM";
+				let dragLocal = tempSec < mer ? tempSec : tempSec - mer;
+				let dragH = Math.floor(dragLocal / 3600);
+				let dragMin = (Math.floor(dragLocal / 60) % 60) + 1;
+				let dragSec = (dragLocal % 60) + 1;
+				return { year: dragDate.y.toString(), month: pad(dragDate.m), day: pad(dragDate.d), hr: pad(dragH), min: pad(dragMin), sec: pad(dragSec), ampm: dragAp, drag: true };
+			}
 			let jdn = ymdToJdn(y, m, day);
 			let totalSec = sec + (min - 1) * 60 + h * 3600;
 
@@ -2161,6 +2271,7 @@ const propertime = (function () {
 			let tempSec = totalSec - 1;
 
 			function getDayLen(j) {
+				if (d.drag) { dragAssertInBounds(j); return dragDayLenSeconds(j); }
 				let len = 86400;
 				if (typeof j === 'bigint') {
 					if (j % 11n === 0n) len += 1;
@@ -2199,6 +2310,9 @@ const propertime = (function () {
 			}
 		}
 
+		if (d.drag) {
+			return { year: y.toString(), month: pad(m), day: pad(day), hr: pad(h), min: pad(min), sec: pad(sec), ampm: d.ampm, drag: true };
+		}
 		let h12 = h % 12;
 		let ampm = h >= 12 ? "PM" : "AM";
 		return { year: y.toString(), month: pad(m), day: pad(day), hr: pad(h12), min: pad(min), sec: pad(sec), ampm: ampm };
@@ -2215,14 +2329,52 @@ const propertime = (function () {
 			this.ampm = d.ampm;
 			this.tag = d.tag || "";
 			this.verbose = d.verbose || false;
+			this.drag = d.drag || false;
 		}
 
 		add(n, unit) {
 			let newPt = new ProperTime(_addStep(this, n, unit));
 			newPt.tag = this.tag;
 			newPt.verbose = this.verbose;
+			newPt.drag = this.drag;
 			return newPt;
 		}
+
+		DTP() {
+			let srcDrag = !!this.drag;
+			let jdn = ymdToJdn(this.year, parseInt(this.month), parseInt(this.day));
+			let hRaw = parseInt(this.hr), min = parseInt(this.min), sec = parseInt(this.sec);
+			let srcLen, tempSec;
+			if (srcDrag) {
+				dragAssertInBounds(jdn);
+				srcLen = dragDayLenSeconds(jdn);
+				let mer = Math.floor(srcLen / 2);
+				tempSec = (this.ampm === "PM" ? mer : 0) + hRaw * 3600 + (min - 1) * 60 + (sec - 1);
+			} else {
+				srcLen = 86400;
+				let h = hRaw;
+				if (this.ampm === "PM" && h !== 12) h += 12;
+				if (this.ampm === "AM" && h === 12) h = 0;
+				tempSec = h * 3600 + (min - 1) * 60 + (sec - 1);
+			}
+			let frac = tempSec / srcLen;
+			let Ysrc = (UNIVERSAL_ANCHOR - jdn) / DRAG_DAYS_PER_YEAR;
+			let Ytgt = srcDrag ? dragLodIntegral(Ysrc) / 24 : dragLodIntegralInverse(24 * Ysrc);
+			let tgtJdn = Math.round(UNIVERSAL_ANCHOR - Ytgt * DRAG_DAYS_PER_YEAR);
+			let tgtDate = jdnToYmd(tgtJdn);
+			let tgtLen = srcDrag ? 86400 : dragDayLenSeconds(tgtJdn);
+			let tgtSec = Math.round(frac * tgtLen);
+			if (tgtSec >= tgtLen) tgtSec = tgtLen - 1;
+			let target = new ProperTime({
+				year: tgtDate.y.toString(), month: pad(tgtDate.m), day: pad(tgtDate.d),
+				hr: "00", min: "01", sec: "01", ampm: "AM",
+				tag: this.tag, verbose: this.verbose, drag: !srcDrag
+			});
+			return target.add(tgtSec, "SEC");
+		}
+
+		DPK() { return this.DTP(); }
+
 getMeta(is_he = false) {
 			let ayStr = this.year;
 			let isMassive = ayStr.length > 14;
@@ -2346,11 +2498,11 @@ getMeta(is_he = false) {
 			const meta = this.getMeta(is_he);
 			let jdn = ymdToJdn(this.year, parseInt(this.month), parseInt(this.day));
 			
-			if (meta.useCanon || (!force_roman && typeof jdn === 'number' && jdn < 1460920)) {
+			if (meta.useCanon || (!force_roman && (typeof jdn === 'bigint' || (typeof jdn === 'number' && jdn < 1460920)))) {
 				let alts = this.toAltFormats(is_he, force_roman);
 				return alts[0];
 			}
-			return `${meta.displayYear} ${this.month}${FS}${this.day} ${this.hr}:${this.min}:${this.sec} ${this.ampm}${meta.suffix}`;
+			return `${meta.displayYear} ${this.month}${FS}${this.day} ${this.hr}:${this.min}:${this.sec} ${this.ampm}${meta.suffix}`;
 		}
 
 		toAltFormats(is_he = false, force_roman = false) {
@@ -2528,7 +2680,7 @@ getMeta(is_he = false) {
 				suShort = `${su.kingId} ${su.year}\u2011${su.month}${FS}${su.day}`;
 			}
 
-			let sh = (typeof jdn === 'number') ? jdnToStonehenge(jdn) : null;
+			let sh = (typeof jdn === 'number' || typeof jdn === 'bigint') ? jdnToStonehenge(jdn) : null;
 			let shFormal = "—";
 			let shShort = "—";
 			
@@ -2573,7 +2725,7 @@ getMeta(is_he = false) {
 		}
 	}
 
-	const ptFunc = function propertime(input, off_set_japan = "", is_day_time_saving = false, verbose = false) {
+	const ptFunc = function propertime(input, off_set_japan = "", is_day_time_saving = false, verbose = false, drag = false) {
 		let offsetSeconds = 0;
 		if (typeof off_set_japan === "string" && off_set_japan.trim() !== "") {
 			let str = off_set_japan.trim().toUpperCase();
@@ -2738,7 +2890,7 @@ getMeta(is_he = false) {
 				let min = pad(parseInt(tMatch[1]));
 				let sec = pad(parseInt(tMatch[2]));
 				let ampm = tMatch[3].toUpperCase();
-				return new ProperTime({ year: ymd.y.toString(), month: pad(ymd.m), day: pad(ymd.d), hr, min, sec, ampm, verbose }).add(offsetSeconds, "SEC");
+				return new ProperTime({ year: ymd.y.toString(), month: pad(ymd.m), day: pad(ymd.d), hr, min, sec, ampm, verbose, drag }).add(offsetSeconds, "SEC");
 			}
 
 			let inputTag = input.toUpperCase();
@@ -2833,7 +2985,7 @@ getMeta(is_he = false) {
 				throw new Error(`Invalid date.`);
 			}
 
-			return new ProperTime({ year: ay.toString(), month: pad(targetMonth), day: pad(targetDay), hr: pad(hr), min: pad(min), sec: pad(sec), ampm, tag: resolvedTag, verbose }).add(offsetSeconds, "SEC");
+			return new ProperTime({ year: ay.toString(), month: pad(targetMonth), day: pad(targetDay), hr: pad(hr), min: pad(min), sec: pad(sec), ampm, tag: resolvedTag, verbose, drag }).add(offsetSeconds, "SEC");
 		}
 
 		const now = new Date();
@@ -2881,7 +3033,8 @@ getMeta(is_he = false) {
 			min: pad(n_min),
 			sec: pad(n_sec),
 			ampm: ampm,
-			verbose: verbose
+			verbose: verbose,
+			drag: drag
 		}).add(offsetSeconds, "SEC");
 	};
 
@@ -3091,6 +3244,13 @@ getMeta(is_he = false) {
 	};
 	ptFunc.jdnDiff = function (cy1, m1, d1, cy2, m2, d2) {
 		return ymdToJdn(cy2, m2, d2) - ymdToJdn(cy1, m1, d1);
+	};
+	ptFunc.lengthOfDay = function (input) {
+		let pt = (input && typeof input === 'object' && 'year' in input && 'month' in input) ? input : ptFunc(input);
+		let j = ymdToJdn(pt.year, parseInt(pt.month), parseInt(pt.day));
+		dragAssertInBounds(j);
+		let seconds = dragDayLenSeconds(j);
+		return { seconds, hours: seconds / 3600, yearsBP: dragYearsBP(j) };
 	};
 
 	return ptFunc;
