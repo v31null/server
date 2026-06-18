@@ -107,7 +107,7 @@ if (is_file($log)) {
                     intervals.push(cur);
                     cur = { from: pt, to: pt, unstable: [] };
                 } else {
-                    if (g < PERIOD - TOL || g > PERIOD + SLACK) { cur.unstable.push(pt); }
+                    if (g < PERIOD - TOL) { cur.unstable.push(pt); }
                     cur.to = pt;
                 }
             }
