@@ -436,9 +436,9 @@
             "size": 8050
         },
         "indexd.json": {
-            "sha256": "e1bd6a9b2d1ded8799d6a0fc464f9acd2c28735e1f29cd40834a0a9f114adf20",
-            "sha384": "sha384-saRsPwnNyKRb8Odx51tzsqW9PIOhCLPBhz0CAQ5fQwwXUR7jFO3Kr1dA8hbhNDGy",
-            "size": 20449
+            "sha256": "7ab634e86b39bb14a4b99cac6a613ccf06500a24389330b99c5a459cc3013ec1",
+            "sha384": "sha384-Horqc6nw3/Lv7HKsdZriBqMndpnfgyQfhya23IeXf/1w4CcsM8My7EP0uq0h29ls",
+            "size": 23411
         },
         "init_storage.php": {
             "sha256": "417ef536a8f627b0cbefff91b68d754cb68c081acb1ca16bcd5dcab41f85406b",
