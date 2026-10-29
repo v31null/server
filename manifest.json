@@ -421,8 +421,8 @@
             "size": 2878
         },
         "download.php": {
-            "sha256": "54af282917255490e31acb23bea403bb1f498f61b657bc9b25cd0a08152d3ebb",
-            "sha384": "sha384-HjzWjSgzIfpE7CXLbZ2WFXavF/DFrjk7/bjJPSjV89KBqSsAe3NWUaOIYjeyrXG0",
+            "sha256": "eade2df790d2539a59d8a044895e3d8df545b267b66815a8a1d55fca97c4da86",
+            "sha384": "sha384-QeGViY49F5k4m4LqfWKATS+rpZ7LhI+pOU4eFQgdviEnLoW2I66rd/wcCAPasybl",
             "size": 4373
         },
         "embed.php": {
@@ -431,8 +431,8 @@
             "size": 5794
         },
         "index.php": {
-            "sha256": "a514bcf7e5a03a266d096d6eb25e77f559c2dad825f20eb26ecf55e3339e6910",
-            "sha384": "sha384-M75CbJUbWykmHmRTZvizN2PquE1eBBK3wKTPa/y+HwFQHocXJIiGBEx0S0WM1IVJ",
+            "sha256": "1cb3dbf52e15f9b82efb2b64af5b0de0b62f5a09c10dae887447176d972dd14c",
+            "sha384": "sha384-DBof2C3hUqsi1dn+9m+aKSigoV/6GuAOsl96u1MHWefRz2w2+jxjI6F2ZKC+PEKc",
             "size": 8050
         },
         "indexd.json": {
