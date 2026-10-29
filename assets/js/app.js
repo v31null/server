@@ -346,7 +346,7 @@ function initUpload() {
             progressFill.style.width = '100%';
             progressText.textContent = 'Complete!';
 
-            const origin = window.location.origin.replace('.com.pr', '.share.zrok.io');
+            const origin = window.location.origin.replace('.com.pr', '.v31null.de');
             const baseUrl = origin + BASE_URL + 'v/' + uploadResult.id;
             
             const fileName = file.name || 'file.bin';

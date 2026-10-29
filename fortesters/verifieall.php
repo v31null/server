@@ -2,7 +2,7 @@
 
 error_reporting(E_ERROR | E_PARSE);
 
-$EDGE        = getenv('VERIFIE_EDGE')   ?: 'https://file.share.zrok.io';
+$EDGE        = getenv('VERIFIE_EDGE')   ?: 'https://file.v31null.de';
 $GITHUB      = getenv('VERIFIE_GITHUB') ?: 'https://raw.githubusercontent.com/v31null/server/main';
 $EXPECT_SPKI = '261AF6EA33A67825250326CC64E5BC735BF3C010FCC4F4132D83F19B28D1DAD5';
 

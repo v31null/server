@@ -381,9 +381,9 @@
             "size": 3890
         },
         "assets/js/app.js": {
-            "sha256": "cb88579c5459b6930f124eaf06ad325da8e733821598d17f064dcef4a84c1f7c",
-            "sha384": "sha384-b4R7uUfxHZLQ5d9Ks2owhTSN33X+h6vO1og3K+EWviEIboeubolabEiYnraVJBen",
-            "size": 20775
+            "sha256": "67eb29bcc4c4f14ea2e5c2e4438493964ad36bbabc9e2132f84d11545c649532",
+            "sha384": "sha384-LNP9ZrtgAjNEMsni8DJFcd2lPkiXopXXIpinBXo45KNIjOKyfbAPAlAA6KEQ2dW9",
+            "size": 20772
         },
         "assets/js/auto-render.js": {
             "sha256": "a1316ded7951625841ba9f81890315465ef798ce6864079670c6c6e2f774677f",

@@ -107,7 +107,7 @@ Per-file sha256s ;
   9ce8a65f2d869e4919d38afc30b41c660a43de30cd2aa7a4c5fb478a7d505b24  assets/css/style.css
   1f93978f886b09cc937982b40e669a915f968506d56abd8d287b84f433f188e8  assets/img/Services for þe General populace Ministeria custodiae filaciorum ( Secura ) , aßervatio.png
   9d2578af7a872b3ce1f9641406b08e8496093ef6de18fa9142ba004eb61148c7  assets/img/logomonochrome.ico
-  cb88579c5459b6930f124eaf06ad325da8e733821598d17f064dcef4a84c1f7c  assets/js/app.js
+  67eb29bcc4c4f14ea2e5c2e4438493964ad36bbabc9e2132f84d11545c649532  assets/js/app.js
   a1316ded7951625841ba9f81890315465ef798ce6864079670c6c6e2f774677f  assets/js/auto-render.js
   07770af90943a1de1a1010794bc78c6a7346d46d48fb63e35cc76ba76b827604  assets/js/copy-tex.min.js
   fd2bb71faa41ee772de8f0881fdfccea0ff730590d4d56461032f4732856a1bf  assets/js/crypto.js
