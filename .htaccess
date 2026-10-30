@@ -20,6 +20,8 @@ RewriteEngine On
 
 RewriteRule ^v/([^/]+)$ download.php?id=$1 [L,QSA]
 
+RewriteRule ^w/([^/]+)$ download.php?id=$1 [L,QSA]
+
 RewriteRule (?i)(^|/)\.git(/|$) - [F,L]
 
 RewriteRule ^storage/ - [F,L]
@@ -29,6 +31,10 @@ RewriteRule ^incoming/ - [F,L]
 RewriteRule ^init_storage\.php$ - [F,L]
 
 RewriteRule ^embed/([a-f0-9]{8})(.*)\.[a-zA-Z0-9]+$ embed.php?id=$1&PASS=$2 [L,QSA,B]
+
+RewriteRule ^embed2/([a-z2-7]{26})(.*)\.[a-zA-Z0-9]+$ embed.php?id=$1&PASS=$2 [L,QSA,B]
+
+SetEnvIf Request_URI "^/api/pack\.php" no-gzip
 
 <FilesMatch "^\.">
     Require all denied

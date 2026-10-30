@@ -953,484 +953,484 @@ const propertime = (function () {
 
 
 	const KINGS = [
-        { prima: 'ROMVLVS', secunda: '', jdnstr: 1446675, jdnend: 1460190 },
-        { prima: 'POLYKRACIE', secunda: '', jdnstr: 1460190, jdnend: 1460555 },
-        { prima: 'NVMA POMPILIVS', secunda: '', jdnstr: 1460555, jdnend: 1475895 },
-        { prima: 'TVLLVS HOSTILIVS', secunda: '', jdnstr: 1475895, jdnend: 1487218 },
-        { prima: 'ANCVS MARCIVS', secunda: '', jdnstr: 1487218, jdnend: 1496349 },
-        { prima: 'TARQVINIVS PRISCVS', secunda: '', jdnstr: 1496349, jdnend: 1510229 },
-        { prima: 'SERVIVS TVLLIVS', secunda: '', jdnstr: 1510229, jdnend: 1526300 },
-        { prima: 'TARQVINIVS SVPERBVS', secunda: '', jdnstr: 1526300, jdnend: 1535870 },
-        { prima: 'L. JVNIVS BRVTVS', secunda: 'L. TARQVINIVS COLLATINVS', jdnstr: 1535870, jdnend: 1536236 },
-        { prima: 'P. VALERIVS POPLICOLA', secunda: 'T. LVCRETIVS TRICIPITINVS', jdnstr: 1536236, jdnend: 1536601 },
-        { prima: 'P. VALERIVS POPLICOLA', secunda: 'M. HORATIVS PVLVILLVS', jdnstr: 1536601, jdnend: 1536966 },
-        { prima: 'SP. LARCIVS', secunda: 'T. HERMINIVS AQVILINVS', jdnstr: 1536966, jdnend: 1537331 },
-        { prima: 'M. VALERIVS VOLVSVS', secunda: 'P. POSTVMIVS TVBERTVS', jdnstr: 1537331, jdnend: 1537697 },
-        { prima: 'P. VALERIVS POPLICOLA', secunda: 'T. LVCRETIVS TRICIPITINVS', jdnstr: 1537697, jdnend: 1538062 },
-        { prima: 'AGRIPPA MENENIVS LANATVS', secunda: 'P. POSTVMIVS TVBERTVS', jdnstr: 1538062, jdnend: 1538427 },
-        { prima: 'OPITER VERGINIVS TRICOSTVS', secunda: 'SP. CASSIVS VECELLINVS', jdnstr: 1538427, jdnend: 1538792 },
-        { prima: 'POSTVMVS COMINIVS AVRVNCVS', secunda: 'T. LARCIVS', jdnstr: 1538792, jdnend: 1539158 },
-        { prima: 'SER. SVLPICIVS CAMERINVS CORNVTVS', secunda: 'M\'. TVLLIVS LONGVS', jdnstr: 1539158, jdnend: 1539523 },
-        { prima: 'T. AEBVTIVS HELVA', secunda: 'C. VETVRIVS GEMINVS CICVRINVS', jdnstr: 1539523, jdnend: 1539888 },
-        { prima: 'Q. CLOELIVS SICVLVS', secunda: 'T. LARCIVS', jdnstr: 1539888, jdnend: 1540253 },
-        { prima: 'A. SEMPRONIVS ATRATINVS', secunda: 'M. MINVCIVS AVGVRINVS', jdnstr: 1540253, jdnend: 1540619 },
-        { prima: 'A. POSTVMIVS ALBVS REGILLENSIS', secunda: 'T. VERGINIVS TRICOSTVS CAELIOMONTANVS', jdnstr: 1540619, jdnend: 1540984 },
-        { prima: 'AP. CLAVDIVS SABINVS INREGILLENSIS', secunda: 'P. SERVILIVS PRISCVS STRVCTVS', jdnstr: 1540984, jdnend: 1541349 },
-        { prima: 'A. VERGINIVS TRICOSTVS CAELIOMONTANVS', secunda: 'T. VETVRIVS GEMINVS CICVRINVS', jdnstr: 1541349, jdnend: 1541714 },
-        { prima: 'POSTVMVS COMINIVS AVRVNCVS', secunda: 'SP. CASSIVS VECELLINVS', jdnstr: 1541714, jdnend: 1542080 },
-        { prima: 'T. GEGANIVS MACERINVS', secunda: 'P. MINVCIVS AVGVRINVS', jdnstr: 1542080, jdnend: 1542445 },
-        { prima: 'M. MINVCIVS AVGVRINVS', secunda: 'A. SEMPRONIVS ATRATINVS', jdnstr: 1542445, jdnend: 1542810 },
-        { prima: 'Q. SVLPICIVS CAMERINVS CORNVTVS', secunda: 'SP. LARCIVS', jdnstr: 1542810, jdnend: 1543175 },
-        { prima: 'C. JVLIVS IVLLVS', secunda: 'P. PINARIVS MAMERCINVS RVFVS', jdnstr: 1543175, jdnend: 1543541 },
-        { prima: 'SP. NAVTIVS RVTILVS', secunda: 'SEX. FVRIVS', jdnstr: 1543541, jdnend: 1543906 },
-        { prima: 'T. SICINIVS (OR SICCIVS) SABINVS', secunda: 'C. AQVILLIVS TVSCVS', jdnstr: 1543906, jdnend: 1544271 },
-        { prima: 'SP. CASSIVS VECELLINVS', secunda: 'PROCVLVS VERGINIVS TRICOSTVS RVTILVS', jdnstr: 1544271, jdnend: 1544636 },
-        { prima: 'Q. FABIVS VIBVLANVS', secunda: 'SER. CORNELIVS MALVGINENSIS', jdnstr: 1544636, jdnend: 1545002 },
-        { prima: 'L. AEMILIVS MAMERCVS', secunda: 'K. FABIVS VIBVLANVS', jdnstr: 1545002, jdnend: 1545367 },
-        { prima: 'M. FABIVS VIBVLANVS', secunda: 'L. VALERIVS POTITVS', jdnstr: 1545367, jdnend: 1545732 },
-        { prima: 'C. JVLIVS IVLLVS', secunda: 'Q. FABIVS VIBVLANVS', jdnstr: 1545732, jdnend: 1546097 },
-        { prima: 'K. FABIVS VIBVLANVS', secunda: 'SP. FVRIVS FVSVS', jdnstr: 1546097, jdnend: 1546463 },
-        { prima: 'M. FABIVS VIBVLANVS', secunda: 'CN. MANLIVS CINCINNATVS', jdnstr: 1546463, jdnend: 1546828 },
-        { prima: 'K. FABIVS VIBVLANVS', secunda: 'T. VERGINIVS TRICOSTVS RVTILVS', jdnstr: 1546828, jdnend: 1547193 },
-        { prima: 'L. AEMILIVS MAMERCVS', secunda: 'C. SERVILIVS STRVCTVS AHALA', jdnstr: 1547193, jdnend: 1547558 },
-        { prima: 'C. (OR M.) HORATIVS PVLVILLVS', secunda: 'T. MENENIVS LANATVS', jdnstr: 1547558, jdnend: 1547924 },
-        { prima: 'A. VERGINIVS TRICOSTVS RVTILVS', secunda: 'SP. (OR C.) SERVILIVS STRVCTVS', jdnstr: 1547924, jdnend: 1548289 },
-        { prima: 'P. VALERIVS POPLICOLA', secunda: 'C. NAVTIVS RVTILVS', jdnstr: 1548289, jdnend: 1548654 },
-        { prima: 'L. FVRIVS MEDVLLINVS', secunda: 'A. MANLIVS VVLSO', jdnstr: 1548654, jdnend: 1549019 },
-        { prima: 'L. AEMILIVS MAMERCVS', secunda: 'VOPISCVS JVLIVS IVLLVS', jdnstr: 1549019, jdnend: 1549385 },
-        { prima: 'L. PINARIVS MAMERCINVS RVFVS', secunda: 'P. FVRIVS MEDVLLINVS FVSVS', jdnstr: 1549385, jdnend: 1549750 },
-        { prima: 'AP. CLAVDIVS CRASSVS INREGILLENSIS SABINVS', secunda: 'T. QVINCTIVS CAPITOLINVS BARBATVS', jdnstr: 1549750, jdnend: 1550115 },
-        { prima: 'L. VALERIVS POTITVS', secunda: 'TI. AEMILIVS MAMERCVS', jdnstr: 1550115, jdnend: 1550480 },
-        { prima: 'T. NVMICIVS PRISCVS', secunda: 'A. VERGINIVS CAELIOMONTANVS', jdnstr: 1550480, jdnend: 1550846 },
-        { prima: 'T. QVINCTIVS CAPITOLINVS BARBATVS', secunda: 'Q. SERVILIVS PRISCVS', jdnstr: 1550846, jdnend: 1551211 },
-        { prima: 'TI. AEMILIVS MAMERCVS', secunda: 'Q. FABIVS VIBVLANVS', jdnstr: 1551211, jdnend: 1551576 },
-        { prima: 'Q. SERVILIVS PRISCVS', secunda: 'SP. POSTVMIVS ALBINVS REGILLENSIS', jdnstr: 1551576, jdnend: 1551941 },
-        { prima: 'Q. FABIVS VIBVLANVS', secunda: 'T. QVINCTIVS CAPITOLINVS BARBATVS', jdnstr: 1551941, jdnend: 1552307 },
-        { prima: 'A. POSTVMIVS ALBINVS REGILLENSIS', secunda: 'SP. FVRIVS MEDVLLINVS FVSVS', jdnstr: 1552307, jdnend: 1552672 },
-        { prima: 'P. SERVILIVS PRISCVS', secunda: 'L. AEBVTIVS HELVA', jdnstr: 1552672, jdnend: 1553037 },
-        { prima: 'L. LVCRETIVS TRICIPITINVS', secunda: 'T. VETVRIVS GEMINVS CICVRINVS', jdnstr: 1553037, jdnend: 1553402 },
-        { prima: 'P. VOLVMNIVS AMINTINVS GALLVS', secunda: 'SER. SVLPICIVS CAMERINVS CORNVTVS', jdnstr: 1553402, jdnend: 1553768 },
-        { prima: 'P. VALERIVS POPLICOLA', secunda: 'C. CLAVDIVS INREGILLENSIS SABINVS', jdnstr: 1553768, jdnend: 1554133 },
-        { prima: 'Q. FABIVS VIBVLANVS', secunda: 'L. CORNELIVS MALVGINENSIS VRITINVS', jdnstr: 1554133, jdnend: 1554498 },
-        { prima: 'C. NAVTIVS RVTILVS', secunda: '(...) CARVE(NTANVS?)', jdnstr: 1554498, jdnend: 1554863 },
-        { prima: 'C. (OR M.) HORATIVS PVLVILLVS', secunda: 'Q. MINVCIVS ESQVILINVS (OR L. POSTVMIVS)', jdnstr: 1554863, jdnend: 1555229 },
-        { prima: 'M. VALERIVS MAXIMVS LACTVCA', secunda: 'SP. VERGINIVS TRICOSTVS CAELIOMONTANVS', jdnstr: 1555229, jdnend: 1555594 },
-        { prima: 'T. ROMILIVS ROCVS VATICANVS', secunda: 'C. VETVRIVS CICVRINVS', jdnstr: 1555594, jdnend: 1555959 },
-        { prima: 'SP. TARPEIVS MONTANVS CAPITOLINVS', secunda: 'A. ATERNIVS VARVS FONTINALIS', jdnstr: 1555959, jdnend: 1556324 },
-        { prima: 'P. CVRIATIVS FISTVS TRIGEMINVS', secunda: 'SEX. QVINCTILIVS', jdnstr: 1556324, jdnend: 1556690 },
-        { prima: 'T. MENENIVS LANATVS', secunda: 'P. SESTIVS CAPITOLINVS VATICANVS', jdnstr: 1556690, jdnend: 1557055 },
-        { prima: 'AP. CLAVDIVS CRASSVS INREGILLENSIS SABINVS', secunda: 'T. GENVCIVS (OR MINVCIVS) AVGVRINVS', jdnstr: 1557055, jdnend: 1557420 },
-        { prima: 'PLACIDVS VALENTINIANVS AVGVSTVS', secunda: 'GENNADIVS AVIENVS', jdnstr: 1557420, jdnend: 1557785 },
-        { prima: 'L. VALERIVS POPLICOLA POTITVS', secunda: 'M. HORATIVS TVRRINVS BARBATVS', jdnstr: 1557785, jdnend: 1558151 },
-        { prima: 'LARS HERMINIVS CORITINESANVS', secunda: 'T. VERGINIVS TRICOSTVS CAELIOMONTANVS', jdnstr: 1558151, jdnend: 1558516 },
-        { prima: 'M. GEGANIVS MACERINVS', secunda: 'C. JVLIVS IVLLVS', jdnstr: 1558516, jdnend: 1558881 },
-        { prima: 'T. QVINCTIVS CAPITOLINVS BARBATVS', secunda: 'AGRIPPA FVRIVS FVSVS', jdnstr: 1558881, jdnend: 1559246 },
-        { prima: 'M. GENVCIVS AVGVRINVS', secunda: 'C. CVRIATIVS PHILO', jdnstr: 1559246, jdnend: 1559612 },
-        { prima: 'THEODOSIVS AVGVSTVS XVIII', secunda: 'CAECINA DECIVS AGINATIVS ALBINVS', jdnstr: 1559612, jdnend: 1559977 },
-        { prima: 'M. GEGANIVS MACERINVS', secunda: 'T. QVINCTIVS CAPITOLINVS BARBATVS', jdnstr: 1559977, jdnend: 1560342 },
-        { prima: 'M. FABIVS VIBVLANVS', secunda: 'POSTVMVS AEBVTIVS HELVA CORNICEN', jdnstr: 1560342, jdnend: 1560707 },
-        { prima: 'C. FVRIVS PACILVS FVSVS', secunda: 'M\'. PAPIRIVS CRASSVS', jdnstr: 1560707, jdnend: 1561073 },
-        { prima: 'PROCVLVS GEGANIVS MACERINVS', secunda: 'T. MENENIVS LANATVS', jdnstr: 1561073, jdnend: 1561438 },
-        { prima: 'AGRIPPA MENENIVS LANATVS', secunda: 'T. QVINCTIVS CAPITOLINVS BARBATVS', jdnstr: 1561438, jdnend: 1561803 },
-        { prima: 'THEODOSIVS AVGVSTVS XVI', secunda: 'ANICIVS ACILIVS GLABRIO FAVSTVS', jdnstr: 1561803, jdnend: 1562168 },
-        { prima: 'M. GEGANIVS MACERINVS', secunda: 'L. SERGIVS FIDENAS', jdnstr: 1562168, jdnend: 1562534 },
-        { prima: 'M. (OR A.) CORNELIVS MALVGINENSIS', secunda: 'L. PAPIRIVS CRASSVS', jdnstr: 1562534, jdnend: 1562899 },
-        { prima: 'C. JVLIVS IVLLVS', secunda: '(L. OR PROCVLVS) VERGINIVS TRICOSTVS', jdnstr: 1562899, jdnend: 1563264 },
-        { prima: 'ARDABVR ASPAR (WESTERN)', secunda: 'AREOBINDVS (EASTERN)', jdnstr: 1563264, jdnend: 1563629 },
-        { prima: 'THEODOSIVS AVGVSTVS XIV', secunda: 'PETRONIVS MAXIMVS', jdnstr: 1563629, jdnend: 1563995 },
-        { prima: 'AETIVS (WESTERN)', secunda: 'VALERIVS (EASTERN)', jdnstr: 1563995, jdnend: 1564360 },
-        { prima: 'T. QVINCTIVS POENVS CINCINNATVS', secunda: 'C. JVLIVS MENTO', jdnstr: 1564360, jdnend: 1564725 },
-        { prima: 'C. (OR L.) PAPIRIVS CRASSVS', secunda: 'L. JVLIVS IVLLVS', jdnstr: 1564725, jdnend: 1565090 },
-        { prima: 'HOSTVS LVCRETIVS TRICIPITINVS', secunda: 'L. SERGIVS FIDENAS', jdnstr: 1565090, jdnend: 1565456 },
-        { prima: 'A. CORNELIVS COSSVS', secunda: 'T. QVINCTIVS POENVS CINCINNATVS', jdnstr: 1565456, jdnend: 1565821 },
-        { prima: 'C. SERVILIVS AXILLA', secunda: 'L. PAPIRIVS MVGILLANVS', jdnstr: 1565821, jdnend: 1566186 },
-        { prima: 'THEODOSIVS AVGVSTVS XII', secunda: 'PLACIDVS VALENTINIANVS AVGVSTVS', jdnstr: 1566186, jdnend: 1566551 },
-        { prima: 'WEST: JOHANNES AVGVSTVS', secunda: '', jdnstr: 1566551, jdnend: 1566917 },
-        { prima: 'CASTINVS (WEST ONLY)', secunda: 'VICTOR (EAST ONLY)', jdnstr: 1566917, jdnend: 1567282 },
-        { prima: 'C. SEMPRONIVS ATRATINVS', secunda: 'Q. FABIVS VIBVLANVS', jdnstr: 1567282, jdnend: 1567647 },
-        { prima: 'HONORIVS AVGVSTVS XIII', secunda: 'THEODOSIVS AVGVSTVS X', jdnstr: 1567647, jdnend: 1568012 },
-        { prima: 'N. (OR CN.) FABIVS VIBVLANVS', secunda: 'T. QVINCTIVS CAPITOLINVS BARBATVS', jdnstr: 1568012, jdnend: 1568378 },
-        { prima: 'THEODOSIVS AVGVSTVS IX', secunda: 'CONSTANTIVS', jdnstr: 1568378, jdnend: 1568743 },
-        { prima: 'MONAXIVS', secunda: 'PLINTA', jdnstr: 1568743, jdnend: 1569108 },
-        { prima: 'HONORIVS AVGVSTVS XII', secunda: 'THEODOSIVS AVGVSTVS VIII', jdnstr: 1569108, jdnend: 1569473 },
-        { prima: 'HONORIVS AVGVSTVS XI', secunda: 'CONSTANTIVS', jdnstr: 1569473, jdnend: 1569839 },
-        { prima: 'THEODOSIVS AVGVSTVS', secunda: 'JVNIVS QVARTVS PALLADIVS', jdnstr: 1569839, jdnend: 1570204 },
-        { prima: 'HONORIVS AVGVSTVS X', secunda: 'THEODOSIVS AVGVSTVS', jdnstr: 1570204, jdnend: 1570569 },
-        { prima: 'CONSTANTIVS', secunda: 'CONSTANS', jdnstr: 1570569, jdnend: 1570934 },
-        { prima: '(A. OR M.) CORNELIVS COSSVS', secunda: 'L. FVRIVS MEDVLLINVS', jdnstr: 1570934, jdnend: 1571300 },
-        { prima: 'Q. FABIVS VIBVLANVS (?)AMBVSTVS (II?)', secunda: 'C. FVRIVS PACILVS', jdnstr: 1571300, jdnend: 1571665 },
-        { prima: 'M. PAPIRIVS MVGILLANVS', secunda: 'SP. (OR C.) NAVTIVS RVTILVS', jdnstr: 1571665, jdnend: 1572030 },
-        { prima: 'M\'. AEMILIVS MAMERCINVS', secunda: 'C. VALERIVS POTITVS VOLVSVS', jdnstr: 1572030, jdnend: 1572395 },
-        { prima: 'CN. CORNELIVS COSSVS', secunda: 'L. FVRIVS MEDVLLINVS', jdnstr: 1572395, jdnend: 1572761 },
-        { prima: 'ANICIVS AVCHENIVS BASSVS', secunda: 'PHILIPPVS', jdnstr: 1572761, jdnend: 1573126 },
-        { prima: 'HONORIVS AVGVSTVS', secunda: 'THEODOSIVS AVGVSTVS', jdnstr: 1573126, jdnend: 1573491 },
-        { prima: 'ARCADIVS AVGVSTVS', secunda: 'ANICIVS PETRONIVS PROBVS', jdnstr: 1573491, jdnend: 1573856 },
-        { prima: 'STILICHO', secunda: 'ANTHEMIVS (EAST ONLY)', jdnstr: 1573856, jdnend: 1574222 },
-        { prima: 'HONORIVS AVGVSTVS', secunda: 'ARISTAENETVS (EAST ONLY)', jdnstr: 1574222, jdnend: 1574587 },
-        { prima: 'THEODOSIVS AVGVSTVS', secunda: 'RVMORIDVS', jdnstr: 1574587, jdnend: 1574952 },
-        { prima: 'ARCADIVS AVGVSTVS', secunda: 'HONORIVS AVGVSTVS', jdnstr: 1574952, jdnend: 1575317 },
-        { prima: 'VINCENTIVS', secunda: 'FRAVITTA', jdnstr: 1575317, jdnend: 1575683 },
-        { prima: 'STILICHO', secunda: 'AVRELIANVS (EAST ONLY)', jdnstr: 1575683, jdnend: 1576048 },
-        { prima: 'MALLIVS THEODORVS (WESTERN)', secunda: 'EVTROPIVS (EAST ONLY, VNTIL AVGVST)', jdnstr: 1576048, jdnend: 1576413 },
-        { prima: 'HONORIVS AVGVSTVS', secunda: 'EVTYCHIANVS', jdnstr: 1576413, jdnend: 1576778 },
-        { prima: 'CAESARIVS', secunda: 'NONIVS ATTICVS', jdnstr: 1576778, jdnend: 1577144 },
-        { prima: 'ARCADIVS AVGVSTVS', secunda: 'HONORIVS AVGVSTVS', jdnstr: 1577144, jdnend: 1577509 },
-        { prima: 'ANICIVS HERMOGENIANVS OLYBRIVS', secunda: 'ANICIVS PROBINVS', jdnstr: 1577509, jdnend: 1577874 },
-        { prima: 'WEST: VIRIVS NICOMACHVS FLAVIANVS', secunda: '', jdnstr: 1577874, jdnend: 1578239 },
-        { prima: 'L. VALERIVS POTITVS (INVALIDATED)', secunda: 'CORNELIVS MALVGINENSIS (INVALIDATED)', jdnstr: 1578239, jdnend: 1578605 },
-        { prima: 'L. VALERIVS POTITVS', secunda: 'M. MANLIVS CAPITOLINVS', jdnstr: 1578605, jdnend: 1578970 },
-        { prima: 'EVTOLMIVS TATIANVS', secunda: 'Q. AVRELIVS SYMMACHVS', jdnstr: 1578970, jdnend: 1579335 },
-        { prima: 'VALENTINIANVS AVGVSTVS', secunda: 'NEOTERIVS', jdnstr: 1579335, jdnend: 1579700 },
-        { prima: 'TIMASIVS', secunda: 'PROMOTVS', jdnstr: 1579700, jdnend: 1580066 },
-        { prima: 'WEST: MEROBAVDES III? (VNTIL 10 JANVARY?)', secunda: 'VNKNOWN COLLEAGVE?', jdnstr: 1580066, jdnend: 1580431 },
-        { prima: 'VALENTINIANVS AVGVSTVS', secunda: 'EVTROPIVS', jdnstr: 1580431, jdnend: 1580796 },
-        { prima: 'HONORIVS', secunda: 'EVODIVS', jdnstr: 1580796, jdnend: 1581161 },
-        { prima: 'ARCADIVS AVGVSTVS', secunda: 'BAVTO', jdnstr: 1581161, jdnend: 1581527 },
-        { prima: 'RICOMER', secunda: 'CLEARCHVS', jdnstr: 1581527, jdnend: 1581892 },
-        { prima: 'MEROBAVDES', secunda: 'SATVRNINVS', jdnstr: 1581892, jdnend: 1582257 },
-        { prima: 'CLAVDIVS ANTONIVS', secunda: 'AFRANIVS SYAGRIVS', jdnstr: 1582257, jdnend: 1582622 },
-        { prima: 'SYAGRIVS (WESTERN)', secunda: 'EVCHERIVS (EASTERN)', jdnstr: 1582622, jdnend: 1582988 },
-        { prima: 'GRATIANVS AVGVSTVS', secunda: 'THEODOSIVS AVGVSTVS', jdnstr: 1582988, jdnend: 1583353 },
-        { prima: 'DECIMIVS MAGNVS AVSONIVS', secunda: 'Q. CLODIVS HERMOGENIANVS OLYBRIVS', jdnstr: 1583353, jdnend: 1583718 },
-        { prima: 'VALENS AVGVSTVS', secunda: 'VALENTINIANVS (JVNIOR) AVGVSTVS', jdnstr: 1583718, jdnend: 1584083 },
-        { prima: 'GRATIANVS AVGVSTVS', secunda: 'MEROBAVDES', jdnstr: 1584083, jdnend: 1584449 },
-        { prima: 'VALENS AVGVSTVS', secunda: 'VALENTINIANVS (JVNIOR) AVGVSTVS', jdnstr: 1584449, jdnend: 1584814 },
-        { prima: 'POST CONSVLATVM GRATIANI AVGVSTI III ET EQVITII', secunda: '', jdnstr: 1584814, jdnend: 1585179 },
-        { prima: 'GRATIANVS AVGVSTVS', secunda: 'EQVITIVS', jdnstr: 1585179, jdnend: 1585544 },
-        { prima: 'VALENTINIANVS AVGVSTVS', secunda: 'VALENS AVGVSTVS', jdnstr: 1585544, jdnend: 1585910 },
-        { prima: 'DOMITIVS MODESTVS', secunda: 'ARINTHEVS', jdnstr: 1585910, jdnend: 1586275 },
-        { prima: 'GRATIANVS AVGVSTVS', secunda: 'SEX. CLAVDIVS PETRONIVS PROBVS', jdnstr: 1586275, jdnend: 1586640 },
-        { prima: 'VALENTINIANVS AVGVSTVS', secunda: 'VALENS AVGVSTVS', jdnstr: 1586640, jdnend: 1587005 },
-        { prima: 'VALENTINIANVS (GALATES)', secunda: 'VICTOR', jdnstr: 1587005, jdnend: 1587371 },
-        { prima: 'VALENTINIANVS AVGVSTVS', secunda: 'VALENS AVGVSTVS', jdnstr: 1587371, jdnend: 1587736 },
-        { prima: 'LVPICINVS', secunda: 'JOVINVS', jdnstr: 1587736, jdnend: 1588101 },
-        { prima: 'L. AEMILIVS MAMERCINVS', secunda: 'L. SEXTIVS SEXTINVS LATERANVS', jdnstr: 1588101, jdnend: 1588466 },
-        { prima: 'L. GENVCIVS AVENTINENSIS', secunda: 'Q. SERVILIVS AHALA', jdnstr: 1588466, jdnend: 1588832 },
-        { prima: 'C. SVLPICIVS PETICVS', secunda: 'C. LICINIVS CALVVS', jdnstr: 1588832, jdnend: 1589197 },
-        { prima: 'CN. GENVCIVS AVENTINENSIS', secunda: 'L. AEMILIVS MAMERCINVS', jdnstr: 1589197, jdnend: 1589562 },
-        { prima: 'Q. SERVILIVS AHALA', secunda: 'L. GENVCIVS AVENTINENSIS', jdnstr: 1589562, jdnend: 1589927 },
-        { prima: 'C. LICINIVS STOLO', secunda: 'C. SVLPICIVS PETICVS', jdnstr: 1589927, jdnend: 1590293 },
-        { prima: 'M. FABIVS AMBVSTVS', secunda: 'C. POETELIVS LIBO VISOLVS', jdnstr: 1590293, jdnend: 1590658 },
-        { prima: 'M. POPILLIVS LAENAS', secunda: 'CN. MANLIVS CAPITOLINVS IMPERIOSVS', jdnstr: 1590658, jdnend: 1591023 },
-        { prima: 'C. FABIVS AMBVSTVS', secunda: 'C. PLAVTIVS PROCVLVS', jdnstr: 1591023, jdnend: 1591388 },
-        { prima: 'C. MARCIVS RVTILVS', secunda: 'CN. MANLIVS CAPITOLINVS (IMPERIOSVS II?)', jdnstr: 1591388, jdnend: 1591754 },
-        { prima: 'M. FABIVS AMBVSTVS', secunda: 'M. POPILLIVS LAENAS', jdnstr: 1591754, jdnend: 1592119 },
-        { prima: 'C. SVLPICIVS PETICVS', secunda: 'M. VALERIVS POPLICOLA', jdnstr: 1592119, jdnend: 1592484 },
-        { prima: 'M. FABIVS AMBVSTVS', secunda: 'T. QVINCTIVS POENVS CAPITOLINVS CRISPINVS', jdnstr: 1592484, jdnend: 1592849 },
-        { prima: 'C. SVLPICIVS PETICVS', secunda: 'M. VALERIVS POPLICOLA', jdnstr: 1592849, jdnend: 1593215 },
-        { prima: 'P. VALERIVS POPLICOLA', secunda: 'C. MARCIVS RVTILVS', jdnstr: 1593215, jdnend: 1593580 },
-        { prima: 'C. SVLPICIVS PETICVS', secunda: 'T. (OR C. OR K.) QVINCTIVS POENVS (II?)', jdnstr: 1593580, jdnend: 1593945 },
-        { prima: 'M. POPILLIVS LAENAS', secunda: 'L. CORNELIVS SCIPIO', jdnstr: 1593945, jdnend: 1594310 },
-        { prima: 'L. FVRIVS CAMILLVS', secunda: 'AP. CLAVDIVS CRASSVS INREGILLENSIS', jdnstr: 1594310, jdnend: 1594676 },
-        { prima: 'M. VALERIVS CORVVS', secunda: 'M. POPILLIVS LAENAS', jdnstr: 1594676, jdnend: 1595041 },
-        { prima: 'C. PLAVTIVS VENNO (OR VENOX)', secunda: 'T. MANLIVS IMPERIOSVS TORQVATVS', jdnstr: 1595041, jdnend: 1595406 },
-        { prima: 'M. VALERIVS CORVVS', secunda: 'C. POETELIVS LIBO VISOLVS', jdnstr: 1595406, jdnend: 1595771 },
-        { prima: 'M. FABIVS DORSVO', secunda: 'SER. SVLPICIVS CAMERINVS RVFVS', jdnstr: 1595771, jdnend: 1596137 },
-        { prima: 'C. MARCIVS RVTILVS', secunda: 'T. MANLIVS IMPERIOSVS TORQVATVS', jdnstr: 1596137, jdnend: 1596502 },
-        { prima: 'M. VALERIVS CORVVS', secunda: 'A. CORNELIVS COSSVS ARVINA', jdnstr: 1596502, jdnend: 1596867 },
-        { prima: 'Q. SERVILIVS AHALA', secunda: 'C. MARCIVS RVTILVS', jdnstr: 1596867, jdnend: 1597232 },
-        { prima: 'C. PLAVTIVS VENNO (OR VENOX)', secunda: 'L. AEMILIVS MAMERCINVS PRIVERNAS', jdnstr: 1597232, jdnend: 1597598 },
-        { prima: 'T. MANLIVS IMPERIOSVS TORQVATVS', secunda: 'P. DECIVS MVS', jdnstr: 1597598, jdnend: 1597963 },
-        { prima: 'TI. AEMILIVS MAMERCINVS', secunda: 'Q. PVBLILIVS PHILO', jdnstr: 1597963, jdnend: 1598328 },
-        { prima: 'L. FVRIVS CAMILLVS', secunda: 'C. MAENIVS', jdnstr: 1598328, jdnend: 1598693 },
-        { prima: 'C. SVLPICIVS LONGVS', secunda: 'P. AELIVS PAETVS', jdnstr: 1598693, jdnend: 1599059 },
-        { prima: 'L. PAPIRIVS CRASSVS', secunda: 'K. DVILIVS', jdnstr: 1599059, jdnend: 1599424 },
-        { prima: 'M. ATILIVS REGVLVS CALENVS', secunda: 'M. VALERIVS CORVVS', jdnstr: 1599424, jdnend: 1599789 },
-        { prima: 'SP. POSTVMIVS ALBINVS (CAVDINVS)', secunda: 'T. VETVRIVS CALVINVS', jdnstr: 1599789, jdnend: 1600154 },
-        { prima: 'FLAVIVS DALMATIVS', secunda: 'DOMITIVS ZENOFILVS', jdnstr: 1600154, jdnend: 1600520 },
-        { prima: 'CN. DOMITIVS CALVINVS', secunda: 'A. CORNELIVS COSSVS ARVINA', jdnstr: 1600520, jdnend: 1600885 },
-        { prima: 'C. VALERIVS POTITVS', secunda: 'M. CLAVDIVS MARCELLVS', jdnstr: 1600885, jdnend: 1601250 },
-        { prima: 'L. PAPIRIVS CRASSVS', secunda: 'L. PLAVTIVS VENNO (OR VENOX)', jdnstr: 1601250, jdnend: 1601615 },
-        { prima: 'L. AEMILIVS MAMERCINVS PRIVERNAS', secunda: 'C. PLAVTIVS DECIANVS', jdnstr: 1601615, jdnend: 1601981 },
-        { prima: 'PLAVTIVS', secunda: 'P. CORNELIVS (SCAPVLA OR SCIPIO BARBATVS)', jdnstr: 1601981, jdnend: 1602346 },
-        { prima: 'L. CORNELIVS LENTVLVS', secunda: 'Q. PVBLILIVS PHILO', jdnstr: 1602346, jdnend: 1602711 },
-        { prima: 'C. POETELIVS LIBO VISOLVS', secunda: 'L. PAPIRIVS CVRSOR', jdnstr: 1602711, jdnend: 1603076 },
-        { prima: 'L. FVRIVS CAMILLVS', secunda: 'D. JVNIVS BRVTVS SCAEVA', jdnstr: 1603076, jdnend: 1603442 },
-        { prima: 'FLAVIVS JVLIVS CRISPVS CAESAR', secunda: 'FLAVIVS CLAVDIVS CONSTANTINVS CAESAR', jdnstr: 1603442, jdnend: 1603807 },
-        { prima: 'C. SVLPICIVS LONGVS', secunda: 'Q. AVLIVS CERRETANVS', jdnstr: 1603807, jdnend: 1604172 },
-        { prima: 'Q. FABIVS MAXIMVS RVLLIANVS', secunda: 'L. FVLVIVS CVRVVS', jdnstr: 1604172, jdnend: 1604537 },
-        { prima: 'T. VETVRIVS CALVINVS', secunda: 'SP. POSTVMIVS ALBINVS CAVDINVS', jdnstr: 1604537, jdnend: 1604903 },
-        { prima: 'Q. PVBLILIVS PHILO', secunda: 'L. PAPIRIVS CVRSOR', jdnstr: 1604903, jdnend: 1605268 },
-        { prima: 'L. PAPIRIVS CVRSOR', secunda: 'Q. AVLIVS CERRETANVS', jdnstr: 1605268, jdnend: 1605633 },
-        { prima: 'M. FOLIVS FLACCINATOR', secunda: 'L. PLAVTIVS VENNO (OR VENOX)', jdnstr: 1605633, jdnend: 1605998 },
-        { prima: 'C. JVNIVS BVBVLCVS BRVTVS', secunda: 'Q. AEMILIVS BARBVLA', jdnstr: 1605998, jdnend: 1606364 },
-        { prima: 'SP. NAVTIVS RVTILVS', secunda: 'M. POPILLIVS LAENAS', jdnstr: 1606364, jdnend: 1606729 },
-        { prima: 'L. PAPIRIVS CVRSOR', secunda: 'Q. PVBLILIVS PHILO', jdnstr: 1606729, jdnend: 1607094 },
-        { prima: 'M. POETELIVS LIBO', secunda: 'C. SVLPICIVS LONGVS', jdnstr: 1607094, jdnend: 1607459 },
-        { prima: 'L. PAPIRIVS CVRSOR', secunda: 'C. JVNIVS BVBVLCVS BRVTVS', jdnstr: 1607459, jdnend: 1607825 },
-        { prima: 'M. VALERIVS MAXIMVS CORVVS', secunda: 'P. DECIVS MVS', jdnstr: 1607825, jdnend: 1608190 },
-        { prima: 'C. JVNIVS BVBVLCVS BRVTVS', secunda: 'Q. AEMILIVS BARBVLA', jdnstr: 1608190, jdnend: 1608555 },
-        { prima: 'Q. FABIVS MAXIMVS RVLLIANVS', secunda: 'C. MARCIVS RVTILVS (CENSORINVS)', jdnstr: 1608555, jdnend: 1608920 },
-        { prima: 'EAST: VALERIVS LICINIANVS LICINIVS AVGVSTVS', secunda: 'FLAVIVS VALERIVS CONSTANTINVS CAESAR', jdnstr: 1608920, jdnend: 1609286 },
-        { prima: 'P. DECIVS MVS', secunda: 'Q. FABIVS MAXIMVS RVLLIANVS', jdnstr: 1609286, jdnend: 1609651 },
-        { prima: 'AP. CLAVDIVS CAECVS', secunda: 'L. VOLVMNIVS FLAMMA VIOLENS', jdnstr: 1609651, jdnend: 1610016 },
-        { prima: 'Q. MARCIVS TREMVLVS', secunda: 'P. CORNELIVS ARVINA', jdnstr: 1610016, jdnend: 1610381 },
-        { prima: 'L. POSTVMIVS MEGELLVS', secunda: 'TI. MINVCIVS AVGVRINVS', jdnstr: 1610381, jdnend: 1610747 },
-        { prima: 'P. SEMPRONIVS SOPHVS', secunda: 'P. SVLPICIVS SAVERRIVS', jdnstr: 1610747, jdnend: 1611112 },
-        { prima: 'SER. CORNELIVS LENTVLVS', secunda: 'L. GENVCIVS AVENTINENSIS', jdnstr: 1611112, jdnend: 1611477 },
-        { prima: 'M. LIVIVS DENTER', secunda: 'M. AEMILIVS PAVLLVS', jdnstr: 1611477, jdnend: 1611842 },
-        { prima: 'T. FLAVIVS POSTVMIVS TITIANVS', secunda: 'VIRIVS NEPOTIANVS', jdnstr: 1611842, jdnend: 1612208 },
-        { prima: 'M. VALERIVS CORVVS', secunda: 'Q. APPVLEIVS PANSA', jdnstr: 1612208, jdnend: 1612573 },
-        { prima: 'M. FVLVIVS PAETINVS', secunda: 'T. MANLIVS TORQVATVS', jdnstr: 1612573, jdnend: 1612938 },
-        { prima: 'L. CORNELIVS SCIPIO BARBATVS', secunda: 'CN. FVLVIVS MAXIMVS CENTVMALVS', jdnstr: 1612938, jdnend: 1613303 },
-        { prima: 'Q. FABIVS MAXIMVS RVLLIANVS', secunda: 'P. DECIVS MVS', jdnstr: 1613303, jdnend: 1613669 },
-        { prima: 'L. VOLVMNIVS FLAMMA VIOLENS', secunda: 'AP. CLAVDIVS CAECVS', jdnstr: 1613669, jdnend: 1614034 },
-        { prima: 'Q. FABIVS MAXIMVS RVLLIANVS', secunda: 'P. DECIVS MVS', jdnstr: 1614034, jdnend: 1614399 },
-        { prima: 'L. POSTVMIVS MEGELLVS', secunda: 'M. ATILIVS REGVLVS', jdnstr: 1614399, jdnend: 1614764 },
-        { prima: 'L. PAPIRIVS CVRSOR', secunda: 'SP. CARVILIVS MAXIMVS', jdnstr: 1614764, jdnend: 1615130 },
-        { prima: 'Q. FABIVS MAXIMVS GVRGES', secunda: 'D. JVNIVS BRVTVS SCAEVA', jdnstr: 1615130, jdnend: 1615495 },
-        { prima: 'L. POSTVMIVS MEGELLVS', secunda: 'C. JVNIVS BVBVLCVS BRVTVS', jdnstr: 1615495, jdnend: 1615860 },
-        { prima: 'P. CORNELIVS RVFINVS', secunda: 'M\'. CVRIVS DENTATVS', jdnstr: 1615860, jdnend: 1616225 },
-        { prima: 'M. VALERIVS MAXIMVS CORVINVS', secunda: 'Q. CAEDICIVS NOCTVA', jdnstr: 1616225, jdnend: 1616591 },
-        { prima: 'Q. MARCIVS TREMVLVS', secunda: 'P. CORNELIVS ARVINA', jdnstr: 1616591, jdnend: 1616956 },
-        { prima: 'M. CLAVDIVS MARCELLVS', secunda: 'C. NAVTIVS RVTILVS', jdnstr: 1616956, jdnend: 1617321 },
-        { prima: 'M. VALERIVS MAXIMVS (POTITVS? CORVINVS III?)', secunda: 'C. AELIVS PAETVS', jdnstr: 1617321, jdnend: 1617686 },
-        { prima: 'C. CLAVDIVS CANINA', secunda: 'M. AEMILIVS LEPIDVS', jdnstr: 1617686, jdnend: 1618052 },
-        { prima: 'C. SERVILIVS TVCCA', secunda: 'L. CAECILIVS METELLVS DENTER', jdnstr: 1618052, jdnend: 1618417 },
-        { prima: 'P. CORNELIVS DOLABELLA', secunda: 'CN. DOMITIVS CALVINVS MAXIMVS', jdnstr: 1618417, jdnend: 1618782 },
-        { prima: 'C. FABRICIVS LVSCINVS', secunda: 'Q. AEMILIVS PAPVS', jdnstr: 1618782, jdnend: 1619147 },
-        { prima: 'L. AEMILIVS BARBVLA', secunda: 'Q. MARCIVS PHILIPPVS', jdnstr: 1619147, jdnend: 1619513 },
-        { prima: 'P. VALERIVS LAEVINVS', secunda: 'TI. CORVNCANIVS', jdnstr: 1619513, jdnend: 1619878 },
-        { prima: 'P. SVLPICIVS SAVERRIO', secunda: 'P. DECIVS MVS', jdnstr: 1619878, jdnend: 1620243 },
-        { prima: 'C. FABRICIVS LVSCINVS', secunda: 'Q. AEMILIVS PAPVS', jdnstr: 1620243, jdnend: 1620608 },
-        { prima: 'P. CORNELIVS RVFINVS', secunda: 'C. JVNIVS BVBVLCVS BRVTVS', jdnstr: 1620608, jdnend: 1620974 },
-        { prima: 'Q. FABIVS MAXIMVS GVRGES', secunda: 'C. GENVCIVS CLEPSINA', jdnstr: 1620974, jdnend: 1621339 },
-        { prima: 'M\'. CVRIVS DENTATVS', secunda: 'L. CORNELIVS LENTVLVS CAVDINVS', jdnstr: 1621339, jdnend: 1621704 },
-        { prima: 'M\'. CVRIVS DENTATVS', secunda: 'SER. CORNELIVS MERENDA', jdnstr: 1621704, jdnend: 1622069 },
-        { prima: 'C. FABIVS LICINVS', secunda: 'C. CLAVDIVS CANINA', jdnstr: 1622069, jdnend: 1622435 },
-        { prima: 'L. PAPIRIVS CVRSOR', secunda: 'SP. CARVILIVS MAXIMVS', jdnstr: 1622435, jdnend: 1622800 },
-        { prima: 'C. QVINCTIVS CLAVDVS', secunda: 'L. GENVCIVS CLEPSINA', jdnstr: 1622800, jdnend: 1623165 },
-        { prima: 'C. GENVCIVS CLEPSINA', secunda: 'CN. CORNELIVS BLASIO', jdnstr: 1623165, jdnend: 1623530 },
-        { prima: 'Q. OGVLNIVS GALLVS', secunda: 'C. FABIVS PICTOR', jdnstr: 1623530, jdnend: 1623896 },
-        { prima: 'P. SEMPRONIVS SOPHVS', secunda: 'AP. CLAVDIVS RVSSVS', jdnstr: 1623896, jdnend: 1624261 },
-        { prima: 'M. ATILIVS REGVLVS', secunda: 'L. JVLIVS LIBO', jdnstr: 1624261, jdnend: 1624626 },
-        { prima: 'D. JVNIVS PERA', secunda: 'N. FABIVS PICTOR', jdnstr: 1624626, jdnend: 1624991 },
-        { prima: 'Q. FABIVS MAXIMVS GVRGES', secunda: 'L. MAMILIVS VITVLVS', jdnstr: 1624991, jdnend: 1625357 },
-        { prima: 'AP. CLAVDIVS CAVDEX', secunda: 'M. FVLVIVS FLACCVS', jdnstr: 1625357, jdnend: 1625722 },
-        { prima: 'M\'. VALERIVS MAXIMVS MESALLA', secunda: 'M\'. OTACILIVS CRASSVS', jdnstr: 1625722, jdnend: 1626087 },
-        { prima: 'L. POSTVMIVS MEGELLVS', secunda: 'Q. MAMILIVS VITVLVS', jdnstr: 1626087, jdnend: 1626452 },
-        { prima: 'L. VALERIVS FLACCVS', secunda: 'T. OTACILIVS CRASSVS', jdnstr: 1626452, jdnend: 1626818 },
-        { prima: 'CN. CORNELIVS SCIPIO ASINA', secunda: 'C. DVILIVS', jdnstr: 1626818, jdnend: 1627183 },
-        { prima: 'L. CORNELIVS SCIPIO', secunda: 'C. AQVILLIVS FLORVS', jdnstr: 1627183, jdnend: 1627548 },
-        { prima: 'A. ATILIVS CAIATINVS', secunda: 'C. SVLPICIVS PATERCVLVS', jdnstr: 1627548, jdnend: 1627913 },
-        { prima: 'C. ATILIVS REGVLVS', secunda: 'CN. CORNELIVS BLASIO', jdnstr: 1627913, jdnend: 1628279 },
-        { prima: 'L. MANLIVS VVLSO LONGVS', secunda: 'Q. CAEDICIVS', jdnstr: 1628279, jdnend: 1628644 },
-        { prima: 'SER. FVLVIVS PAETINVS NOBILIOR', secunda: 'M. AEMILIVS PAVLLVS', jdnstr: 1628644, jdnend: 1629009 },
-        { prima: 'CN. CORNELIVS SCIPIO ASINA', secunda: 'A. ATILIVS CAIATINVS', jdnstr: 1629009, jdnend: 1629374 },
-        { prima: 'CN. SERVILIVS CAEPIO', secunda: 'C. SEMPRONIVS BLAESVS', jdnstr: 1629374, jdnend: 1629740 },
-        { prima: 'C. AVRELIVS COTTA', secunda: 'P. SERVILIVS GEMINVS', jdnstr: 1629740, jdnend: 1630105 },
-        { prima: 'L. CAECILIVS METELLVS', secunda: 'C. FVRIVS PACILVS', jdnstr: 1630105, jdnend: 1630470 },
-        { prima: 'C. ATILIVS REGVLVS', secunda: 'L. MANLIVS VVLSO LONGVS', jdnstr: 1630470, jdnend: 1630835 },
-        { prima: 'P. CLAVDIVS PVLCHER', secunda: 'L. JVNIVS PVLLVS', jdnstr: 1630835, jdnend: 1631201 },
-        { prima: 'C. AVRELIVS COTTA', secunda: 'P. SERVILIVS GEMINVS', jdnstr: 1631201, jdnend: 1631566 },
-        { prima: 'L. CAECILIVS METELLVS', secunda: 'N. FABIVS BVTEO', jdnstr: 1631566, jdnend: 1631931 },
-        { prima: 'M\'. OTACILIVS CRASSVS', secunda: 'M. FABIVS LICINVS', jdnstr: 1631931, jdnend: 1632296 },
-        { prima: 'M. FABIVS BVTEO', secunda: 'C. ATILIVS BVLBVS', jdnstr: 1632296, jdnend: 1632662 },
-        { prima: 'A. MANLIVS TORQVATVS ATTICVS', secunda: 'C. SEMPRONIVS BLAESVS', jdnstr: 1632662, jdnend: 1633027 },
-        { prima: 'C. FVNDANIVS FVNDVLVS', secunda: 'C. SVLPICIVS GALVS', jdnstr: 1633027, jdnend: 1633392 },
-        { prima: 'C. LVTATIVS CATVLVS', secunda: 'A. POSTVMIVS ALBINVS', jdnstr: 1633392, jdnend: 1633757 },
-        { prima: 'A. MANLIVS TORQVATVS ATTICVS', secunda: 'Q. LVTATIVS CERCO', jdnstr: 1633757, jdnend: 1634123 },
-        { prima: 'C. CLAVDIVS CENTHO', secunda: 'M. SEMPRONIVS TVDITANVS', jdnstr: 1634123, jdnend: 1634488 },
-        { prima: 'C. MAMILIVS TVRRINVS', secunda: 'Q. VALERIVS FALTO', jdnstr: 1634488, jdnend: 1634853 },
-        { prima: 'TI. SEMPRONIVS GRACCHVS', secunda: 'P. VALERIVS FALTO', jdnstr: 1634853, jdnend: 1635218 },
-        { prima: 'L. CORNELIVS LENTVLVS CAVDINVS', secunda: 'Q. FVLVIVS FLACCVS', jdnstr: 1635218, jdnend: 1635584 },
-        { prima: 'P. CORNELIVS LENTVLVS CAVDINVS', secunda: 'C. LICINIVS VARVS', jdnstr: 1635584, jdnend: 1635949 },
-        { prima: 'T. MANLIVS TORQVATVS', secunda: 'C. ATILIVS BVLBVS', jdnstr: 1635949, jdnend: 1636314 },
-        { prima: 'L. POSTVMIVS ALBINVS', secunda: 'SP. CARVILIVS MAXIMVS RVGA', jdnstr: 1636314, jdnend: 1636679 },
-        { prima: 'Q. FABIVS MAXIMVS VERRVCOSVS', secunda: 'M\'. POMPONIVS MATHO', jdnstr: 1636679, jdnend: 1637045 },
-        { prima: 'M. AEMILIVS LEPIDVS', secunda: 'M. PVBLICIVS MALLEOLVS', jdnstr: 1637045, jdnend: 1637410 },
-        { prima: 'M. POMPONIVS MATHO', secunda: 'C. PAPIRIVS MASO', jdnstr: 1637410, jdnend: 1637775 },
-        { prima: 'M. AEMILIVS BARBVLA', secunda: 'M. JVNIVS PERA', jdnstr: 1637775, jdnend: 1638140 },
-        { prima: 'L. POSTVMIVS ALBINVS', secunda: 'CN. FVLVIVS CENTVMALVS', jdnstr: 1638140, jdnend: 1638506 },
-        { prima: 'SP. CARVILIVS MAXIMVS RVGA', secunda: 'Q. FABIVS MAXIMVS VERRVCOSVS', jdnstr: 1638506, jdnend: 1638871 },
-        { prima: 'P. VALERIVS FLACCVS', secunda: 'M. ATILIVS REGVLVS', jdnstr: 1638871, jdnend: 1639236 },
-        { prima: 'M. VALERIVS MESSALLA', secunda: 'L. APVSTIVS FVLLO', jdnstr: 1639236, jdnend: 1639601 },
-        { prima: 'L. AEMILIVS PAPVS', secunda: 'C. ATILIVS REGVLVS', jdnstr: 1639601, jdnend: 1639967 },
-        { prima: 'T. MANLIVS TORQVATVS', secunda: 'Q. FVLVIVS FLACCVS', jdnstr: 1639967, jdnend: 1640332 },
-        { prima: 'C. FLAMINIVS', secunda: 'P. FVRIVS PHILVS', jdnstr: 1640332, jdnend: 1640697 },
-        { prima: 'M. CLAVDIVS MARCELLVS', secunda: 'CN. CORNELIVS SCIPIO CALVVS', jdnstr: 1640697, jdnend: 1641062 },
-        { prima: 'P. CORNELIVS SCIPIO ASINA', secunda: 'M. MINVCIVS RVFVS', jdnstr: 1641062, jdnend: 1641428 },
-        { prima: 'M. VALERIVS LAEVINVS (INVALIDATED)', secunda: 'Q. MVCIVS SCAEVOLA (INVALIDATED)', jdnstr: 1641428, jdnend: 1641793 },
-        { prima: 'L. AEMILIVS PAVLLVS', secunda: 'M. LIVIVS SALINATOR', jdnstr: 1641793, jdnend: 1642158 },
-        { prima: 'P. CORNELIVS SCIPIO', secunda: 'TI. SEMPRONIVS LONGVS', jdnstr: 1642158, jdnend: 1642523 },
-        { prima: 'CN. SERVILIVS GEMINVS', secunda: 'C. FLAMINIVS', jdnstr: 1642523, jdnend: 1642889 },
-        { prima: 'C. TERENTIVS VARRO', secunda: 'L. AEMILIVS PAVLLVS', jdnstr: 1642889, jdnend: 1643254 },
-        { prima: 'L. POSTVMIVS ALBINVS III (KILLED BEFORE TAKING OFFICE)', secunda: 'TI. SEMPRONIVS GRACCHVS', jdnstr: 1643254, jdnend: 1643619 },
-        { prima: 'Q. FABIVS MAXIMVS VERRVCOSVS', secunda: 'M. CLAVDIVS MARCELLVS', jdnstr: 1643619, jdnend: 1643984 },
-        { prima: 'Q. FABIVS MAXIMVS', secunda: 'TI. SEMPRONIVS GRACCHVS', jdnstr: 1643984, jdnend: 1644350 },
-        { prima: 'Q. FVLVIVS FLACCVS', secunda: 'AP. CLAVDIVS PVLCHER', jdnstr: 1644350, jdnend: 1644715 },
-        { prima: 'CN. FVLVIVS CENTVMALVS MAXIMVS', secunda: 'P. SVLPICIVS GALBA MAXIMVS', jdnstr: 1644715, jdnend: 1645080 },
-        { prima: 'M. CLAVDIVS MARCELLVS', secunda: 'M. VALERIVS LAEVINVS', jdnstr: 1645080, jdnend: 1645445 },
-        { prima: 'Q. FABIVS MAXIMVS VERRVCOSVS', secunda: 'Q. FVLVIVS FLACCVS', jdnstr: 1645445, jdnend: 1645811 },
-        { prima: 'M. CLAVDIVS MARCELLVS', secunda: 'T. QVINCTIVS CRISPINVS', jdnstr: 1645811, jdnend: 1646176 },
-        { prima: 'C. CLAVDIVS NERO', secunda: 'M. LIVIVS SALINATOR', jdnstr: 1646176, jdnend: 1646541 },
-        { prima: 'L. VETVRIVS PHILO', secunda: 'Q. CAECILIVS METELLVS', jdnstr: 1646541, jdnend: 1646906 },
-        { prima: 'P. CORNELIVS SCIPIO (AFRICANVS)', secunda: 'P. LICINIVS CRASSVS DIVES', jdnstr: 1646906, jdnend: 1647272 },
-        { prima: 'M. CORNELIVS CETHEGVS', secunda: 'P. SEMPRONIVS TVDITANVS', jdnstr: 1647272, jdnend: 1647637 },
-        { prima: 'CN. SERVILIVS CAEPIO', secunda: 'C. SERVILIVS GEMINVS', jdnstr: 1647637, jdnend: 1648002 },
-        { prima: 'M. SERVILIVS PVLEX GEMINVS', secunda: 'TI. CLAVDIVS NERO', jdnstr: 1648002, jdnend: 1648367 },
-        { prima: 'CN. CORNELIVS LENTVLVS', secunda: 'P. AELIVS PAETVS', jdnstr: 1648367, jdnend: 1648733 },
-        { prima: 'P. SVLPICIVS GALBA MAXIMVS', secunda: 'C. AVRELIVS COTTA', jdnstr: 1648733, jdnend: 1649098 },
-        { prima: 'L. CORNELIVS LENTVLVS', secunda: 'P. VILLIVS TAPPVLVS', jdnstr: 1649098, jdnend: 1649463 },
-        { prima: 'T. QVINCTIVS FLAMININVS', secunda: 'SEX. AELIVS PAETVS CATVS', jdnstr: 1649463, jdnend: 1649828 },
-        { prima: 'C. CORNELIVS CETHEGVS', secunda: 'Q. MINVCIVS RVFVS', jdnstr: 1649828, jdnend: 1650194 },
-        { prima: 'L. FVRIVS PVRPVREO', secunda: 'M. CLAVDIVS MARCELLVS', jdnstr: 1650194, jdnend: 1650559 },
-        { prima: 'L. VALERIVS FLACCVS', secunda: 'M. PORCIVS CATO', jdnstr: 1650559, jdnend: 1650924 },
-        { prima: 'P. CORNELIVS SCIPIO AFRICANVS', secunda: 'TI. SEMPRONIVS LONGVS', jdnstr: 1650924, jdnend: 1651289 },
-        { prima: 'L. CORNELIVS MERVLA', secunda: 'Q. MINVCIVS THERMVS', jdnstr: 1651289, jdnend: 1651655 },
-        { prima: 'L. QVINCTIVS FLAMININVS', secunda: 'CN. DOMITIVS AHENOBARBVS', jdnstr: 1651655, jdnend: 1652020 },
-        { prima: 'P. CORNELIVS SCIPIO NASICA', secunda: 'M\'. ACILIVS GLABRIO', jdnstr: 1652020, jdnend: 1652385 },
-        { prima: 'L. CORNELIVS SCIPIO ASIATICVS', secunda: 'C. LAELIVS', jdnstr: 1652385, jdnend: 1652750 },
-        { prima: 'M. FVLVIVS NOBILIOR', secunda: 'CN. MANLIVS VVLSO', jdnstr: 1652750, jdnend: 1653116 },
-        { prima: 'M. VALERIVS MESSALLA', secunda: 'C. LIVIVS SALINATOR', jdnstr: 1653116, jdnend: 1653481 },
-        { prima: 'M. AEMILIVS LEPIDVS', secunda: 'C. FLAMINIVS', jdnstr: 1653481, jdnend: 1653846 },
-        { prima: 'SP. POSTVMIVS ALBINVS', secunda: 'Q. MARCIVS PHILIPPVS', jdnstr: 1653846, jdnend: 1654211 },
-        { prima: 'AP. CLAVDIVS PVLCHER', secunda: 'M. SEMPRONIVS TVDITANVS', jdnstr: 1654211, jdnend: 1654577 },
-        { prima: 'P. CLAVDIVS PVLCHER', secunda: 'L. PORCIVS LICINVS', jdnstr: 1654577, jdnend: 1654942 },
-        { prima: 'M. CLAVDIVS MARCELLVS', secunda: 'Q. FABIVS LABEO', jdnstr: 1654942, jdnend: 1655307 },
-        { prima: 'CN. BAEBIVS TAMPHILVS', secunda: 'L. AEMILIVS PAVLLVS (MACEDONICVS)', jdnstr: 1655307, jdnend: 1655672 },
-        { prima: 'P. CORNELIVS CETHEGVS', secunda: 'M. BAEBIVS TAMPHILVS', jdnstr: 1655672, jdnend: 1656038 },
-        { prima: 'A. POSTVMIVS ALBINVS LVSCVS', secunda: 'C. CALPVRNIVS PISO', jdnstr: 1656038, jdnend: 1656403 },
-        { prima: 'Q. FVLVIVS FLACCVS', secunda: 'L. MANLIVS ACIDINVS FVLVIANVS', jdnstr: 1656403, jdnend: 1656768 },
-        { prima: 'M. JVNIVS BRVTVS', secunda: 'A. MANLIVS VVLSO', jdnstr: 1656768, jdnend: 1657133 },
-        { prima: 'C. CLAVDIVS PVLCHER', secunda: 'TI. SEMPRONIVS GRACCHVS', jdnstr: 1657133, jdnend: 1657499 },
-        { prima: 'CN. CORNELIVS SCIPIO HISPALLVS', secunda: 'Q. PETILLIVS SPVRINVS', jdnstr: 1657499, jdnend: 1657864 },
-        { prima: 'P. MVCIVS SCAEVOLA', secunda: 'M. AEMILIVS LEPIDVS', jdnstr: 1657864, jdnend: 1658229 },
-        { prima: 'SP. POSTVMIVS ALBINVS PAVLLVLVS', secunda: 'Q. MVCIVS SCAEVOLA', jdnstr: 1658229, jdnend: 1658594 },
-        { prima: 'L. POSTVMIVS ALBINVS', secunda: 'M. POPILLIVS LAENAS', jdnstr: 1658594, jdnend: 1658960 },
-        { prima: 'C. POPILLIVS LAENAS', secunda: 'P. AELIVS LIGVS', jdnstr: 1658960, jdnend: 1659325 },
-        { prima: 'P. LICINIVS CRASSVS', secunda: 'C. CASSIVS LONGINVS', jdnstr: 1659325, jdnend: 1659690 },
-        { prima: 'A. HOSTILIVS MANCINVS', secunda: 'A. ATILIVS SERRANVS', jdnstr: 1659690, jdnend: 1660055 },
-        { prima: 'Q. MARCIVS PHILIPPVS', secunda: 'CN. SERVILIVS CAEPIO', jdnstr: 1660055, jdnend: 1660421 },
-        { prima: 'L. AEMILIVS PAVLLVS MACEDONICVS', secunda: 'C. LICINIVS CRASSVS', jdnstr: 1660421, jdnend: 1660786 },
-        { prima: 'Q. AELIVS PAETVS', secunda: 'M. JVNIVS PENNVS', jdnstr: 1660786, jdnend: 1661151 },
-        { prima: 'M. CLAVDIVS MARCELLVS', secunda: 'C. SVLPICIVS GALVS', jdnstr: 1661151, jdnend: 1661516 },
-        { prima: 'T. MANLIVS TORQVATVS', secunda: 'CN. OCTAVIVS', jdnstr: 1661516, jdnend: 1661882 },
-        { prima: 'A. MANLIVS TORQVATVS', secunda: 'Q. CASSIVS LONGINVS', jdnstr: 1661882, jdnend: 1662247 },
-        { prima: 'TI. SEMPRONIVS GRACCHVS', secunda: 'M\'. JVVENTIVS THALNA', jdnstr: 1662247, jdnend: 1662612 },
-        { prima: 'P. CORNELIVS SCIPIO NASICA CORCVLVM', secunda: 'C. MARCIVS FIGVLVS', jdnstr: 1662612, jdnend: 1662977 },
-        { prima: 'M. VALERIVS MESSALLA', secunda: 'C. FANNIVS STRABO', jdnstr: 1662977, jdnend: 1663343 },
-        { prima: 'L. ANICIVS GALLVS', secunda: 'M. CORNELIVS CETHEGVS', jdnstr: 1663343, jdnend: 1663708 },
-        { prima: 'CN. CORNELIVS DOLABELLA', secunda: 'M. FVLVIVS NOBILIOR', jdnstr: 1663708, jdnend: 1664073 },
-        { prima: 'M. AEMILIVS LEPIDVS', secunda: 'C. POPILLIVS LAENAS', jdnstr: 1664073, jdnend: 1664438 },
-        { prima: 'SEX. JVLIVS CAESAR', secunda: 'L. AVRELIVS ORESTES', jdnstr: 1664438, jdnend: 1664804 },
-        { prima: 'L. CORNELIVS LENTVLVS LVPVS', secunda: 'C. MARCIVS FIGVLVS', jdnstr: 1664804, jdnend: 1665169 },
-        { prima: 'P. CORNELIVS SCIPIO NASICA CORCVLVM', secunda: 'M. CLAVDIVS MARCELLVS', jdnstr: 1665169, jdnend: 1665534 },
-        { prima: 'Q. OPIMIVS', secunda: 'L. POSTVMIVS ALBINVS', jdnstr: 1665534, jdnend: 1665825 },
-        { prima: 'Q. FVLVIVS NOBILIOR', secunda: 'T. ANNIVS LVSCVS', jdnstr: 1665825, jdnend: 1666191 },
-        { prima: 'M. CLAVDIVS MARCELLVS', secunda: 'L. VALERIVS FLACCVS', jdnstr: 1666191, jdnend: 1666556 },
-        { prima: 'L. LICINIVS LVCVLLVS', secunda: 'A. POSTVMIVS ALBINVS', jdnstr: 1666556, jdnend: 1666921 },
-        { prima: 'T. QVINCTIVS FLAMININVS', secunda: 'M\'. ACILIVS BALBVS', jdnstr: 1666921, jdnend: 1667286 },
-        { prima: 'L. MARCIVS CENSORINVS', secunda: 'M\'. MANILIVS', jdnstr: 1667286, jdnend: 1667652 },
-        { prima: 'SP. POSTVMIVS ALBINVS MAGNVS', secunda: 'L. CALPVRNIVS PISO CAESONINVS', jdnstr: 1667652, jdnend: 1668017 },
-        { prima: 'P. CORNELIVS SCIPIO AEMILIANVS', secunda: 'C. LIVIVS DRVSVS', jdnstr: 1668017, jdnend: 1668382 },
-        { prima: 'CN. CORNELIVS LENTVLVS', secunda: 'L. MVMMIVS ACHAICVS', jdnstr: 1668382, jdnend: 1668747 },
-        { prima: 'Q. FABIVS MAXIMVS AEMILIANVS', secunda: 'L. HOSTILIVS MANCINVS', jdnstr: 1668747, jdnend: 1669113 },
-        { prima: 'SER. SVLPICIVS GALBA', secunda: 'L. AVRELIVS COTTA', jdnstr: 1669113, jdnend: 1669478 },
-        { prima: 'AP. CLAVDIVS PVLCHER', secunda: 'Q. CAECILIVS METELLVS MACEDONICVS', jdnstr: 1669478, jdnend: 1669843 },
-        { prima: 'L. CAECILIVS METELLVS CALVVS', secunda: 'Q. FABIVS MAXIMVS SERVILIANVS', jdnstr: 1669843, jdnend: 1670208 },
-        { prima: 'CN. SERVILIVS CAEPIO', secunda: 'Q. POMPEIVS', jdnstr: 1670208, jdnend: 1670574 },
-        { prima: 'C. LAELIVS SAPIENS', secunda: 'Q. SERVILIVS CAEPIO', jdnstr: 1670574, jdnend: 1670939 },
-        { prima: 'CN. CALPVRNIVS PISO', secunda: 'M. POPILLIVS LAENAS', jdnstr: 1670939, jdnend: 1671304 },
-        { prima: 'P. CORNELIVS SCIPIO NASICA SERAPIO', secunda: 'D. JVNIVS BRVTVS (CALLAICVS)', jdnstr: 1671304, jdnend: 1671669 },
-        { prima: 'M. AEMILIVS LEPIDVS PORCINA', secunda: 'C. HOSTILIVS MANCINVS', jdnstr: 1671669, jdnend: 1672035 },
-        { prima: 'L. FVRIVS PHILVS', secunda: 'SEX. ATILIVS SERRANVS', jdnstr: 1672035, jdnend: 1672400 },
-        { prima: 'SER. FVLVIVS FLACCVS', secunda: 'Q. CALPVRNIVS PISO', jdnstr: 1672400, jdnend: 1672765 },
-        { prima: 'P. CORNELIVS SCIPIO AFRICANVS AEMILIANVS', secunda: 'C. FVLVIVS FLACCVS', jdnstr: 1672765, jdnend: 1673130 },
-        { prima: 'P. MVCIVS SCAEVOLA', secunda: 'L. CALPVRNIVS PISO FRVGI', jdnstr: 1673130, jdnend: 1673496 },
-        { prima: 'P. POPILLIVS LAENAS', secunda: 'P. RVPILIVS', jdnstr: 1673496, jdnend: 1673861 },
-        { prima: 'P. LICINIVS CRASSVS DIVES MVCIANVS', secunda: 'L. VALERIVS FLACCVS', jdnstr: 1673861, jdnend: 1674226 },
-        { prima: 'L. CORNELIVS LENTVLVS', secunda: 'M. PERPERNA', jdnstr: 1674226, jdnend: 1674591 },
-        { prima: 'C. SEMPRONIVS TVDITANVS', secunda: 'M\'. AQVILLIVS', jdnstr: 1674591, jdnend: 1674957 },
-        { prima: 'CN. OCTAVIVS', secunda: 'T. ANNIVS RVFVS', jdnstr: 1674957, jdnend: 1675322 },
-        { prima: 'L. CASSIVS LONGINVS RAVILLA', secunda: 'L. CORNELIVS CINNA', jdnstr: 1675322, jdnend: 1675687 },
-        { prima: 'M. AEMILIVS LEPIDVS', secunda: 'L. AVRELIVS ORESTES', jdnstr: 1675687, jdnend: 1676052 },
-        { prima: 'M. PLAVTIVS HYPSAEVS', secunda: 'M. FVLVIVS FLACCVS', jdnstr: 1676052, jdnend: 1676418 },
-        { prima: 'C. CASSIVS LONGINVS', secunda: 'C. SEXTIVS CALVINVS', jdnstr: 1676418, jdnend: 1676783 },
-        { prima: 'Q. CAECILIVS METELLVS (BALEARICVS)', secunda: 'T. QVINCTIVS FLAMININVS', jdnstr: 1676783, jdnend: 1677148 },
-        { prima: 'CN. DOMITIVS AHENOBARBVS', secunda: 'C. FANNIVS', jdnstr: 1677148, jdnend: 1677513 },
-        { prima: 'L. OPIMIVS', secunda: 'Q. FABIVS MAXIMVS (ALLOBROGICVS)', jdnstr: 1677513, jdnend: 1677879 },
-        { prima: 'P. MANILIVS', secunda: 'C. PAPIRIVS CARBO', jdnstr: 1677879, jdnend: 1678244 },
-        { prima: 'L. CAECILIVS METELLVS (DELMATICVS)', secunda: 'L. AVRELIVS COTTA', jdnstr: 1678244, jdnend: 1678609 },
-        { prima: 'M. PORCIVS CATO', secunda: 'Q. MARCIVS REX', jdnstr: 1678609, jdnend: 1678974 },
-        { prima: 'L. CAECILIVS METELLVS DIADEMATVS', secunda: 'Q. MVCIVS SCAEVOLA (AVGVR)', jdnstr: 1678974, jdnend: 1679340 },
-        { prima: 'C. LICINIVS GETA', secunda: 'Q. FABIVS MAXIMVS EBVRNVS', jdnstr: 1679340, jdnend: 1679705 },
-        { prima: 'M. AEMILIVS SCAVRVS', secunda: 'M. CAECILIVS METELLVS', jdnstr: 1679705, jdnend: 1680070 },
-        { prima: 'M\'. ACILIVS BALBVS', secunda: 'C. PORCIVS CATO', jdnstr: 1680070, jdnend: 1680435 },
-        { prima: 'C. CAECILIVS METELLVS CAPRARIVS', secunda: 'CN. PAPIRIVS CARBO', jdnstr: 1680435, jdnend: 1680801 },
-        { prima: 'M. LIVIVS DRVSVS', secunda: 'L. CALPVRNIVS PISO CAESONINVS', jdnstr: 1680801, jdnend: 1681166 },
-        { prima: 'P. CORNELIVS SCIPIO NASICA', secunda: 'L. CALPVRNIVS BESTIA', jdnstr: 1681166, jdnend: 1681531 },
-        { prima: 'M. MINVCIVS RVFVS', secunda: 'SP. POSTVMIVS ALBINVS', jdnstr: 1681531, jdnend: 1681896 },
-        { prima: 'Q. CAECILIVS METELLVS (NVMIDICVS)', secunda: 'M. JVNIVS SILANVS', jdnstr: 1681896, jdnend: 1682262 },
-        { prima: 'SER. SVLPICIVS GALBA', secunda: 'HORTENSIVS (INVALIDATED)', jdnstr: 1682262, jdnend: 1682627 },
-        { prima: 'C. MARIVS', secunda: 'L. CASSIVS LONGINVS', jdnstr: 1682627, jdnend: 1682992 },
-        { prima: 'Q. SERVILIVS CAEPIO', secunda: 'C. ATILIVS SERRANVS', jdnstr: 1682992, jdnend: 1683357 },
-        { prima: 'P. RVTILIVS RVFVS', secunda: 'CN. MALLIVS MAXIMVS', jdnstr: 1683357, jdnend: 1683723 },
-        { prima: 'C. MARIVS', secunda: 'C. FLAVIVS FIMBRIA', jdnstr: 1683723, jdnend: 1684088 },
-        { prima: 'C. MARIVS', secunda: 'L. AVRELIVS ORESTES', jdnstr: 1684088, jdnend: 1684453 },
-        { prima: 'C. MARIVS', secunda: 'Q. LVTATIVS CATVLVS', jdnstr: 1684453, jdnend: 1684818 },
-        { prima: 'C. MARIVS', secunda: 'M\'. AQVILLIVS', jdnstr: 1684818, jdnend: 1685184 },
-        { prima: 'C. MARIVS', secunda: 'L. VALERIVS FLACCVS', jdnstr: 1685184, jdnend: 1685914 },
-        { prima: 'Q. CAECILIVS METELLVS NEPOS', secunda: 'T. DIDIVS', jdnstr: 1685914, jdnend: 1686279 },
-        { prima: 'CN. CORNELIVS LENTVLVS', secunda: 'P. LICINIVS CRASSVS', jdnstr: 1686279, jdnend: 1686645 },
-        { prima: 'CN. DOMITIVS AHENOBARBVS', secunda: 'C. CASSIVS LONGINVS', jdnstr: 1686645, jdnend: 1687010 },
-        { prima: 'L. LICINIVS CRASSVS', secunda: 'Q. MVCIVS SCAEVOLA (PONTIFEX)', jdnstr: 1687010, jdnend: 1687375 },
-        { prima: 'C. COELIVS CALDVS', secunda: 'L. DOMITIVS AHENOBARBVS', jdnstr: 1687375, jdnend: 1687740 },
-        { prima: 'C. VALERIVS FLACCVS', secunda: 'M. HERENNIVS', jdnstr: 1687740, jdnend: 1688106 },
-        { prima: 'C. CLAVDIVS PVLCHER', secunda: 'M. PERPERNA', jdnstr: 1688106, jdnend: 1688471 },
-        { prima: 'L. MARCIVS PHILIPPVS', secunda: 'SEX. JVLIVS CAESAR', jdnstr: 1688471, jdnend: 1688836 },
-        { prima: 'L. JVLIVS CAESAR', secunda: 'P. RVTILIVS LVPVS', jdnstr: 1688836, jdnend: 1689201 },
-        { prima: 'CN. POMPEIVS STRABO', secunda: 'L. PORCIVS CATO', jdnstr: 1689201, jdnend: 1689567 },
-        { prima: 'L. CORNELIVS SVLLA', secunda: 'Q. POMPEIVS RVFVS', jdnstr: 1689567, jdnend: 1689932 },
-        { prima: 'CN. OCTAVIVS', secunda: 'L. CORNELIVS CINNA', jdnstr: 1689932, jdnend: 1690297 },
-        { prima: 'L. CORNELIVS CINNA', secunda: 'C. MARIVS', jdnstr: 1690297, jdnend: 1690662 },
-        { prima: 'L. CORNELIVS CINNA', secunda: 'CN. PAPIRIVS CARBO', jdnstr: 1690662, jdnend: 1691028 },
-        { prima: 'CN. PAPIRIVS CARBO', secunda: 'L. CORNELIVS CINNA', jdnstr: 1691028, jdnend: 1691393 },
-        { prima: 'L. CORNELIVS SCIPIO ASIAGENES (ASIATICVS)', secunda: 'C. NORBANVS', jdnstr: 1691393, jdnend: 1691758 },
-        { prima: 'C. MARIVS', secunda: 'CN. PAPIRIVS CARBO', jdnstr: 1691758, jdnend: 1692123 },
-        { prima: 'M. TVLLIVS DECVLA', secunda: 'CN. CORNELIVS DOLABELLA', jdnstr: 1692123, jdnend: 1692489 },
-        { prima: 'L. CORNELIVS SVLLA FELIX', secunda: 'Q. CAECILIVS METELLVS PIVS', jdnstr: 1692489, jdnend: 1692854 },
-        { prima: 'P. SERVILIVS VATIA (ISAVRICVS)', secunda: 'AP. CLAVDIVS PVLCHER', jdnstr: 1692854, jdnend: 1693219 },
-        { prima: 'M. AEMILIVS LEPIDVS', secunda: 'Q. LVTATIVS CATVLVS', jdnstr: 1693219, jdnend: 1693584 },
-        { prima: 'D. JVNIVS BRVTVS', secunda: 'MAM. AEMILIVS LEPIDVS LIVIANVS', jdnstr: 1693584, jdnend: 1693950 },
-        { prima: 'CN. OCTAVIVS', secunda: 'C. SCRIBONIVS CVRIO', jdnstr: 1693950, jdnend: 1694315 },
-        { prima: 'L. OCTAVIVS', secunda: 'C. AVRELIVS COTTA', jdnstr: 1694315, jdnend: 1694680 },
-        { prima: 'L. LICINIVS LVCVLLVS', secunda: 'M. AVRELIVS COTTA', jdnstr: 1694680, jdnend: 1695045 },
-        { prima: 'M. TERENTIVS VARRO LVCVLLVS', secunda: 'C. CASSIVS LONGINVS', jdnstr: 1695045, jdnend: 1695411 },
-        { prima: 'L. GELLIVS', secunda: 'CN. CORNELIVS LENTVLVS CLODIANVS', jdnstr: 1695411, jdnend: 1695776 },
-        { prima: 'P. CORNELIVS LENTVLVS SVRA', secunda: 'CN. AVFIDIVS ORESTES', jdnstr: 1695776, jdnend: 1696141 },
-        { prima: 'CN. POMPEIVS MAGNVS', secunda: 'M. LICINIVS CRASSVS', jdnstr: 1696141, jdnend: 1696506 },
-        { prima: 'Q. HORTENSIVS HORTALVS', secunda: 'Q. CAECILIVS METELLVS (CRETICVS)', jdnstr: 1696506, jdnend: 1696872 },
-        { prima: 'L. CAECILIVS METELLVS', secunda: 'Q. MARCIVS REX', jdnstr: 1696872, jdnend: 1697237 },
-        { prima: 'C. CALPVRNIVS PISO', secunda: 'M\'. ACILIVS GLABRIO', jdnstr: 1697237, jdnend: 1697602 },
-        { prima: 'M\'. AEMILIVS LEPIDVS', secunda: 'L. VOLCACIVS TVLLVS', jdnstr: 1697602, jdnend: 1697967 },
-        { prima: 'P. CORNELIVS SVLLA (INVALIDATED)', secunda: 'P. AVTRONIVS PAETVS (INVALIDATED)', jdnstr: 1697967, jdnend: 1698333 },
-        { prima: 'L. JVLIVS CAESAR', secunda: '(?) MINVCIVS THERMVS', jdnstr: 1698333, jdnend: 1698698 },
-        { prima: 'M. TVLLIVS CICERO', secunda: 'C. ANTONIVS HYBRIDA', jdnstr: 1698698, jdnend: 1699063 },
-        { prima: 'D. JVNIVS SILANVS', secunda: 'L. LICINIVS MVRENA', jdnstr: 1699063, jdnend: 1699428 },
-        { prima: 'M. PVPIVS PISO FRVGI CALPVRNIANVS', secunda: 'M. VALERIVS MESSALLA NIGER', jdnstr: 1699428, jdnend: 1699794 },
-        { prima: 'NERO CLAVDIVS CAESAR AVGVSTVS GERMANICVS', secunda: 'COSSVS CORNELIVS LENTVLVS', jdnstr: 1699794, jdnend: 1700159 },
-        { prima: 'C. JVLIVS CAESAR', secunda: 'M. CALPVRNIVS BIBVLVS', jdnstr: 1700159, jdnend: 1700524 },
-        { prima: 'L. CALPVRNIVS PISO CAESONINVS', secunda: 'A. GABINIVS', jdnstr: 1700524, jdnend: 1700889 },
-        { prima: 'P. CORNELIVS LENTVLVS SPINTHER', secunda: 'Q. CAECILIVS METELLVS NEPOS', jdnstr: 1700889, jdnend: 1701255 },
-        { prima: 'CN. CORNELIVS LENTVLVS MARCELLINVS', secunda: 'L. MARCIVS PHILIPPVS', jdnstr: 1701255, jdnend: 1701620 },
-        { prima: 'CN. POMPEIVS MAGNVS', secunda: 'M. LICINIVS CRASSVS', jdnstr: 1701620, jdnend: 1701985 },
-        { prima: 'L. DOMITIVS AHENOBARBVS', secunda: 'AP. CLAVDIVS PVLCHER', jdnstr: 1701985, jdnend: 1702350 },
-        { prima: 'CN. DOMITIVS CALVINVS', secunda: 'M. VALERIVS MESSALLA RVFVS', jdnstr: 1702350, jdnend: 1702716 },
-        { prima: 'CN. POMPEIVS MAGNVS', secunda: 'Q. CAECILIVS METELLVS PIVS SCIPIO (FROM 1 SEPTEMBER)', jdnstr: 1702716, jdnend: 1703081 },
-        { prima: 'SER. SVLPICIVS RVFVS', secunda: 'M. CLAVDIVS MARCELLVS', jdnstr: 1703081, jdnend: 1703446 },
-        { prima: 'L. AEMILIVS PAVLLVS', secunda: 'C. CLAVDIVS MARCELLVS', jdnstr: 1703446, jdnend: 1703811 },
-        { prima: 'C. CLAVDIVS MARCELLVS', secunda: 'L. CORNELIVS LENTVLVS CRVS', jdnstr: 1703811, jdnend: 1704177 },
-        { prima: 'C. JVLIVS CAESAR', secunda: 'P. SERVILIVS ISAVRICVS', jdnstr: 1704177, jdnend: 1704542 },
-        { prima: 'Q. FVFIVS CALENVS', secunda: 'P. VATINIVS', jdnstr: 1704542, jdnend: 1704987 },
-        { prima: 'C. JVLIVS CAESAR', secunda: 'M. AEMILIVS LEPIDVS', jdnstr: 1704987, jdnend: 1705353 },
-        { prima: 'C. JVLIVS CAESAR', secunda: 'SINE COLLEGA', jdnstr: 1705353, jdnend: 1705718 },
-        { prima: 'C. JVLIVS CAESAR', secunda: 'M. ANTONIVS', jdnstr: 1705718, jdnend: 1705762 },
-        { prima: 'IVLIVS CAESAR', secunda: '', jdnstr: 1705762, jdnend: 1705791 },
-        { prima: 'POLYKRACIE', secunda: '', jdnstr: 1705791, jdnend: 1706413 },
-        { prima: 'OCTAVIANVS', secunda: 'M ANTONIVS WITH KLEOPATRA VII PHILOPATOR & M LEPIDVS', jdnstr: 1706413, jdnend: 1710100 },
-        { prima: 'OCTAVIANVS', secunda: 'M ANTONIVS WITH KLEOPATRA VII PHILOPATOR', jdnstr: 1710100, jdnend: 1711942 },
-        { prima: 'AVGVSTVS', secunda: '', jdnstr: 1711942, jdnend: 1726402 },
+        { prima: 'ROMVLVS', secunda: '', jdnstr: 1446310, jdnend: 1459824 },
+        { prima: 'POLYKRACIE', secunda: '', jdnstr: 1459824, jdnend: 1460190 },
+        { prima: 'NVMA POMPILIVS', secunda: '', jdnstr: 1460190, jdnend: 1475530 },
+        { prima: 'TVLLVS HOSTILIVS', secunda: '', jdnstr: 1475530, jdnend: 1486853 },
+        { prima: 'ANCVS MARCIVS', secunda: '', jdnstr: 1486853, jdnend: 1495984 },
+        { prima: 'TARQVINIVS PRISCVS', secunda: '', jdnstr: 1495984, jdnend: 1509864 },
+        { prima: 'SERVIVS TVLLIVS', secunda: '', jdnstr: 1509864, jdnend: 1525935 },
+        { prima: 'TARQVINIVS SVPERBVS', secunda: '', jdnstr: 1525935, jdnend: 1535505 },
+        { prima: 'L. JVNIVS BRVTVS', secunda: 'L. TARQVINIVS COLLATINVS', jdnstr: 1535505, jdnend: 1535870 },
+        { prima: 'P. VALERIVS POPLICOLA', secunda: 'T. LVCRETIVS TRICIPITINVS', jdnstr: 1535870, jdnend: 1536236 },
+        { prima: 'P. VALERIVS POPLICOLA', secunda: 'M. HORATIVS PVLVILLVS', jdnstr: 1536236, jdnend: 1536601 },
+        { prima: 'SP. LARCIVS', secunda: 'T. HERMINIVS AQVILINVS', jdnstr: 1536601, jdnend: 1536966 },
+        { prima: 'M. VALERIVS VOLVSVS', secunda: 'P. POSTVMIVS TVBERTVS', jdnstr: 1536966, jdnend: 1537331 },
+        { prima: 'P. VALERIVS POPLICOLA', secunda: 'T. LVCRETIVS TRICIPITINVS', jdnstr: 1537331, jdnend: 1537697 },
+        { prima: 'AGRIPPA MENENIVS LANATVS', secunda: 'P. POSTVMIVS TVBERTVS', jdnstr: 1537697, jdnend: 1538062 },
+        { prima: 'OPITER VERGINIVS TRICOSTVS', secunda: 'SP. CASSIVS VECELLINVS', jdnstr: 1538062, jdnend: 1538427 },
+        { prima: 'POSTVMVS COMINIVS AVRVNCVS', secunda: 'T. LARCIVS', jdnstr: 1538427, jdnend: 1538792 },
+        { prima: 'SER. SVLPICIVS CAMERINVS CORNVTVS', secunda: 'M\'. TVLLIVS LONGVS', jdnstr: 1538792, jdnend: 1539158 },
+        { prima: 'T. AEBVTIVS HELVA', secunda: 'C. VETVRIVS GEMINVS CICVRINVS', jdnstr: 1539158, jdnend: 1539523 },
+        { prima: 'Q. CLOELIVS SICVLVS', secunda: 'T. LARCIVS', jdnstr: 1539523, jdnend: 1539888 },
+        { prima: 'A. SEMPRONIVS ATRATINVS', secunda: 'M. MINVCIVS AVGVRINVS', jdnstr: 1539888, jdnend: 1540253 },
+        { prima: 'A. POSTVMIVS ALBVS REGILLENSIS', secunda: 'T. VERGINIVS TRICOSTVS CAELIOMONTANVS', jdnstr: 1540253, jdnend: 1540619 },
+        { prima: 'AP. CLAVDIVS SABINVS INREGILLENSIS', secunda: 'P. SERVILIVS PRISCVS STRVCTVS', jdnstr: 1540619, jdnend: 1540984 },
+        { prima: 'A. VERGINIVS TRICOSTVS CAELIOMONTANVS', secunda: 'T. VETVRIVS GEMINVS CICVRINVS', jdnstr: 1540984, jdnend: 1541349 },
+        { prima: 'POSTVMVS COMINIVS AVRVNCVS', secunda: 'SP. CASSIVS VECELLINVS', jdnstr: 1541349, jdnend: 1541714 },
+        { prima: 'T. GEGANIVS MACERINVS', secunda: 'P. MINVCIVS AVGVRINVS', jdnstr: 1541714, jdnend: 1542080 },
+        { prima: 'M. MINVCIVS AVGVRINVS', secunda: 'A. SEMPRONIVS ATRATINVS', jdnstr: 1542080, jdnend: 1542445 },
+        { prima: 'Q. SVLPICIVS CAMERINVS CORNVTVS', secunda: 'SP. LARCIVS', jdnstr: 1542445, jdnend: 1542810 },
+        { prima: 'C. JVLIVS IVLLVS', secunda: 'P. PINARIVS MAMERCINVS RVFVS', jdnstr: 1542810, jdnend: 1543175 },
+        { prima: 'SP. NAVTIVS RVTILVS', secunda: 'SEX. FVRIVS', jdnstr: 1543175, jdnend: 1543541 },
+        { prima: 'T. SICINIVS (OR SICCIVS) SABINVS', secunda: 'C. AQVILLIVS TVSCVS', jdnstr: 1543541, jdnend: 1543906 },
+        { prima: 'SP. CASSIVS VECELLINVS', secunda: 'PROCVLVS VERGINIVS TRICOSTVS RVTILVS', jdnstr: 1543906, jdnend: 1544271 },
+        { prima: 'Q. FABIVS VIBVLANVS', secunda: 'SER. CORNELIVS MALVGINENSIS', jdnstr: 1544271, jdnend: 1544636 },
+        { prima: 'L. AEMILIVS MAMERCVS', secunda: 'K. FABIVS VIBVLANVS', jdnstr: 1544636, jdnend: 1545002 },
+        { prima: 'M. FABIVS VIBVLANVS', secunda: 'L. VALERIVS POTITVS', jdnstr: 1545002, jdnend: 1545367 },
+        { prima: 'C. JVLIVS IVLLVS', secunda: 'Q. FABIVS VIBVLANVS', jdnstr: 1545367, jdnend: 1545732 },
+        { prima: 'K. FABIVS VIBVLANVS', secunda: 'SP. FVRIVS FVSVS', jdnstr: 1545732, jdnend: 1546097 },
+        { prima: 'M. FABIVS VIBVLANVS', secunda: 'CN. MANLIVS CINCINNATVS', jdnstr: 1546097, jdnend: 1546463 },
+        { prima: 'K. FABIVS VIBVLANVS', secunda: 'T. VERGINIVS TRICOSTVS RVTILVS', jdnstr: 1546463, jdnend: 1546828 },
+        { prima: 'L. AEMILIVS MAMERCVS', secunda: 'C. SERVILIVS STRVCTVS AHALA', jdnstr: 1546828, jdnend: 1547193 },
+        { prima: 'C. (OR M.) HORATIVS PVLVILLVS', secunda: 'T. MENENIVS LANATVS', jdnstr: 1547193, jdnend: 1547558 },
+        { prima: 'A. VERGINIVS TRICOSTVS RVTILVS', secunda: 'SP. (OR C.) SERVILIVS STRVCTVS', jdnstr: 1547558, jdnend: 1547924 },
+        { prima: 'P. VALERIVS POPLICOLA', secunda: 'C. NAVTIVS RVTILVS', jdnstr: 1547924, jdnend: 1548289 },
+        { prima: 'L. FVRIVS MEDVLLINVS', secunda: 'A. MANLIVS VVLSO', jdnstr: 1548289, jdnend: 1548654 },
+        { prima: 'L. AEMILIVS MAMERCVS', secunda: 'VOPISCVS JVLIVS IVLLVS', jdnstr: 1548654, jdnend: 1549019 },
+        { prima: 'L. PINARIVS MAMERCINVS RVFVS', secunda: 'P. FVRIVS MEDVLLINVS FVSVS', jdnstr: 1549019, jdnend: 1549385 },
+        { prima: 'AP. CLAVDIVS CRASSVS INREGILLENSIS SABINVS', secunda: 'T. QVINCTIVS CAPITOLINVS BARBATVS', jdnstr: 1549385, jdnend: 1549750 },
+        { prima: 'L. VALERIVS POTITVS', secunda: 'TI. AEMILIVS MAMERCVS', jdnstr: 1549750, jdnend: 1550115 },
+        { prima: 'T. NVMICIVS PRISCVS', secunda: 'A. VERGINIVS CAELIOMONTANVS', jdnstr: 1550115, jdnend: 1550480 },
+        { prima: 'T. QVINCTIVS CAPITOLINVS BARBATVS', secunda: 'Q. SERVILIVS PRISCVS', jdnstr: 1550480, jdnend: 1550846 },
+        { prima: 'TI. AEMILIVS MAMERCVS', secunda: 'Q. FABIVS VIBVLANVS', jdnstr: 1550846, jdnend: 1551211 },
+        { prima: 'Q. SERVILIVS PRISCVS', secunda: 'SP. POSTVMIVS ALBINVS REGILLENSIS', jdnstr: 1551211, jdnend: 1551576 },
+        { prima: 'Q. FABIVS VIBVLANVS', secunda: 'T. QVINCTIVS CAPITOLINVS BARBATVS', jdnstr: 1551576, jdnend: 1551941 },
+        { prima: 'A. POSTVMIVS ALBINVS REGILLENSIS', secunda: 'SP. FVRIVS MEDVLLINVS FVSVS', jdnstr: 1551941, jdnend: 1552307 },
+        { prima: 'P. SERVILIVS PRISCVS', secunda: 'L. AEBVTIVS HELVA', jdnstr: 1552307, jdnend: 1552672 },
+        { prima: 'L. LVCRETIVS TRICIPITINVS', secunda: 'T. VETVRIVS GEMINVS CICVRINVS', jdnstr: 1552672, jdnend: 1553037 },
+        { prima: 'P. VOLVMNIVS AMINTINVS GALLVS', secunda: 'SER. SVLPICIVS CAMERINVS CORNVTVS', jdnstr: 1553037, jdnend: 1553402 },
+        { prima: 'P. VALERIVS POPLICOLA', secunda: 'C. CLAVDIVS INREGILLENSIS SABINVS', jdnstr: 1553402, jdnend: 1553768 },
+        { prima: 'Q. FABIVS VIBVLANVS', secunda: 'L. CORNELIVS MALVGINENSIS VRITINVS', jdnstr: 1553768, jdnend: 1554133 },
+        { prima: 'C. NAVTIVS RVTILVS', secunda: '(...) CARVE(NTANVS?)', jdnstr: 1554133, jdnend: 1554498 },
+        { prima: 'C. (OR M.) HORATIVS PVLVILLVS', secunda: 'Q. MINVCIVS ESQVILINVS (OR L. POSTVMIVS)', jdnstr: 1554498, jdnend: 1554863 },
+        { prima: 'M. VALERIVS MAXIMVS LACTVCA', secunda: 'SP. VERGINIVS TRICOSTVS CAELIOMONTANVS', jdnstr: 1554863, jdnend: 1555229 },
+        { prima: 'T. ROMILIVS ROCVS VATICANVS', secunda: 'C. VETVRIVS CICVRINVS', jdnstr: 1555229, jdnend: 1555594 },
+        { prima: 'SP. TARPEIVS MONTANVS CAPITOLINVS', secunda: 'A. ATERNIVS VARVS FONTINALIS', jdnstr: 1555594, jdnend: 1555959 },
+        { prima: 'P. CVRIATIVS FISTVS TRIGEMINVS', secunda: 'SEX. QVINCTILIVS', jdnstr: 1555959, jdnend: 1556324 },
+        { prima: 'T. MENENIVS LANATVS', secunda: 'P. SESTIVS CAPITOLINVS VATICANVS', jdnstr: 1556324, jdnend: 1556690 },
+        { prima: 'AP. CLAVDIVS CRASSVS INREGILLENSIS SABINVS', secunda: 'T. GENVCIVS (OR MINVCIVS) AVGVRINVS', jdnstr: 1556690, jdnend: 1557055 },
+        { prima: 'DECEMVIRI', secunda: '', jdnstr: 1557055, jdnend: 1557420 },
+        { prima: 'L. VALERIVS POPLICOLA POTITVS', secunda: 'M. HORATIVS TVRRINVS BARBATVS', jdnstr: 1557420, jdnend: 1557785 },
+        { prima: 'LARS HERMINIVS CORITINESANVS', secunda: 'T. VERGINIVS TRICOSTVS CAELIOMONTANVS', jdnstr: 1557785, jdnend: 1558151 },
+        { prima: 'M. GEGANIVS MACERINVS', secunda: 'C. JVLIVS IVLLVS', jdnstr: 1558151, jdnend: 1558516 },
+        { prima: 'T. QVINCTIVS CAPITOLINVS BARBATVS', secunda: 'AGRIPPA FVRIVS FVSVS', jdnstr: 1558516, jdnend: 1558881 },
+        { prima: 'M. GENVCIVS AVGVRINVS', secunda: 'C. CVRIATIVS PHILO', jdnstr: 1558881, jdnend: 1559246 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1559246, jdnend: 1559612 },
+        { prima: 'M. GEGANIVS MACERINVS', secunda: 'T. QVINCTIVS CAPITOLINVS BARBATVS', jdnstr: 1559612, jdnend: 1559977 },
+        { prima: 'M. FABIVS VIBVLANVS', secunda: 'POSTVMVS AEBVTIVS HELVA CORNICEN', jdnstr: 1559977, jdnend: 1560342 },
+        { prima: 'C. FVRIVS PACILVS FVSVS', secunda: 'M\'. PAPIRIVS CRASSVS', jdnstr: 1560342, jdnend: 1560707 },
+        { prima: 'PROCVLVS GEGANIVS MACERINVS', secunda: 'T. MENENIVS LANATVS', jdnstr: 1560707, jdnend: 1561073 },
+        { prima: 'AGRIPPA MENENIVS LANATVS', secunda: 'T. QVINCTIVS CAPITOLINVS BARBATVS', jdnstr: 1561073, jdnend: 1561438 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1561438, jdnend: 1561803 },
+        { prima: 'M. GEGANIVS MACERINVS', secunda: 'L. SERGIVS FIDENAS', jdnstr: 1561803, jdnend: 1562168 },
+        { prima: 'M. (OR A.) CORNELIVS MALVGINENSIS', secunda: 'L. PAPIRIVS CRASSVS', jdnstr: 1562168, jdnend: 1562534 },
+        { prima: 'C. JVLIVS IVLLVS', secunda: '(L. OR PROCVLVS) VERGINIVS TRICOSTVS', jdnstr: 1562534, jdnend: 1562899 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1562899, jdnend: 1563264 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1563264, jdnend: 1563629 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1563629, jdnend: 1563995 },
+        { prima: 'T. QVINCTIVS POENVS CINCINNATVS', secunda: 'C. JVLIVS MENTO', jdnstr: 1563995, jdnend: 1564360 },
+        { prima: 'C. (OR L.) PAPIRIVS CRASSVS', secunda: 'L. JVLIVS IVLLVS', jdnstr: 1564360, jdnend: 1564725 },
+        { prima: 'HOSTVS LVCRETIVS TRICIPITINVS', secunda: 'L. SERGIVS FIDENAS', jdnstr: 1564725, jdnend: 1565090 },
+        { prima: 'A. CORNELIVS COSSVS', secunda: 'T. QVINCTIVS POENVS CINCINNATVS', jdnstr: 1565090, jdnend: 1565456 },
+        { prima: 'C. SERVILIVS AXILLA', secunda: 'L. PAPIRIVS MVGILLANVS', jdnstr: 1565456, jdnend: 1565821 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1565821, jdnend: 1566186 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1566186, jdnend: 1566551 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1566551, jdnend: 1566917 },
+        { prima: 'C. SEMPRONIVS ATRATINVS', secunda: 'Q. FABIVS VIBVLANVS', jdnstr: 1566917, jdnend: 1567282 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1567282, jdnend: 1567647 },
+        { prima: 'N. (OR CN.) FABIVS VIBVLANVS', secunda: 'T. QVINCTIVS CAPITOLINVS BARBATVS', jdnstr: 1567647, jdnend: 1568012 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1568012, jdnend: 1568378 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1568378, jdnend: 1568743 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1568743, jdnend: 1569108 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1569108, jdnend: 1569473 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1569473, jdnend: 1569839 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1569839, jdnend: 1570204 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1570204, jdnend: 1570569 },
+        { prima: '(A. OR M.) CORNELIVS COSSVS', secunda: 'L. FVRIVS MEDVLLINVS', jdnstr: 1570569, jdnend: 1570934 },
+        { prima: 'Q. FABIVS VIBVLANVS (?)AMBVSTVS (II?)', secunda: 'C. FVRIVS PACILVS', jdnstr: 1570934, jdnend: 1571300 },
+        { prima: 'M. PAPIRIVS MVGILLANVS', secunda: 'SP. (OR C.) NAVTIVS RVTILVS', jdnstr: 1571300, jdnend: 1571665 },
+        { prima: 'M\'. AEMILIVS MAMERCINVS', secunda: 'C. VALERIVS POTITVS VOLVSVS', jdnstr: 1571665, jdnend: 1572030 },
+        { prima: 'CN. CORNELIVS COSSVS', secunda: 'L. FVRIVS MEDVLLINVS', jdnstr: 1572030, jdnend: 1572395 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1572395, jdnend: 1572761 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1572761, jdnend: 1573126 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1573126, jdnend: 1573491 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1573491, jdnend: 1573856 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1573856, jdnend: 1574222 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1574222, jdnend: 1574587 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1574587, jdnend: 1574952 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1574952, jdnend: 1575317 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1575317, jdnend: 1575683 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1575683, jdnend: 1576048 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1576048, jdnend: 1576413 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1576413, jdnend: 1576778 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1576778, jdnend: 1577144 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1577144, jdnend: 1577509 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1577509, jdnend: 1577874 },
+        { prima: 'L. VALERIVS POTITVS (INVALIDATED)', secunda: 'CORNELIVS MALVGINENSIS (INVALIDATED)', jdnstr: 1577874, jdnend: 1578239 },
+        { prima: 'L. VALERIVS POTITVS', secunda: 'M. MANLIVS CAPITOLINVS', jdnstr: 1578239, jdnend: 1578605 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1578605, jdnend: 1578970 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1578970, jdnend: 1579335 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1579335, jdnend: 1579700 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1579700, jdnend: 1580066 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1580066, jdnend: 1580431 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1580431, jdnend: 1580796 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1580796, jdnend: 1581161 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1581161, jdnend: 1581527 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1581527, jdnend: 1581892 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1581892, jdnend: 1582257 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1582257, jdnend: 1582622 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1582622, jdnend: 1582988 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1582988, jdnend: 1583353 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1583353, jdnend: 1583718 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1583718, jdnend: 1584083 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1584083, jdnend: 1584449 },
+        { prima: 'SOLITVDO MAGISTRATVVM', secunda: '', jdnstr: 1584449, jdnend: 1584814 },
+        { prima: 'SOLITVDO MAGISTRATVVM', secunda: '', jdnstr: 1584814, jdnend: 1585179 },
+        { prima: 'SOLITVDO MAGISTRATVVM', secunda: '', jdnstr: 1585179, jdnend: 1585544 },
+        { prima: 'SOLITVDO MAGISTRATVVM', secunda: '', jdnstr: 1585544, jdnend: 1585910 },
+        { prima: 'SOLITVDO MAGISTRATVVM', secunda: '', jdnstr: 1585910, jdnend: 1586275 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1586275, jdnend: 1586640 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1586640, jdnend: 1587005 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1587005, jdnend: 1587371 },
+        { prima: 'TRIBVNI MILITVM CONSVLARI POTESTATE', secunda: '', jdnstr: 1587371, jdnend: 1587736 },
+        { prima: 'L. AEMILIVS MAMERCINVS', secunda: 'L. SEXTIVS SEXTINVS LATERANVS', jdnstr: 1587736, jdnend: 1588101 },
+        { prima: 'L. GENVCIVS AVENTINENSIS', secunda: 'Q. SERVILIVS AHALA', jdnstr: 1588101, jdnend: 1588466 },
+        { prima: 'C. SVLPICIVS PETICVS', secunda: 'C. LICINIVS CALVVS', jdnstr: 1588466, jdnend: 1588832 },
+        { prima: 'CN. GENVCIVS AVENTINENSIS', secunda: 'L. AEMILIVS MAMERCINVS', jdnstr: 1588832, jdnend: 1589197 },
+        { prima: 'Q. SERVILIVS AHALA', secunda: 'L. GENVCIVS AVENTINENSIS', jdnstr: 1589197, jdnend: 1589562 },
+        { prima: 'C. LICINIVS STOLO', secunda: 'C. SVLPICIVS PETICVS', jdnstr: 1589562, jdnend: 1589927 },
+        { prima: 'M. FABIVS AMBVSTVS', secunda: 'C. POETELIVS LIBO VISOLVS', jdnstr: 1589927, jdnend: 1590293 },
+        { prima: 'M. POPILLIVS LAENAS', secunda: 'CN. MANLIVS CAPITOLINVS IMPERIOSVS', jdnstr: 1590293, jdnend: 1590658 },
+        { prima: 'C. FABIVS AMBVSTVS', secunda: 'C. PLAVTIVS PROCVLVS', jdnstr: 1590658, jdnend: 1591023 },
+        { prima: 'C. MARCIVS RVTILVS', secunda: 'CN. MANLIVS CAPITOLINVS (IMPERIOSVS II?)', jdnstr: 1591023, jdnend: 1591388 },
+        { prima: 'M. FABIVS AMBVSTVS', secunda: 'M. POPILLIVS LAENAS', jdnstr: 1591388, jdnend: 1591754 },
+        { prima: 'C. SVLPICIVS PETICVS', secunda: 'M. VALERIVS POPLICOLA', jdnstr: 1591754, jdnend: 1592119 },
+        { prima: 'M. FABIVS AMBVSTVS', secunda: 'T. QVINCTIVS POENVS CAPITOLINVS CRISPINVS', jdnstr: 1592119, jdnend: 1592484 },
+        { prima: 'C. SVLPICIVS PETICVS', secunda: 'M. VALERIVS POPLICOLA', jdnstr: 1592484, jdnend: 1592849 },
+        { prima: 'P. VALERIVS POPLICOLA', secunda: 'C. MARCIVS RVTILVS', jdnstr: 1592849, jdnend: 1593215 },
+        { prima: 'C. SVLPICIVS PETICVS', secunda: 'T. (OR C. OR K.) QVINCTIVS POENVS (II?)', jdnstr: 1593215, jdnend: 1593580 },
+        { prima: 'M. POPILLIVS LAENAS', secunda: 'L. CORNELIVS SCIPIO', jdnstr: 1593580, jdnend: 1593945 },
+        { prima: 'L. FVRIVS CAMILLVS', secunda: 'AP. CLAVDIVS CRASSVS INREGILLENSIS', jdnstr: 1593945, jdnend: 1594310 },
+        { prima: 'M. VALERIVS CORVVS', secunda: 'M. POPILLIVS LAENAS', jdnstr: 1594310, jdnend: 1594676 },
+        { prima: 'C. PLAVTIVS VENNO (OR VENOX)', secunda: 'T. MANLIVS IMPERIOSVS TORQVATVS', jdnstr: 1594676, jdnend: 1595041 },
+        { prima: 'M. VALERIVS CORVVS', secunda: 'C. POETELIVS LIBO VISOLVS', jdnstr: 1595041, jdnend: 1595406 },
+        { prima: 'M. FABIVS DORSVO', secunda: 'SER. SVLPICIVS CAMERINVS RVFVS', jdnstr: 1595406, jdnend: 1595771 },
+        { prima: 'C. MARCIVS RVTILVS', secunda: 'T. MANLIVS IMPERIOSVS TORQVATVS', jdnstr: 1595771, jdnend: 1596137 },
+        { prima: 'M. VALERIVS CORVVS', secunda: 'A. CORNELIVS COSSVS ARVINA', jdnstr: 1596137, jdnend: 1596502 },
+        { prima: 'Q. SERVILIVS AHALA', secunda: 'C. MARCIVS RVTILVS', jdnstr: 1596502, jdnend: 1596867 },
+        { prima: 'C. PLAVTIVS VENNO (OR VENOX)', secunda: 'L. AEMILIVS MAMERCINVS PRIVERNAS', jdnstr: 1596867, jdnend: 1597232 },
+        { prima: 'T. MANLIVS IMPERIOSVS TORQVATVS', secunda: 'P. DECIVS MVS', jdnstr: 1597232, jdnend: 1597598 },
+        { prima: 'TI. AEMILIVS MAMERCINVS', secunda: 'Q. PVBLILIVS PHILO', jdnstr: 1597598, jdnend: 1597963 },
+        { prima: 'L. FVRIVS CAMILLVS', secunda: 'C. MAENIVS', jdnstr: 1597963, jdnend: 1598328 },
+        { prima: 'C. SVLPICIVS LONGVS', secunda: 'P. AELIVS PAETVS', jdnstr: 1598328, jdnend: 1598693 },
+        { prima: 'L. PAPIRIVS CRASSVS', secunda: 'K. DVILIVS', jdnstr: 1598693, jdnend: 1599059 },
+        { prima: 'M. ATILIVS REGVLVS CALENVS', secunda: 'M. VALERIVS CORVVS', jdnstr: 1599059, jdnend: 1599424 },
+        { prima: 'SP. POSTVMIVS ALBINVS (CAVDINVS)', secunda: 'T. VETVRIVS CALVINVS', jdnstr: 1599424, jdnend: 1599789 },
+        { prima: 'P. CORNELIVS RVFINVS (DICTATOR)', secunda: 'M. ANTONIVS (MAGISTER EQVITVM)', jdnstr: 1599789, jdnend: 1600154 },
+        { prima: 'CN. DOMITIVS CALVINVS', secunda: 'A. CORNELIVS COSSVS ARVINA', jdnstr: 1600154, jdnend: 1600520 },
+        { prima: 'C. VALERIVS POTITVS', secunda: 'M. CLAVDIVS MARCELLVS', jdnstr: 1600520, jdnend: 1600885 },
+        { prima: 'L. PAPIRIVS CRASSVS', secunda: 'L. PLAVTIVS VENNO (OR VENOX)', jdnstr: 1600885, jdnend: 1601250 },
+        { prima: 'L. AEMILIVS MAMERCINVS PRIVERNAS', secunda: 'C. PLAVTIVS DECIANVS', jdnstr: 1601250, jdnend: 1601615 },
+        { prima: 'PLAVTIVS', secunda: 'P. CORNELIVS (SCAPVLA OR SCIPIO BARBATVS)', jdnstr: 1601615, jdnend: 1601981 },
+        { prima: 'L. CORNELIVS LENTVLVS', secunda: 'Q. PVBLILIVS PHILO', jdnstr: 1601981, jdnend: 1602346 },
+        { prima: 'C. POETELIVS LIBO VISOLVS', secunda: 'L. PAPIRIVS CVRSOR', jdnstr: 1602346, jdnend: 1602711 },
+        { prima: 'L. FVRIVS CAMILLVS', secunda: 'D. JVNIVS BRVTVS SCAEVA', jdnstr: 1602711, jdnend: 1603076 },
+        { prima: 'L. PAPIRIVS CVRSOR (DICTATOR)', secunda: 'Q. FABIVS MAXIMVS RVLLIANVS (MAGISTER EQVITVM)', jdnstr: 1603076, jdnend: 1603442 },
+        { prima: 'C. SVLPICIVS LONGVS', secunda: 'Q. AVLIVS CERRETANVS', jdnstr: 1603442, jdnend: 1603807 },
+        { prima: 'Q. FABIVS MAXIMVS RVLLIANVS', secunda: 'L. FVLVIVS CVRVVS', jdnstr: 1603807, jdnend: 1604172 },
+        { prima: 'T. VETVRIVS CALVINVS', secunda: 'SP. POSTVMIVS ALBINVS CAVDINVS', jdnstr: 1604172, jdnend: 1604537 },
+        { prima: 'Q. PVBLILIVS PHILO', secunda: 'L. PAPIRIVS CVRSOR', jdnstr: 1604537, jdnend: 1604903 },
+        { prima: 'L. PAPIRIVS CVRSOR', secunda: 'Q. AVLIVS CERRETANVS', jdnstr: 1604903, jdnend: 1605268 },
+        { prima: 'M. FOLIVS FLACCINATOR', secunda: 'L. PLAVTIVS VENNO (OR VENOX)', jdnstr: 1605268, jdnend: 1605633 },
+        { prima: 'C. JVNIVS BVBVLCVS BRVTVS', secunda: 'Q. AEMILIVS BARBVLA', jdnstr: 1605633, jdnend: 1605998 },
+        { prima: 'SP. NAVTIVS RVTILVS', secunda: 'M. POPILLIVS LAENAS', jdnstr: 1605998, jdnend: 1606364 },
+        { prima: 'L. PAPIRIVS CVRSOR', secunda: 'Q. PVBLILIVS PHILO', jdnstr: 1606364, jdnend: 1606729 },
+        { prima: 'M. POETELIVS LIBO', secunda: 'C. SVLPICIVS LONGVS', jdnstr: 1606729, jdnend: 1607094 },
+        { prima: 'L. PAPIRIVS CVRSOR', secunda: 'C. JVNIVS BVBVLCVS BRVTVS', jdnstr: 1607094, jdnend: 1607459 },
+        { prima: 'M. VALERIVS MAXIMVS CORVVS', secunda: 'P. DECIVS MVS', jdnstr: 1607459, jdnend: 1607825 },
+        { prima: 'C. JVNIVS BVBVLCVS BRVTVS', secunda: 'Q. AEMILIVS BARBVLA', jdnstr: 1607825, jdnend: 1608190 },
+        { prima: 'Q. FABIVS MAXIMVS RVLLIANVS', secunda: 'C. MARCIVS RVTILVS (CENSORINVS)', jdnstr: 1608190, jdnend: 1608555 },
+        { prima: 'L. PAPIRIVS CVRSOR (DICTATOR)', secunda: 'C. JVNIVS BVBVLCVS BRVTVS (MAGISTER EQVITVM)', jdnstr: 1608555, jdnend: 1608920 },
+        { prima: 'P. DECIVS MVS', secunda: 'Q. FABIVS MAXIMVS RVLLIANVS', jdnstr: 1608920, jdnend: 1609286 },
+        { prima: 'AP. CLAVDIVS CAECVS', secunda: 'L. VOLVMNIVS FLAMMA VIOLENS', jdnstr: 1609286, jdnend: 1609651 },
+        { prima: 'Q. MARCIVS TREMVLVS', secunda: 'P. CORNELIVS ARVINA', jdnstr: 1609651, jdnend: 1610016 },
+        { prima: 'L. POSTVMIVS MEGELLVS', secunda: 'TI. MINVCIVS AVGVRINVS', jdnstr: 1610016, jdnend: 1610381 },
+        { prima: 'P. SEMPRONIVS SOPHVS', secunda: 'P. SVLPICIVS SAVERRIVS', jdnstr: 1610381, jdnend: 1610747 },
+        { prima: 'SER. CORNELIVS LENTVLVS', secunda: 'L. GENVCIVS AVENTINENSIS', jdnstr: 1610747, jdnend: 1611112 },
+        { prima: 'M. LIVIVS DENTER', secunda: 'M. AEMILIVS PAVLLVS', jdnstr: 1611112, jdnend: 1611477 },
+        { prima: 'M. VALERIVS CORVVS (DICTATOR)', secunda: 'M. AEMILIVS PAVLLVS (MAGISTER EQVITVM)', jdnstr: 1611477, jdnend: 1611842 },
+        { prima: 'M. VALERIVS CORVVS', secunda: 'Q. APPVLEIVS PANSA', jdnstr: 1611842, jdnend: 1612208 },
+        { prima: 'M. FVLVIVS PAETINVS', secunda: 'T. MANLIVS TORQVATVS', jdnstr: 1612208, jdnend: 1612573 },
+        { prima: 'L. CORNELIVS SCIPIO BARBATVS', secunda: 'CN. FVLVIVS MAXIMVS CENTVMALVS', jdnstr: 1612573, jdnend: 1612938 },
+        { prima: 'Q. FABIVS MAXIMVS RVLLIANVS', secunda: 'P. DECIVS MVS', jdnstr: 1612938, jdnend: 1613303 },
+        { prima: 'L. VOLVMNIVS FLAMMA VIOLENS', secunda: 'AP. CLAVDIVS CAECVS', jdnstr: 1613303, jdnend: 1613669 },
+        { prima: 'Q. FABIVS MAXIMVS RVLLIANVS', secunda: 'P. DECIVS MVS', jdnstr: 1613669, jdnend: 1614034 },
+        { prima: 'L. POSTVMIVS MEGELLVS', secunda: 'M. ATILIVS REGVLVS', jdnstr: 1614034, jdnend: 1614399 },
+        { prima: 'L. PAPIRIVS CVRSOR', secunda: 'SP. CARVILIVS MAXIMVS', jdnstr: 1614399, jdnend: 1614764 },
+        { prima: 'Q. FABIVS MAXIMVS GVRGES', secunda: 'D. JVNIVS BRVTVS SCAEVA', jdnstr: 1614764, jdnend: 1615130 },
+        { prima: 'L. POSTVMIVS MEGELLVS', secunda: 'C. JVNIVS BVBVLCVS BRVTVS', jdnstr: 1615130, jdnend: 1615495 },
+        { prima: 'P. CORNELIVS RVFINVS', secunda: 'M\'. CVRIVS DENTATVS', jdnstr: 1615495, jdnend: 1615860 },
+        { prima: 'M. VALERIVS MAXIMVS CORVINVS', secunda: 'Q. CAEDICIVS NOCTVA', jdnstr: 1615860, jdnend: 1616225 },
+        { prima: 'Q. MARCIVS TREMVLVS', secunda: 'P. CORNELIVS ARVINA', jdnstr: 1616225, jdnend: 1616591 },
+        { prima: 'M. CLAVDIVS MARCELLVS', secunda: 'C. NAVTIVS RVTILVS', jdnstr: 1616591, jdnend: 1616956 },
+        { prima: 'M. VALERIVS MAXIMVS (POTITVS? CORVINVS III?)', secunda: 'C. AELIVS PAETVS', jdnstr: 1616956, jdnend: 1617321 },
+        { prima: 'C. CLAVDIVS CANINA', secunda: 'M. AEMILIVS LEPIDVS', jdnstr: 1617321, jdnend: 1617686 },
+        { prima: 'C. SERVILIVS TVCCA', secunda: 'L. CAECILIVS METELLVS DENTER', jdnstr: 1617686, jdnend: 1618052 },
+        { prima: 'P. CORNELIVS DOLABELLA', secunda: 'CN. DOMITIVS CALVINVS MAXIMVS', jdnstr: 1618052, jdnend: 1618417 },
+        { prima: 'C. FABRICIVS LVSCINVS', secunda: 'Q. AEMILIVS PAPVS', jdnstr: 1618417, jdnend: 1618782 },
+        { prima: 'L. AEMILIVS BARBVLA', secunda: 'Q. MARCIVS PHILIPPVS', jdnstr: 1618782, jdnend: 1619147 },
+        { prima: 'P. VALERIVS LAEVINVS', secunda: 'TI. CORVNCANIVS', jdnstr: 1619147, jdnend: 1619513 },
+        { prima: 'P. SVLPICIVS SAVERRIO', secunda: 'P. DECIVS MVS', jdnstr: 1619513, jdnend: 1619878 },
+        { prima: 'C. FABRICIVS LVSCINVS', secunda: 'Q. AEMILIVS PAPVS', jdnstr: 1619878, jdnend: 1620243 },
+        { prima: 'P. CORNELIVS RVFINVS', secunda: 'C. JVNIVS BVBVLCVS BRVTVS', jdnstr: 1620243, jdnend: 1620608 },
+        { prima: 'Q. FABIVS MAXIMVS GVRGES', secunda: 'C. GENVCIVS CLEPSINA', jdnstr: 1620608, jdnend: 1620974 },
+        { prima: 'M\'. CVRIVS DENTATVS', secunda: 'L. CORNELIVS LENTVLVS CAVDINVS', jdnstr: 1620974, jdnend: 1621339 },
+        { prima: 'M\'. CVRIVS DENTATVS', secunda: 'SER. CORNELIVS MERENDA', jdnstr: 1621339, jdnend: 1621704 },
+        { prima: 'C. FABIVS LICINVS', secunda: 'C. CLAVDIVS CANINA', jdnstr: 1621704, jdnend: 1622069 },
+        { prima: 'L. PAPIRIVS CVRSOR', secunda: 'SP. CARVILIVS MAXIMVS', jdnstr: 1622069, jdnend: 1622435 },
+        { prima: 'C. QVINCTIVS CLAVDVS', secunda: 'L. GENVCIVS CLEPSINA', jdnstr: 1622435, jdnend: 1622800 },
+        { prima: 'C. GENVCIVS CLEPSINA', secunda: 'CN. CORNELIVS BLASIO', jdnstr: 1622800, jdnend: 1623165 },
+        { prima: 'Q. OGVLNIVS GALLVS', secunda: 'C. FABIVS PICTOR', jdnstr: 1623165, jdnend: 1623530 },
+        { prima: 'P. SEMPRONIVS SOPHVS', secunda: 'AP. CLAVDIVS RVSSVS', jdnstr: 1623530, jdnend: 1623896 },
+        { prima: 'M. ATILIVS REGVLVS', secunda: 'L. JVLIVS LIBO', jdnstr: 1623896, jdnend: 1624261 },
+        { prima: 'D. JVNIVS PERA', secunda: 'N. FABIVS PICTOR', jdnstr: 1624261, jdnend: 1624626 },
+        { prima: 'Q. FABIVS MAXIMVS GVRGES', secunda: 'L. MAMILIVS VITVLVS', jdnstr: 1624626, jdnend: 1624991 },
+        { prima: 'AP. CLAVDIVS CAVDEX', secunda: 'M. FVLVIVS FLACCVS', jdnstr: 1624991, jdnend: 1625357 },
+        { prima: 'M\'. VALERIVS MAXIMVS MESALLA', secunda: 'M\'. OTACILIVS CRASSVS', jdnstr: 1625357, jdnend: 1625722 },
+        { prima: 'L. POSTVMIVS MEGELLVS', secunda: 'Q. MAMILIVS VITVLVS', jdnstr: 1625722, jdnend: 1626087 },
+        { prima: 'L. VALERIVS FLACCVS', secunda: 'T. OTACILIVS CRASSVS', jdnstr: 1626087, jdnend: 1626452 },
+        { prima: 'CN. CORNELIVS SCIPIO ASINA', secunda: 'C. DVILIVS', jdnstr: 1626452, jdnend: 1626818 },
+        { prima: 'L. CORNELIVS SCIPIO', secunda: 'C. AQVILLIVS FLORVS', jdnstr: 1626818, jdnend: 1627183 },
+        { prima: 'A. ATILIVS CAIATINVS', secunda: 'C. SVLPICIVS PATERCVLVS', jdnstr: 1627183, jdnend: 1627548 },
+        { prima: 'C. ATILIVS REGVLVS', secunda: 'CN. CORNELIVS BLASIO', jdnstr: 1627548, jdnend: 1627913 },
+        { prima: 'L. MANLIVS VVLSO LONGVS', secunda: 'Q. CAEDICIVS', jdnstr: 1627913, jdnend: 1628279 },
+        { prima: 'SER. FVLVIVS PAETINVS NOBILIOR', secunda: 'M. AEMILIVS PAVLLVS', jdnstr: 1628279, jdnend: 1628644 },
+        { prima: 'CN. CORNELIVS SCIPIO ASINA', secunda: 'A. ATILIVS CAIATINVS', jdnstr: 1628644, jdnend: 1629009 },
+        { prima: 'CN. SERVILIVS CAEPIO', secunda: 'C. SEMPRONIVS BLAESVS', jdnstr: 1629009, jdnend: 1629374 },
+        { prima: 'C. AVRELIVS COTTA', secunda: 'P. SERVILIVS GEMINVS', jdnstr: 1629374, jdnend: 1629740 },
+        { prima: 'L. CAECILIVS METELLVS', secunda: 'C. FVRIVS PACILVS', jdnstr: 1629740, jdnend: 1630105 },
+        { prima: 'C. ATILIVS REGVLVS', secunda: 'L. MANLIVS VVLSO LONGVS', jdnstr: 1630105, jdnend: 1630470 },
+        { prima: 'P. CLAVDIVS PVLCHER', secunda: 'L. JVNIVS PVLLVS', jdnstr: 1630470, jdnend: 1630835 },
+        { prima: 'C. AVRELIVS COTTA', secunda: 'P. SERVILIVS GEMINVS', jdnstr: 1630835, jdnend: 1631201 },
+        { prima: 'L. CAECILIVS METELLVS', secunda: 'N. FABIVS BVTEO', jdnstr: 1631201, jdnend: 1631566 },
+        { prima: 'M\'. OTACILIVS CRASSVS', secunda: 'M. FABIVS LICINVS', jdnstr: 1631566, jdnend: 1631931 },
+        { prima: 'M. FABIVS BVTEO', secunda: 'C. ATILIVS BVLBVS', jdnstr: 1631931, jdnend: 1632296 },
+        { prima: 'A. MANLIVS TORQVATVS ATTICVS', secunda: 'C. SEMPRONIVS BLAESVS', jdnstr: 1632296, jdnend: 1632662 },
+        { prima: 'C. FVNDANIVS FVNDVLVS', secunda: 'C. SVLPICIVS GALVS', jdnstr: 1632662, jdnend: 1633027 },
+        { prima: 'C. LVTATIVS CATVLVS', secunda: 'A. POSTVMIVS ALBINVS', jdnstr: 1633027, jdnend: 1633392 },
+        { prima: 'A. MANLIVS TORQVATVS ATTICVS', secunda: 'Q. LVTATIVS CERCO', jdnstr: 1633392, jdnend: 1633757 },
+        { prima: 'C. CLAVDIVS CENTHO', secunda: 'M. SEMPRONIVS TVDITANVS', jdnstr: 1633757, jdnend: 1634123 },
+        { prima: 'C. MAMILIVS TVRRINVS', secunda: 'Q. VALERIVS FALTO', jdnstr: 1634123, jdnend: 1634488 },
+        { prima: 'TI. SEMPRONIVS GRACCHVS', secunda: 'P. VALERIVS FALTO', jdnstr: 1634488, jdnend: 1634853 },
+        { prima: 'L. CORNELIVS LENTVLVS CAVDINVS', secunda: 'Q. FVLVIVS FLACCVS', jdnstr: 1634853, jdnend: 1635218 },
+        { prima: 'P. CORNELIVS LENTVLVS CAVDINVS', secunda: 'C. LICINIVS VARVS', jdnstr: 1635218, jdnend: 1635584 },
+        { prima: 'T. MANLIVS TORQVATVS', secunda: 'C. ATILIVS BVLBVS', jdnstr: 1635584, jdnend: 1635949 },
+        { prima: 'L. POSTVMIVS ALBINVS', secunda: 'SP. CARVILIVS MAXIMVS RVGA', jdnstr: 1635949, jdnend: 1636314 },
+        { prima: 'Q. FABIVS MAXIMVS VERRVCOSVS', secunda: 'M\'. POMPONIVS MATHO', jdnstr: 1636314, jdnend: 1636679 },
+        { prima: 'M. AEMILIVS LEPIDVS', secunda: 'M. PVBLICIVS MALLEOLVS', jdnstr: 1636679, jdnend: 1637045 },
+        { prima: 'M. POMPONIVS MATHO', secunda: 'C. PAPIRIVS MASO', jdnstr: 1637045, jdnend: 1637410 },
+        { prima: 'M. AEMILIVS BARBVLA', secunda: 'M. JVNIVS PERA', jdnstr: 1637410, jdnend: 1637775 },
+        { prima: 'L. POSTVMIVS ALBINVS', secunda: 'CN. FVLVIVS CENTVMALVS', jdnstr: 1637775, jdnend: 1638140 },
+        { prima: 'SP. CARVILIVS MAXIMVS RVGA', secunda: 'Q. FABIVS MAXIMVS VERRVCOSVS', jdnstr: 1638140, jdnend: 1638506 },
+        { prima: 'P. VALERIVS FLACCVS', secunda: 'M. ATILIVS REGVLVS', jdnstr: 1638506, jdnend: 1638871 },
+        { prima: 'M. VALERIVS MESSALLA', secunda: 'L. APVSTIVS FVLLO', jdnstr: 1638871, jdnend: 1639236 },
+        { prima: 'L. AEMILIVS PAPVS', secunda: 'C. ATILIVS REGVLVS', jdnstr: 1639236, jdnend: 1639601 },
+        { prima: 'T. MANLIVS TORQVATVS', secunda: 'Q. FVLVIVS FLACCVS', jdnstr: 1639601, jdnend: 1639967 },
+        { prima: 'C. FLAMINIVS', secunda: 'P. FVRIVS PHILVS', jdnstr: 1639967, jdnend: 1640332 },
+        { prima: 'M. CLAVDIVS MARCELLVS', secunda: 'CN. CORNELIVS SCIPIO CALVVS', jdnstr: 1640332, jdnend: 1640697 },
+        { prima: 'P. CORNELIVS SCIPIO ASINA', secunda: 'M. MINVCIVS RVFVS', jdnstr: 1640697, jdnend: 1641062 },
+        { prima: 'M. VALERIVS LAEVINVS (INVALIDATED)', secunda: 'Q. MVCIVS SCAEVOLA (INVALIDATED)', jdnstr: 1641062, jdnend: 1641428 },
+        { prima: 'L. AEMILIVS PAVLLVS', secunda: 'M. LIVIVS SALINATOR', jdnstr: 1641428, jdnend: 1641793 },
+        { prima: 'P. CORNELIVS SCIPIO', secunda: 'TI. SEMPRONIVS LONGVS', jdnstr: 1641793, jdnend: 1642158 },
+        { prima: 'CN. SERVILIVS GEMINVS', secunda: 'C. FLAMINIVS', jdnstr: 1642158, jdnend: 1642523 },
+        { prima: 'C. TERENTIVS VARRO', secunda: 'L. AEMILIVS PAVLLVS', jdnstr: 1642523, jdnend: 1642889 },
+        { prima: 'L. POSTVMIVS ALBINVS III (KILLED BEFORE TAKING OFFICE)', secunda: 'TI. SEMPRONIVS GRACCHVS', jdnstr: 1642889, jdnend: 1643254 },
+        { prima: 'Q. FABIVS MAXIMVS VERRVCOSVS', secunda: 'M. CLAVDIVS MARCELLVS', jdnstr: 1643254, jdnend: 1643619 },
+        { prima: 'Q. FABIVS MAXIMVS', secunda: 'TI. SEMPRONIVS GRACCHVS', jdnstr: 1643619, jdnend: 1643984 },
+        { prima: 'Q. FVLVIVS FLACCVS', secunda: 'AP. CLAVDIVS PVLCHER', jdnstr: 1643984, jdnend: 1644350 },
+        { prima: 'CN. FVLVIVS CENTVMALVS MAXIMVS', secunda: 'P. SVLPICIVS GALBA MAXIMVS', jdnstr: 1644350, jdnend: 1644715 },
+        { prima: 'M. CLAVDIVS MARCELLVS', secunda: 'M. VALERIVS LAEVINVS', jdnstr: 1644715, jdnend: 1645080 },
+        { prima: 'Q. FABIVS MAXIMVS VERRVCOSVS', secunda: 'Q. FVLVIVS FLACCVS', jdnstr: 1645080, jdnend: 1645445 },
+        { prima: 'M. CLAVDIVS MARCELLVS', secunda: 'T. QVINCTIVS CRISPINVS', jdnstr: 1645445, jdnend: 1645811 },
+        { prima: 'C. CLAVDIVS NERO', secunda: 'M. LIVIVS SALINATOR', jdnstr: 1645811, jdnend: 1646176 },
+        { prima: 'L. VETVRIVS PHILO', secunda: 'Q. CAECILIVS METELLVS', jdnstr: 1646176, jdnend: 1646541 },
+        { prima: 'P. CORNELIVS SCIPIO (AFRICANVS)', secunda: 'P. LICINIVS CRASSVS DIVES', jdnstr: 1646541, jdnend: 1646906 },
+        { prima: 'M. CORNELIVS CETHEGVS', secunda: 'P. SEMPRONIVS TVDITANVS', jdnstr: 1646906, jdnend: 1647272 },
+        { prima: 'CN. SERVILIVS CAEPIO', secunda: 'C. SERVILIVS GEMINVS', jdnstr: 1647272, jdnend: 1647637 },
+        { prima: 'M. SERVILIVS PVLEX GEMINVS', secunda: 'TI. CLAVDIVS NERO', jdnstr: 1647637, jdnend: 1648002 },
+        { prima: 'CN. CORNELIVS LENTVLVS', secunda: 'P. AELIVS PAETVS', jdnstr: 1648002, jdnend: 1648367 },
+        { prima: 'P. SVLPICIVS GALBA MAXIMVS', secunda: 'C. AVRELIVS COTTA', jdnstr: 1648367, jdnend: 1648733 },
+        { prima: 'L. CORNELIVS LENTVLVS', secunda: 'P. VILLIVS TAPPVLVS', jdnstr: 1648733, jdnend: 1649098 },
+        { prima: 'T. QVINCTIVS FLAMININVS', secunda: 'SEX. AELIVS PAETVS CATVS', jdnstr: 1649098, jdnend: 1649463 },
+        { prima: 'C. CORNELIVS CETHEGVS', secunda: 'Q. MINVCIVS RVFVS', jdnstr: 1649463, jdnend: 1649828 },
+        { prima: 'L. FVRIVS PVRPVREO', secunda: 'M. CLAVDIVS MARCELLVS', jdnstr: 1649828, jdnend: 1650194 },
+        { prima: 'L. VALERIVS FLACCVS', secunda: 'M. PORCIVS CATO', jdnstr: 1650194, jdnend: 1650559 },
+        { prima: 'P. CORNELIVS SCIPIO AFRICANVS', secunda: 'TI. SEMPRONIVS LONGVS', jdnstr: 1650559, jdnend: 1650924 },
+        { prima: 'L. CORNELIVS MERVLA', secunda: 'Q. MINVCIVS THERMVS', jdnstr: 1650924, jdnend: 1651289 },
+        { prima: 'L. QVINCTIVS FLAMININVS', secunda: 'CN. DOMITIVS AHENOBARBVS', jdnstr: 1651289, jdnend: 1651655 },
+        { prima: 'P. CORNELIVS SCIPIO NASICA', secunda: 'M\'. ACILIVS GLABRIO', jdnstr: 1651655, jdnend: 1652020 },
+        { prima: 'L. CORNELIVS SCIPIO ASIATICVS', secunda: 'C. LAELIVS', jdnstr: 1652020, jdnend: 1652385 },
+        { prima: 'M. FVLVIVS NOBILIOR', secunda: 'CN. MANLIVS VVLSO', jdnstr: 1652385, jdnend: 1652750 },
+        { prima: 'M. VALERIVS MESSALLA', secunda: 'C. LIVIVS SALINATOR', jdnstr: 1652750, jdnend: 1653116 },
+        { prima: 'M. AEMILIVS LEPIDVS', secunda: 'C. FLAMINIVS', jdnstr: 1653116, jdnend: 1653481 },
+        { prima: 'SP. POSTVMIVS ALBINVS', secunda: 'Q. MARCIVS PHILIPPVS', jdnstr: 1653481, jdnend: 1653846 },
+        { prima: 'AP. CLAVDIVS PVLCHER', secunda: 'M. SEMPRONIVS TVDITANVS', jdnstr: 1653846, jdnend: 1654211 },
+        { prima: 'P. CLAVDIVS PVLCHER', secunda: 'L. PORCIVS LICINVS', jdnstr: 1654211, jdnend: 1654577 },
+        { prima: 'M. CLAVDIVS MARCELLVS', secunda: 'Q. FABIVS LABEO', jdnstr: 1654577, jdnend: 1654942 },
+        { prima: 'CN. BAEBIVS TAMPHILVS', secunda: 'L. AEMILIVS PAVLLVS (MACEDONICVS)', jdnstr: 1654942, jdnend: 1655307 },
+        { prima: 'P. CORNELIVS CETHEGVS', secunda: 'M. BAEBIVS TAMPHILVS', jdnstr: 1655307, jdnend: 1655672 },
+        { prima: 'A. POSTVMIVS ALBINVS LVSCVS', secunda: 'C. CALPVRNIVS PISO', jdnstr: 1655672, jdnend: 1656038 },
+        { prima: 'Q. FVLVIVS FLACCVS', secunda: 'L. MANLIVS ACIDINVS FVLVIANVS', jdnstr: 1656038, jdnend: 1656403 },
+        { prima: 'M. JVNIVS BRVTVS', secunda: 'A. MANLIVS VVLSO', jdnstr: 1656403, jdnend: 1656768 },
+        { prima: 'C. CLAVDIVS PVLCHER', secunda: 'TI. SEMPRONIVS GRACCHVS', jdnstr: 1656768, jdnend: 1657133 },
+        { prima: 'CN. CORNELIVS SCIPIO HISPALLVS', secunda: 'Q. PETILLIVS SPVRINVS', jdnstr: 1657133, jdnend: 1657499 },
+        { prima: 'P. MVCIVS SCAEVOLA', secunda: 'M. AEMILIVS LEPIDVS', jdnstr: 1657499, jdnend: 1657864 },
+        { prima: 'SP. POSTVMIVS ALBINVS PAVLLVLVS', secunda: 'Q. MVCIVS SCAEVOLA', jdnstr: 1657864, jdnend: 1658229 },
+        { prima: 'L. POSTVMIVS ALBINVS', secunda: 'M. POPILLIVS LAENAS', jdnstr: 1658229, jdnend: 1658594 },
+        { prima: 'C. POPILLIVS LAENAS', secunda: 'P. AELIVS LIGVS', jdnstr: 1658594, jdnend: 1658960 },
+        { prima: 'P. LICINIVS CRASSVS', secunda: 'C. CASSIVS LONGINVS', jdnstr: 1658960, jdnend: 1659325 },
+        { prima: 'A. HOSTILIVS MANCINVS', secunda: 'A. ATILIVS SERRANVS', jdnstr: 1659325, jdnend: 1659690 },
+        { prima: 'Q. MARCIVS PHILIPPVS', secunda: 'CN. SERVILIVS CAEPIO', jdnstr: 1659690, jdnend: 1660055 },
+        { prima: 'L. AEMILIVS PAVLLVS MACEDONICVS', secunda: 'C. LICINIVS CRASSVS', jdnstr: 1660055, jdnend: 1660421 },
+        { prima: 'Q. AELIVS PAETVS', secunda: 'M. JVNIVS PENNVS', jdnstr: 1660421, jdnend: 1660786 },
+        { prima: 'M. CLAVDIVS MARCELLVS', secunda: 'C. SVLPICIVS GALVS', jdnstr: 1660786, jdnend: 1661151 },
+        { prima: 'T. MANLIVS TORQVATVS', secunda: 'CN. OCTAVIVS', jdnstr: 1661151, jdnend: 1661516 },
+        { prima: 'A. MANLIVS TORQVATVS', secunda: 'Q. CASSIVS LONGINVS', jdnstr: 1661516, jdnend: 1661882 },
+        { prima: 'TI. SEMPRONIVS GRACCHVS', secunda: 'M\'. JVVENTIVS THALNA', jdnstr: 1661882, jdnend: 1662247 },
+        { prima: 'P. CORNELIVS SCIPIO NASICA CORCVLVM', secunda: 'C. MARCIVS FIGVLVS', jdnstr: 1662247, jdnend: 1662612 },
+        { prima: 'M. VALERIVS MESSALLA', secunda: 'C. FANNIVS STRABO', jdnstr: 1662612, jdnend: 1662977 },
+        { prima: 'L. ANICIVS GALLVS', secunda: 'M. CORNELIVS CETHEGVS', jdnstr: 1662977, jdnend: 1663343 },
+        { prima: 'CN. CORNELIVS DOLABELLA', secunda: 'M. FVLVIVS NOBILIOR', jdnstr: 1663343, jdnend: 1663708 },
+        { prima: 'M. AEMILIVS LEPIDVS', secunda: 'C. POPILLIVS LAENAS', jdnstr: 1663708, jdnend: 1664073 },
+        { prima: 'SEX. JVLIVS CAESAR', secunda: 'L. AVRELIVS ORESTES', jdnstr: 1664073, jdnend: 1664438 },
+        { prima: 'L. CORNELIVS LENTVLVS LVPVS', secunda: 'C. MARCIVS FIGVLVS', jdnstr: 1664438, jdnend: 1664804 },
+        { prima: 'P. CORNELIVS SCIPIO NASICA CORCVLVM', secunda: 'M. CLAVDIVS MARCELLVS', jdnstr: 1664804, jdnend: 1665169 },
+        { prima: 'Q. OPIMIVS', secunda: 'L. POSTVMIVS ALBINVS', jdnstr: 1665169, jdnend: 1665460 },
+        { prima: 'Q. FVLVIVS NOBILIOR', secunda: 'T. ANNIVS LVSCVS', jdnstr: 1665460, jdnend: 1665825 },
+        { prima: 'M. CLAVDIVS MARCELLVS', secunda: 'L. VALERIVS FLACCVS', jdnstr: 1665825, jdnend: 1666191 },
+        { prima: 'L. LICINIVS LVCVLLVS', secunda: 'A. POSTVMIVS ALBINVS', jdnstr: 1666191, jdnend: 1666556 },
+        { prima: 'T. QVINCTIVS FLAMININVS', secunda: 'M\'. ACILIVS BALBVS', jdnstr: 1666556, jdnend: 1666921 },
+        { prima: 'L. MARCIVS CENSORINVS', secunda: 'M\'. MANILIVS', jdnstr: 1666921, jdnend: 1667286 },
+        { prima: 'SP. POSTVMIVS ALBINVS MAGNVS', secunda: 'L. CALPVRNIVS PISO CAESONINVS', jdnstr: 1667286, jdnend: 1667652 },
+        { prima: 'P. CORNELIVS SCIPIO AEMILIANVS', secunda: 'C. LIVIVS DRVSVS', jdnstr: 1667652, jdnend: 1668017 },
+        { prima: 'CN. CORNELIVS LENTVLVS', secunda: 'L. MVMMIVS ACHAICVS', jdnstr: 1668017, jdnend: 1668382 },
+        { prima: 'Q. FABIVS MAXIMVS AEMILIANVS', secunda: 'L. HOSTILIVS MANCINVS', jdnstr: 1668382, jdnend: 1668747 },
+        { prima: 'SER. SVLPICIVS GALBA', secunda: 'L. AVRELIVS COTTA', jdnstr: 1668747, jdnend: 1669113 },
+        { prima: 'AP. CLAVDIVS PVLCHER', secunda: 'Q. CAECILIVS METELLVS MACEDONICVS', jdnstr: 1669113, jdnend: 1669478 },
+        { prima: 'L. CAECILIVS METELLVS CALVVS', secunda: 'Q. FABIVS MAXIMVS SERVILIANVS', jdnstr: 1669478, jdnend: 1669843 },
+        { prima: 'CN. SERVILIVS CAEPIO', secunda: 'Q. POMPEIVS', jdnstr: 1669843, jdnend: 1670208 },
+        { prima: 'C. LAELIVS SAPIENS', secunda: 'Q. SERVILIVS CAEPIO', jdnstr: 1670208, jdnend: 1670574 },
+        { prima: 'CN. CALPVRNIVS PISO', secunda: 'M. POPILLIVS LAENAS', jdnstr: 1670574, jdnend: 1670939 },
+        { prima: 'P. CORNELIVS SCIPIO NASICA SERAPIO', secunda: 'D. JVNIVS BRVTVS (CALLAICVS)', jdnstr: 1670939, jdnend: 1671304 },
+        { prima: 'M. AEMILIVS LEPIDVS PORCINA', secunda: 'C. HOSTILIVS MANCINVS', jdnstr: 1671304, jdnend: 1671669 },
+        { prima: 'L. FVRIVS PHILVS', secunda: 'SEX. ATILIVS SERRANVS', jdnstr: 1671669, jdnend: 1672035 },
+        { prima: 'SER. FVLVIVS FLACCVS', secunda: 'Q. CALPVRNIVS PISO', jdnstr: 1672035, jdnend: 1672400 },
+        { prima: 'P. CORNELIVS SCIPIO AFRICANVS AEMILIANVS', secunda: 'C. FVLVIVS FLACCVS', jdnstr: 1672400, jdnend: 1672765 },
+        { prima: 'P. MVCIVS SCAEVOLA', secunda: 'L. CALPVRNIVS PISO FRVGI', jdnstr: 1672765, jdnend: 1673130 },
+        { prima: 'P. POPILLIVS LAENAS', secunda: 'P. RVPILIVS', jdnstr: 1673130, jdnend: 1673496 },
+        { prima: 'P. LICINIVS CRASSVS DIVES MVCIANVS', secunda: 'L. VALERIVS FLACCVS', jdnstr: 1673496, jdnend: 1673861 },
+        { prima: 'L. CORNELIVS LENTVLVS', secunda: 'M. PERPERNA', jdnstr: 1673861, jdnend: 1674226 },
+        { prima: 'C. SEMPRONIVS TVDITANVS', secunda: 'M\'. AQVILLIVS', jdnstr: 1674226, jdnend: 1674591 },
+        { prima: 'CN. OCTAVIVS', secunda: 'T. ANNIVS RVFVS', jdnstr: 1674591, jdnend: 1674957 },
+        { prima: 'L. CASSIVS LONGINVS RAVILLA', secunda: 'L. CORNELIVS CINNA', jdnstr: 1674957, jdnend: 1675322 },
+        { prima: 'M. AEMILIVS LEPIDVS', secunda: 'L. AVRELIVS ORESTES', jdnstr: 1675322, jdnend: 1675687 },
+        { prima: 'M. PLAVTIVS HYPSAEVS', secunda: 'M. FVLVIVS FLACCVS', jdnstr: 1675687, jdnend: 1676052 },
+        { prima: 'C. CASSIVS LONGINVS', secunda: 'C. SEXTIVS CALVINVS', jdnstr: 1676052, jdnend: 1676418 },
+        { prima: 'Q. CAECILIVS METELLVS (BALEARICVS)', secunda: 'T. QVINCTIVS FLAMININVS', jdnstr: 1676418, jdnend: 1676783 },
+        { prima: 'CN. DOMITIVS AHENOBARBVS', secunda: 'C. FANNIVS', jdnstr: 1676783, jdnend: 1677148 },
+        { prima: 'L. OPIMIVS', secunda: 'Q. FABIVS MAXIMVS (ALLOBROGICVS)', jdnstr: 1677148, jdnend: 1677513 },
+        { prima: 'P. MANILIVS', secunda: 'C. PAPIRIVS CARBO', jdnstr: 1677513, jdnend: 1677879 },
+        { prima: 'L. CAECILIVS METELLVS (DELMATICVS)', secunda: 'L. AVRELIVS COTTA', jdnstr: 1677879, jdnend: 1678244 },
+        { prima: 'M. PORCIVS CATO', secunda: 'Q. MARCIVS REX', jdnstr: 1678244, jdnend: 1678609 },
+        { prima: 'L. CAECILIVS METELLVS DIADEMATVS', secunda: 'Q. MVCIVS SCAEVOLA (AVGVR)', jdnstr: 1678609, jdnend: 1678974 },
+        { prima: 'C. LICINIVS GETA', secunda: 'Q. FABIVS MAXIMVS EBVRNVS', jdnstr: 1678974, jdnend: 1679340 },
+        { prima: 'M. AEMILIVS SCAVRVS', secunda: 'M. CAECILIVS METELLVS', jdnstr: 1679340, jdnend: 1679705 },
+        { prima: 'M\'. ACILIVS BALBVS', secunda: 'C. PORCIVS CATO', jdnstr: 1679705, jdnend: 1680070 },
+        { prima: 'C. CAECILIVS METELLVS CAPRARIVS', secunda: 'CN. PAPIRIVS CARBO', jdnstr: 1680070, jdnend: 1680435 },
+        { prima: 'M. LIVIVS DRVSVS', secunda: 'L. CALPVRNIVS PISO CAESONINVS', jdnstr: 1680435, jdnend: 1680801 },
+        { prima: 'P. CORNELIVS SCIPIO NASICA', secunda: 'L. CALPVRNIVS BESTIA', jdnstr: 1680801, jdnend: 1681166 },
+        { prima: 'M. MINVCIVS RVFVS', secunda: 'SP. POSTVMIVS ALBINVS', jdnstr: 1681166, jdnend: 1681531 },
+        { prima: 'Q. CAECILIVS METELLVS (NVMIDICVS)', secunda: 'M. JVNIVS SILANVS', jdnstr: 1681531, jdnend: 1681896 },
+        { prima: 'SER. SVLPICIVS GALBA', secunda: 'HORTENSIVS (INVALIDATED)', jdnstr: 1681896, jdnend: 1682262 },
+        { prima: 'C. MARIVS', secunda: 'L. CASSIVS LONGINVS', jdnstr: 1682262, jdnend: 1682627 },
+        { prima: 'Q. SERVILIVS CAEPIO', secunda: 'C. ATILIVS SERRANVS', jdnstr: 1682627, jdnend: 1682992 },
+        { prima: 'P. RVTILIVS RVFVS', secunda: 'CN. MALLIVS MAXIMVS', jdnstr: 1682992, jdnend: 1683357 },
+        { prima: 'C. MARIVS', secunda: 'C. FLAVIVS FIMBRIA', jdnstr: 1683357, jdnend: 1683723 },
+        { prima: 'C. MARIVS', secunda: 'L. AVRELIVS ORESTES', jdnstr: 1683723, jdnend: 1684088 },
+        { prima: 'C. MARIVS', secunda: 'Q. LVTATIVS CATVLVS', jdnstr: 1684088, jdnend: 1684453 },
+        { prima: 'C. MARIVS', secunda: 'M\'. AQVILLIVS', jdnstr: 1684453, jdnend: 1684818 },
+        { prima: 'C. MARIVS', secunda: 'L. VALERIVS FLACCVS', jdnstr: 1684818, jdnend: 1685549 },
+        { prima: 'Q. CAECILIVS METELLVS NEPOS', secunda: 'T. DIDIVS', jdnstr: 1685549, jdnend: 1685914 },
+        { prima: 'CN. CORNELIVS LENTVLVS', secunda: 'P. LICINIVS CRASSVS', jdnstr: 1685914, jdnend: 1686279 },
+        { prima: 'CN. DOMITIVS AHENOBARBVS', secunda: 'C. CASSIVS LONGINVS', jdnstr: 1686279, jdnend: 1686645 },
+        { prima: 'L. LICINIVS CRASSVS', secunda: 'Q. MVCIVS SCAEVOLA (PONTIFEX)', jdnstr: 1686645, jdnend: 1687010 },
+        { prima: 'C. COELIVS CALDVS', secunda: 'L. DOMITIVS AHENOBARBVS', jdnstr: 1687010, jdnend: 1687375 },
+        { prima: 'C. VALERIVS FLACCVS', secunda: 'M. HERENNIVS', jdnstr: 1687375, jdnend: 1687740 },
+        { prima: 'C. CLAVDIVS PVLCHER', secunda: 'M. PERPERNA', jdnstr: 1687740, jdnend: 1688106 },
+        { prima: 'L. MARCIVS PHILIPPVS', secunda: 'SEX. JVLIVS CAESAR', jdnstr: 1688106, jdnend: 1688471 },
+        { prima: 'L. JVLIVS CAESAR', secunda: 'P. RVTILIVS LVPVS', jdnstr: 1688471, jdnend: 1688836 },
+        { prima: 'CN. POMPEIVS STRABO', secunda: 'L. PORCIVS CATO', jdnstr: 1688836, jdnend: 1689201 },
+        { prima: 'L. CORNELIVS SVLLA', secunda: 'Q. POMPEIVS RVFVS', jdnstr: 1689201, jdnend: 1689567 },
+        { prima: 'CN. OCTAVIVS', secunda: 'L. CORNELIVS CINNA', jdnstr: 1689567, jdnend: 1689932 },
+        { prima: 'L. CORNELIVS CINNA', secunda: 'C. MARIVS', jdnstr: 1689932, jdnend: 1690297 },
+        { prima: 'L. CORNELIVS CINNA', secunda: 'CN. PAPIRIVS CARBO', jdnstr: 1690297, jdnend: 1690662 },
+        { prima: 'CN. PAPIRIVS CARBO', secunda: 'L. CORNELIVS CINNA', jdnstr: 1690662, jdnend: 1691028 },
+        { prima: 'L. CORNELIVS SCIPIO ASIAGENES (ASIATICVS)', secunda: 'C. NORBANVS', jdnstr: 1691028, jdnend: 1691393 },
+        { prima: 'C. MARIVS', secunda: 'CN. PAPIRIVS CARBO', jdnstr: 1691393, jdnend: 1691758 },
+        { prima: 'M. TVLLIVS DECVLA', secunda: 'CN. CORNELIVS DOLABELLA', jdnstr: 1691758, jdnend: 1692123 },
+        { prima: 'L. CORNELIVS SVLLA FELIX', secunda: 'Q. CAECILIVS METELLVS PIVS', jdnstr: 1692123, jdnend: 1692489 },
+        { prima: 'P. SERVILIVS VATIA (ISAVRICVS)', secunda: 'AP. CLAVDIVS PVLCHER', jdnstr: 1692489, jdnend: 1692854 },
+        { prima: 'M. AEMILIVS LEPIDVS', secunda: 'Q. LVTATIVS CATVLVS', jdnstr: 1692854, jdnend: 1693219 },
+        { prima: 'D. JVNIVS BRVTVS', secunda: 'MAM. AEMILIVS LEPIDVS LIVIANVS', jdnstr: 1693219, jdnend: 1693584 },
+        { prima: 'CN. OCTAVIVS', secunda: 'C. SCRIBONIVS CVRIO', jdnstr: 1693584, jdnend: 1693950 },
+        { prima: 'L. OCTAVIVS', secunda: 'C. AVRELIVS COTTA', jdnstr: 1693950, jdnend: 1694315 },
+        { prima: 'L. LICINIVS LVCVLLVS', secunda: 'M. AVRELIVS COTTA', jdnstr: 1694315, jdnend: 1694680 },
+        { prima: 'M. TERENTIVS VARRO LVCVLLVS', secunda: 'C. CASSIVS LONGINVS', jdnstr: 1694680, jdnend: 1695045 },
+        { prima: 'L. GELLIVS', secunda: 'CN. CORNELIVS LENTVLVS CLODIANVS', jdnstr: 1695045, jdnend: 1695411 },
+        { prima: 'P. CORNELIVS LENTVLVS SVRA', secunda: 'CN. AVFIDIVS ORESTES', jdnstr: 1695411, jdnend: 1695776 },
+        { prima: 'CN. POMPEIVS MAGNVS', secunda: 'M. LICINIVS CRASSVS', jdnstr: 1695776, jdnend: 1696141 },
+        { prima: 'Q. HORTENSIVS HORTALVS', secunda: 'Q. CAECILIVS METELLVS (CRETICVS)', jdnstr: 1696141, jdnend: 1696506 },
+        { prima: 'L. CAECILIVS METELLVS', secunda: 'Q. MARCIVS REX', jdnstr: 1696506, jdnend: 1696872 },
+        { prima: 'C. CALPVRNIVS PISO', secunda: 'M\'. ACILIVS GLABRIO', jdnstr: 1696872, jdnend: 1697237 },
+        { prima: 'M\'. AEMILIVS LEPIDVS', secunda: 'L. VOLCACIVS TVLLVS', jdnstr: 1697237, jdnend: 1697602 },
+        { prima: 'P. CORNELIVS SVLLA (INVALIDATED)', secunda: 'P. AVTRONIVS PAETVS (INVALIDATED)', jdnstr: 1697602, jdnend: 1697967 },
+        { prima: 'L. JVLIVS CAESAR', secunda: 'C. MARCIVS FIGVLVS', jdnstr: 1697967, jdnend: 1698333 },
+        { prima: 'M. TVLLIVS CICERO', secunda: 'C. ANTONIVS HYBRIDA', jdnstr: 1698333, jdnend: 1698698 },
+        { prima: 'D. JVNIVS SILANVS', secunda: 'L. LICINIVS MVRENA', jdnstr: 1698698, jdnend: 1699063 },
+        { prima: 'M. PVPIVS PISO FRVGI CALPVRNIANVS', secunda: 'M. VALERIVS MESSALLA NIGER', jdnstr: 1699063, jdnend: 1699428 },
+        { prima: 'Q. CAECILIVS METELLVS CELER', secunda: 'L. AFRANIVS', jdnstr: 1699428, jdnend: 1699794 },
+        { prima: 'C. JVLIVS CAESAR', secunda: 'M. CALPVRNIVS BIBVLVS', jdnstr: 1699794, jdnend: 1700159 },
+        { prima: 'L. CALPVRNIVS PISO CAESONINVS', secunda: 'A. GABINIVS', jdnstr: 1700159, jdnend: 1700524 },
+        { prima: 'P. CORNELIVS LENTVLVS SPINTHER', secunda: 'Q. CAECILIVS METELLVS NEPOS', jdnstr: 1700524, jdnend: 1700889 },
+        { prima: 'CN. CORNELIVS LENTVLVS MARCELLINVS', secunda: 'L. MARCIVS PHILIPPVS', jdnstr: 1700889, jdnend: 1701255 },
+        { prima: 'CN. POMPEIVS MAGNVS', secunda: 'M. LICINIVS CRASSVS', jdnstr: 1701255, jdnend: 1701620 },
+        { prima: 'L. DOMITIVS AHENOBARBVS', secunda: 'AP. CLAVDIVS PVLCHER', jdnstr: 1701620, jdnend: 1701985 },
+        { prima: 'CN. DOMITIVS CALVINVS', secunda: 'M. VALERIVS MESSALLA RVFVS', jdnstr: 1701985, jdnend: 1702350 },
+        { prima: 'CN. POMPEIVS MAGNVS', secunda: 'Q. CAECILIVS METELLVS PIVS SCIPIO (FROM 1 SEPTEMBER)', jdnstr: 1702350, jdnend: 1702716 },
+        { prima: 'SER. SVLPICIVS RVFVS', secunda: 'M. CLAVDIVS MARCELLVS', jdnstr: 1702716, jdnend: 1703081 },
+        { prima: 'L. AEMILIVS PAVLLVS', secunda: 'C. CLAVDIVS MARCELLVS', jdnstr: 1703081, jdnend: 1703446 },
+        { prima: 'C. CLAVDIVS MARCELLVS', secunda: 'L. CORNELIVS LENTVLVS CRVS', jdnstr: 1703446, jdnend: 1703811 },
+        { prima: 'C. JVLIVS CAESAR', secunda: 'P. SERVILIVS ISAVRICVS', jdnstr: 1703811, jdnend: 1704177 },
+        { prima: 'Q. FVFIVS CALENVS', secunda: 'P. VATINIVS', jdnstr: 1704177, jdnend: 1704542 },
+        { prima: 'C. JVLIVS CAESAR', secunda: 'M. AEMILIVS LEPIDVS', jdnstr: 1704542, jdnend: 1704987 },
+        { prima: 'C. JVLIVS CAESAR', secunda: 'SINE COLLEGA', jdnstr: 1704987, jdnend: 1705353 },
+        { prima: 'C. JVLIVS CAESAR', secunda: 'M. ANTONIVS', jdnstr: 1705353, jdnend: 1705397 },
+        { prima: 'IVLIVS CAESAR', secunda: '', jdnstr: 1705397, jdnend: 1705426 },
+        { prima: 'POLYKRACIE', secunda: '', jdnstr: 1705426, jdnend: 1706048 },
+        { prima: 'OCTAVIANVS', secunda: 'M ANTONIVS WITH KLEOPATRA VII PHILOPATOR & M LEPIDVS', jdnstr: 1706048, jdnend: 1709735 },
+        { prima: 'OCTAVIANVS', secunda: 'M ANTONIVS WITH KLEOPATRA VII PHILOPATOR', jdnstr: 1709735, jdnend: 1711577 },
+        { prima: 'AVGVSTVS', secunda: '', jdnstr: 1711577, jdnend: 1726402 },
         { prima: 'POLYKRACIE', secunda: '', jdnstr: 1726402, jdnend: 1726431 },
         { prima: 'TIBERIVS', secunda: '', jdnstr: 1726431, jdnend: 1734647 },
         { prima: 'GAIVS CAESAR', secunda: '', jdnstr: 1734647, jdnend: 1736057 },
@@ -1525,9 +1525,9 @@ const propertime = (function () {
         { prima: 'CEAWLIN', secunda: '', jdnstr: 1925598, jdnend: 1936921 },
         { prima: 'CEOL', secunda: '', jdnstr: 1936921, jdnend: 1939113 },
         { prima: 'CEOLWULF', secunda: '', jdnstr: 1939113, jdnend: 1944226 },
-        { prima: 'CYNEGILS', secunda: '', jdnstr: 1944226, jdnend: 1949661 },
-        { prima: 'CYNEGILS', secunda: 'CWICHELM', jdnstr: 1949661, jdnend: 1953314 },
-        { prima: 'CYNEGILS', secunda: '', jdnstr: 1953314, jdnend: 1955549 },
+        { prima: 'CYNEGILS', secunda: '', jdnstr: 1944226, jdnend: 1949661, id: 'cynegils' },
+        { prima: 'CYNEGILS', secunda: 'CWICHELM', jdnstr: 1949661, jdnend: 1953314, id: 'cynegils' },
+        { prima: 'CYNEGILS', secunda: '', jdnstr: 1953314, jdnend: 1955549, id: 'cynegils' },
         { prima: 'CENWALH', secunda: '', jdnstr: 1955549, jdnend: 1956645 },
         { prima: 'PENDA', secunda: '', jdnstr: 1956645, jdnend: 1957740 },
         { prima: 'CENWALH', secunda: '', jdnstr: 1957740, jdnend: 1966506 },
@@ -1578,9 +1578,9 @@ const propertime = (function () {
         { prima: 'MATILDA', secunda: '', jdnstr: 2137986, jdnend: 2138200 },
         { prima: 'STEPHEN', secunda: '', jdnstr: 2138200, jdnend: 2142854 },
         { prima: 'POLYKRACIE', secunda: '', jdnstr: 2142854, jdnend: 2142909 },
-        { prima: 'HENRY II', secunda: '', jdnstr: 2142909, jdnend: 2148619 },
-        { prima: 'HENRY II', secunda: 'HENRY THE YOUNG KING', jdnstr: 2148619, jdnend: 2153362 },
-        { prima: 'HENRY II', secunda: '', jdnstr: 2153362, jdnend: 2155527 },
+        { prima: 'HENRY II', secunda: '', jdnstr: 2142909, jdnend: 2148619, id: 'henry2' },
+        { prima: 'HENRY II', secunda: 'HENRY THE YOUNG KING', jdnstr: 2148619, jdnend: 2153362, id: 'henry2' },
+        { prima: 'HENRY II', secunda: '', jdnstr: 2153362, jdnend: 2155527, id: 'henry2' },
         { prima: 'POLYKRACIE', secunda: '', jdnstr: 2155527, jdnend: 2155586 },
         { prima: 'RICHARD I', secunda: '', jdnstr: 2155586, jdnend: 2159088 },
         { prima: 'POLYKRACIE', secunda: '', jdnstr: 2159088, jdnend: 2159139 },
@@ -1600,10 +1600,10 @@ const propertime = (function () {
         { prima: 'POLYKRACIE', secunda: '', jdnstr: 2237235, jdnend: 2237236 },
         { prima: 'HENRY V', secunda: '', jdnstr: 2237236, jdnend: 2240686 },
         { prima: 'POLYKRACIE', secunda: '', jdnstr: 2240686, jdnend: 2240687 },
-        { prima: 'HENRY VI', secunda: '', jdnstr: 2240687, jdnend: 2254751 },
-        { prima: 'EDWARD IV', secunda: '', jdnstr: 2254751, jdnend: 2258251 },
-        { prima: 'HENRY VI', secunda: '', jdnstr: 2258251, jdnend: 2258441 },
-        { prima: 'EDWARD IV', secunda: '', jdnstr: 2258441, jdnend: 2262822 },
+        { prima: 'HENRY VI', secunda: '', jdnstr: 2240687, jdnend: 2254751, id: 'henry6' },
+        { prima: 'EDWARD IV', secunda: '', jdnstr: 2254751, jdnend: 2258251, id: 'edward4' },
+        { prima: 'HENRY VI', secunda: '', jdnstr: 2258251, jdnend: 2258441, id: 'henry6' },
+        { prima: 'EDWARD IV', secunda: '', jdnstr: 2258441, jdnend: 2262822, id: 'edward4' },
         { prima: 'EDWARD V', secunda: '', jdnstr: 2262822, jdnend: 2262899 },
         { prima: 'POLYKRACIE', secunda: '', jdnstr: 2262899, jdnend: 2262900 },
         { prima: 'RICHARD III', secunda: '', jdnstr: 2262900, jdnend: 2263688 },
@@ -1613,27 +1613,27 @@ const propertime = (function () {
         { prima: 'EDWARD VI', secunda: '', jdnstr: 2286127, jdnend: 2288478 },
         { prima: 'POLYKRACIE', secunda: '', jdnstr: 2288478, jdnend: 2288482 },
         { prima: 'LADY JANE GREY', secunda: '', jdnstr: 2288482, jdnend: 2288491 },
-        { prima: 'MARY I', secunda: '', jdnstr: 2288491, jdnend: 2288861 },
+        { prima: 'MARY I', secunda: '', jdnstr: 2288491, jdnend: 2288861, id: 'mary1' },
         { prima: 'POLYKRACIE', secunda: '', jdnstr: 2288861, jdnend: 2288862 },
-        { prima: 'MARY I', secunda: 'PHILIP', jdnstr: 2288862, jdnend: 2290438 },
+        { prima: 'MARY I', secunda: 'PHILIP', jdnstr: 2288862, jdnend: 2290438, id: 'mary1' },
         { prima: 'ELIZABETH I', secunda: '', jdnstr: 2290438, jdnend: 2306636 },
         { prima: 'JAMES I', secunda: '', jdnstr: 2306636, jdnend: 2314675 },
         { prima: 'CHARLES I', secunda: '', jdnstr: 2314675, jdnend: 2323385 },
-        { prima: 'CHARLES II', secunda: '', jdnstr: 2323385, jdnend: 2323385 },
+        { prima: 'CHARLES II', secunda: '', jdnstr: 2323385, jdnend: 2323385, id: 'charles2' },
         { prima: 'KEEPERS OF THE LIBERTY', secunda: '', jdnstr: 2323385, jdnend: 2325125 },
         { prima: 'OLIVER CROMWELL', secunda: '', jdnstr: 2325125, jdnend: 2326848 },
         { prima: 'RICHARD CROMWELL', secunda: '', jdnstr: 2326848, jdnend: 2327111 },
         { prima: 'KEEPERS OF THE LIBERTY', secunda: '', jdnstr: 2327111, jdnend: 2327481 },
-        { prima: 'CHARLES II', secunda: '', jdnstr: 2327481, jdnend: 2336541 },
+        { prima: 'CHARLES II', secunda: '', jdnstr: 2327481, jdnend: 2336541, id: 'charles2' },
         { prima: 'JAMES II', secunda: '', jdnstr: 2336541, jdnend: 2337945 },
         { prima: 'POLYKRACIE', secunda: '', jdnstr: 2337945, jdnend: 2338009 },
-        { prima: 'WILLIAM III', secunda: 'MARY II', jdnstr: 2338009, jdnend: 2340153 },
-        { prima: 'WILLIAM III', secunda: '', jdnstr: 2340153, jdnend: 2342780 },
+        { prima: 'WILLIAM III', secunda: 'MARY II', jdnstr: 2338009, jdnend: 2340153, id: 'william3' },
+        { prima: 'WILLIAM III', secunda: '', jdnstr: 2340153, jdnend: 2342780, id: 'william3' },
         { prima: 'ANNE', secunda: '', jdnstr: 2342780, jdnend: 2347309 },
         { prima: 'GEORGE I', secunda: '', jdnstr: 2347309, jdnend: 2352006 },
         { prima: 'GEORGE II', secunda: '', jdnstr: 2352006, jdnend: 2364185 },
-        { prima: 'GEORGE III', secunda: '', jdnstr: 2364185, jdnend: 2382549 },
-        { prima: 'GEORGE III', secunda: 'PRINCE REGENT', jdnstr: 2382549, jdnend: 2385829 },
+        { prima: 'GEORGE III', secunda: '', jdnstr: 2364185, jdnend: 2382549, id: 'george3' },
+        { prima: 'GEORGE III', secunda: 'PRINCE REGENT', jdnstr: 2382549, jdnend: 2385829, id: 'george3' },
         { prima: 'GEORGE IV', secunda: '', jdnstr: 2385829, jdnend: 2389630 },
         { prima: 'WILLIAM IV', secunda: '', jdnstr: 2389630, jdnend: 2392181 },
         { prima: 'VICTORIA', secunda: '', jdnstr: 2392181, jdnend: 2415407 },
@@ -1731,7 +1731,7 @@ const propertime = (function () {
 					reignDays = 1446501 - currentEgJdn;
 				}
 				if (jdn >= currentEgJdn && jdn < currentEgJdn + reignDays) {
-					mObj = { prima: EGYPTIAN_KINGS[i][0], secunda: '', jdnstr: currentEgJdn, jdnend: currentEgJdn + reignDays - 1 };
+					mObj = { prima: EGYPTIAN_KINGS[i][0], secunda: '', jdnstr: currentEgJdn, jdnend: currentEgJdn + reignDays - 1, egyptian: true };
 					break;
 				}
 				currentEgJdn += reignDays;
@@ -1746,7 +1746,7 @@ const propertime = (function () {
 		}
 		if (!mObj) return null;
 		
-		if (mObj && jdn < 1446501 && jdn >= currentEgyptianEpoch) {
+		if (mObj && mObj.egyptian) {
 			let daysIntoKing = jdn - mObj.jdnstr;
 			let regnalYear = Math.floor(daysIntoKing / 365) + 1;
 			let dayInYear = daysIntoKing % 365;
@@ -1785,6 +1785,7 @@ const propertime = (function () {
 		}
 		
 		let yDiff = current.y - start.y;
+		if (start.y < 0 && current.y > 0) yDiff -= 1;
 		let mDiff = current.m - start.m;
 		let dDiff = current.d - start.d;
 		if (dDiff < 0) {
@@ -2270,20 +2271,7 @@ const propertime = (function () {
 
 			let tempSec = totalSec - 1;
 
-			function getDayLen(j) {
-				if (d.drag) { dragAssertInBounds(j); return dragDayLenSeconds(j); }
-				let len = 86400;
-				if (typeof j === 'bigint') {
-					if (j % 11n === 0n) len += 1;
-					return len;
-				}
-
-				let dp = jdnToYmd(j);
-				if (dp.m === 1 && dp.d === 1 &&[1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1988, 1990, 1991, 1996, 1999, 2006, 2009, 2017].includes(dp.y)) len += 1;
-				else if (dp.m === 7 && dp.d === 1 &&[1972, 1981, 1982, 1983, 1985, 1992, 1993, 1994, 1997, 2012, 2015].includes(dp.y)) len += 1;
-
-				return len;
-			}
+			const getDayLen = (j) => dayLenSeconds(j, d.drag);
 			while (tempSec >= getDayLen(jdn)) {
 				tempSec -= getDayLen(jdn);
 				jdn++;
@@ -2334,10 +2322,22 @@ const propertime = (function () {
 
 		add(n, unit) {
 			let newPt = new ProperTime(_addStep(this, n, unit));
-			newPt.tag = this.tag;
+			newPt.tag = n === 0 ? this.tag : resolveStyleTag(newPt, this.tag);
 			newPt.verbose = this.verbose;
 			newPt.drag = this.drag;
 			return newPt;
+		}
+
+		toStorage() {
+			return fieldsToWire(this);
+		}
+
+		toSortKey() {
+			return fieldsToSortKey(this);
+		}
+
+		getCivilDate() {
+			return fieldsToCivilDate(this);
 		}
 
 		DTP() {
@@ -2393,10 +2393,7 @@ getMeta(is_he = false) {
 					pyNum += 1;
 					if (pyNum === 0) pyNum = -1;
 				}
-				
-				if (this.tag === "N.S." && ayNum === 1155 && (m === 1 || m === 2 || (m === 3 && day < 25))) {
-					pyNum = 1154;
-				}
+
 			}
 			
 			let isBeforeBirth = false;
@@ -2910,15 +2907,33 @@ getMeta(is_he = false) {
 			let isIP = inputTag.includes("I.P.");
 			let isBC = isAC || isIP || s.startsWith("-");
 			if (s.startsWith("-")) s = s.substring(1);
+
 			if (s.length < 11) throw new Error("Invalid propertime string");
 
-			let is3DigitSec = /1157\d{3}PM$/i.test(s);
-			let secLen = is3DigitSec ? 3 : 2;
-			let ampm = s.slice(-2).toUpperCase();
-			let sec = parseInt(s.slice(-2 - secLen, -2));
-			let min = parseInt(s.slice(-4 - secLen, -2 - secLen));
-			let hr = parseInt(s.slice(-6 - secLen, -4 - secLen));
-			let dateStr = s.slice(0, -6 - secLen);
+			let merMatch = s.match(/[AP]M?/i);
+			if (!merMatch) throw new Error(`Invalid date.`);
+			let ampm = merMatch[0].toUpperCase();
+			if (ampm.length === 1) ampm += "M";
+			let beforeMer = s.slice(0, merMatch.index);
+			let afterMer = s.slice(merMatch.index + merMatch[0].length);
+
+			let timeStr, dateStr;
+			if (afterMer.length >= 6) {
+				dateStr = beforeMer;
+				timeStr = afterMer;
+			} else {
+				let timeLen = (ampm === "PM" && /1157\d{3}$/.test(beforeMer)) ? 7 : 6;
+				dateStr = beforeMer.slice(0, beforeMer.length - timeLen);
+				timeStr = beforeMer.slice(beforeMer.length - timeLen);
+			}
+
+			let hr = parseInt(timeStr.slice(0, 2));
+			let min = parseInt(timeStr.slice(2, 4));
+			let sec = parseInt(timeStr.slice(4));
+
+			if (timeStr.length > 7) throw new Error(`Invalid date.`);
+			if (timeStr.length === 7 && merMatch[0].length === 2 && !(hr === 11 && min === 57 && ampm === "PM")) throw new Error(`Invalid date.`);
+			if (timeStr.length === 7 && merMatch[0].length === 2 && afterMer.length >= 6) throw new Error(`Invalid date.`);
 
 			const day = parseInt(dateStr.slice(-2));
 			const month = parseInt(dateStr.slice(-4, -2));
@@ -2979,6 +2994,8 @@ getMeta(is_he = false) {
 				targetDay = 25;
 			}
 			
+			if (!isMassive && resolvedTag === "N.S." && ay === 1155 && (targetMonth < 3 || (targetMonth === 3 && targetDay < 25))) resolvedTag = "O.S.";
+
 			let jdnCheck = ymdToJdn(ay, targetMonth, targetDay);
 			let rt = jdnToYmd(jdnCheck);
 			if (rt.y.toString() !== ay.toString() || rt.m !== targetMonth || rt.d !== targetDay) {
@@ -3251,6 +3268,116 @@ getMeta(is_he = false) {
 		dragAssertInBounds(j);
 		let seconds = dragDayLenSeconds(j);
 		return { seconds, hours: seconds / 3600, yearsBP: dragYearsBP(j) };
+	};
+
+	function fieldsToWire(p) {
+		let time = p.hr + p.min + p.sec;
+		let mer = String(time).length >= 7 ? p.ampm[0] : p.ampm;
+		return civilYear(p) + p.month + p.day + mer + time + styleTag(p);
+	}
+	ptFunc.toStorage = fieldsToWire;
+
+	function fieldsToSortKey(p) {
+		return civilYear(p) + p.month + p.day + p.ampm[0] + p.hr + p.min + String(p.sec).padStart(3, "0") + styleTag(p);
+	}
+	ptFunc.toSortKey = fieldsToSortKey;
+
+	function resolveStyleTag(p, prevTag) {
+		if (p.drag || p.year.length > 14) return prevTag;
+		let ay = parseInt(p.year);
+		if (ay < 1) return prevTag;
+		if (prevTag !== "O.S." && prevTag !== "N.S." && (ay < 1145 || ay > 1760)) return prevTag;
+		let m = parseInt(p.month), d = parseInt(p.day);
+		if (ay === 1752) return (m < 9 || (m === 9 && d <= 2)) ? "O.S." : "N.S.";
+		let beforeLadyDay = m < 3 || (m === 3 && d < 25);
+		let tries = [prevTag, "", "O.S.", "N.S."];
+		for (let i = 0; i < tries.length; i++) {
+			let t = tries[i];
+			if (t !== "" && t !== "O.S." && t !== "N.S.") continue;
+			let py = (t !== "N.S." && beforeLadyDay && ay >= 1155 && ay <= 1751) ? ay - 1 : ay;
+			let back;
+			try { back = ptFunc(py + p.month + p.day + "AM000101" + (t ? " " + t : "")); } catch (e) { continue; }
+			if (back.year === p.year && back.month === p.month && back.day === p.day) return back.tag;
+		}
+		return prevTag;
+	}
+
+	const CIVIL_DATE_STARTS = [[1125, 0], [1020, 9], [913, 8], [808, 7], [702, 6], [527, 5], [420, 4], [315, 3], [206, 2], [101, 1]];
+
+	function fieldsToCivilDate(p) {
+		let m = parseInt(p.month), d = parseInt(p.day);
+		if (m === 2 && d === 29) return 0;
+		let md = m * 100 + d;
+		for (let i = 0; i < CIVIL_DATE_STARTS.length; i++) {
+			if (md >= CIVIL_DATE_STARTS[i][0]) return CIVIL_DATE_STARTS[i][1];
+		}
+		throw new Error("Invalid date.");
+	}
+	ptFunc.getCivilDate = function (input) {
+		return fieldsToCivilDate((input && typeof input === 'object' && 'month' in input && 'day' in input) ? input : ptFunc(input));
+	};
+
+	function civilYear(p) {
+		let y = p.year;
+		if (p.tag !== "O.S." || y.length > 14) return y;
+		let ay = parseInt(y), m = parseInt(p.month), d = parseInt(p.day);
+		return (ay >= 1155 && ay <= 1751 && (m < 3 || (m === 3 && d < 25))) ? String(ay - 1) : y;
+	}
+
+	function styleTag(p) {
+		return p.tag === "O.S." || p.tag === "N.S." ? " " + p.tag : "";
+	}
+
+	function dayLenSeconds(j, isDrag) {
+		if (isDrag) { dragAssertInBounds(j); return dragDayLenSeconds(j); }
+		let len = 86400;
+		if (typeof j === 'bigint') {
+			if (j % 11n === 0n) len += 1;
+			return len;
+		}
+		let dp = jdnToYmd(j);
+		if (dp.m === 1 && dp.d === 1 && [1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1988, 1990, 1991, 1996, 1999, 2006, 2009, 2017].includes(dp.y)) len += 1;
+		else if (dp.m === 7 && dp.d === 1 && [1972, 1981, 1982, 1983, 1985, 1992, 1993, 1994, 1997, 2012, 2015].includes(dp.y)) len += 1;
+		return len;
+	}
+
+	ptFunc.diff = function (a, b, units) {
+		const parse = function (x) { return (x && typeof x === 'object' && 'year' in x && 'month' in x) ? x : ptFunc(x); };
+		const cmpKey = function (pt) {
+			let jdn = ymdToJdn(pt.year, parseInt(pt.month), parseInt(pt.day));
+			jdn = typeof jdn === 'bigint' ? Number(jdn) : jdn;
+			let h = parseInt(pt.hr);
+			if (pt.ampm === "PM" && h !== 12) h += 12;
+			if (pt.ampm === "AM" && h === 12) h = 0;
+			return jdn * 100000 + h * 3600 + (parseInt(pt.min) - 1) * 60 + (parseInt(pt.sec) - 1);
+		};
+		let ptA = parse(a), ptB = parse(b);
+		let negative = cmpKey(ptA) > cmpKey(ptB);
+		let lo = negative ? ptB : ptA, hi = negative ? ptA : ptB;
+		let pool = units || UNITS;
+		let measured = [];
+		for (let i = 0; i < pool.length; i++) {
+			let step = cmpKey(lo.add(1, pool[i])) - cmpKey(lo);
+			if (step > 0) measured.push([pool[i], step, i]);
+		}
+		measured.sort(function (x, y) { return y[1] - x[1] || x[2] - y[2]; });
+		let bracket = [], lastStep = null;
+		for (let k = 0; k < measured.length; k++) {
+			if (measured[k][1] === lastStep) continue;
+			bracket.push(measured[k][0]);
+			lastStep = measured[k][1];
+		}
+		let hiKey = cmpKey(hi);
+		let cursor = lo;
+		let parts = [];
+		for (let i = 0; i < bracket.length; i++) {
+			let u = bracket[i], count = 0;
+			while (cmpKey(cursor.add(1, u)) <= hiKey) { cursor = cursor.add(1, u); count++; }
+			if (count > 0) parts.push(count + " " + u);
+		}
+		if (!parts.length) parts.push("0 SEC");
+		let s = parts.join(" ");
+		return s;
 	};
 
 	return ptFunc;

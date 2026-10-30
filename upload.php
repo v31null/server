@@ -226,14 +226,23 @@ if (!$isFinalize) {
     exit;
 }
 
+$pt = json_decode((string)shell_exec('node ' . escapeshellarg(__DIR__ . '/time/pt.js') . ' day'), true);
+if (!is_array($pt) || !isset($pt['key']) || !is_string($pt['key']) || $pt['key'] === '') {
+    http_response_code(500);
+    echo json_encode(['error' => 'No.']);
+    exit;
+}
+$createdAtDay = $pt['key'];
+
+$alphabet = 'abcdefghijklmnopqrstuvwxyz234567';
 $idStmt = $db->prepare('SELECT 1 FROM maps WHERE file_id = ?');
 do {
-    $uploadId = bin2hex(random_bytes(4));
+    $uploadId = '';
+    for ($i = 0; $i < 26; $i++) {
+        $uploadId .= $alphabet[random_int(0, 31)];
+    }
     $idStmt->execute([$uploadId]);
 } while ($idStmt->fetch());
-
-$JST_OFFSET = 9 * 3600;
-$createdAtDay = intdiv(time() + $JST_OFFSET, 86400) * 86400 - $JST_OFFSET;
 
 $mapStmt = $db->prepare('INSERT INTO maps (file_id, encrypted_payload, payload_iv, salt, created_at) VALUES (?, ?, ?, ?, ?)');
 $mapStmt->execute([
@@ -246,7 +255,7 @@ $mapStmt->execute([
 
 echo json_encode([
     'id'             => $uploadId,
-    'url'            => '/v/' . $uploadId,
+    'url'            => '/w/' . $uploadId,
     'new_chunks'     => $newChunksWritten,
     'deduped_chunks' => $totalChunks - $newChunksWritten
 ]);

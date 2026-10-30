@@ -6,12 +6,14 @@ require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/ratelimit.php';
 rl_enforce('download', 30);
 
+$t = require __DIR__ . '/lang.php';
+
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 
-if (!preg_match('/^[a-f0-9]{8}$/', $id)) {
+if (!preg_match('/^(?:[a-f0-9]{8}|[a-z2-7]{26})\z/', $id)) {
     http_response_code(404);
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        showErrorPage("File could not be finden", "Given \u{2018}yper\u{2011}link exists not in Our storage , pray ; do turn whence You kame back.");
+        showErrorPage($t, $t['error.notfound.title'], $t['error.notfound.badid']);
     } else {
         header('Content-Type: application/json');
         echo json_encode(['error' => 'No.']);
@@ -27,7 +29,7 @@ $mapData = $mapStmt->fetch(PDO::FETCH_ASSOC);
 if (!$mapData) {
     http_response_code(404);
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        showErrorPage("File could not be finden", "Given \u{2018}yper\u{2011}link exists not in Our storage , pray ; do turn whence You kame.");
+        showErrorPage($t, $t['error.notfound.title'], $t['error.notfound.missing']);
     } else {
         header('Content-Type: application/json');
         echo json_encode(['error' => 'No.']);
@@ -42,28 +44,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>v31nfiles</title>
+    <title><?= $t['title'] ?></title>
     <link rel="stylesheet" href="/assets/css/style.css" integrity="sha384-vkUMYVHo2DIftBUDGjFayMhenL4FQwi/pjSOQleqswVLpuBIVIh3JTj9W/kcULzd">
 </head>
 <body>
     <div class="container">
         <main>
             <div class="encrypted-notice">
-                <p class="encrypted-text">Please enter þͤ Paſs‑word.</p>
+                <p class="encrypted-text"><?= $t['download.prompt'] ?></p>
             </div>
 
             <div class="form-group">
                 <input type="password" id="download-password-input"
-                       placeholder="Paſs‑word" autocomplete="off">
+                       placeholder="<?= $t['download.password'] ?>" autocomplete="off">
             </div>
 
-            <button id="download-btn" class="btn">Akseſs þͤ file</button>
+            <button id="download-btn" class="btn"><?= $t['download.button'] ?></button>
 
             <div id="download-progress-container" class="progress-container" style="display:none">
                 <div class="progress-bar-wrapper">
                     <div id="download-progress-fill" class="progress-fill" style="width:0%"></div>
                 </div>
-                <p id="download-progress-text" class="progress-text">Requesting þͤ file…</p>
+                <p id="download-progress-text" class="progress-text"><?= $t['download.requesting'] ?></p>
             </div>
 
             <div id="download-error" class="error-container" style="display:none">
@@ -75,9 +77,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     <script>
         window.V31N_MODE = 'download';
         window.V31N_FILE_ID = '<?php echo htmlspecialchars($id, ENT_QUOTES, 'UTF-8'); ?>';
+        window.V31N_T = <?= json_encode($t, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
     </script>
-    <script src="../assets/js/crypto.js" integrity="sha384-w9GiC6ltG0puiUuhr/G608/S9HJf5ZfAAxan3zEu36iH4Ceo0wklSd9cfxfP3riU"></script>
-    <script src="../assets/js/app.js" integrity="sha384-LNP9ZrtgAjNEMsni8DJFcd2lPkiXopXXIpinBXo45KNIjOKyfbAPAlAA6KEQ2dW9"></script>
+    <script src="../assets/js/crypto.js" integrity="sha384-DrecfpzOZSnN2g+VI3ZtibT7KM6DFomdMsfoaaMGRSCikxlp+rlwrXrBmMfISwix"></script>
+    <script src="../assets/js/app.js" integrity="sha384-LC6btMJt8fygJ2Ei+o9LIeYlQkWDhqj40Aqt1UoIyD5lqQhrLKsVTP+PaZwPxduC"></script>
 </body>
 </html>
 <?php
@@ -102,25 +105,25 @@ echo json_encode(['error' => 'No.']);
 exit;
 
 
-function showErrorPage($title, $message) {
+function showErrorPage($t, $title, $message) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>v31nfiles</title>
+    <title><?= $t['title'] ?></title>
     <link rel="stylesheet" href="../assets/css/style.css" integrity="sha384-vkUMYVHo2DIftBUDGjFayMhenL4FQwi/pjSOQleqswVLpuBIVIh3JTj9W/kcULzd">
 </head>
 <body>
     <div class="container">
         <main>
             <div class="encrypted-notice">
-                <p class="encrypted-text">Attention !</p>
+                <p class="encrypted-text"><?= $t['error.attention'] ?></p>
                 <p class="encrypted-subtext"><?php echo htmlspecialchars($title); ?></p>
                 <p class="encrypted-subtext"><?php echo htmlspecialchars($message); ?></p>
                 <br>
-                <a href="/index.php" rel="noopener noreferrer"><p>Shall We ?</p></a>
+                <a href="/index.php" rel="noopener noreferrer"><p><?= $t['error.back'] ?></p></a>
             </div>
         </main>
     </div>

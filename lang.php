@@ -1,0 +1,59 @@
+<?php
+
+require_once __DIR__ . '/integritie.php'; integritie_gate(__FILE__);
+
+return [
+	'title' => 'v31nfiles',
+
+	'upload.drop' => 'Drag ‘iþer for to Up‑load',
+	'upload.at' => 'at',
+	'upload.password' => 'Paſs‑word ‘iðer',
+	'upload.button' => 'Up‑load',
+	'upload.encrypting' => 'En‑crypting…',
+	'upload.copied' => 'Kopieren.',
+	'upload.unsupported' => 'Un‑supporten characters.',
+	'upload.encrypting.progress' => 'En‑krypting. {p}%',
+	'upload.too.large' => 'File too large. Maximum 50 MiB.',
+	'upload.checking' => 'Checking.',
+	'upload.check.failed' => 'Failed to check chunk status (HTTP {status})',
+	'upload.uploading' => 'Up‑loading.',
+	'upload.uploading.progress' => 'Up‑loading. {p}%',
+	'upload.unstable' => 'Connection too unstable to finish. Progress was saved — re-upload the same file to resume.',
+	'upload.sealing' => 'Sealing.',
+	'upload.failed.http' => 'Upload failed (HTTP {status})',
+	'upload.failed' => 'Upload failed',
+	'upload.complete' => 'Complete!',
+	'upload.embed.reveal' => 'Click to reveal embed link',
+	'upload.embed.copy' => 'Click to copy embed link',
+	'network.failed' => 'Network request failed after retries',
+
+	'footer.links' => 'Click ‘iðer for to be Re‑direkten to see keys Publik fileses.',
+
+	'acta.sigillum' => 'Certificatio authenticitatis huius actae, sigillo nostro {alg} munita.',
+	'acta.sigillum.alg' => 'sigillum',
+
+	'download.prompt' => 'Please enter þͤ Paſs‑word.',
+	'download.password' => 'Paſs‑word',
+	'download.button' => 'Akseſs þͤ file',
+	'download.requesting' => 'Requesting þͤ file…',
+	'download.empty' => 'Please enter an Paß‑word.',
+	'download.meta' => 'Requesting Meta‑data.',
+	'download.notfound' => 'File kouldn’t be finden.',
+	'download.server' => 'Server error',
+	'download.auth' => 'Auðentikating.',
+	'download.wrong' => 'Wrong Paſs‑word.',
+	'download.fetching' => 'Down‑loading {n} En‑crypten‑chunks.',
+	'download.progress' => 'Down‑loading chunks. {p}%',
+	'download.waiting' => 'Waiting for a Free stream.',
+	'download.resuming' => 'Resuming. {p}%',
+	'download.failed' => 'Down‑load fole.',
+	'download.assembling' => "Aſsembling þͤ\u{00A0}file.",
+	'download.missing' => 'Missing chunk: {id}',
+	'download.decrypt.failed' => 'Decryption failed',
+
+	'error.attention' => 'Attention !',
+	'error.notfound.title' => 'File could not be finden',
+	'error.notfound.badid' => "Given \u{2018}yper\u{2011}link exists not in Our storage , pray ; do turn whence You kame back.",
+	'error.notfound.missing' => "Given \u{2018}yper\u{2011}link exists not in Our storage , pray ; do turn whence You kame.",
+	'error.back' => 'Shall We ?',
+];

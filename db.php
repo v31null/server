@@ -23,7 +23,6 @@ function getDb() {
     if ($isNew) {
         createSchema($pdo);
         migrateChunkIndex($pdo);
-        migrateMaps($pdo);
     }
 
     return $pdo;
@@ -45,7 +44,7 @@ function createSchema(PDO $pdo) {
             encrypted_payload TEXT NOT NULL,
             payload_iv        TEXT NOT NULL,
             salt              TEXT NOT NULL,
-            created_at        INTEGER NOT NULL
+            created_at        VARCHAR(24) NOT NULL
         )
     ');
 
@@ -75,41 +74,6 @@ function migrateChunkIndex(PDO $pdo) {
 
     foreach ($index as $hash => $entry) {
         $stmt->execute([$hash, $entry['offset'], $entry['length']]);
-    }
-
-    $pdo->commit();
-}
-
-
-function migrateMaps(PDO $pdo) {
-    $mapsDir = __DIR__ . '/storage/maps';
-    if (!is_dir($mapsDir)) {
-        return;
-    }
-
-    $files = glob($mapsDir . '/*.json');
-    if (empty($files)) {
-        return;
-    }
-
-    $pdo->beginTransaction();
-    $stmt = $pdo->prepare('INSERT OR IGNORE INTO maps (file_id, encrypted_payload, payload_iv, salt, created_at) VALUES (?, ?, ?, ?, ?)');
-
-    foreach ($files as $file) {
-        $fileId = basename($file, '.json');
-        $data = json_decode(file_get_contents($file), true);
-        if (!$data || !isset($data['encrypted_payload'], $data['payload_iv'], $data['salt'])) {
-            continue;
-        }
-
-        $createdAt = filemtime($file) ?: time();
-        $stmt->execute([
-            $fileId,
-            $data['encrypted_payload'],
-            $data['payload_iv'],
-            $data['salt'],
-            $createdAt
-        ]);
     }
 
     $pdo->commit();

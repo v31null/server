@@ -99,12 +99,14 @@ else {
 
 echo "\nDe singulis scriptis quae publice in limine proponuntur, ad breve signatum collatis.\n";
 info("Scripta ipsa machinae atque leges aditus non publice exponuntur neque eminus dinosci possunt; ea ex puro exemplari domestico recognoscas.");
+$clearnet = !preg_match('/\.onion$/i', (string) parse_url($EDGE, PHP_URL_HOST));
 if (is_array($man) && !empty($man['files'])) {
     $okc = 0; $diff = 0; $sk = 0;
     foreach ($man['files'] as $rel => $meta) {
         $base = basename($rel);
         $ext  = strtolower(pathinfo($rel, PATHINFO_EXTENSION));
         if ($ext === 'php' || $base === '.htaccess') { $sk++; skip("$rel, quod intra machinam latet neque ut scriptum exponitur."); continue; }
+        if ($clearnet && ($ext === 'html' || $ext === 'htm')) { $sk++; skip("$rel, quod in limine aperto custos viae scripto suo auget, ideoque per viam nostram propriam recognoscas."); continue; }
         if (!$full && isset($meta['size']) && $meta['size'] > $bigCap) { $sk++; skip("$rel, magnitudine " . round($meta['size'] / 1048576, 1) . " MB praegrave; quod ut plene recognoscatur, vexillo --full opus est."); continue; }
         list($body, $code, ) = fetch(rtrim($EDGE, '/') . '/' . $rel, $tlsVerify);
         if ($body === null || $code >= 400) { $sk++; skip("$rel, limine responsum $code reddente."); continue; }

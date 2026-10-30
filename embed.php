@@ -8,7 +8,7 @@ require_once __DIR__ . '/ratelimit.php';
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 $pass = isset($_GET['PASS']) ? $_GET['PASS'] : '';
 
-if (!preg_match('/^[a-f0-9]{8}$/', $id) || empty($pass)) {
+if (!preg_match('/^(?:[a-f0-9]{8}|[a-z2-7]{26})\z/', $id) || empty($pass)) {
     http_response_code(404);
     exit;
 }
@@ -43,7 +43,7 @@ if (!$mapData) {
 $claimStmt = $db->prepare('INSERT OR IGNORE INTO embed_bans (file_id, banned_at) VALUES (?, ?)');
 $claimStmt->execute([$id, time()]);
 if ($claimStmt->rowCount() === 0) {
-    header('Location: /v/' . $id);
+    header('Location: ' . (strlen($id) === 26 ? '/w/' : '/v/') . $id);
     exit;
 }
 

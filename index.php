@@ -1,9 +1,9 @@
-<?php require_once __DIR__ . '/integritie.php'; integritie_gate(__FILE__); ?>
+<?php require_once __DIR__ . '/integritie.php'; integritie_gate(__FILE__); $t = require __DIR__ . '/lang.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-    <title>v31nfiles</title>
+    <title><?= $t['title'] ?></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/css/style.css" integrity="sha384-vkUMYVHo2DIftBUDGjFayMhenL4FQwi/pjSOQleqswVLpuBIVIh3JTj9W/kcULzd">
 
@@ -39,25 +39,25 @@
     <main>
 
       <div id="drop-zone" class="drop-zone">
-        <p class="drop-zone-text">Drag ‘iþer for to Up‑load</p>
+        <p class="drop-zone-text"><?= $t['upload.drop'] ?></p>
         <input type="file" id="file-input" hidden>
       </div>
 
       <div id="file-info" class="file-info" style="display:none">
-        <span id="file-name"></span> at <span id="file-size"></span>
+        <span id="file-name"></span> <?= $t['upload.at'] ?> <span id="file-size"></span>
       </div>
 
       <div class="form-group">
-        <input type="password" id="password-input" placeholder="Paſs‑word ‘iðer" autocomplete="off">
+        <input type="password" id="password-input" placeholder="<?= $t['upload.password'] ?>" autocomplete="off">
       </div>
 
-      <button id="upload-btn" class="btn" disabled>Up‑load</button>
+      <button id="upload-btn" class="btn" disabled><?= $t['upload.button'] ?></button>
 
       <div id="progress-container" class="progress-container" style="display:none">
         <div class="progress-bar-wrapper">
           <div id="progress-fill" class="progress-fill" style="width:0%"></div>
         </div>
-        <p id="progress-text" class="progress-text">En‑crypting…</p>
+        <p id="progress-text" class="progress-text"><?= $t['upload.encrypting'] ?></p>
       </div>
 
       <div id="result-container" class="result-container" style="display:none; text-align:center;">
@@ -69,7 +69,7 @@
                   <a id="result-link" class="result-link" href="#" target="_blank"></a>
                 </span>
               </div>
-              <span id="copy-feedback-secure" class="copy-feedback" style="display:none">Kopieren.</span>
+              <span id="copy-feedback-secure" class="copy-feedback" style="display:none"><?= $t['upload.copied'] ?></span>
             </td>
             <td style="width: 50%; padding: 10px; vertical-align: top;">
               <div class="result-link-wrapper" style="justify-content: center; margin-bottom: 5px;">
@@ -77,7 +77,7 @@
                   <a id="result-embed-link" class="result-link" href="#" target="_blank"></a>
                 </span>
               </div>
-              <span id="copy-feedback-embed" class="copy-feedback" style="display:none">Kopieren.</span>
+              <span id="copy-feedback-embed" class="copy-feedback" style="display:none"><?= $t['upload.copied'] ?></span>
             </td>
           </tr>
         </table>
@@ -90,8 +90,7 @@
     </main>
 
     <footer>
-      <p><a href="/links.txt">Click ‘iðer for to be Re‑direkten to see keys Publik fileses.</a></p>
-      <p><a href="/aliveneß.php">Aliveneß logs.</a></p>
+      <p><a href="/links.txt"><?= $t['footer.links'] ?></a></p>
     </footer>
 
 <?php
@@ -138,7 +137,7 @@
 
 <?php if (!empty($sig['value'])) : ?>
         <div class="acta-sigillum">
-          <p class="acta-sigillum-titulus">Certificatio authenticitatis huius actae, sigillo nostro <?php echo htmlspecialchars(isset($sig['alg']) ? $sig['alg'] : 'sigillum', ENT_QUOTES, 'UTF-8'); ?> munita.</p>
+          <p class="acta-sigillum-titulus"><?= str_replace('{alg}', htmlspecialchars(isset($sig['alg']) ? $sig['alg'] : $t['acta.sigillum.alg'], ENT_QUOTES, 'UTF-8'), $t['acta.sigillum']) ?></p>
           <p class="acta-sigillum-valor"><?php echo htmlspecialchars($sig['value'], ENT_QUOTES, 'UTF-8'); ?></p>
         </div>
 <?php endif; ?>
@@ -171,8 +170,8 @@
   })();
   </script>
 
-  <script>window.V31N_MODE = 'upload';</script>
-  <script src="assets/js/crypto.js" integrity="sha384-w9GiC6ltG0puiUuhr/G608/S9HJf5ZfAAxan3zEu36iH4Ceo0wklSd9cfxfP3riU"></script>
-  <script src="assets/js/app.js" integrity="sha384-LNP9ZrtgAjNEMsni8DJFcd2lPkiXopXXIpinBXo45KNIjOKyfbAPAlAA6KEQ2dW9"></script>
+  <script>window.V31N_MODE = 'upload'; window.V31N_T = <?= json_encode($t, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
+  <script src="assets/js/crypto.js" integrity="sha384-DrecfpzOZSnN2g+VI3ZtibT7KM6DFomdMsfoaaMGRSCikxlp+rlwrXrBmMfISwix"></script>
+  <script src="assets/js/app.js" integrity="sha384-LC6btMJt8fygJ2Ei+o9LIeYlQkWDhqj40Aqt1UoIyD5lqQhrLKsVTP+PaZwPxduC"></script>
 </body>
 </html>
