@@ -64,6 +64,11 @@ if (!$slot) {
     pack_refuse(503);
 }
 
+$gate = @fopen(__DIR__ . '/../storage/nuke.lock', 'c');
+if (!$gate || !flock($gate, LOCK_SH)) {
+    pack_refuse(503);
+}
+
 require_once __DIR__ . '/../db.php';
 $db = getDb();
 $stmt = $db->prepare('SELECT offset, length FROM chunks WHERE hash = ?');
@@ -192,5 +197,7 @@ hash_update($crc, $PI);
 $out($PI . strrev(hash_final($crc, true)));
 flush();
 
+flock($gate, LOCK_UN);
+fclose($gate);
 flock($slot, LOCK_UN);
 fclose($slot);

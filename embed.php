@@ -30,6 +30,11 @@ if (file_exists($cacheFile) && file_exists($cacheFile . '.meta')) {
 }
 
 rl_enforce('embed', 10);
+$gate = fopen(__DIR__ . '/storage/nuke.lock', 'c');
+if (!$gate || !flock($gate, LOCK_SH)) {
+    http_response_code(503);
+    exit;
+}
 
 $mapStmt = $db->prepare('SELECT encrypted_payload, payload_iv, salt FROM maps WHERE file_id = ?');
 $mapStmt->execute([$id]);
@@ -140,6 +145,13 @@ if (isset($payloadObj['size']) && is_int($payloadObj['size']) && $payloadObj['si
 
 fclose($outHandle);
 fclose($slugHandle);
+
+$db->beginTransaction();
+$embedChunkStmt = $db->prepare('INSERT OR IGNORE INTO embed_chunks (file_id, hash) VALUES (?, ?)');
+foreach ($payloadObj['map'] as $item) {
+    $embedChunkStmt->execute([$id, $item['id']]);
+}
+$db->commit();
 
 rename($tmpCacheFile, $cacheFile);
 

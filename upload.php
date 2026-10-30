@@ -69,6 +69,13 @@ initStorage();
 require_once __DIR__ . '/db.php';
 $db = getDb();
 
+$gate = fopen(__DIR__ . '/storage/nuke.lock', 'c');
+if (!$gate || !flock($gate, LOCK_SH)) {
+    http_response_code(503);
+    echo json_encode(['error' => 'No.']);
+    exit;
+}
+
 $ticketStmt = $db->prepare('SELECT chunks FROM tickets WHERE ticket = ?');
 $ticketStmt->execute([$ticket]);
 $ticketChunks = $ticketStmt->fetchColumn();
