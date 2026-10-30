@@ -19,17 +19,16 @@ if ($contentLength > $maxPostBytes) {
     exit;
 }
 
-$raw = file_get_contents('php://input');
-$input = json_decode($raw, true);
-
-if (!$input) {
-    http_response_code(400);
+$raw = file_get_contents('php://input', false, null, 0, $maxPostBytes + 1);
+if ($raw === false || strlen($raw) > $maxPostBytes) {
+    http_response_code(413);
     echo json_encode(['error' => 'No.']);
     exit;
 }
 
-$hasChunks = isset($input['chunks']) && is_array($input['chunks']);
-$isFinalize = isset($input['encrypted_payload']);
+$contentType = strtolower(trim(explode(';', (string)($_SERVER['CONTENT_TYPE'] ?? ''))[0]));
+$isFinalize = $contentType !== 'application/octet-stream';
+$RECORD = 4156;
 
 require_once __DIR__ . '/ratelimit.php';
 if ($isFinalize) {
@@ -39,20 +38,21 @@ if ($isFinalize) {
 }
 
 if ($isFinalize) {
+    $input = json_decode($raw, true);
+    if (!is_array($input)) {
+        http_response_code(400);
+        echo json_encode(['error' => 'No.']);
+        exit;
+    }
     foreach (['encrypted_payload', 'payload_iv', 'salt'] as $field) {
-        if (!isset($input[$field])) {
+        if (!isset($input[$field]) || !is_string($input[$field])) {
             http_response_code(400);
             echo json_encode(['error' => 'No.']);
             exit;
         }
     }
 } else {
-    if (!$hasChunks) {
-        http_response_code(400);
-        echo json_encode(['error' => 'No.']);
-        exit;
-    }
-    if (empty($input['chunks'])) {
+    if ($raw === '' || strlen($raw) % $RECORD !== 0) {
         http_response_code(400);
         echo json_encode(['error' => 'No.']);
         exit;
@@ -65,12 +65,24 @@ initStorage();
 require_once __DIR__ . '/db.php';
 $db = getDb();
 
-$totalChunks = $hasChunks ? count($input['chunks']) : 0;
+$totalChunks = $isFinalize ? 0 : intdiv(strlen($raw), $RECORD);
 $newChunksWritten = 0;
 
-if ($hasChunks && $totalChunks > 0) {
+if ($totalChunks > 0) {
     $storagePath = __DIR__ . '/storage';
     $slugPath = $storagePath . '/slug.v31n';
+
+    clearstatcache(true, $slugPath);
+    $slugBytes = @filesize($slugPath);
+    $freeBytes = @disk_free_space($storagePath);
+    $incomingBytes = $totalChunks * 4160;
+    if ($slugBytes === false || $freeBytes === false
+        || $slugBytes + $incomingBytes > 100 * 1024 ** 3
+        || $freeBytes - $incomingBytes < 20 * 1024 ** 3) {
+        http_response_code(507);
+        echo json_encode(['error' => 'No.']);
+        exit;
+    }
 
     $slugHandle = fopen($slugPath, 'r+b');
     if (!$slugHandle) {
@@ -120,34 +132,18 @@ if ($hasChunks && $totalChunks > 0) {
     $fileSize = ftell($slugHandle);
     $slotCount = intdiv($fileSize - $HEADER_LEN, $SLOT);
 
-    foreach ($input['chunks'] as $chunk) {
-        if (!isset($chunk['hash'], $chunk['iv'], $chunk['data'])) {
-            continue;
-        }
-
-        $hash = $chunk['hash'];
-
-        if (!preg_match('/^[a-f0-9]{64}$/', $hash)) {
-            continue;
-        }
+    for ($k = 0; $k < $totalChunks; $k++) {
+        $record = substr($raw, $k * $RECORD, $RECORD);
+        $hashBytes = substr($record, 0, 32);
+        $hash = bin2hex($hashBytes);
 
         $existsStmt->execute([$hash]);
         if ($existsStmt->fetch()) {
             continue;
         }
 
-        $iv = base64_decode($chunk['iv'], true);
-        $data = base64_decode($chunk['data'], true);
-
-        if ($iv === false || $data === false) {
-            continue;
-        }
-
-        if (strlen($iv) !== 12) {
-            continue;
-        }
-
-        $hashBytes = hex2bin($hash);
+        $iv = substr($record, 32, 12);
+        $data = substr($record, 44);
         $dataLength = strlen($data);
         $lengthBytes = pack('N', $dataLength);
 

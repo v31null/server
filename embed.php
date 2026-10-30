@@ -119,6 +119,10 @@ foreach ($payloadObj['map'] as $item) {
     }
 }
 
+if (isset($payloadObj['size']) && is_int($payloadObj['size']) && $payloadObj['size'] >= 0 && ftell($outHandle) > $payloadObj['size']) {
+    ftruncate($outHandle, $payloadObj['size']);
+}
+
 fclose($outHandle);
 fclose($slugHandle);
 

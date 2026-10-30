@@ -19,16 +19,11 @@ function pack_num($v) {
     return $b;
 }
 
-function pack_dummy_size($hash) {
-    $lenHash = hexdec(substr(hash('sha256', $hash . '_len'), 0, 8));
-    return $lenHash % 100 < 95 ? 4112 : 16 + ($lenHash % 4096);
-}
-
 function pack_dummy($hash) {
     $iv = substr(hash('sha256', $hash . '_iv', true), 0, 12);
     $ctrIv = substr(hash('sha256', $hash . '_iv_crypto', true), 0, 16);
     $key = hash('sha256', $hash . '_key', true);
-    return $iv . openssl_encrypt(str_repeat("\0", pack_dummy_size($hash)), 'aes-256-ctr', $key, OPENSSL_RAW_DATA, $ctrIv);
+    return $iv . openssl_encrypt(str_repeat("\0", 4112), 'aes-256-ctr', $key, OPENSSL_RAW_DATA, $ctrIv);
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -81,7 +76,7 @@ foreach ($hashes as $h) {
     if ($row && (int)$row['length'] > 48) {
         $entries[] = [$h, (int)$row['offset'] + 36, (int)$row['length'] - 36];
     } else {
-        $entries[] = [$h, -1, 12 + pack_dummy_size($h)];
+        $entries[] = [$h, -1, 12 + 4112];
     }
     $bodyLen += $entries[count($entries) - 1][2];
 }

@@ -192,7 +192,8 @@ async function chunkAndEncryptFile(file, password, decoyHashes, onProgress) {
     for (let i = 0; i < totalChunks; i++) {
         const start = i * CHUNK_SIZE;
         const end = Math.min(start + CHUNK_SIZE, fileBytes.length);
-        const chunkBytes = fileBytes.slice(start, end);
+        const chunkBytes = new Uint8Array(CHUNK_SIZE);
+        chunkBytes.set(fileBytes.subarray(start, end));
 
         const baseHash = await hashChunk(chunkBytes, hmacKey);
 
@@ -255,7 +256,7 @@ async function assembleFile(payload, chunks, onProgress) {
         data.set(part, offset);
         offset += part.length;
     }
-    return { data, filename, mime, size };
+    return { data: data.subarray(0, Math.min(size, totalLength)), filename, mime, size };
 }
 
 

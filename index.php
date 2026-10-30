@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . '/integritie.php'; integritie_gate(__FILE__); $t = require __DIR__ . '/lang.php'; ?>
+<?php require_once __DIR__ . '/integritie.php'; integritie_gate(__FILE__); $t = require __DIR__ . '/lang.php'; require_once __DIR__ . '/csp.php'; $nonce = v31n_csp(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,12 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/css/style.css" integrity="sha384-vkUMYVHo2DIftBUDGjFayMhenL4FQwi/pjSOQleqswVLpuBIVIh3JTj9W/kcULzd">
 
-		<link rel="stylesheet" href="/assets/css/katex.css" integrity="sha384-SDhS2XmGfhu2j8zW3P66SdGPyhekPD7vRAl7zMnMYbSu94g/F4xtfJuR2P2XLWgg" />
-		<script defer src="/assets/js/katex.js" integrity="sha384-tMzugJpfLv7v0f+KXzNMqNCC6sVzLMM3sCnZDgzy0lcO/0h3sAkEBg/URFcV0JpE"></script>
-		<script defer src="/assets/js/auto-render.js" integrity="sha384-xPmXPBvcxK/y8ReZ6Bqqc2xLa3i/2NHkhfeKYWS2sIfCbizZU2B2AsusEWhU1yOV"></script>
-		<script defer src="/assets/js/copy-tex.min.js" integrity="sha384-HORx6nWi8j5/mYA+y57/9/CZc5z8HnEw4WUZWy5yOn9ToKBv1l58vJaufFAn9Zzi"></script>
+		<link rel="stylesheet" href="/assets/css/katex.css" integrity="sha384-dyEuTchRIWTUUS5esbTCpMfx+B+xfO8EoTt5SiUbKmafuP0Gilzcq4YNJuy9EkCC" />
+		<script defer src="/assets/js/katex.js" integrity="sha384-H4X0CTVqduiMCy79KQw+noSKkBB6tvyQopi29LC//G1uFcl52atjOC6Ltc9br/U7"></script>
+		<script defer src="/assets/js/auto-render.js" integrity="sha384-n4X0EO8umJELS25kX2SIST9zVstnnEkI8qCfzN4c4+fmWRTNE8fA+MCgssTBDI9g"></script>
+		<script defer src="/assets/js/copy-tex.min.js" integrity="sha384-Pe2JWbaShhSRT0SESJ9XLPeAsi4yrNi7r/CiH0Coq7giBjK5a6Ae7XcybE8rNlQP"></script>
     <link rel="shortcut icon" href="/assets/img/logomonochrome.ico" type="image/x-icon">
-		<script>
+		<script nonce="<?= $nonce ?>">
 			window.onload = function () {
 				renderMathInElement(document.body, {
 					delimiters: [
@@ -149,7 +149,7 @@
 
   </div>
 
-  <script>
+  <script nonce="<?= $nonce ?>">
   (function () {
     document.querySelectorAll('.acta-intitulatio').forEach(function (el) {
       el.innerHTML = el.innerHTML.replace(
@@ -170,8 +170,8 @@
   })();
   </script>
 
-  <script>window.V31N_MODE = 'upload'; window.V31N_T = <?= json_encode($t, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-  <script src="assets/js/crypto.js" integrity="sha384-DrecfpzOZSnN2g+VI3ZtibT7KM6DFomdMsfoaaMGRSCikxlp+rlwrXrBmMfISwix"></script>
-  <script src="assets/js/app.js" integrity="sha384-LC6btMJt8fygJ2Ei+o9LIeYlQkWDhqj40Aqt1UoIyD5lqQhrLKsVTP+PaZwPxduC"></script>
+  <script nonce="<?= $nonce ?>">window.V31N_MODE = 'upload'; window.V31N_T = <?= json_encode($t, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
+  <script src="assets/js/crypto.js" integrity="sha384-l+bGaCZl9Le11KMI1QeeVvCWDWsQ/k6B0G9hzBOillGfYLl9i6zPgn+/Bn1iYo3v"></script>
+  <script src="assets/js/app.js" integrity="sha384-63WeU4N0HB2qX+4zzzLO4R0fkvOmwq5MCkCKM3eU5DLvyrB9uwT9DVTxh0uhvmKJ"></script>
 </body>
 </html>

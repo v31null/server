@@ -22,6 +22,7 @@ return [
 	'upload.sealing' => 'Sealing.',
 	'upload.failed.http' => 'Upload failed (HTTP {status})',
 	'upload.failed' => 'Upload failed',
+	'upload.nospace' => 'No‑space.',
 	'upload.complete' => 'Complete!',
 	'upload.embed.reveal' => 'Click to reveal embed link',
 	'upload.embed.copy' => 'Click to copy embed link',

@@ -6,6 +6,9 @@ require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/ratelimit.php';
 rl_enforce('download', 30);
 
+require_once __DIR__ . '/csp.php';
+$nonce = v31n_csp();
+
 $t = require __DIR__ . '/lang.php';
 
 $id = isset($_GET['id']) ? $_GET['id'] : '';
@@ -74,13 +77,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         </main>
     </div>
 
-    <script>
+    <script nonce="<?= $nonce ?>">
         window.V31N_MODE = 'download';
         window.V31N_FILE_ID = '<?php echo htmlspecialchars($id, ENT_QUOTES, 'UTF-8'); ?>';
         window.V31N_T = <?= json_encode($t, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
     </script>
-    <script src="../assets/js/crypto.js" integrity="sha384-DrecfpzOZSnN2g+VI3ZtibT7KM6DFomdMsfoaaMGRSCikxlp+rlwrXrBmMfISwix"></script>
-    <script src="../assets/js/app.js" integrity="sha384-LC6btMJt8fygJ2Ei+o9LIeYlQkWDhqj40Aqt1UoIyD5lqQhrLKsVTP+PaZwPxduC"></script>
+    <script src="../assets/js/crypto.js" integrity="sha384-l+bGaCZl9Le11KMI1QeeVvCWDWsQ/k6B0G9hzBOillGfYLl9i6zPgn+/Bn1iYo3v"></script>
+    <script src="../assets/js/app.js" integrity="sha384-63WeU4N0HB2qX+4zzzLO4R0fkvOmwq5MCkCKM3eU5DLvyrB9uwT9DVTxh0uhvmKJ"></script>
 </body>
 </html>
 <?php

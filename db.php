@@ -25,6 +25,8 @@ function getDb() {
         migrateChunkIndex($pdo);
     }
 
+    $pdo->exec('CREATE INDEX IF NOT EXISTS chunks_offset ON chunks(offset)');
+
     return $pdo;
 }
 

@@ -87,7 +87,7 @@ async function v31nFetchRetry(url, options, cfg) {
             const resp = await fetch(url, Object.assign({}, options, { signal: ctrl.signal }));
             clearTimeout(timer);
 
-            if (resp.status === 429 || (resp.status >= 500 && resp.status < 600)) {
+            if (resp.status === 429 || (resp.status >= 500 && resp.status < 600 && resp.status !== 507)) {
                 if (attempt >= maxAttempts) return resp;
                 const ra = parseInt(resp.headers.get('Retry-After') || '0', 10);
                 const wait = (ra > 0 ? ra * 1000 : delay) + Math.floor(Math.random() * 750);
@@ -107,6 +107,20 @@ async function v31nFetchRetry(url, options, cfg) {
     }
 
     throw lastErr || new Error(v31nT('network.failed'));
+}
+
+
+function v31nPadme(n) {
+    const e = 31 - Math.clz32(n);
+    const s = 32 - Math.clz32(e);
+    const step = 2 ** Math.max(0, e - s);
+    return Math.ceil(n / step) * step;
+}
+
+
+function v31nSafeMime(mime) {
+    const m = String(mime || '').toLowerCase();
+    return m.startsWith('image/') || m.startsWith('video/') || m.startsWith('audio/') || m === 'application/pdf';
 }
 
 
@@ -227,23 +241,18 @@ function initUpload() {
         hideError();
 
         try {
-            const baseDecoys = Math.floor(Math.random() * 21) + 10;
-            const proportionalDecoys = Math.floor((file.size / 4096) * (0.1 + Math.random() * 0.2));
-            const numPseudos = baseDecoys + proportionalDecoys;
-            
+            const realCount = Math.ceil(file.size / V31nCrypto.CHUNK_SIZE) || 1;
+            const numPseudos = v31nPadme(realCount) - realCount;
+
             const decoyHashes = [];
             const decoyChunks = [];
             for (let p = 0; p < numPseudos; p++) {
-                const dummyBytes = crypto.getRandomValues(new Uint8Array(32));
-                const dummyHash = V31nCrypto.bytesToHex(dummyBytes);
-                const dummySize = Math.random() < 0.95 ? 4112 : 16 + Math.floor(Math.random() * 4096);
-                const dummyData = new Uint8Array(dummySize);
-                crypto.getRandomValues(dummyData);
-                const dummyIv = crypto.getRandomValues(new Uint8Array(12));
+                const dummyData = crypto.getRandomValues(new Uint8Array(V31N_ENTRY));
+                const dummyHash = V31nCrypto.bytesToHex(new Uint8Array(await crypto.subtle.digest('SHA-256', dummyData)));
                 decoyChunks.push({
                     hash: dummyHash,
-                    iv: V31nCrypto.bytesToBase64(dummyIv),
-                    data: V31nCrypto.bytesToBase64(dummyData)
+                    iv: crypto.getRandomValues(new Uint8Array(12)),
+                    data: dummyData
                 });
                 decoyHashes.push(dummyHash);
             }
@@ -253,84 +262,99 @@ function initUpload() {
                 progressText.textContent = v31nT('upload.encrypting.progress', { p: Math.round(progress * 100) });
             });
 
-            const STORE_BATCH = 40;
+            const STORE_BATCH = 128;
+            const STORE_PARALLEL = 2;
+            const STATUS_BATCH = 2000;
+
+            const allChunks = result.chunks.concat(decoyChunks);
+            for (let i = allChunks.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                const tmp = allChunks[i];
+                allChunks[i] = allChunks[j];
+                allChunks[j] = tmp;
+            }
+
+            const missingOf = async (hashes, strict) => {
+                const missing = new Set();
+                for (let i = 0; i < hashes.length; i += STATUS_BATCH) {
+                    const part = hashes.slice(i, i + STATUS_BATCH);
+                    const resp = await v31nFetchRetry(BASE_URL + 'api/status.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ hashes: part })
+                    });
+                    if (!resp.ok) {
+                        if (strict) throw new Error(v31nT('upload.check.failed', { status: resp.status }));
+                        part.forEach(h => missing.add(h));
+                        continue;
+                    }
+                    (await resp.json()).missing.forEach(h => missing.add(h));
+                }
+                return missing;
+            };
 
             progressText.textContent = v31nT('upload.checking');
-            const realHashes = result.chunks.map(c => c.hash);
-
-            const statusResp = await v31nFetchRetry(BASE_URL + 'api/status.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ hashes: realHashes })
-            });
-
-            if (!statusResp.ok) {
-                throw new Error(v31nT('upload.check.failed', { status: statusResp.status }));
-            }
-
-            const status = await statusResp.json();
-            const missingSet = new Set(status.missing);
-
-            const realMissing = result.chunks
-                .filter(c => missingSet.has(c.hash))
-                .map(c => ({
-                    hash: c.hash,
-                    iv: V31nCrypto.bytesToBase64(c.iv),
-                    data: V31nCrypto.bytesToBase64(c.data)
-                }));
-
-            const requiredHashes = realMissing.map(c => c.hash);
-
-            let toUpload = realMissing.concat(decoyChunks);
-            for (let i = toUpload.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                const tmp = toUpload[i];
-                toUpload[i] = toUpload[j];
-                toUpload[j] = tmp;
-            }
+            const firstMissing = await missingOf(allChunks.map(c => c.hash), true);
+            let toUpload = allChunks.filter(c => firstMissing.has(c.hash));
 
             const totalToStore = Math.max(1, toUpload.length);
             let storedSoFar = 0;
+            let noSpace = false;
             progressText.textContent = v31nT('upload.uploading');
 
+            const sendBatch = async (batch) => {
+                const body = new Uint8Array(batch.length * V31N_RECORD);
+                batch.forEach((c, k) => {
+                    const o = k * V31N_RECORD;
+                    body.set(V31nCrypto.hexToBytes(c.hash), o);
+                    body.set(c.iv, o + 32);
+                    body.set(c.data, o + 44);
+                });
+                try {
+                    const r = await v31nFetchRetry(BASE_URL + 'upload.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/octet-stream' },
+                        body
+                    });
+                    if (r.status === 507) {
+                        noSpace = true;
+                        return;
+                    }
+                    if (!r.ok) return;
+                    storedSoFar += batch.length;
+                    const frac = Math.min(1, storedSoFar / totalToStore);
+                    progressFill.style.width = (40 + frac * 45) + '%';
+                    progressText.textContent = v31nT('upload.uploading.progress', { p: Math.round(frac * 100) });
+                } catch (e) {
+                }
+            };
+
             let round = 0;
-            while (true) {
+            while (toUpload.length) {
                 round++;
 
-                for (let i = 0; i < toUpload.length; i += STORE_BATCH) {
-                    const batch = toUpload.slice(i, i + STORE_BATCH);
-                    try {
-                        const r = await v31nFetchRetry(BASE_URL + 'upload.php', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ chunks: batch })
-                        });
-                        if (!r.ok) throw new Error('store HTTP ' + r.status);
-                        storedSoFar += batch.length;
-                        const frac = Math.min(1, storedSoFar / totalToStore);
-                        progressFill.style.width = (40 + frac * 45) + '%';
-                        progressText.textContent = v31nT('upload.uploading.progress', { p: Math.round(frac * 100) });
-                    } catch (e) {
+                let next = 0;
+                const lane = async () => {
+                    while (!noSpace && next < toUpload.length) {
+                        const batch = toUpload.slice(next, next + STORE_BATCH);
+                        next += STORE_BATCH;
+                        await sendBatch(batch);
                     }
+                };
+                await Promise.all(Array.from({ length: STORE_PARALLEL }, lane));
+
+                if (noSpace) {
+                    throw new Error(v31nT('upload.nospace'));
                 }
 
-                if (!requiredHashes.length) break;
+                const stillMissing = await missingOf(toUpload.map(c => c.hash), false);
+                toUpload = toUpload.filter(c => stillMissing.has(c.hash));
 
-                const recheck = await v31nFetchRetry(BASE_URL + 'api/status.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ hashes: requiredHashes })
-                });
-                const recheckJson = recheck.ok ? await recheck.json() : { missing: requiredHashes };
-                const stillMissing = new Set(recheckJson.missing);
-                const remainingReal = realMissing.filter(c => stillMissing.has(c.hash));
-
-                if (!remainingReal.length) break;
+                if (!toUpload.length) break;
                 if (round >= 6) {
                     throw new Error(v31nT('upload.unstable'));
                 }
 
-                toUpload = remainingReal;
                 await v31nSleep(2000 + Math.floor(Math.random() * 1500));
             }
 
@@ -503,9 +527,21 @@ function initDownload() {
                 progressFill.style.width = (90 + p * 10) + '%';
             });
 
-            const blob = new Blob([file.data], { type: file.mime });
+            const safe = v31nSafeMime(file.mime);
+            const blob = new Blob([file.data], { type: safe ? file.mime : 'application/octet-stream' });
             const blobUrl = URL.createObjectURL(blob);
-            window.location.href = blobUrl;
+            if (safe) {
+                window.location.href = blobUrl;
+                return;
+            }
+            const a = document.createElement('a');
+            a.href = blobUrl;
+            a.download = file.filename || 'file.bin';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            progressFill.style.width = '100%';
+            downloadBtn.disabled = false;
             return;
 
         } catch (err) {
@@ -536,6 +572,8 @@ function initDownload() {
 const V31N_PI = new Uint8Array([0x24, 0x3F, 0x6A, 0x88, 0x85, 0xA3, 0x08, 0xD3, 0x13, 0x19, 0x8A, 0x2E]);
 const V31N_PHI = new Uint8Array([0x9E, 0x37, 0x79, 0xB9, 0x7F, 0x4A, 0x7C, 0x15, 0xF3, 0x9C, 0xC0, 0x60]);
 const V31N_MAGIC = new TextEncoder().encode('V31NSPACKFORMAT');
+const V31N_ENTRY = 4112;
+const V31N_RECORD = 32 + 12 + V31N_ENTRY;
 const V31N_CRC_TABLE = (() => {
     const t = new Uint32Array(256);
     for (let n = 0; n < 256; n++) {

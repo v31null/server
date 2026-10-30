@@ -42,43 +42,43 @@ function rl_enforce($bucket, $limit, $window = 60) {
         }
 
         $now = time();
-        $hits = array_values(array_filter($state[$key] ?? [], function ($ts) use ($now, $window) {
-            return $ts > $now - $window;
-        }));
-
-        if (count($hits) >= $limit) {
-            $state[$key] = $hits;
-            $prune = $now - $window;
-            foreach ($state as $k => $list) {
-                $kept = array_values(array_filter($list, function ($ts) use ($prune) {
-                    return $ts > $prune;
-                }));
-                if (empty($kept)) {
-                    unset($state[$k]);
-                } else {
-                    $state[$k] = $kept;
-                }
+        $prune = $now - $window;
+        foreach ($state as $k => $list) {
+            $kept = is_array($list) ? array_values(array_filter($list, function ($ts) use ($prune) {
+                return is_int($ts) && $ts > $prune;
+            })) : [];
+            if (empty($kept)) {
+                unset($state[$k]);
+            } else {
+                $state[$k] = $kept;
             }
+        }
+
+        $hits = $state[$key] ?? [];
+        $limited = count($hits) >= $limit;
+        if (!$limited) {
+            $hits[] = $now;
+            $state[$key] = $hits;
+        }
+
+        $encoded = json_encode($state);
+        if ($encoded !== false) {
             rewind($fh);
             ftruncate($fh, 0);
-            fwrite($fh, json_encode($state));
-            flock($fh, LOCK_UN);
-            fclose($fh);
+            fwrite($fh, $encoded);
+            fflush($fh);
+        }
+        flock($fh, LOCK_UN);
+        fclose($fh);
 
+        if ($limited) {
             http_response_code(429);
             header('Retry-After: ' . $window);
             header('Content-Type: application/json; charset=utf-8');
             echo json_encode(['error' => 'No.']);
             exit;
         }
-
-        $hits[] = $now;
-        $state[$key] = $hits;
-
-        rewind($fh);
-        ftruncate($fh, 0);
-        fwrite($fh, json_encode($state));
-        flock($fh, LOCK_UN);
+        return;
     }
 
     fclose($fh);

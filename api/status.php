@@ -17,7 +17,7 @@ rl_enforce('status', 20);
 $raw = file_get_contents('php://input');
 $input = json_decode($raw, true);
 
-if (!$input || !isset($input['hashes']) || !is_array($input['hashes'])) {
+if (!is_array($input) || !isset($input['hashes']) || !is_array($input['hashes']) || count($input['hashes']) > 2000) {
     http_response_code(400);
     echo json_encode(['error' => 'No.']);
     exit;
@@ -32,7 +32,7 @@ $missing = [];
 $stmt = $db->prepare('SELECT 1 FROM chunks WHERE hash = ?');
 
 foreach ($input['hashes'] as $hash) {
-    if (!is_string($hash) || !preg_match('/^[a-f0-9]{64}$/', $hash)) {
+    if (!is_string($hash) || !preg_match('/^[a-f0-9]{64}\z/', $hash)) {
         continue;
     }
 

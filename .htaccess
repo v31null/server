@@ -1,5 +1,6 @@
 Options -Indexes
 ServerSignature Off
+LimitRequestBody 78643200
 
 ErrorDocument 400 /blocken.html
 ErrorDocument 403 /blocken.html
@@ -14,6 +15,9 @@ ErrorDocument 500 /blocken.html
     Header always set Server "Blocken"
     Header unset X-Powered-By
     Header always set Onion-Location "http://fileprtejlf5mpnrgs5isoknpg6zmidwvc2jtpotepkfeocx4zltm2ad.onion%{REQUEST_URI}e" "expr=%{HTTPS} == 'on'"
+    <Files "blocken.html">
+        Header always set Content-Security-Policy "default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+    </Files>
 </IfModule>
 
 RewriteEngine On
