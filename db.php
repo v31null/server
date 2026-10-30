@@ -26,6 +26,7 @@ function getDb() {
     }
 
     $pdo->exec('CREATE INDEX IF NOT EXISTS chunks_offset ON chunks(offset)');
+    $pdo->exec('CREATE TABLE IF NOT EXISTS tickets (ticket TEXT PRIMARY KEY, chunks INTEGER NOT NULL)');
 
     return $pdo;
 }

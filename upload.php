@@ -29,6 +29,8 @@ if ($raw === false || strlen($raw) > $maxPostBytes) {
 $contentType = strtolower(trim(explode(';', (string)($_SERVER['CONTENT_TYPE'] ?? ''))[0]));
 $isFinalize = $contentType !== 'application/octet-stream';
 $RECORD = 4156;
+$TICKET = 16;
+$MAX_UPLOAD_CHUNKS = 12800;
 
 require_once __DIR__ . '/ratelimit.php';
 if ($isFinalize) {
@@ -44,19 +46,21 @@ if ($isFinalize) {
         echo json_encode(['error' => 'No.']);
         exit;
     }
-    foreach (['encrypted_payload', 'payload_iv', 'salt'] as $field) {
+    foreach (['encrypted_payload', 'payload_iv', 'salt', 'ticket'] as $field) {
         if (!isset($input[$field]) || !is_string($input[$field])) {
             http_response_code(400);
             echo json_encode(['error' => 'No.']);
             exit;
         }
     }
+    $ticket = $input['ticket'];
 } else {
-    if ($raw === '' || strlen($raw) % $RECORD !== 0) {
+    if (strlen($raw) <= $TICKET || (strlen($raw) - $TICKET) % $RECORD !== 0) {
         http_response_code(400);
         echo json_encode(['error' => 'No.']);
         exit;
     }
+    $ticket = bin2hex(substr($raw, 0, $TICKET));
 }
 
 require_once __DIR__ . '/init_storage.php';
@@ -65,8 +69,19 @@ initStorage();
 require_once __DIR__ . '/db.php';
 $db = getDb();
 
-$totalChunks = $isFinalize ? 0 : intdiv(strlen($raw), $RECORD);
+$ticketStmt = $db->prepare('SELECT chunks FROM tickets WHERE ticket = ?');
+$ticketStmt->execute([$ticket]);
+$ticketChunks = $ticketStmt->fetchColumn();
+$ticketStmt->closeCursor();
+if ($ticketChunks === false) {
+    http_response_code(400);
+    echo json_encode(['error' => 'No.']);
+    exit;
+}
+
+$totalChunks = $isFinalize ? 0 : intdiv(strlen($raw) - $TICKET, $RECORD);
 $newChunksWritten = 0;
+$overCap = false;
 
 if ($totalChunks > 0) {
     $storagePath = __DIR__ . '/storage';
@@ -132,14 +147,23 @@ if ($totalChunks > 0) {
     $fileSize = ftell($slugHandle);
     $slotCount = intdiv($fileSize - $HEADER_LEN, $SLOT);
 
+    $ticketStmt->execute([$ticket]);
+    $ticketChunks = (int)$ticketStmt->fetchColumn();
+    $ticketStmt->closeCursor();
+
     for ($k = 0; $k < $totalChunks; $k++) {
-        $record = substr($raw, $k * $RECORD, $RECORD);
+        $record = substr($raw, $TICKET + $k * $RECORD, $RECORD);
         $hashBytes = substr($record, 0, 32);
         $hash = bin2hex($hashBytes);
 
         $existsStmt->execute([$hash]);
         if ($existsStmt->fetch()) {
             continue;
+        }
+
+        if ($ticketChunks + $newChunksWritten >= $MAX_UPLOAD_CHUNKS) {
+            $overCap = true;
+            break;
         }
 
         $iv = substr($record, 32, 12);
@@ -203,6 +227,10 @@ if ($totalChunks > 0) {
         $newChunksWritten++;
     }
 
+    if ($newChunksWritten > 0) {
+        $db->prepare('UPDATE tickets SET chunks = chunks + ? WHERE ticket = ?')->execute([$newChunksWritten, $ticket]);
+    }
+
     fseek($slugHandle, 0);
     $headerByte = fread($slugHandle, 1);
     $byte0 = ord($headerByte) & ~0x40;
@@ -212,6 +240,12 @@ if ($totalChunks > 0) {
 
     flock($slugHandle, LOCK_UN);
     fclose($slugHandle);
+}
+
+if ($overCap) {
+    http_response_code(413);
+    echo json_encode(['error' => 'No.']);
+    exit;
 }
 
 if (!$isFinalize) {
@@ -248,6 +282,7 @@ $mapStmt->execute([
     $input['salt'],
     $createdAtDay
 ]);
+$db->prepare('DELETE FROM tickets WHERE ticket = ?')->execute([$ticket]);
 
 echo json_encode([
     'id'             => $uploadId,

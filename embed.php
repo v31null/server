@@ -130,7 +130,7 @@ rename($tmpCacheFile, $cacheFile);
 
 $meta = [
     'mime' => $payloadObj['mime'],
-    'name' => isset($payloadObj['name']) ? $payloadObj['name'] : 'file'
+    'name' => isset($payloadObj['filename']) ? $payloadObj['filename'] : 'file'
 ];
 file_put_contents($cacheFile . '.meta', json_encode($meta));
 
@@ -167,7 +167,7 @@ function serveFile($filePath, $mime, $fileId, $meta) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>v31nfiles</title>
-    <link rel="stylesheet" href="/assets/css/style.css" integrity="sha384-vkUMYVHo2DIftBUDGjFayMhenL4FQwi/pjSOQleqswVLpuBIVIh3JTj9W/kcULzd">
+    <link rel="stylesheet" href="/assets/css/style.css?v=455ebe99708445f8" integrity="sha384-kK8tmzqH2ovbltgRXGfVCMP9dD+s9ckonIhRpdBK543B77n0mqu6DyQAF7v18kG0">
 </head>
 <body>
     <div class="container">

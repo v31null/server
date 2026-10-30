@@ -15,6 +15,9 @@ ErrorDocument 500 /blocken.html
     Header always set Server "Blocken"
     Header unset X-Powered-By
     Header always set Onion-Location "http://fileprtejlf5mpnrgs5isoknpg6zmidwvc2jtpotepkfeocx4zltm2ad.onion%{REQUEST_URI}e" "expr=%{HTTPS} == 'on'"
+    <If "%{REQUEST_URI} =~ m#^/assets/#">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </If>
     <Files "blocken.html">
         Header always set Content-Security-Policy "default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
     </Files>

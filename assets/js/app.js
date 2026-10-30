@@ -39,14 +39,6 @@ function getBaseUrl() {
 }
 
 
-function formatFileSize(bytes) {
-    if (bytes === 0) return '0 B';
-    if (bytes < 1024) return bytes + ' B';
-    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(2) + ' KiB';
-    return (bytes / (1024 * 1024)).toFixed(2) + ' MiB';
-}
-
-
 function v31nSleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -110,11 +102,30 @@ async function v31nFetchRetry(url, options, cfg) {
 }
 
 
-function v31nPadme(n) {
-    const e = 31 - Math.clz32(n);
-    const s = 32 - Math.clz32(e);
-    const step = 2 ** Math.max(0, e - s);
-    return Math.ceil(n / step) * step;
+function v31nKb(bytes) {
+    return (bytes / 1024).toFixed(2);
+}
+
+
+function v31nFit(files, max) {
+    let total = files.reduce((sum, f) => sum + f.size, 0);
+    const dropped = new Set();
+    for (const f of files.slice().sort((a, b) => b.size - a.size)) {
+        if (total <= max) break;
+        dropped.add(f);
+        total -= f.size;
+    }
+    return files.filter(f => !dropped.has(f));
+}
+
+
+function v31nListText(files) {
+    const items = files.map(f => v31nT('file.item', { name: f.name, size: v31nKb(f.size) }));
+    if (items.length === 1) return items[0];
+    const list = items.length === 2
+        ? items[0] + v31nT('file.list.and2') + items[1]
+        : items.slice(0, -1).join(v31nT('file.list.sep')) + v31nT('file.list.and') + items[items.length - 1];
+    return list + v31nT('file.list.sum', { size: v31nKb(files.reduce((sum, f) => sum + f.size, 0)) });
 }
 
 
@@ -129,8 +140,6 @@ function initUpload() {
 
     const dropZone = document.getElementById('drop-zone');
     const fileInput = document.getElementById('file-input');
-    const fileName = document.getElementById('file-name');
-    const fileSize = document.getElementById('file-size');
     const fileInfo = document.getElementById('file-info');
     const passwordInput = document.getElementById('password-input');
     const uploadBtn = document.getElementById('upload-btn');
@@ -145,7 +154,7 @@ function initUpload() {
     const errorContainer = document.getElementById('error-container');
     const errorText = document.getElementById('error-text');
 
-    let selectedFile = null;
+    let selectedFiles = [];
     let fullUrlWithHash = '';
 
     function showError(msg) {
@@ -159,8 +168,21 @@ function initUpload() {
     }
 
     function updateButtonState() {
-        const hasFile = selectedFile !== null;
+        const hasFile = selectedFiles.length > 0;
         uploadBtn.disabled = !hasFile;
+    }
+
+    function selectFiles(list) {
+        selectedFiles = v31nFit(Array.from(list), V31nCrypto.MAX_FILE_SIZE);
+        hideError();
+        if (selectedFiles.length) {
+            fileInfo.textContent = v31nListText(selectedFiles);
+            fileInfo.style.display = 'block';
+        } else {
+            fileInfo.style.display = 'none';
+            showError(v31nT('upload.too.large'));
+        }
+        updateButtonState();
     }
 
     dropZone.addEventListener('click', () => {
@@ -169,9 +191,7 @@ function initUpload() {
 
     fileInput.addEventListener('change', () => {
         if (fileInput.files && fileInput.files.length > 0) {
-            selectedFile = fileInput.files[0];
-            showFileInfo(selectedFile);
-            updateButtonState();
+            selectFiles(fileInput.files);
         }
     });
 
@@ -194,33 +214,24 @@ function initUpload() {
         dropZone.classList.remove('dragover');
 
         if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-            selectedFile = e.dataTransfer.files[0];
-            showFileInfo(selectedFile);
-            updateButtonState();
+            selectFiles(e.dataTransfer.files);
         }
     });
 
     document.addEventListener('paste', (e) => {
         if (e.clipboardData && e.clipboardData.files && e.clipboardData.files.length > 0) {
             e.preventDefault();
-            selectedFile = e.clipboardData.files[0];
-            showFileInfo(selectedFile);
-            updateButtonState();
+            selectFiles(e.clipboardData.files);
         }
     });
-
-    function showFileInfo(file) {
-        fileName.textContent = file.name;
-        fileSize.textContent = formatFileSize(file.size);
-        fileInfo.style.display = 'block';
-    }
 
     passwordInput.addEventListener('input', () => {
         updateButtonState();
     });
 
     uploadBtn.addEventListener('click', async () => {
-        const file = selectedFile;
+        const files = selectedFiles;
+        const file = files[0];
         let password = passwordInput.value;
 
         if (!file) return;
@@ -241,8 +252,8 @@ function initUpload() {
         hideError();
 
         try {
-            const realCount = Math.ceil(file.size / V31nCrypto.CHUNK_SIZE) || 1;
-            const numPseudos = v31nPadme(realCount) - realCount;
+            const realCount = Math.ceil(files.reduce((sum, f) => sum + f.size, 0) / V31nCrypto.CHUNK_SIZE) || 1;
+            const numPseudos = V31nCrypto.padme(realCount) - realCount;
 
             const decoyHashes = [];
             const decoyChunks = [];
@@ -257,7 +268,7 @@ function initUpload() {
                 decoyHashes.push(dummyHash);
             }
 
-            const result = await V31nCrypto.chunkAndEncryptFile(file, password, decoyHashes, (progress) => {
+            const result = await V31nCrypto.chunkAndEncryptFile(files, password, decoyHashes, (progress) => {
                 progressFill.style.width = (progress * 40) + '%';
                 progressText.textContent = v31nT('upload.encrypting.progress', { p: Math.round(progress * 100) });
             });
@@ -297,15 +308,24 @@ function initUpload() {
             const firstMissing = await missingOf(allChunks.map(c => c.hash), true);
             let toUpload = allChunks.filter(c => firstMissing.has(c.hash));
 
+            const ticketResp = await v31nFetchRetry(BASE_URL + 'api/ticket.php', { method: 'POST' });
+            if (!ticketResp.ok) {
+                throw new Error(v31nT('upload.failed.http', { status: ticketResp.status }));
+            }
+            const ticket = (await ticketResp.json()).ticket;
+            const ticketBytes = V31nCrypto.hexToBytes(ticket);
+
             const totalToStore = Math.max(1, toUpload.length);
             let storedSoFar = 0;
             let noSpace = false;
+            let tooLarge = false;
             progressText.textContent = v31nT('upload.uploading');
 
             const sendBatch = async (batch) => {
-                const body = new Uint8Array(batch.length * V31N_RECORD);
+                const body = new Uint8Array(ticketBytes.length + batch.length * V31N_RECORD);
+                body.set(ticketBytes, 0);
                 batch.forEach((c, k) => {
-                    const o = k * V31N_RECORD;
+                    const o = ticketBytes.length + k * V31N_RECORD;
                     body.set(V31nCrypto.hexToBytes(c.hash), o);
                     body.set(c.iv, o + 32);
                     body.set(c.data, o + 44);
@@ -318,6 +338,10 @@ function initUpload() {
                     });
                     if (r.status === 507) {
                         noSpace = true;
+                        return;
+                    }
+                    if (r.status === 413) {
+                        tooLarge = true;
                         return;
                     }
                     if (!r.ok) return;
@@ -335,7 +359,7 @@ function initUpload() {
 
                 let next = 0;
                 const lane = async () => {
-                    while (!noSpace && next < toUpload.length) {
+                    while (!noSpace && !tooLarge && next < toUpload.length) {
                         const batch = toUpload.slice(next, next + STORE_BATCH);
                         next += STORE_BATCH;
                         await sendBatch(batch);
@@ -345,6 +369,9 @@ function initUpload() {
 
                 if (noSpace) {
                     throw new Error(v31nT('upload.nospace'));
+                }
+                if (tooLarge) {
+                    throw new Error(v31nT('upload.too.large'));
                 }
 
                 const stillMissing = await missingOf(toUpload.map(c => c.hash), false);
@@ -367,7 +394,8 @@ function initUpload() {
                 body: JSON.stringify({
                     encrypted_payload: V31nCrypto.bytesToBase64(result.encrypted_payload),
                     payload_iv: V31nCrypto.bytesToBase64(result.payload_iv),
-                    salt: V31nCrypto.bytesToBase64(result.salt)
+                    salt: V31nCrypto.bytesToBase64(result.salt),
+                    ticket
                 })
             }, { maxAttempts: 12 });
 
@@ -448,6 +476,16 @@ function initUpload() {
 }
 
 
+function v31nSave(url, name) {
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = name || 'file.bin';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+}
+
+
 function initDownload() {
     const BASE_URL = getBaseUrl();
 
@@ -458,8 +496,58 @@ function initDownload() {
     const progressText = document.getElementById('download-progress-text');
     const errorContainer = document.getElementById('download-error');
     const errorText = document.getElementById('download-error-text');
+    const dir = document.getElementById('dir');
+    const dirCount = document.getElementById('dir-count');
+    const dirTable = document.getElementById('dir-table');
 
     const fileId = window.V31N_FILE_ID;
+
+    function showDir(file) {
+        let at = 0;
+        let total = 0;
+        dirTable.textContent = '';
+        file.files.forEach((f) => {
+            const bytes = file.data.subarray(at, at + f.size);
+            at += f.size;
+            total += f.size;
+            const safe = v31nSafeMime(f.mime);
+            const url = URL.createObjectURL(new Blob([bytes], { type: safe ? f.mime : 'application/octet-stream' }));
+
+            const tr = document.createElement('tr');
+            const preview = document.createElement('td');
+            const box = document.createElement('div');
+            box.className = 'dir-preview';
+            if (String(f.mime).toLowerCase().startsWith('image/')) {
+                const img = document.createElement('img');
+                img.src = url;
+                img.alt = '';
+                box.appendChild(img);
+            } else {
+                const name = String(f.filename || '');
+                const dot = name.lastIndexOf('.');
+                box.textContent = dot !== -1 && dot < name.length - 1 ? name.substring(dot + 1).toLowerCase() : '';
+            }
+            preview.appendChild(box);
+            const label = document.createElement('td');
+            label.textContent = v31nT('file.item', { name: f.filename, size: v31nKb(f.size) });
+            tr.append(preview, label);
+            tr.addEventListener('click', () => {
+                if (safe) {
+                    window.open(url, '_blank');
+                } else {
+                    v31nSave(url, f.filename);
+                }
+            });
+            dirTable.appendChild(tr);
+        });
+        dirCount.textContent = v31nT('download.dir.count', { n: file.files.length, size: v31nKb(total) });
+        document.querySelectorAll('.encrypted-notice, .form-group').forEach((el) => {
+            el.style.display = 'none';
+        });
+        downloadBtn.style.display = 'none';
+        progressContainer.style.display = 'none';
+        dir.style.display = 'block';
+    }
 
     function showError(msg) {
         errorText.textContent = msg;
@@ -527,19 +615,18 @@ function initDownload() {
                 progressFill.style.width = (90 + p * 10) + '%';
             });
 
+            if (file.files && file.files.length > 1) {
+                showDir(file);
+                return;
+            }
+
             const safe = v31nSafeMime(file.mime);
-            const blob = new Blob([file.data], { type: safe ? file.mime : 'application/octet-stream' });
-            const blobUrl = URL.createObjectURL(blob);
+            const blobUrl = URL.createObjectURL(new Blob([file.data], { type: safe ? file.mime : 'application/octet-stream' }));
             if (safe) {
                 window.location.href = blobUrl;
                 return;
             }
-            const a = document.createElement('a');
-            a.href = blobUrl;
-            a.download = file.filename || 'file.bin';
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
+            v31nSave(blobUrl, file.filename);
             progressFill.style.width = '100%';
             downloadBtn.disabled = false;
             return;

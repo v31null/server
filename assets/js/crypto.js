@@ -50,16 +50,15 @@ async function generateSalt() {
     return crypto.getRandomValues(new Uint8Array(32));
 }
 
-async function deriveKeyFromPassword(password, salt) {
-    const encoded = new TextEncoder().encode(password);
+async function deriveMasterKey(password, salt) {
     const baseKey = await crypto.subtle.importKey(
         'raw',
-        encoded,
+        new TextEncoder().encode(password),
         'PBKDF2',
         false,
-        ['deriveKey']
+        ['deriveBits']
     );
-    return crypto.subtle.deriveKey(
+    return new Uint8Array(await crypto.subtle.deriveBits(
         {
             name: 'PBKDF2',
             salt,
@@ -67,33 +66,24 @@ async function deriveKeyFromPassword(password, salt) {
             hash: 'SHA-256'
         },
         baseKey,
-        { name: 'AES-GCM', length: 256 },
-        false,
-        ['encrypt', 'decrypt']
-    );
+        256
+    ));
+}
+
+function importAesKey(master) {
+    return crypto.subtle.importKey('raw', master, { name: 'AES-GCM' }, false, ['encrypt', 'decrypt']);
+}
+
+function importHmacKey(master) {
+    return crypto.subtle.importKey('raw', master, { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+}
+
+async function deriveKeyFromPassword(password, salt) {
+    return importAesKey(await deriveMasterKey(password, salt));
 }
 
 async function deriveHmacKey(password, salt) {
-    const encoded = new TextEncoder().encode(password);
-    const baseKey = await crypto.subtle.importKey(
-        'raw',
-        encoded,
-        'PBKDF2',
-        false,
-        ['deriveKey']
-    );
-    return crypto.subtle.deriveKey(
-        {
-            name: 'PBKDF2',
-            salt,
-            iterations: PBKDF2_ITERATIONS,
-            hash: 'SHA-256'
-        },
-        baseKey,
-        { name: 'HMAC', hash: 'SHA-256', length: 256 },
-        false,
-        ['sign']
-    );
+    return importHmacKey(await deriveMasterKey(password, salt));
 }
 
 async function hashChunk(chunkBytes, hmacKey) {
@@ -150,9 +140,9 @@ async function decryptChunk(encryptedData, baseHashHex) {
     return new Uint8Array(decrypted);
 }
 
-async function encryptPayload(payloadObj, password, salt) {
+async function encryptPayload(payloadObj, password, salt, aesKey) {
     const plaintext = new TextEncoder().encode(JSON.stringify(payloadObj));
-    const key = await deriveKeyFromPassword(password, salt);
+    const key = aesKey || await deriveKeyFromPassword(password, salt);
     const iv = crypto.getRandomValues(new Uint8Array(12));
     const encrypted = await crypto.subtle.encrypt(
         { name: 'AES-GCM', iv },
@@ -174,20 +164,35 @@ async function decryptPayload(encryptedData, iv, password, salt) {
 }
 
 
-async function chunkAndEncryptFile(file, password, decoyHashes, onProgress) {
-    if (file.size > MAX_FILE_SIZE) {
+function padme(n) {
+    const e = 31 - Math.clz32(n);
+    const s = 32 - Math.clz32(e);
+    const step = 2 ** Math.max(0, e - s);
+    return Math.ceil(n / step) * step;
+}
+
+async function chunkAndEncryptFile(files, password, decoyHashes, onProgress) {
+    const total = files.reduce((sum, f) => sum + f.size, 0);
+    if (total > MAX_FILE_SIZE) {
         throw new Error(window.v31nT('upload.too.large'));
     }
 
     const salt = await generateSalt();
 
-    const buffer = await file.arrayBuffer();
-    const fileBytes = new Uint8Array(buffer);
+    const fileBytes = new Uint8Array(total);
+    let at = 0;
+    for (const f of files) {
+        fileBytes.set(new Uint8Array(await f.arrayBuffer()), at);
+        at += f.size;
+    }
+    const file = files[0];
 
     const totalChunks = Math.ceil(fileBytes.length / CHUNK_SIZE) || 1;
     const chunks = [];
     const map = [];
-    const hmacKey = await deriveHmacKey(password, salt);
+    const master = await deriveMasterKey(password, salt);
+    const hmacKey = await importHmacKey(master);
+    const aesKey = await importAesKey(master);
 
     for (let i = 0; i < totalChunks; i++) {
         const start = i * CHUNK_SIZE;
@@ -215,16 +220,26 @@ async function chunkAndEncryptFile(file, password, decoyHashes, onProgress) {
         size: file.size,
         padding: ""
     };
+    if (files.length > 1) {
+        payload.files = files.map(f => ({
+            filename: f.name,
+            mime: f.type || 'application/octet-stream',
+            size: f.size
+        }));
+    }
 
     const totalCombinedChunks = map.length + (decoyHashes ? decoyHashes.length : 0);
-    const targetSize = totalCombinedChunks * 180 + 1500;
     const currentSize = new TextEncoder().encode(JSON.stringify(payload)).length;
-    
+    let targetSize = totalCombinedChunks * 180 + 1500;
+    if (currentSize > targetSize) {
+        targetSize = padme(currentSize);
+    }
+
     if (targetSize > currentSize) {
         payload.padding = 'A'.repeat(targetSize - currentSize);
     }
 
-    const { iv: payload_iv, data: encrypted_payload } = await encryptPayload(payload, password, salt);
+    const { iv: payload_iv, data: encrypted_payload } = await encryptPayload(payload, password, salt, aesKey);
 
     if (onProgress) {
         onProgress(0.85);
@@ -256,7 +271,9 @@ async function assembleFile(payload, chunks, onProgress) {
         data.set(part, offset);
         offset += part.length;
     }
-    return { data: data.subarray(0, Math.min(size, totalLength)), filename, mime, size };
+    const files = payload.files;
+    const total = files ? files.reduce((sum, f) => sum + f.size, 0) : size;
+    return { data: data.subarray(0, Math.min(total, totalLength)), filename, mime, size, files };
 }
 
 
@@ -272,6 +289,7 @@ window.V31nCrypto = {
     decryptPayload,
     chunkAndEncryptFile,
     assembleFile,
+    padme,
 
     bytesToBase64,
     base64ToBytes,

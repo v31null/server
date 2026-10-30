@@ -33,10 +33,12 @@ Take þe Finger‑print from an Trusten Official‑source , e.g./ github.com/v3
 
 Per-file sha256s ;
   3273581722446ffa8ba538c07adc08da799a77df208360a9c0ae1bad97c412ff  .gitattributes
-  e7a3053727fdfaf074fb750deb649f256c36464cc50965966cf1b82b8673924d  .htaccess
+  829737627f4a665d4dfd0d70cf5f4e64b204cbac3cfe57af788b64bcfcf2e713  .htaccess
   2771cc45cfe90c0801eda34309280b248735a2e00b733e23a5e6b31bc934de28  api/pack.php
   e42b5ed7c1258d4c3eac24f2ab7da249005a82ab75cebdd99f35fd93284008ff  api/status.php
+  335470988280502953f30f1028a37eddeac556a3181513baf08ab3aec13a4424  api/ticket.php
   d8bb747b3fdccd84a60bd0aa56bb90937270d0bd15f1101cd8f2a5a3709dd0a3  assets/css/fonts/BabelStoneHan.ttf
+  4ce0f8df42fac16b1f7426a0a7b472dfdda5219746c2283d1ecb44501f7bc06c  assets/css/fonts/BabelStoneHan.woff2
   8a8719fff8a515d7b501c7073f1d7fe4a934fbbfe577d67a531d547cf5d080c9  assets/css/fonts/JunicodeVF-Roman.woff2
   68534840bcfdd2bffb6f0e8deb48684dd01e7f04ea2813267577afb906de1d13  assets/css/fonts/KaTeX_AMS-Regular.ttf
   30da91e84c893f875e252689faebdc590b2871145e8adc7f9a9d4dbd8ce0b251  assets/css/fonts/KaTeX_AMS-Regular.woff
@@ -103,27 +105,28 @@ Per-file sha256s ;
   776ac4ef4b53b46e2b38698818361ecd4f6926dfa4eb79bf1113c456785695bd  assets/css/fonts/nullpunktsenergiefont-Regular.ttf
   38d32567380fdcee9e76bb5127c38b9109fa6f27de984bc108f559ff4e8b2a08  assets/css/fonts/regular.ttf
   042b367bf8d89aef200f567f27aba119ec4204f9594e697609951e1295362ce8  assets/css/katex.css
-  9ce8a65f2d869e4919d38afc30b41c660a43de30cd2aa7a4c5fb478a7d505b24  assets/css/style.css
+  455ebe99708445f8633020acd54cbc9910e84bc54b0d930e911c3bca4ac6a68c  assets/css/style.css
   1f93978f886b09cc937982b40e669a915f968506d56abd8d287b84f433f188e8  assets/img/Services for þe General populace Ministeria custodiae filaciorum ( Secura ) , aßervatio.png
   9d2578af7a872b3ce1f9641406b08e8496093ef6de18fa9142ba004eb61148c7  assets/img/logomonochrome.ico
-  8476518e083dc748ad9e7a240cbec1182c0a4e8ecf02bd0a7808823280f54f1a  assets/js/app.js
+  b560dde482c0162bf6c62e0a1eee63f9992ba9169f1e89ea3d7b4ea37fed2494  assets/js/app.js
   4cfb141d56e2c5644f5226e6b8709a3eadd39989fcec86a38c8150adb196d89b  assets/js/auto-render.js
   c571c49b520cb8e9040287338286b21783e39b476660b8b56d9e1c037eeaeaff  assets/js/copy-tex.min.js
-  503c5f65c04c01623e36efe426aff8c322fe519307b714e86cbbf4e1ad893197  assets/js/crypto.js
+  e13ab2e41bfe15702feb5c4d8f8a272f21edfaed447bb39d2de8bd48618548ea  assets/js/crypto.js
   8f4f4efac9e80863b0ef9946c004928ad3bd33bbbeabcc8531c605c82a1bb545  assets/js/katex.js
+  fa140498b8cfc8302cbe5e7cb1bdbc1f952bc38b3fa258ede09e73edbf9a74bc  assets/js/katex.min.js
   7789c02dc8eca78dda5fc3b93ba0aad592a59a1a02bbc7339e15b32e244e14f6  assets/js/time.js
   7f09c4161db5a021dc82d924dd346c1c99f388bdb4e097c758ce91f649f7e77a  blocken.html
-  37969979deefee0514d3c558c14b455d8394bdedcb3ed6c6d8fa75dd8279dd24  csp.php
-  be943dc4ec7015926492b7acc09b6a9327ba486db9c120bce833dca50f10639d  db.php
-  27699a19b4d557d4cf09aa118784323cbabba53b0c46fb4d6223aaa9faa5244a  download.php
-  e9d6a580af23829ff9b271bf8485b896bb8e6c5337ecb284389e348a8de4aaea  embed.php
-  e129decc8e2cd29b1cf7441f7483f4af8965e5710b37dff28f51bebc064c78f9  index.php
+  db68ffe6e0eb2e8ce25046ca8e1755be5fbf28224c2d675212e0ab631cea2089  csp.php
+  63644ba2117b522ed096d3bb218cb67194dc475f05f37ffada99fe2a35d82879  db.php
+  d731abc8347747c48ac0d1915a98f3e044fbe6a09b66164c8ccc4d0635c3253e  download.php
+  3c8dfbb08b237053178403ae08dffed6d4f0a78af6351db4cf613338d6475116  embed.php
+  9cfef036184d2ee489eb00961e3e7a86071b9e9ad69e44237f8038c0643c3fad  index.php
   7ab634e86b39bb14a4b99cac6a613ccf06500a24389330b99c5a459cc3013ec1  indexd.json
   417ef536a8f627b0cbefff91b68d754cb68c081acb1ca16bcd5dcab41f85406b  init_storage.php
   a089e81d9ff91dc623de95a4b60dfbed9a82ab7f8cd5955f1a0b0c08d3d468ee  integritie.php
-  bdd43d0a6da3e907905f1b53d9f3dfc92d220512f3489b58b28ac608aa7b0956  lang.php
+  24a7593b2addce9310c9476b5200844d70ff2b372e693fdd498185e1c3dbc78a  lang.php
   9e454f2ae8df4f4029d4f389b4cf3cbc02bde7d6d8be7cf711c9804ab8dfe8c7  onion.txt
   aea7fa16965aed3de3803a270f1e2973d600c852511ecf04b59ace1a9026e13e  publickey.pem
   60662a32085c27712b8948ac212d6113c914916c4aefa60ebe376fd4481122fc  ratelimit.php
   e48a27f0d62b45eae65c04b4fdd1799a2a0bec1d87348487f561e7c9500cbb77  time/pt.js
-  f6e3cf929d89777a34465495d86b659b7c5426e4ee7b1995db3bb8943287f3f3  upload.php
+  4ffc5c7362b74dbdf44c7c24dfbd64913a16659802d0ec2625e6441c13734402  upload.php
