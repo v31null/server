@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
     <title><?= $t['title'] ?></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/assets/css/style.css?v=455ebe99708445f8" integrity="sha384-kK8tmzqH2ovbltgRXGfVCMP9dD+s9ckonIhRpdBK543B77n0mqu6DyQAF7v18kG0">
+  <link rel="stylesheet" href="/assets/css/style.css?v=7c4ecc7e193cad7e" integrity="sha384-P7qHbO6s19f6tejEweyYhU4xaEIzn+vTiNMJcqf6FxN1bLMDreqQC5sHOn5GK64P">
 
 		<link rel="stylesheet" href="/assets/css/katex.css?v=042b367bf8d89aef" integrity="sha384-dyEuTchRIWTUUS5esbTCpMfx+B+xfO8EoTt5SiUbKmafuP0Gilzcq4YNJuy9EkCC" />
 		<script defer src="/assets/js/katex.min.js?v=fa140498b8cfc830" integrity="sha384-a1WQdjRj162i159OYq041X6I4K8NenkrI09LlPmiHg0YOb7CR+wJOraXwK9abpnE"></script>
@@ -46,11 +46,13 @@
 
       <div id="file-info" class="file-info" style="display:none"></div>
 
-      <div class="form-group">
+      <div class="form-group pw-field">
         <input type="password" id="password-input" placeholder="<?= $t['upload.password'] ?>" autocomplete="off">
+        <button class="eye-toggle" type="button" data-eye="password-input" title="<?= $t['password.show'] ?>" aria-label="<?= $t['password.show'] ?>" data-show="<?= $t['password.show'] ?>" data-hide="<?= $t['password.hide'] ?>"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path class="eye-off" d="M4 20 20 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
       </div>
 
       <button id="upload-btn" class="btn" disabled><?= $t['upload.button'] ?></button>
+      <button id="cancel-btn" class="btn btn-secondary cancel-btn" type="button" style="display:none"><?= $t['upload.cancel'] ?></button>
 
       <div id="progress-container" class="progress-container" style="display:none">
         <div class="progress-bar-wrapper">
@@ -69,6 +71,7 @@
                 </span>
               </div>
               <span id="copy-feedback-secure" class="copy-feedback" style="display:none"><?= $t['upload.copied'] ?></span>
+              <div id="result-qr" class="qr"></div>
             </td>
             <td style="width: 50%; padding: 10px; vertical-align: top;">
               <div class="result-link-wrapper" style="justify-content: center; margin-bottom: 5px;">
@@ -171,7 +174,8 @@
   </script>
 
   <script nonce="<?= $nonce ?>">window.V31N_MODE = 'upload'; window.V31N_T = <?= json_encode($t, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
+  <script src="assets/js/qrcode.min.js?v=164fc2c1c9eaf0a0" integrity="sha384-mZT2gIty7ZDdOGkxfP6joZcYdMW1Jvj9dRlfpTmaJAKKXTqzygtB22k7FLe+KZC1"></script>
   <script src="assets/js/crypto.js?v=e13ab2e41bfe1570" integrity="sha384-XWvQhE2PfMlXJrsu8PjfOMaycm+iN9GgSl0Xw8AU3oX6Co2rCwy8sj9bDcILI8JC"></script>
-  <script src="assets/js/app.js?v=b560dde482c0162b" integrity="sha384-NFRR3g4RHwMbYJeYYqfTFRer5gqzs5njj2EXHlewV8R4Zm36mV5mW5RruE83yKVk"></script>
+  <script src="assets/js/app.js?v=6ea034b12699aaf0" integrity="sha384-jVqNxRFwuP2t2ZDujgrFQOAU0rOj4Ja4p2HcmQmIYh74dkXXmcD7u7o9KWUaDESK"></script>
 </body>
 </html>

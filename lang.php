@@ -23,6 +23,9 @@ return [
 	'upload.failed.http' => 'Upload failed (HTTP {status})',
 	'upload.failed' => 'Upload failed',
 	'upload.nospace' => 'No‑space.',
+	'upload.cancel' => 'Kancel þͤ Up‑load',
+	'password.show' => 'Ič uq’číkík',
+	'password.hide' => 'Żen uq’číkík',
 	'nojs' => 'Need JS',
 
 	'file.item' => '{name} @ {size} KB',
@@ -31,6 +34,7 @@ return [
 	'file.list.and' => ' , & ',
 	'file.list.sum' => ' — @ {size} KB en sum',
 	'download.dir.count' => '{n} files @ {size} KB',
+	'download.all' => 'Down‑load all',
 	'upload.complete' => 'Complete!',
 	'upload.embed.reveal' => 'Click to reveal embed link',
 	'upload.embed.copy' => 'Click to copy embed link',

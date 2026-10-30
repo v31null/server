@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $t['title'] ?></title>
-    <link rel="stylesheet" href="/assets/css/style.css?v=455ebe99708445f8" integrity="sha384-kK8tmzqH2ovbltgRXGfVCMP9dD+s9ckonIhRpdBK543B77n0mqu6DyQAF7v18kG0">
+    <link rel="stylesheet" href="/assets/css/style.css?v=7c4ecc7e193cad7e" integrity="sha384-P7qHbO6s19f6tejEweyYhU4xaEIzn+vTiNMJcqf6FxN1bLMDreqQC5sHOn5GK64P">
 </head>
 <body>
     <div class="container">
@@ -58,9 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 <p class="encrypted-text"><?= $t['download.prompt'] ?></p>
             </div>
 
-            <div class="form-group">
+            <div class="form-group pw-field">
                 <input type="password" id="download-password-input"
                        placeholder="<?= $t['download.password'] ?>" autocomplete="off">
+                <button class="eye-toggle" type="button" data-eye="download-password-input" title="<?= $t['password.show'] ?>" aria-label="<?= $t['password.show'] ?>" data-show="<?= $t['password.show'] ?>" data-hide="<?= $t['password.hide'] ?>"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path class="eye-off" d="M4 20 20 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
             </div>
 
             <button id="download-btn" class="btn"><?= $t['download.button'] ?></button>
@@ -84,6 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 </div>
                 <hr>
                 <table id="dir-table"></table>
+                <button id="dir-all" class="btn dir-all" type="button"><?= $t['download.all'] ?></button>
             </div>
         </main>
     </div>
@@ -94,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         window.V31N_T = <?= json_encode($t, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
     </script>
     <script src="../assets/js/crypto.js?v=e13ab2e41bfe1570" integrity="sha384-XWvQhE2PfMlXJrsu8PjfOMaycm+iN9GgSl0Xw8AU3oX6Co2rCwy8sj9bDcILI8JC"></script>
-    <script src="../assets/js/app.js?v=b560dde482c0162b" integrity="sha384-NFRR3g4RHwMbYJeYYqfTFRer5gqzs5njj2EXHlewV8R4Zm36mV5mW5RruE83yKVk"></script>
+    <script src="../assets/js/app.js?v=6ea034b12699aaf0" integrity="sha384-jVqNxRFwuP2t2ZDujgrFQOAU0rOj4Ja4p2HcmQmIYh74dkXXmcD7u7o9KWUaDESK"></script>
 </body>
 </html>
 <?php
@@ -127,7 +129,7 @@ function showErrorPage($t, $title, $message) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $t['title'] ?></title>
-    <link rel="stylesheet" href="../assets/css/style.css?v=455ebe99708445f8" integrity="sha384-kK8tmzqH2ovbltgRXGfVCMP9dD+s9ckonIhRpdBK543B77n0mqu6DyQAF7v18kG0">
+    <link rel="stylesheet" href="../assets/css/style.css?v=7c4ecc7e193cad7e" integrity="sha384-P7qHbO6s19f6tejEweyYhU4xaEIzn+vTiNMJcqf6FxN1bLMDreqQC5sHOn5GK64P">
 </head>
 <body>
     <div class="container">

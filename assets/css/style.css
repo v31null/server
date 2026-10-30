@@ -126,7 +126,8 @@ body{
   margin-bottom: 4px;
 }
 
-.form-group input[type='password'] {
+.form-group input[type='password'],
+.pw-field input {
   width: 100%;
   padding: 10px 12px;
   border: 1px solid #ddd;
@@ -139,12 +140,67 @@ body{
   background: #fff;
 }
 
-.form-group input[type='password']:focus {
+.form-group input[type='password']:focus,
+.pw-field input:focus {
   border-color: #0891b2;
 }
 
-.form-group input[type='password']::placeholder {
+.form-group input[type='password']::placeholder,
+.pw-field input::placeholder {
   color: #aaa;
+}
+
+.pw-field {
+  position: relative;
+}
+
+.pw-field input {
+  padding-right: 44px;
+}
+
+.eye-toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: #888;
+  cursor: pointer;
+}
+
+.eye-toggle:hover,
+.eye-toggle.is-on {
+  color: #0891b2;
+}
+
+.eye-toggle .eye-off {
+  display: none;
+}
+
+.eye-toggle.is-on .eye-off {
+  display: inline;
+}
+
+.cancel-btn {
+  margin-top: 8px;
+}
+
+.qr {
+  margin-top: 8px;
+}
+
+.qr svg {
+  width: 200px;
+  height: 200px;
+}
+
+.dir-all {
+  margin-top: 12px;
 }
 
 .btn {
