@@ -11,9 +11,9 @@
             "size": 75
         },
         ".htaccess": {
-            "sha256": "829737627f4a665d4dfd0d70cf5f4e64b204cbac3cfe57af788b64bcfcf2e713",
-            "sha384": "sha384-Tb+cTOx3Rvo3Le5uhprmq6mM/6llrOpuR9H36WO2v2UDFKtzlgxQQXEZxZuq8a5d",
-            "size": 1711
+            "sha256": "f1b8dc043164acaef97a52a67ea209beed859b864493ac9b3128b0bc210641a8",
+            "sha384": "sha384-VkUDrFYbUmTZ/kNaSCDw62YWBprhnnWg3W6OXRr5SuWVix8cB6XYViME/TJa0iOT",
+            "size": 1949
         },
         "api/pack.php": {
             "sha256": "2771cc45cfe90c0801eda34309280b248735a2e00b733e23a5e6b31bc934de28",

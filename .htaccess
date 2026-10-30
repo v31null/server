@@ -41,7 +41,11 @@ RewriteRule ^embed/([a-f0-9]{8})(.*)\.[a-zA-Z0-9]+$ embed.php?id=$1&PASS=$2 [L,Q
 
 RewriteRule ^embed2/([a-z2-7]{26})(.*)\.[a-zA-Z0-9]+$ embed.php?id=$1&PASS=$2 [L,QSA,B]
 
-SetEnvIf Request_URI "^/api/pack\.php" no-gzip
+SetEnvIf Request_URI "^/api/pack\.php" no-gzip no-brotli
+
+<IfModule mod_filter.c>
+    AddOutputFilterByType BROTLI_COMPRESS;DEFLATE text/html text/plain text/css text/javascript application/javascript application/json image/svg+xml font/ttf font/otf application/x-font-ttf
+</IfModule>
 
 <FilesMatch "^\.">
     Require all denied

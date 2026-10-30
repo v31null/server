@@ -33,7 +33,7 @@ Take þe Finger‑print from an Trusten Official‑source , e.g./ github.com/v3
 
 Per-file sha256s ;
   3273581722446ffa8ba538c07adc08da799a77df208360a9c0ae1bad97c412ff  .gitattributes
-  829737627f4a665d4dfd0d70cf5f4e64b204cbac3cfe57af788b64bcfcf2e713  .htaccess
+  f1b8dc043164acaef97a52a67ea209beed859b864493ac9b3128b0bc210641a8  .htaccess
   2771cc45cfe90c0801eda34309280b248735a2e00b733e23a5e6b31bc934de28  api/pack.php
   e42b5ed7c1258d4c3eac24f2ab7da249005a82ab75cebdd99f35fd93284008ff  api/status.php
   335470988280502953f30f1028a37eddeac556a3181513baf08ab3aec13a4424  api/ticket.php
