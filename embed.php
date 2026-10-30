@@ -51,7 +51,22 @@ $salt = base64_decode($mapData['salt']);
 $payloadIv = base64_decode($mapData['payload_iv']);
 $encPayload = base64_decode($mapData['encrypted_payload']);
 
-$key = hash_pbkdf2('sha256', $pass, $salt, 600000, 32, true);
+$kdf = proc_open(['node', __DIR__ . '/kdf/low.js'], [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $kdfPipes);
+if (!is_resource($kdf)) {
+    http_response_code(500);
+    exit;
+}
+fwrite($kdfPipes[0], json_encode(['pass' => base64_encode($pass), 'salt' => $mapData['salt'], 'iterations' => 600000]));
+fclose($kdfPipes[0]);
+$kdfHex = stream_get_contents($kdfPipes[1]);
+fclose($kdfPipes[1]);
+fclose($kdfPipes[2]);
+proc_close($kdf);
+if (!is_string($kdfHex) || !preg_match('/^[a-f0-9]{64}\z/', $kdfHex)) {
+    http_response_code(500);
+    exit;
+}
+$key = hex2bin($kdfHex);
 
 $ciphertext = substr($encPayload, 0, -16);
 $tag = substr($encPayload, -16);

@@ -29,7 +29,7 @@
 		</script>
 </head>
 <body>
-      <img src="/assets/img/Services for þe General populace Ministeria custodiae filaciorum ( Secura ) , aßervatio.png" alt="" style="height: 2cm;margin: 0.5cm;float:left;z-index: 9999;position: absolute;">
+      <img src="/assets/img/Services for þe General populace Ministeria custodiae filaciorum ( Secura ) , aßervatio.2cm.png" alt="" style="height: 2cm;margin: 0.5cm;float:left;z-index: 9999;position: absolute;">
   <div class="container">
 
     <header class="header">
@@ -90,6 +90,7 @@
 
     <footer>
       <p><a href="/links.txt"><?= $t['footer.links'] ?></a></p>
+      <p><a href="https://stats.uptimerobot.com/Y1UqdausP4/803270927" rel="noopener noreferrer"><?= $t['footer.alive'] ?></a></p>
     </footer>
 
 <?php

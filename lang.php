@@ -37,6 +37,7 @@ return [
 	'network.failed' => 'Network request failed after retries',
 
 	'footer.links' => 'Click ‘iðer for to be Re‑direkten to see keys Publik fileses.',
+	'footer.alive' => 'Aliveneß logs.',
 
 	'acta.sigillum' => 'Certificatio authenticitatis huius actae, sigillo nostro {alg} munita.',
 	'acta.sigillum.alg' => 'sigillum',

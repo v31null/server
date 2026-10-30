@@ -133,13 +133,21 @@ if ($from > 0) {
 header('Content-Length: ' . ($total - $from));
 
 $pos = 0;
-$out = function ($bytes) use (&$pos, $from) {
+$sent = 0;
+$out = function ($bytes) use (&$pos, &$sent, $from) {
     $len = strlen($bytes);
     if ($pos + $len > $from) {
-        echo $pos >= $from ? $bytes : substr($bytes, $from - $pos);
+        $chunk = $pos >= $from ? $bytes : substr($bytes, $from - $pos);
+        echo $chunk;
+        $sent += strlen($chunk);
     }
     $pos += $len;
 };
+
+$STALL_WINDOW = 30;
+$STALL_MIN_BYTES = 64 * 1024;
+$windowStart = microtime(true);
+$windowSent = 0;
 
 $crc = hash_init('crc32b');
 hash_update($crc, $header);
@@ -161,10 +169,18 @@ foreach ($entries as $n => $e) {
     }
     hash_update($crc, $bytes);
     $out($bytes);
-    if ($n % 32 === 31) {
+    if ($n % 8 === 7) {
         flush();
         if (connection_aborted()) {
             exit;
+        }
+        $elapsed = microtime(true) - $windowStart;
+        if ($elapsed >= $STALL_WINDOW) {
+            if ($sent - $windowSent < $STALL_MIN_BYTES) {
+                exit;
+            }
+            $windowStart = microtime(true);
+            $windowSent = $sent;
         }
     }
 }

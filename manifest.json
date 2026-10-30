@@ -3,7 +3,7 @@
     "algo": "RSA ／ SHA‑256 De‑attachen‑signature ( manifest.sig is base64 of sign( SHA-256(manifest.json) ) )",
     "pubkey": "publickey.pem",
     "pubkey_spki_sha256": "261AF6EA33A67825250326CC64E5BC735BF3C010FCC4F4132D83F19B28D1DAD5",
-    "count": 98,
+    "count": 100,
     "files": {
         ".gitattributes": {
             "sha256": "3273581722446ffa8ba538c07adc08da799a77df208360a9c0ae1bad97c412ff",
@@ -16,9 +16,9 @@
             "size": 1949
         },
         "api/pack.php": {
-            "sha256": "2771cc45cfe90c0801eda34309280b248735a2e00b733e23a5e6b31bc934de28",
-            "sha384": "sha384-Kr+/eaGTaJouFhG9aZibVx1mcWem0EqwS4znJ/43jyZeQhaYN2ox0PetS6y4MAFn",
-            "size": 4516
+            "sha256": "0e4092573504e451372e4ea58779ba374088006b54dfa62c36257f2e4f2e74c8",
+            "sha384": "sha384-/cjTUKbr7cxyBEqb/yEiFMHIB4mKIIjtUL3ZLWp3qb41TljKD3tbT+mCDa3wJXt7",
+            "size": 4964
         },
         "api/status.php": {
             "sha256": "e42b5ed7c1258d4c3eac24f2ab7da249005a82ab75cebdd99f35fd93284008ff",
@@ -375,6 +375,11 @@
             "sha384": "sha384-kK8tmzqH2ovbltgRXGfVCMP9dD+s9ckonIhRpdBK543B77n0mqu6DyQAF7v18kG0",
             "size": 10727
         },
+        "assets/img/Services for þe General populace Ministeria custodiae filaciorum ( Secura ) , aßervatio.2cm.png": {
+            "sha256": "fcd2738dbbbf2280937d814c0628cc8b1ab46e419e3813be141d9c1e5fe9312d",
+            "sha384": "sha384-Lz2sNVHEBNxuNyAJXatbtF1C0wRk0/uzcUXxFPxU9Tb7J1G03JIgr48P1tuxgF6K",
+            "size": 17068
+        },
         "assets/img/Services for þe General populace Ministeria custodiae filaciorum ( Secura ) , aßervatio.png": {
             "sha256": "1f93978f886b09cc937982b40e669a915f968506d56abd8d287b84f433f188e8",
             "sha384": "sha384-ZU63WI76nerYMbW8IKTfCepsW/hzav4mmboatPWP5mXKwVo+8mgazfj7Jf7bqPqP",
@@ -441,14 +446,14 @@
             "size": 5254
         },
         "embed.php": {
-            "sha256": "3c8dfbb08b237053178403ae08dffed6d4f0a78af6351db4cf613338d6475116",
-            "sha384": "sha384-E7xbPYY0YJ8mRewMRUnRczIePGoHIEItHn4pe8a+ICdjON9IyPx+9KqxcYnMGcU2",
-            "size": 6062
+            "sha256": "bc25b1c945b49512b2881898f86cde21283a79950eeb6a70e3a5ac2155667ab0",
+            "sha384": "sha384-sMc2XrL+0IlkOG+fo6nF7n3gfjuLZk6dNOU6YgdgGUfM545hGk9nOF4sNNzzDV02",
+            "size": 6581
         },
         "index.php": {
-            "sha256": "9cfef036184d2ee489eb00961e3e7a86071b9e9ad69e44237f8038c0643c3fad",
-            "sha384": "sha384-9ivG7PvfC2dlGtzRL53F8BZ/XbtQImE+fRlGVGH+LslRFjDVNiZt1eAasNaVBel7",
-            "size": 8450
+            "sha256": "3b2a7d7d6b0d1e7725d66da663a8b4a1650648567f9b7345964030d978d3673d",
+            "sha384": "sha384-6/gk7K5PbadPNsd+3rZRnVtLakxsCKeUahtP99lUAKZIKUIDSDQh6zDWNSOFiPzm",
+            "size": 8584
         },
         "indexd.json": {
             "sha256": "7ab634e86b39bb14a4b99cac6a613ccf06500a24389330b99c5a459cc3013ec1",
@@ -465,10 +470,15 @@
             "sha384": "sha384-8M17rHWxSodBtpY4TGXbvrwSsQyU7CLFMX1F7rzDw4lMydIxCqA3cT3LtXSkY2i8",
             "size": 2784
         },
+        "kdf/low.js": {
+            "sha256": "17e88c806c59b8e4819e2e35a28d85c42d7a1f029116ab743fc4ac578f95cb6d",
+            "sha384": "sha384-qRx2bPziT4WagbdxKfla5Hk6NV0foJc5Xxn1MADewVIujSdmGTVZvSWO8aWi86jS",
+            "size": 464
+        },
         "lang.php": {
-            "sha256": "24a7593b2addce9310c9476b5200844d70ff2b372e693fdd498185e1c3dbc78a",
-            "sha384": "sha384-ioMfcm7TRUHK+0qzyMc/DavDmFUfCLu4r2jbXF1bscFGBHRI6Ap4kfI78w4Nm94u",
-            "size": 2933
+            "sha256": "8f5f55541a8592d3a30b6740e5bc19e17e228cb33bf426ab267e64e72d5dc0f2",
+            "sha384": "sha384-6Z5+63Ot+T20nvRRPlKvB8qeHWDVHbbyrXbszaArpM7zzp6UEWAcFiM3rE+UI3Yv",
+            "size": 2971
         },
         "onion.txt": {
             "sha256": "9e454f2ae8df4f4029d4f389b4cf3cbc02bde7d6d8be7cf711c9804ab8dfe8c7",

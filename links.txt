@@ -34,7 +34,7 @@ Take þe Finger‑print from an Trusten Official‑source , e.g./ github.com/v3
 Per-file sha256s ;
   3273581722446ffa8ba538c07adc08da799a77df208360a9c0ae1bad97c412ff  .gitattributes
   f1b8dc043164acaef97a52a67ea209beed859b864493ac9b3128b0bc210641a8  .htaccess
-  2771cc45cfe90c0801eda34309280b248735a2e00b733e23a5e6b31bc934de28  api/pack.php
+  0e4092573504e451372e4ea58779ba374088006b54dfa62c36257f2e4f2e74c8  api/pack.php
   e42b5ed7c1258d4c3eac24f2ab7da249005a82ab75cebdd99f35fd93284008ff  api/status.php
   335470988280502953f30f1028a37eddeac556a3181513baf08ab3aec13a4424  api/ticket.php
   d8bb747b3fdccd84a60bd0aa56bb90937270d0bd15f1101cd8f2a5a3709dd0a3  assets/css/fonts/BabelStoneHan.ttf
@@ -106,6 +106,7 @@ Per-file sha256s ;
   38d32567380fdcee9e76bb5127c38b9109fa6f27de984bc108f559ff4e8b2a08  assets/css/fonts/regular.ttf
   042b367bf8d89aef200f567f27aba119ec4204f9594e697609951e1295362ce8  assets/css/katex.css
   455ebe99708445f8633020acd54cbc9910e84bc54b0d930e911c3bca4ac6a68c  assets/css/style.css
+  fcd2738dbbbf2280937d814c0628cc8b1ab46e419e3813be141d9c1e5fe9312d  assets/img/Services for þe General populace Ministeria custodiae filaciorum ( Secura ) , aßervatio.2cm.png
   1f93978f886b09cc937982b40e669a915f968506d56abd8d287b84f433f188e8  assets/img/Services for þe General populace Ministeria custodiae filaciorum ( Secura ) , aßervatio.png
   9d2578af7a872b3ce1f9641406b08e8496093ef6de18fa9142ba004eb61148c7  assets/img/logomonochrome.ico
   b560dde482c0162bf6c62e0a1eee63f9992ba9169f1e89ea3d7b4ea37fed2494  assets/js/app.js
@@ -119,12 +120,13 @@ Per-file sha256s ;
   db68ffe6e0eb2e8ce25046ca8e1755be5fbf28224c2d675212e0ab631cea2089  csp.php
   63644ba2117b522ed096d3bb218cb67194dc475f05f37ffada99fe2a35d82879  db.php
   d731abc8347747c48ac0d1915a98f3e044fbe6a09b66164c8ccc4d0635c3253e  download.php
-  3c8dfbb08b237053178403ae08dffed6d4f0a78af6351db4cf613338d6475116  embed.php
-  9cfef036184d2ee489eb00961e3e7a86071b9e9ad69e44237f8038c0643c3fad  index.php
+  bc25b1c945b49512b2881898f86cde21283a79950eeb6a70e3a5ac2155667ab0  embed.php
+  3b2a7d7d6b0d1e7725d66da663a8b4a1650648567f9b7345964030d978d3673d  index.php
   7ab634e86b39bb14a4b99cac6a613ccf06500a24389330b99c5a459cc3013ec1  indexd.json
   417ef536a8f627b0cbefff91b68d754cb68c081acb1ca16bcd5dcab41f85406b  init_storage.php
   a089e81d9ff91dc623de95a4b60dfbed9a82ab7f8cd5955f1a0b0c08d3d468ee  integritie.php
-  24a7593b2addce9310c9476b5200844d70ff2b372e693fdd498185e1c3dbc78a  lang.php
+  17e88c806c59b8e4819e2e35a28d85c42d7a1f029116ab743fc4ac578f95cb6d  kdf/low.js
+  8f5f55541a8592d3a30b6740e5bc19e17e228cb33bf426ab267e64e72d5dc0f2  lang.php
   9e454f2ae8df4f4029d4f389b4cf3cbc02bde7d6d8be7cf711c9804ab8dfe8c7  onion.txt
   aea7fa16965aed3de3803a270f1e2973d600c852511ecf04b59ace1a9026e13e  publickey.pem
   60662a32085c27712b8948ac212d6113c914916c4aefa60ebe376fd4481122fc  ratelimit.php
