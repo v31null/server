@@ -771,7 +771,7 @@ function initDownload() {
                 if (used.has(key)) {
                     const slash = key.lastIndexOf('/') + 1;
                     const dot = key.lastIndexOf('.');
-                    const cut = dot > slash ? dot : key.length;
+                    const cut = dot >= slash ? dot : key.length;
                     for (let k = 1; ; k++) {
                         let suffix = '';
                         for (let n = k; n > 0; n = Math.floor((n - 1) / letters.length)) {

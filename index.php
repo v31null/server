@@ -176,6 +176,6 @@
   <script nonce="<?= $nonce ?>">window.V31N_MODE = 'upload'; window.V31N_T = <?= json_encode($t, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
   <script src="assets/js/qrcode.min.js?v=164fc2c1c9eaf0a0" integrity="sha384-mZT2gIty7ZDdOGkxfP6joZcYdMW1Jvj9dRlfpTmaJAKKXTqzygtB22k7FLe+KZC1"></script>
   <script src="assets/js/crypto.js?v=e13ab2e41bfe1570" integrity="sha384-XWvQhE2PfMlXJrsu8PjfOMaycm+iN9GgSl0Xw8AU3oX6Co2rCwy8sj9bDcILI8JC"></script>
-  <script src="assets/js/app.js?v=6ea034b12699aaf0" integrity="sha384-jVqNxRFwuP2t2ZDujgrFQOAU0rOj4Ja4p2HcmQmIYh74dkXXmcD7u7o9KWUaDESK"></script>
+  <script src="assets/js/app.js?v=6dc2b04c2e18fdd1" integrity="sha384-tbBdPOcdqI4Lb+2UtcQgxl3OTsR5zYiJ+OnMpNSeSvNzeupowfeGvJiEiIH4Jin6"></script>
 </body>
 </html>

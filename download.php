@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         window.V31N_T = <?= json_encode($t, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
     </script>
     <script src="../assets/js/crypto.js?v=e13ab2e41bfe1570" integrity="sha384-XWvQhE2PfMlXJrsu8PjfOMaycm+iN9GgSl0Xw8AU3oX6Co2rCwy8sj9bDcILI8JC"></script>
-    <script src="../assets/js/app.js?v=6ea034b12699aaf0" integrity="sha384-jVqNxRFwuP2t2ZDujgrFQOAU0rOj4Ja4p2HcmQmIYh74dkXXmcD7u7o9KWUaDESK"></script>
+    <script src="../assets/js/app.js?v=6dc2b04c2e18fdd1" integrity="sha384-tbBdPOcdqI4Lb+2UtcQgxl3OTsR5zYiJ+OnMpNSeSvNzeupowfeGvJiEiIH4Jin6"></script>
 </body>
 </html>
 <?php
