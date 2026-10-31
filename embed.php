@@ -176,6 +176,10 @@ function serveFile($filePath, $mime, $fileId, $meta) {
     }
 
     if (isSafeMime($mime)) {
+        if (strtolower($mime) === 'application/v31np') {
+            header('Location: /w/' . $fileId . '#' . rawurlencode($_GET['PASS']));
+            exit;
+        }
         header('Content-Type: ' . $mime);
         header('Content-Length: ' . filesize($filePath));
         header('Cache-Control: public, max-age=31536000');
@@ -220,6 +224,7 @@ function isSafeMime($mime) {
     if (strpos($mime, 'video/') === 0) return true;
     if (strpos($mime, 'audio/') === 0) return true;
     if ($mime === 'application/pdf') return true;
+    if ($mime === 'application/v31np') return true;
 
     return false;
 }

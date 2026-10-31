@@ -171,21 +171,14 @@ function padme(n) {
     return Math.ceil(n / step) * step;
 }
 
-async function chunkAndEncryptFile(files, password, decoyHashes, onProgress) {
-    const total = files.reduce((sum, f) => sum + f.size, 0);
-    if (total > MAX_FILE_SIZE) {
+async function chunkAndEncryptFile(file, password, decoyHashes, onProgress) {
+    if (file.size > MAX_FILE_SIZE) {
         throw new Error(window.v31nT('upload.too.large'));
     }
 
     const salt = await generateSalt();
 
-    const fileBytes = new Uint8Array(total);
-    let at = 0;
-    for (const f of files) {
-        fileBytes.set(new Uint8Array(await f.arrayBuffer()), at);
-        at += f.size;
-    }
-    const file = files[0];
+    const fileBytes = new Uint8Array(await file.arrayBuffer());
 
     const totalChunks = Math.ceil(fileBytes.length / CHUNK_SIZE) || 1;
     const chunks = [];
@@ -220,13 +213,6 @@ async function chunkAndEncryptFile(files, password, decoyHashes, onProgress) {
         size: file.size,
         padding: ""
     };
-    if (files.length > 1) {
-        payload.files = files.map(f => ({
-            filename: f.name,
-            mime: f.type || 'application/octet-stream',
-            size: f.size
-        }));
-    }
 
     const totalCombinedChunks = map.length + (decoyHashes ? decoyHashes.length : 0);
     const currentSize = new TextEncoder().encode(JSON.stringify(payload)).length;
@@ -271,9 +257,7 @@ async function assembleFile(payload, chunks, onProgress) {
         data.set(part, offset);
         offset += part.length;
     }
-    const files = payload.files;
-    const total = files ? files.reduce((sum, f) => sum + f.size, 0) : size;
-    return { data: data.subarray(0, Math.min(total, totalLength)), filename, mime, size, files };
+    return { data: data.subarray(0, Math.min(size, totalLength)), filename, mime, size };
 }
 
 

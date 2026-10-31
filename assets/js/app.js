@@ -236,6 +236,65 @@ function v31nCmp(a, b) {
 }
 
 
+function v31nStem(name) {
+    const dot = name.lastIndexOf('.');
+    return dot <= 0 ? name : name.substring(0, dot);
+}
+
+
+function v31nOrder(a, b) {
+    return v31nCmp(v31nStem(a), v31nStem(b)) || v31nCmp(a, b);
+}
+
+
+function v31nPathCmp(a, b) {
+    const p1 = a.split('/');
+    const p2 = b.split('/');
+    for (let i = 0; i < Math.min(p1.length, p2.length); i++) {
+        const dir1 = i < p1.length - 1;
+        const dir2 = i < p2.length - 1;
+        if (dir1 !== dir2) return dir1 ? -1 : 1;
+        if (p1[i] === p2[i]) continue;
+        return v31nOrder(p1[i], p2[i]) || (p1[i] < p2[i] ? -1 : 1);
+    }
+    return 0;
+}
+
+
+function v31nUnique(key, taken, used) {
+    if (used.has(key)) {
+        const letters = V31N_ORDER.filter(g => !/^[0-9]$/.test(g)).map(g => Array.from(g)[0]);
+        const slash = key.lastIndexOf('/') + 1;
+        const dot = key.lastIndexOf('.');
+        const cut = dot >= slash ? dot : key.length;
+        for (let k = 1; ; k++) {
+            let suffix = '';
+            for (let n = k; n > 0; n = Math.floor((n - 1) / letters.length)) {
+                suffix = letters[(n - 1) % letters.length] + suffix;
+            }
+            const next = key.substring(0, cut) + suffix + key.substring(cut);
+            if (!taken.has(next) && !used.has(next)) {
+                key = next;
+                break;
+            }
+        }
+    }
+    used.add(key);
+    return key;
+}
+
+
+async function v31nPackEntries(files) {
+    const taken = new Set(files.map(f => String(f.name)));
+    const used = new Set();
+    const entries = [];
+    for (const f of files) {
+        entries.push({ key: v31nUnique(String(f.name), taken, used), bytes: new Uint8Array(await f.arrayBuffer()) });
+    }
+    return entries.sort((a, b) => v31nPathCmp(a.key, b.key));
+}
+
+
 function v31nBase(path) {
     const s = String(path || '');
     return s.substring(s.lastIndexOf('/') + 1);
@@ -438,7 +497,14 @@ function initUpload() {
         hideError();
 
         try {
-            const realCount = Math.ceil(files.reduce((sum, f) => sum + f.size, 0) / V31nCrypto.CHUNK_SIZE) || 1;
+            let source = file;
+            if (files.length > 1) {
+                const packed = new Uint8Array(await v31nPackBlob(await v31nPackEntries(files)).arrayBuffer());
+                halt();
+                source = { name: file.name, size: packed.length, type: 'application/v31np', arrayBuffer: async () => packed.buffer };
+            }
+
+            const realCount = Math.ceil(source.size / V31nCrypto.CHUNK_SIZE) || 1;
             const numPseudos = V31nCrypto.padme(realCount) - realCount;
 
             const decoyHashes = [];
@@ -455,7 +521,7 @@ function initUpload() {
                 decoyHashes.push(dummyHash);
             }
 
-            const result = await V31nCrypto.chunkAndEncryptFile(files, password, decoyHashes, (progress) => {
+            const result = await V31nCrypto.chunkAndEncryptFile(source, password, decoyHashes, (progress) => {
                 halt();
                 progressFill.style.width = (progress * 40) + '%';
                 progressText.textContent = v31nT('upload.encrypting.progress', { p: Math.round(progress * 100) });
@@ -753,41 +819,92 @@ function initDownload() {
         return tr;
     }
 
-    function showDir(list) {
-        const total = list.reduce((sum, f) => sum + f.bytes.length, 0);
-        const items = v31nExpand(list, '').map((f) => {
-            const bytes = f.bytes;
-            const safe = v31nSafeMime(f.mime);
-            const url = URL.createObjectURL(new Blob([bytes], { type: safe ? f.mime : 'application/octet-stream' }));
-            return { f, safe, url, bytes, path: String(f.filename || '') };
+    const track = {
+        progress(frac, resumed) {
+            progressFill.style.width = (20 + frac * 60) + '%';
+            progressText.textContent = v31nT(resumed ? 'download.resuming' : 'download.progress', { p: Math.round(frac * 100) });
+        },
+        waiting() {
+            progressText.textContent = v31nT('download.waiting');
+        }
+    };
+
+    async function fetchAll(payload) {
+        const realHashes = payload.map.map(m => m.id);
+        const hashesToFetch = [...new Set([...realHashes, ...(payload.decoys || [])])].sort(() => Math.random() - 0.5);
+
+        progressText.textContent = v31nT('download.fetching', { n: hashesToFetch.length });
+        progressFill.style.width = '20%';
+
+        const fetchedChunks = await v31nFetchPack(BASE_URL + 'api/pack.php', hashesToFetch, new Set(realHashes), track);
+
+        progressText.textContent = v31nT('download.assembling');
+        progressFill.style.width = '90%';
+
+        return V31nCrypto.assembleFile(payload, fetchedChunks, (p) => {
+            progressFill.style.width = (90 + p * 10) + '%';
         });
+    }
+
+    function showDir(payload, lazy, entries) {
+        const items = entries.map(e => ({ path: e.key, at: e.at, size: e.size, pack: /\.v31np$/i.test(e.key) }));
+        const total = entries.reduce((sum, e) => sum + e.size, 0);
+        let queue = Promise.resolve();
+
+        const run = (task, win) => {
+            queue = queue.then(async () => {
+                hideError();
+                progressFill.style.width = '20%';
+                progressText.textContent = v31nT('download.progress', { p: 0 });
+                progressContainer.style.display = 'block';
+                try {
+                    await task();
+                } catch (err) {
+                    if (win) win.close();
+                    showError(err.message || v31nT('download.decrypt.failed'));
+                }
+                progressContainer.style.display = 'none';
+            });
+        };
+
+        const openFile = (it) => {
+            const name = v31nBase(it.path);
+            const mime = v31nExtMime(it.path);
+            const safe = v31nSafeMime(mime);
+            const win = safe ? window.open('', '_blank') : null;
+            run(async () => {
+                const bytes = await lazy.read(it.at, it.at + it.size, track);
+                const url = URL.createObjectURL(new Blob([bytes], { type: safe ? mime : 'application/octet-stream' }));
+                if (win) win.location.href = url;
+                else v31nSave(url, name);
+            }, win);
+        };
+
+        const openPack = (it) => {
+            run(async () => {
+                const inner = await lazy.header(it.at, it.size, track);
+                if (!inner) {
+                    it.pack = false;
+                    render(it.path.substring(0, it.path.lastIndexOf('/') + 1));
+                    const bytes = await lazy.read(it.at, it.at + it.size, track);
+                    v31nSave(URL.createObjectURL(new Blob([bytes], { type: 'application/octet-stream' })), v31nBase(it.path));
+                    return;
+                }
+                items.splice(items.indexOf(it), 1, ...inner.map(e => ({
+                    path: it.path + '/' + e.key,
+                    at: it.at + e.at,
+                    size: e.size,
+                    pack: /\.v31np$/i.test(e.key)
+                })));
+                render(it.path + '/');
+            });
+        };
 
         dirAll.onclick = () => {
-            const letters = V31N_ORDER.filter(g => !/^[0-9]$/.test(g)).map(g => Array.from(g)[0]);
-            const taken = new Set(list.map(f => String(f.filename || '')));
-            const used = new Set();
-            const entries = list.map((f) => {
-                let key = String(f.filename || '');
-                if (used.has(key)) {
-                    const slash = key.lastIndexOf('/') + 1;
-                    const dot = key.lastIndexOf('.');
-                    const cut = dot >= slash ? dot : key.length;
-                    for (let k = 1; ; k++) {
-                        let suffix = '';
-                        for (let n = k; n > 0; n = Math.floor((n - 1) / letters.length)) {
-                            suffix = letters[(n - 1) % letters.length] + suffix;
-                        }
-                        const next = key.substring(0, cut) + suffix + key.substring(cut);
-                        if (!taken.has(next) && !used.has(next)) {
-                            key = next;
-                            break;
-                        }
-                    }
-                }
-                used.add(key);
-                return { key, bytes: f.bytes };
+            run(async () => {
+                const file = await fetchAll(payload);
+                v31nSave(URL.createObjectURL(new Blob([file.data], { type: 'application/octet-stream' })), fileId + '.v31np');
             });
-            v31nSave(URL.createObjectURL(v31nPackBlob(entries)), fileId + '.v31np');
         };
 
         const render = (cwd) => {
@@ -801,45 +918,36 @@ function initDownload() {
                 if (!it.path.startsWith(cwd)) return;
                 const rest = it.path.substring(cwd.length);
                 const slash = rest.indexOf('/');
-                if (slash !== -1 && !folders.includes(rest.substring(0, slash))) folders.push(rest.substring(0, slash));
+                if (slash !== -1) {
+                    const name = rest.substring(0, slash);
+                    if (!folders.some(f => f.name === name)) folders.push({ name, open: () => render(cwd + name + '/') });
+                } else if (it.pack) {
+                    folders.push({ name: rest, open: () => openPack(it) });
+                }
             });
-            folders.sort(v31nCmp).forEach((name) => {
-                dirTable.appendChild(folderRow(name, () => render(cwd + name + '/')));
+            folders.sort((a, b) => v31nOrder(a.name, b.name)).forEach((f) => {
+                dirTable.appendChild(folderRow(f.name, f.open));
             });
-            const here = items.filter(({ path }) => path.startsWith(cwd) && path.indexOf('/', cwd.length) === -1);
-            here.sort((a, b) => v31nCmp(v31nBase(a.path), v31nBase(b.path)));
-            here.forEach(({ f, safe, url, bytes, path }) => {
-                const name = v31nBase(path);
-
+            const here = items.filter(it => !it.pack && it.path.startsWith(cwd) && it.path.indexOf('/', cwd.length) === -1);
+            here.sort((a, b) => v31nOrder(v31nBase(a.path), v31nBase(b.path)));
+            here.forEach((it) => {
+                const name = v31nBase(it.path);
                 const tr = document.createElement('tr');
                 const preview = document.createElement('td');
                 const box = document.createElement('div');
                 box.className = 'dir-preview';
-                if (String(f.mime).toLowerCase().startsWith('image/')) {
-                    const img = document.createElement('img');
-                    img.src = url;
-                    img.alt = '';
-                    box.appendChild(img);
-                } else {
-                    const dot = name.lastIndexOf('.');
-                    box.textContent = dot !== -1 && dot < name.length - 1 ? name.substring(dot + 1).toLowerCase() : '';
-                }
+                const dot = name.lastIndexOf('.');
+                box.textContent = dot !== -1 && dot < name.length - 1 ? name.substring(dot + 1).toLowerCase() : '';
                 preview.appendChild(box);
                 const label = document.createElement('td');
-                label.textContent = v31nT('file.item', { name, size: v31nKb(bytes.length) });
+                label.textContent = v31nT('file.item', { name, size: v31nKb(it.size) });
                 tr.append(preview, label);
-                tr.addEventListener('click', () => {
-                    if (safe) {
-                        window.open(url, '_blank');
-                    } else {
-                        v31nSave(url, name);
-                    }
-                });
+                tr.addEventListener('click', () => openFile(it));
                 dirTable.appendChild(tr);
             });
         };
         render('');
-        dirCount.textContent = v31nT('download.dir.count', { n: list.length, size: v31nKb(total) });
+        dirCount.textContent = v31nT('download.dir.count', { n: entries.length, size: v31nKb(total) });
         document.querySelectorAll('.encrypted-notice, .form-group').forEach((el) => {
             el.style.display = 'none';
         });
@@ -890,47 +998,17 @@ function initDownload() {
                 throw new Error(v31nT('download.wrong'));
             }
 
-            const realHashes = payload.map.map(m => m.id);
-            const payloadDecoys = payload.decoys || [];
-            const hashesToFetch = [...new Set([...realHashes, ...payloadDecoys])].sort(() => Math.random() - 0.5);
-
-            progressText.textContent = v31nT('download.fetching', { n: hashesToFetch.length });
-            progressFill.style.width = '20%';
-
-            const fetchedChunks = await v31nFetchPack(BASE_URL + 'api/pack.php', hashesToFetch, new Set(realHashes), {
-                progress(frac, resumed) {
-                    progressFill.style.width = (20 + frac * 60) + '%';
-                    progressText.textContent = v31nT(resumed ? 'download.resuming' : 'download.progress', { p: Math.round(frac * 100) });
-                },
-                waiting() {
-                    progressText.textContent = v31nT('download.waiting');
-                }
-            });
-
-            progressText.textContent = v31nT('download.assembling');
-            progressFill.style.width = '90%';
-
-            const file = await V31nCrypto.assembleFile(payload, fetchedChunks, (p) => {
-                progressFill.style.width = (90 + p * 10) + '%';
-            });
-
-            if (file.files && file.files.length > 1) {
-                let at = 0;
-                showDir(file.files.map((f) => {
-                    const bytes = file.data.subarray(at, at + f.size);
-                    at += f.size;
-                    return { filename: f.filename, mime: f.mime, bytes };
-                }));
-                return;
-            }
-
-            if (/\.v31np$/i.test(String(file.filename || ''))) {
-                const unpacked = v31nUnpack(file.data);
-                if (unpacked) {
-                    showDir(unpacked);
+            if (payload.mime === 'application/v31np' || /\.v31np$/i.test(String(payload.filename || ''))) {
+                progressFill.style.width = '20%';
+                const lazy = v31nLazy(BASE_URL, payload);
+                const entries = await lazy.header(0, payload.size, track);
+                if (entries) {
+                    showDir(payload, lazy, entries);
                     return;
                 }
             }
+
+            const file = await fetchAll(payload);
 
             const safe = v31nSafeMime(file.mime);
             const blobUrl = URL.createObjectURL(new Blob([file.data], { type: safe ? file.mime : 'application/octet-stream' }));
@@ -1020,7 +1098,15 @@ function v31nPackBlob(entries) {
     const datum = v31nJoin([new Uint8Array([1]), V31N_PHI]);
     const keys = entries.map(e => enc.encode(e.key));
 
-    const t2 = v31nJoin(entries.flatMap((e, i) => [head, keys[i], datum, v31nNumBytes(e.bytes.length), datum, datum, keys[i], datum]));
+    const t2 = v31nJoin(entries.flatMap((e, i) => {
+        const slash = e.key.lastIndexOf('/') + 1;
+        const dot = e.key.lastIndexOf('.');
+        const cut = dot >= slash ? dot : e.key.length;
+        return [head, keys[i], datum, v31nNumBytes(e.bytes.length),
+            datum, enc.encode(e.key.substring(0, slash)),
+            datum, enc.encode(e.key.substring(slash, cut)),
+            datum, enc.encode(e.key.substring(cut))];
+    }));
 
     let header;
     let start = 0;
@@ -1048,23 +1134,55 @@ function v31nPackBlob(entries) {
 }
 
 
-function v31nUnpack(buf) {
-    const lead = V31N_MAGIC.length + V31N_PI.length;
-    if (buf.length < lead + 16) return null;
-    for (let i = 0; i < lead; i++) {
-        if (buf[i] !== (i < V31N_MAGIC.length ? V31N_MAGIC[i] : V31N_PI[i - V31N_MAGIC.length])) return null;
-    }
-    const b = v31nIndexOf(buf, V31N_PI, lead);
-    const c = b < 0 ? -1 : v31nIndexOf(buf, V31N_PI, b + V31N_PI.length);
-    if (c < 0) return null;
-    const headerLen = c + V31N_PI.length;
-    const parsed = v31nParseHeader(buf.subarray(0, headerLen), null);
-    if (!parsed || parsed.end + 16 !== buf.length) return null;
-    const foot = buf.subarray(parsed.end);
-    for (let i = 0; i < 12; i++) if (foot[i] !== V31N_PI[i]) return null;
-    const crc = v31nCrc(V31N_PI, v31nCrc(buf.subarray(0, parsed.end), 0));
-    if (crc !== ((foot[12] | (foot[13] << 8) | (foot[14] << 16) | (foot[15] << 24)) >>> 0)) return null;
-    return parsed.entries.map(e => ({ filename: e.key, mime: v31nExtMime(e.key), bytes: buf.subarray(e.at, e.at + e.size) }));
+function v31nLazy(base, payload) {
+    const size = V31nCrypto.CHUNK_SIZE;
+    const map = payload.map;
+    const plain = new Map();
+    const pool = [...new Set([...map.map(m => m.id), ...(payload.decoys || [])])];
+
+    const load = async (want, on) => {
+        const need = want.filter(i => !plain.has(i));
+        if (!need.length) return;
+        const ids = new Set(need.map(i => map[i].id));
+        const extra = V31nCrypto.padme(ids.size) - ids.size;
+        const spare = pool.filter(h => !ids.has(h)).sort(() => Math.random() - 0.5).slice(0, extra);
+        const hashes = [...ids, ...spare].sort(() => Math.random() - 0.5);
+        const got = await v31nFetchPack(base + 'api/pack.php', hashes, ids, on);
+        for (const i of need) plain.set(i, await V31nCrypto.decryptChunk(got.get(map[i].id), map[i].key));
+    };
+
+    const read = async (start, end, on) => {
+        const want = [];
+        for (let i = Math.floor(start / size); i * size < end; i++) want.push(i);
+        await load(want, on);
+        const out = new Uint8Array(end - start);
+        for (const i of want) {
+            const from = Math.max(start, i * size);
+            const to = Math.min(end, (i + 1) * size);
+            out.set(plain.get(i).subarray(from - i * size, to - i * size), from - start);
+        }
+        return out;
+    };
+
+    const header = async (at, len, on) => {
+        const lead = V31N_MAGIC.length + V31N_PI.length;
+        for (let n = size; ; n *= 2) {
+            const head = await read(at, at + Math.min(len, n), on);
+            if (head.length < lead) return null;
+            for (let i = 0; i < lead; i++) {
+                if (head[i] !== (i < V31N_MAGIC.length ? V31N_MAGIC[i] : V31N_PI[i - V31N_MAGIC.length])) return null;
+            }
+            const b = v31nIndexOf(head, V31N_PI, lead);
+            const c = b < 0 ? -1 : v31nIndexOf(head, V31N_PI, b + V31N_PI.length);
+            if (c >= 0) {
+                const parsed = v31nParseHeader(head.subarray(0, c + V31N_PI.length), null);
+                return parsed && parsed.end + 16 === len ? parsed.entries : null;
+            }
+            if (head.length >= len) return null;
+        }
+    };
+
+    return { read, header };
 }
 
 
@@ -1083,23 +1201,6 @@ function v31nExtMime(path) {
     const dot = name.lastIndexOf('.');
     const ext = dot > 0 ? name.substring(dot + 1).toLowerCase() : '';
     return V31N_EXT_MIME[ext] || '';
-}
-
-
-function v31nExpand(list, prefix) {
-    const out = [];
-    list.forEach((f) => {
-        const path = prefix + String(f.filename || '');
-        if (/\.v31np$/i.test(path)) {
-            const inner = v31nUnpack(f.bytes);
-            if (inner) {
-                out.push(...v31nExpand(inner, path + '/'));
-                return;
-            }
-        }
-        out.push({ filename: path, mime: f.mime, bytes: f.bytes });
-    });
-    return out;
 }
 
 
@@ -1156,7 +1257,10 @@ function v31nParseHeader(head, keys) {
         if (r.length !== 5) return null;
         const key = dec.decode(r[0]);
         const size = v31nNum(r[1]);
-        if (size === null || sizes.has(key) || dec.decode(r[2]) + dec.decode(r[3]) + dec.decode(r[4]) !== key) return null;
+        const slash = key.lastIndexOf('/') + 1;
+        const dot = key.lastIndexOf('.');
+        const cut = dot >= slash ? dot : key.length;
+        if (size === null || sizes.has(key) || dec.decode(r[2]) !== key.substring(0, slash) || dec.decode(r[3]) !== key.substring(slash, cut) || dec.decode(r[4]) !== key.substring(cut)) return null;
         sizes.set(key, size);
     }
     const entries = [];

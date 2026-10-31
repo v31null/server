@@ -391,9 +391,9 @@
             "size": 3890
         },
         "assets/js/app.js": {
-            "sha256": "6dc2b04c2e18fdd145fdac55482853a31f13a1041b962c0c7166cf6141359099",
-            "sha384": "sha384-tbBdPOcdqI4Lb+2UtcQgxl3OTsR5zYiJ+OnMpNSeSvNzeupowfeGvJiEiIH4Jin6",
-            "size": 50355
+            "sha256": "253d478fee38d0d6b4fd7267254c297d65290cbd41a149229b5ca1db46d4dbb6",
+            "sha384": "sha384-vw0eL6Y5+HlJInR1zvpVVlUk9t/aQVW1Ypd+HwH35qzsSi0S7ld563eoVTGHcul1",
+            "size": 54060
         },
         "assets/js/auto-render.js": {
             "sha256": "4cfb141d56e2c5644f5226e6b8709a3eadd39989fcec86a38c8150adb196d89b",
@@ -406,9 +406,9 @@
             "size": 1671
         },
         "assets/js/crypto.js": {
-            "sha256": "e13ab2e41bfe15702feb5c4d8f8a272f21edfaed447bb39d2de8bd48618548ea",
-            "sha384": "sha384-XWvQhE2PfMlXJrsu8PjfOMaycm+iN9GgSl0Xw8AU3oX6Co2rCwy8sj9bDcILI8JC",
-            "size": 8377
+            "sha256": "acb501462841c48bcee49fa1ac7b298d3968f71eac9cb45c50b007c2eb93e265",
+            "sha384": "sha384-uVu1ZL0ck5/f0BfamiT8sMyLQIOfVFCTMsbzhCMaWU4bA7vToijEEm3EsOXZ5Vlv",
+            "size": 7855
         },
         "assets/js/katex.js": {
             "sha256": "8f4f4efac9e80863b0ef9946c004928ad3bd33bbbeabcc8531c605c82a1bb545",
@@ -446,18 +446,18 @@
             "size": 2258
         },
         "download.php": {
-            "sha256": "4881ef2fd761b78672dea95a27898946166c47742b70ff0b8d6080ea8ad59c31",
-            "sha384": "sha384-euXGKbwEAQH8szU4cxQiXhZoTTkzdKMMJFXzh7bpYhd3FrIIbc7a6W1+VSWhfHas",
+            "sha256": "4e010cca8841d81adbb34116ab9e82b29f079adab28a9715a737e21fe62f3aee",
+            "sha384": "sha384-Anjm8Fe8w6nJkVtR78DAqgqkjfV2KvXsyBxdy/WpjVw1vxsh6qOCaSLFYb0bZyou",
             "size": 6007
         },
         "embed.php": {
-            "sha256": "37608e638c394b18060996217f3e528100858cd6da48cfffd39e8e3a40b1adc9",
-            "sha384": "sha384-N9xFzN6lixTjsPYwE+kuWRqkOWmr4i+1lSCExw255r8/ynWCJgf4X4VmnMcY1xiC",
-            "size": 6947
+            "sha256": "1023ae2fc67ad7902e2c22b6f48a78937952da902a75f152228d3d95457486d3",
+            "sha384": "sha384-/YvUoVnEtksiyqE8ByqZEdg2+aoE3vUevTY0RrlgM2iI95B+l76WLnc/Ra2Pxy8a",
+            "size": 7167
         },
         "index.php": {
-            "sha256": "b84d0826ed791a185b42d8080b00d776541ca2eccac748f0b3f06c35ccce15b6",
-            "sha384": "sha384-bX1yhv/aBPgyJDaUZofGTghOZvBPwQUr9WPSGCTelLtrGp/91TqDDEIYsYCAYMpZ",
+            "sha256": "bed3c9201ca76df758b021bfa0936d09f0105fbfb13996016f8c01ef0ba8d795",
+            "sha384": "sha384-y0ojzD9gf2SpRQucZGWdqFSJM1advkUUN4QnDDQNqwdMDkgLm4Y9V2Prb50Wa9zM",
             "size": 9557
         },
         "indexd.json": {

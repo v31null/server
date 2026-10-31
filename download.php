@@ -95,8 +95,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         window.V31N_FILE_ID = '<?php echo htmlspecialchars($id, ENT_QUOTES, 'UTF-8'); ?>';
         window.V31N_T = <?= json_encode($t, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
     </script>
-    <script src="../assets/js/crypto.js?v=e13ab2e41bfe1570" integrity="sha384-XWvQhE2PfMlXJrsu8PjfOMaycm+iN9GgSl0Xw8AU3oX6Co2rCwy8sj9bDcILI8JC"></script>
-    <script src="../assets/js/app.js?v=6dc2b04c2e18fdd1" integrity="sha384-tbBdPOcdqI4Lb+2UtcQgxl3OTsR5zYiJ+OnMpNSeSvNzeupowfeGvJiEiIH4Jin6"></script>
+    <script src="../assets/js/crypto.js?v=acb501462841c48b" integrity="sha384-uVu1ZL0ck5/f0BfamiT8sMyLQIOfVFCTMsbzhCMaWU4bA7vToijEEm3EsOXZ5Vlv"></script>
+    <script src="../assets/js/app.js?v=253d478fee38d0d6" integrity="sha384-vw0eL6Y5+HlJInR1zvpVVlUk9t/aQVW1Ypd+HwH35qzsSi0S7ld563eoVTGHcul1"></script>
 </body>
 </html>
 <?php

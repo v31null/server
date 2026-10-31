@@ -109,10 +109,10 @@ Per-file sha256s ;
   fcd2738dbbbf2280937d814c0628cc8b1ab46e419e3813be141d9c1e5fe9312d  assets/img/Services for þe General populace Ministeria custodiae filaciorum ( Secura ) , aßervatio.2cm.png
   1f93978f886b09cc937982b40e669a915f968506d56abd8d287b84f433f188e8  assets/img/Services for þe General populace Ministeria custodiae filaciorum ( Secura ) , aßervatio.png
   9d2578af7a872b3ce1f9641406b08e8496093ef6de18fa9142ba004eb61148c7  assets/img/logomonochrome.ico
-  6dc2b04c2e18fdd145fdac55482853a31f13a1041b962c0c7166cf6141359099  assets/js/app.js
+  253d478fee38d0d6b4fd7267254c297d65290cbd41a149229b5ca1db46d4dbb6  assets/js/app.js
   4cfb141d56e2c5644f5226e6b8709a3eadd39989fcec86a38c8150adb196d89b  assets/js/auto-render.js
   c571c49b520cb8e9040287338286b21783e39b476660b8b56d9e1c037eeaeaff  assets/js/copy-tex.min.js
-  e13ab2e41bfe15702feb5c4d8f8a272f21edfaed447bb39d2de8bd48618548ea  assets/js/crypto.js
+  acb501462841c48bcee49fa1ac7b298d3968f71eac9cb45c50b007c2eb93e265  assets/js/crypto.js
   8f4f4efac9e80863b0ef9946c004928ad3bd33bbbeabcc8531c605c82a1bb545  assets/js/katex.js
   fa140498b8cfc8302cbe5e7cb1bdbc1f952bc38b3fa258ede09e73edbf9a74bc  assets/js/katex.min.js
   164fc2c1c9eaf0a03aa8dfdb855e82e41a5c6922fbad8bb3238116207e26bef7  assets/js/qrcode.min.js
@@ -120,9 +120,9 @@ Per-file sha256s ;
   7f09c4161db5a021dc82d924dd346c1c99f388bdb4e097c758ce91f649f7e77a  blocken.html
   db68ffe6e0eb2e8ce25046ca8e1755be5fbf28224c2d675212e0ab631cea2089  csp.php
   ba331907fa1fc5ae2d19156379c4469c995daa565c72a457addf27239ca45572  db.php
-  4881ef2fd761b78672dea95a27898946166c47742b70ff0b8d6080ea8ad59c31  download.php
-  37608e638c394b18060996217f3e528100858cd6da48cfffd39e8e3a40b1adc9  embed.php
-  b84d0826ed791a185b42d8080b00d776541ca2eccac748f0b3f06c35ccce15b6  index.php
+  4e010cca8841d81adbb34116ab9e82b29f079adab28a9715a737e21fe62f3aee  download.php
+  1023ae2fc67ad7902e2c22b6f48a78937952da902a75f152228d3d95457486d3  embed.php
+  bed3c9201ca76df758b021bfa0936d09f0105fbfb13996016f8c01ef0ba8d795  index.php
   7ab634e86b39bb14a4b99cac6a613ccf06500a24389330b99c5a459cc3013ec1  indexd.json
   417ef536a8f627b0cbefff91b68d754cb68c081acb1ca16bcd5dcab41f85406b  init_storage.php
   a089e81d9ff91dc623de95a4b60dfbed9a82ab7f8cd5955f1a0b0c08d3d468ee  integritie.php
