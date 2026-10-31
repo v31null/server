@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
     <title><?= $t['title'] ?></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/assets/css/style.css?v=7c4ecc7e193cad7e" integrity="sha384-P7qHbO6s19f6tejEweyYhU4xaEIzn+vTiNMJcqf6FxN1bLMDreqQC5sHOn5GK64P">
+  <link rel="stylesheet" href="/assets/css/style.css?v=de54bf6c4c689c3f" integrity="sha384-cerGnvhsn1F6KpPo9+mLT2AkP8/3PrfIcKGbhHVXkUDooX7Q4EeIjlRvy/d1dNC6">
 
 		<link rel="stylesheet" href="/assets/css/katex.css?v=042b367bf8d89aef" integrity="sha384-dyEuTchRIWTUUS5esbTCpMfx+B+xfO8EoTt5SiUbKmafuP0Gilzcq4YNJuy9EkCC" />
 		<script defer src="/assets/js/katex.min.js?v=fa140498b8cfc830" integrity="sha384-a1WQdjRj162i159OYq041X6I4K8NenkrI09LlPmiHg0YOb7CR+wJOraXwK9abpnE"></script>
@@ -71,7 +71,6 @@
                 </span>
               </div>
               <span id="copy-feedback-secure" class="copy-feedback" style="display:none"><?= $t['upload.copied'] ?></span>
-              <div id="result-qr" class="qr"></div>
             </td>
             <td style="width: 50%; padding: 10px; vertical-align: top;">
               <div class="result-link-wrapper" style="justify-content: center; margin-bottom: 5px;">
@@ -84,6 +83,8 @@
           </tr>
         </table>
       </div>
+
+      <div id="result-qr" class="qr" style="display:none; text-align:center;"></div>
 
       <div id="error-container" class="error-container" style="display:none">
         <p id="error-text"></p>
@@ -176,6 +177,6 @@
   <script nonce="<?= $nonce ?>">window.V31N_MODE = 'upload'; window.V31N_T = <?= json_encode($t, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
   <script src="assets/js/qrcode.min.js?v=164fc2c1c9eaf0a0" integrity="sha384-mZT2gIty7ZDdOGkxfP6joZcYdMW1Jvj9dRlfpTmaJAKKXTqzygtB22k7FLe+KZC1"></script>
   <script src="assets/js/crypto.js?v=acb501462841c48b" integrity="sha384-uVu1ZL0ck5/f0BfamiT8sMyLQIOfVFCTMsbzhCMaWU4bA7vToijEEm3EsOXZ5Vlv"></script>
-  <script src="assets/js/app.js?v=253d478fee38d0d6" integrity="sha384-vw0eL6Y5+HlJInR1zvpVVlUk9t/aQVW1Ypd+HwH35qzsSi0S7ld563eoVTGHcul1"></script>
+  <script src="assets/js/app.js?v=d89067a2b9dd5146" integrity="sha384-axJABUg0y4eIN3dYu9NaAzLmwiIPpbdKASN0Tn/Jm39RQkJ75Vp7voov72U3XQeC"></script>
 </body>
 </html>

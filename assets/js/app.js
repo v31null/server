@@ -494,6 +494,7 @@ function initUpload() {
         progressFill.style.width = '0%';
         progressText.textContent = v31nT('upload.encrypting.progress', { p: 0 });
         resultContainer.style.display = 'none';
+        resultQr.style.display = 'none';
         hideError();
 
         try {
@@ -673,7 +674,7 @@ function initUpload() {
             
             const fileName = v31nBase(file.name) || 'file.bin';
             const extIdx = fileName.lastIndexOf('.');
-            const ext = extIdx !== -1 && extIdx < fileName.length - 1 ? fileName.substring(extIdx + 1) : 'bin';
+            const ext = source.type === 'application/v31np' ? 'v31np' : extIdx !== -1 && extIdx < fileName.length - 1 ? fileName.substring(extIdx + 1) : 'bin';
             const embedUrl = origin + BASE_URL + 'embed2/' + uploadResult.id + encodeURIComponent(password) + '.' + ext;
 
             resultLink.href = baseUrl;
@@ -685,8 +686,10 @@ function initUpload() {
             resultEmbedLink.title = v31nT('upload.embed.reveal');
 
             v31nQr(resultQr, baseUrl);
+            v31nBarcode(resultQr, BASE_URL + 'w/' + uploadResult.id);
 
             resultContainer.style.display = 'block';
+            resultQr.style.display = 'block';
 
             selectedFiles = [];
             fileInfo.style.display = 'none';
@@ -744,34 +747,83 @@ function initUpload() {
 
 
 function v31nQr(box, text) {
-    const NS = 'http://www.w3.org/2000/svg';
     const qr = qrcode(0, 'M');
     qr.addData(text);
     qr.make();
     const n = qr.getModuleCount();
     const quiet = 4;
-    const svg = document.createElementNS(NS, 'svg');
-    svg.setAttribute('viewBox', '0 0 ' + (n + quiet * 2) + ' ' + (n + quiet * 2));
-    svg.setAttribute('shape-rendering', 'crispEdges');
-    svg.setAttribute('aria-hidden', 'true');
-    const bg = document.createElementNS(NS, 'rect');
-    bg.setAttribute('width', '100%');
-    bg.setAttribute('height', '100%');
-    bg.setAttribute('fill', '#fff');
-    svg.appendChild(bg);
-    let d = '';
+    const scale = 10;
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = (n + quiet * 2) * scale;
+    const g = canvas.getContext('2d');
+    g.fillStyle = '#fff';
+    g.fillRect(0, 0, canvas.width, canvas.height);
+    g.fillStyle = '#000';
     for (let r = 0; r < n; r++) {
         for (let c = 0; c < n; c++) {
-            if (qr.isDark(r, c)) d += 'M' + (c + quiet) + ' ' + (r + quiet) + 'h1v1h-1z';
+            if (qr.isDark(r, c)) g.fillRect((c + quiet) * scale, (r + quiet) * scale, scale, scale);
         }
     }
-    const path = document.createElementNS(NS, 'path');
-    path.setAttribute('d', d);
-    path.setAttribute('fill', '#000');
-    svg.appendChild(path);
+    const img = document.createElement('img');
+    img.src = canvas.toDataURL('image/png');
+    img.alt = '';
     box.textContent = '';
-    box.appendChild(svg);
+    box.appendChild(img);
 }
+
+const V31N_CODE128 = [
+    '212222', '222122', '222221', '121223', '121322', '131222', '122213', '122312', '132212', '221213',
+    '221312', '231212', '112232', '122132', '122231', '113222', '123122', '123221', '223211', '221132',
+    '221231', '213212', '223112', '312131', '311222', '321122', '321221', '312212', '322112', '322211',
+    '212123', '212321', '232121', '111323', '131123', '131321', '112313', '132113', '132311', '211313',
+    '231113', '231311', '112133', '112331', '132131', '113123', '113321', '133121', '313121', '211331',
+    '231131', '213113', '213311', '213131', '311123', '311321', '331121', '312113', '312311', '332111',
+    '314111', '221411', '431111', '111224', '111422', '121124', '121421', '141122', '141221', '112214',
+    '112412', '122114', '122411', '142112', '142211', '241211', '221114', '413111', '241112', '134111',
+    '111242', '121142', '121241', '114212', '124112', '124211', '411212', '421112', '421211', '212141',
+    '214121', '412121', '111143', '111341', '131141', '114113', '114311', '411113', '411311', '113141',
+    '114131', '311141', '411131', '211412', '211214', '211232', '2331112'
+];
+
+
+function v31nBarcode(box, text) {
+    const codes = [104];
+    let sum = 104;
+    Array.from(text).forEach((ch, i) => {
+        const v = ch.charCodeAt(0) - 32;
+        codes.push(v);
+        sum += v * (i + 1);
+    });
+    codes.push(sum % 103, 106);
+    const widths = codes.map(c => V31N_CODE128[c]).join('');
+    const modules = Array.from(widths).reduce((s, w) => s + +w, 0);
+    const scale = 3;
+    const quiet = 10;
+    const barH = 60;
+    const fontH = 14;
+    const canvas = document.createElement('canvas');
+    canvas.width = (modules + quiet * 2) * scale;
+    canvas.height = (4 + barH + 3 + fontH + 4) * scale;
+    const g = canvas.getContext('2d');
+    g.fillStyle = '#fff';
+    g.fillRect(0, 0, canvas.width, canvas.height);
+    g.fillStyle = '#000';
+    let x = quiet;
+    Array.from(widths).forEach((w, i) => {
+        if (i % 2 === 0) g.fillRect(x * scale, 4 * scale, +w * scale, barH * scale);
+        x += +w;
+    });
+    g.font = (fontH * scale) + "px 'JetBrains Mono', monospace";
+    g.textAlign = 'center';
+    g.textBaseline = 'top';
+    g.fillText('*' + text + '*', canvas.width / 2, (4 + barH + 3) * scale);
+    const img = document.createElement('img');
+    img.className = 'barcode';
+    img.src = canvas.toDataURL('image/png');
+    img.alt = '';
+    box.appendChild(img);
+}
+
 
 
 function v31nSave(url, name) {

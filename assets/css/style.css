@@ -194,9 +194,18 @@ body{
   margin-top: 8px;
 }
 
-.qr svg {
+.qr img {
   width: 200px;
   height: 200px;
+  image-rendering: pixelated;
+}
+
+.qr .barcode {
+  display: block;
+  margin: 8px auto 0;
+  width: 374px;
+  max-width: 100%;
+  height: auto;
 }
 
 .dir-all {

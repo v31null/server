@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $t['title'] ?></title>
-    <link rel="stylesheet" href="/assets/css/style.css?v=7c4ecc7e193cad7e" integrity="sha384-P7qHbO6s19f6tejEweyYhU4xaEIzn+vTiNMJcqf6FxN1bLMDreqQC5sHOn5GK64P">
+    <link rel="stylesheet" href="/assets/css/style.css?v=de54bf6c4c689c3f" integrity="sha384-cerGnvhsn1F6KpPo9+mLT2AkP8/3PrfIcKGbhHVXkUDooX7Q4EeIjlRvy/d1dNC6">
 </head>
 <body>
     <div class="container">
@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         window.V31N_T = <?= json_encode($t, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
     </script>
     <script src="../assets/js/crypto.js?v=acb501462841c48b" integrity="sha384-uVu1ZL0ck5/f0BfamiT8sMyLQIOfVFCTMsbzhCMaWU4bA7vToijEEm3EsOXZ5Vlv"></script>
-    <script src="../assets/js/app.js?v=253d478fee38d0d6" integrity="sha384-vw0eL6Y5+HlJInR1zvpVVlUk9t/aQVW1Ypd+HwH35qzsSi0S7ld563eoVTGHcul1"></script>
+    <script src="../assets/js/app.js?v=d89067a2b9dd5146" integrity="sha384-axJABUg0y4eIN3dYu9NaAzLmwiIPpbdKASN0Tn/Jm39RQkJ75Vp7voov72U3XQeC"></script>
 </body>
 </html>
 <?php
@@ -129,7 +129,7 @@ function showErrorPage($t, $title, $message) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $t['title'] ?></title>
-    <link rel="stylesheet" href="../assets/css/style.css?v=7c4ecc7e193cad7e" integrity="sha384-P7qHbO6s19f6tejEweyYhU4xaEIzn+vTiNMJcqf6FxN1bLMDreqQC5sHOn5GK64P">
+    <link rel="stylesheet" href="../assets/css/style.css?v=de54bf6c4c689c3f" integrity="sha384-cerGnvhsn1F6KpPo9+mLT2AkP8/3PrfIcKGbhHVXkUDooX7Q4EeIjlRvy/d1dNC6">
 </head>
 <body>
     <div class="container">
