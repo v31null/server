@@ -1,0 +1,497 @@
+{
+    "crc": "6F53B464",
+    "files": [
+        {
+            "key": "/assets/js/auto-render.js",
+            "at": 17736,
+            "size": 10529,
+            "crc": "915A0FDE"
+        },
+        {
+            "key": "/assets/js/app.js",
+            "at": 28265,
+            "size": 56472,
+            "crc": "44206FAA"
+        },
+        {
+            "key": "/assets/js/katex.js",
+            "at": 84737,
+            "size": 621475,
+            "crc": "DC5FBA27"
+        },
+        {
+            "key": "/assets/js/katex.min.js",
+            "at": 706212,
+            "size": 273081,
+            "crc": "8C3600FC"
+        },
+        {
+            "key": "/assets/js/time.js",
+            "at": 979293,
+            "size": 181958,
+            "crc": "D13BDED0"
+        },
+        {
+            "key": "/assets/js/copy-tex.min.js",
+            "at": 1161251,
+            "size": 1671,
+            "crc": "C8C7F5CC"
+        },
+        {
+            "key": "/assets/js/crypto.js",
+            "at": 1162922,
+            "size": 7855,
+            "crc": "1ED53F1A"
+        },
+        {
+            "key": "/assets/js/qrcode.min.js",
+            "at": 1170777,
+            "size": 20387,
+            "crc": "17FE70F1"
+        },
+        {
+            "key": "/assets/img/logomonochrome.ico",
+            "at": 1191164,
+            "size": 3890,
+            "crc": "7D1795F0"
+        },
+        {
+            "key": "/assets/img/Services for þe General populace Ministeria custodiae filaciorum ( Secura ) , aßervatio.png",
+            "at": 1195054,
+            "size": 274413,
+            "crc": "4B4D2471"
+        },
+        {
+            "key": "/assets/img/Services for þe General populace Ministeria custodiae filaciorum ( Secura ) , aßervatio.2cm.png",
+            "at": 1469467,
+            "size": 17068,
+            "crc": "28B4B279"
+        },
+        {
+            "key": "/assets/css/fonts/BabelStoneHan.woff2",
+            "at": 1486535,
+            "size": 7276,
+            "crc": "C492E21A"
+        },
+        {
+            "key": "/assets/css/fonts/JunicodeVF-Roman.woff2",
+            "at": 1493811,
+            "size": 1114244,
+            "crc": "B56D0E95"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_AMS-Regular.woff",
+            "at": 2608055,
+            "size": 33516,
+            "crc": "4F1FB9F4"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_AMS-Regular.woff2",
+            "at": 2641571,
+            "size": 28076,
+            "crc": "A65F5FBD"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_AMS-Regular.ttf",
+            "at": 2669647,
+            "size": 63632,
+            "crc": "DF9D6466"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Main-Bold.woff",
+            "at": 2733279,
+            "size": 29912,
+            "crc": "E925144A"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Main-Bold.woff2",
+            "at": 2763191,
+            "size": 25324,
+            "crc": "74DB2CEA"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Main-Bold.ttf",
+            "at": 2788515,
+            "size": 51336,
+            "crc": "F5E5AEB9"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Main-BoldItalic.woff",
+            "at": 2839851,
+            "size": 19412,
+            "crc": "174E0980"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Main-BoldItalic.woff2",
+            "at": 2859263,
+            "size": 16780,
+            "crc": "FEAD3850"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Main-BoldItalic.ttf",
+            "at": 2876043,
+            "size": 32968,
+            "crc": "2364FD1F"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Main-Italic.woff",
+            "at": 2909011,
+            "size": 19676,
+            "crc": "5FBFE271"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Main-Italic.woff2",
+            "at": 2928687,
+            "size": 16988,
+            "crc": "85D75F57"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Main-Italic.ttf",
+            "at": 2945675,
+            "size": 33580,
+            "crc": "04B537C3"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Main-Regular.woff",
+            "at": 2979255,
+            "size": 30772,
+            "crc": "6A667662"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Main-Regular.woff2",
+            "at": 3010027,
+            "size": 26272,
+            "crc": "67E85378"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Main-Regular.ttf",
+            "at": 3036299,
+            "size": 53580,
+            "crc": "107F903B"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Math-BoldItalic.woff",
+            "at": 3089879,
+            "size": 18668,
+            "crc": "6977EA3C"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Math-BoldItalic.woff2",
+            "at": 3108547,
+            "size": 16400,
+            "crc": "A113CB5C"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Math-BoldItalic.ttf",
+            "at": 3124947,
+            "size": 31196,
+            "crc": "3B18E04F"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Math-Italic.woff",
+            "at": 3156143,
+            "size": 18748,
+            "crc": "8824929C"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Math-Italic.woff2",
+            "at": 3174891,
+            "size": 16440,
+            "crc": "E48F5D46"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Math-Italic.ttf",
+            "at": 3191331,
+            "size": 31308,
+            "crc": "AF5D0625"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_SansSerif-Bold.woff",
+            "at": 3222639,
+            "size": 14408,
+            "crc": "5D117310"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_SansSerif-Bold.woff2",
+            "at": 3237047,
+            "size": 12216,
+            "crc": "9DA441B3"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_SansSerif-Bold.ttf",
+            "at": 3249263,
+            "size": 24504,
+            "crc": "88AC540F"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_SansSerif-Italic.woff",
+            "at": 3273767,
+            "size": 14112,
+            "crc": "0B48FD80"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_SansSerif-Italic.woff2",
+            "at": 3287879,
+            "size": 12028,
+            "crc": "8A9EC761"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_SansSerif-Italic.ttf",
+            "at": 3299907,
+            "size": 22364,
+            "crc": "5509AABC"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_SansSerif-Regular.woff",
+            "at": 3322271,
+            "size": 12316,
+            "crc": "B85DDD49"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_SansSerif-Regular.woff2",
+            "at": 3334587,
+            "size": 10344,
+            "crc": "83ACB775"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_SansSerif-Regular.ttf",
+            "at": 3344931,
+            "size": 19436,
+            "crc": "18AA84BF"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Size1-Regular.woff",
+            "at": 3364367,
+            "size": 6496,
+            "crc": "A09FA453"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Size1-Regular.woff2",
+            "at": 3370863,
+            "size": 5468,
+            "crc": "95C9E117"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Size1-Regular.ttf",
+            "at": 3376331,
+            "size": 12228,
+            "crc": "E69808B4"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Size2-Regular.woff",
+            "at": 3388559,
+            "size": 6188,
+            "crc": "52AC0A51"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Size2-Regular.woff2",
+            "at": 3394747,
+            "size": 5208,
+            "crc": "95D7F7F9"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Size2-Regular.ttf",
+            "at": 3399955,
+            "size": 11508,
+            "crc": "9FE18A51"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Size3-Regular.woff",
+            "at": 3411463,
+            "size": 4420,
+            "crc": "E174370F"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Size3-Regular.woff2",
+            "at": 3415883,
+            "size": 3624,
+            "crc": "2F9EE2B8"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Size3-Regular.ttf",
+            "at": 3419507,
+            "size": 7588,
+            "crc": "4E0B0EF7"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Size4-Regular.woff",
+            "at": 3427095,
+            "size": 5980,
+            "crc": "724CFA02"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Size4-Regular.woff2",
+            "at": 3433075,
+            "size": 4928,
+            "crc": "B25B390D"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Size4-Regular.ttf",
+            "at": 3438003,
+            "size": 10364,
+            "crc": "739A92A0"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Script-Regular.woff",
+            "at": 3448367,
+            "size": 10588,
+            "crc": "CFD7C28F"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Script-Regular.woff2",
+            "at": 3458955,
+            "size": 9644,
+            "crc": "C2135C13"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Script-Regular.ttf",
+            "at": 3468599,
+            "size": 16648,
+            "crc": "E81841D1"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Typewriter-Regular.woff",
+            "at": 3485247,
+            "size": 16028,
+            "crc": "2551BD1B"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Typewriter-Regular.woff2",
+            "at": 3501275,
+            "size": 13568,
+            "crc": "FB60AC6C"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Typewriter-Regular.ttf",
+            "at": 3514843,
+            "size": 27556,
+            "crc": "D7E9D86F"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Fraktur-Bold.woff",
+            "at": 3542399,
+            "size": 13296,
+            "crc": "E1888C58"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Fraktur-Bold.woff2",
+            "at": 3555695,
+            "size": 11348,
+            "crc": "24BEE02D"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Fraktur-Bold.ttf",
+            "at": 3567043,
+            "size": 19584,
+            "crc": "A0BB816C"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Fraktur-Regular.woff",
+            "at": 3586627,
+            "size": 13208,
+            "crc": "A90805A6"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Fraktur-Regular.woff2",
+            "at": 3599835,
+            "size": 11316,
+            "crc": "229FFEFC"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Fraktur-Regular.ttf",
+            "at": 3611151,
+            "size": 19572,
+            "crc": "E113A3CA"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Caligraphic-Bold.woff",
+            "at": 3630723,
+            "size": 7716,
+            "crc": "E4AA83DC"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Caligraphic-Bold.woff2",
+            "at": 3638439,
+            "size": 6912,
+            "crc": "3238D307"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Caligraphic-Bold.ttf",
+            "at": 3645351,
+            "size": 12368,
+            "crc": "E7277885"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Caligraphic-Regular.woff",
+            "at": 3657719,
+            "size": 7656,
+            "crc": "92470759"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Caligraphic-Regular.woff2",
+            "at": 3665375,
+            "size": 6908,
+            "crc": "9F71E950"
+        },
+        {
+            "key": "/assets/css/fonts/KaTeX_Caligraphic-Regular.ttf",
+            "at": 3672283,
+            "size": 12344,
+            "crc": "AA228013"
+        },
+        {
+            "key": "/assets/css/fonts/nullpunktsenergiefont-Regular.ttf",
+            "at": 3684627,
+            "size": 3516,
+            "crc": "48881225"
+        },
+        {
+            "key": "/assets/css/fonts/regular.ttf",
+            "at": 3688143,
+            "size": 34892,
+            "crc": "9FDD7B35"
+        },
+        {
+            "key": "/assets/css/fonts/cmunrm.otf",
+            "at": 3723035,
+            "size": 330492,
+            "crc": "7001327D"
+        },
+        {
+            "key": "/assets/css/katex.css",
+            "at": 4053527,
+            "size": 33084,
+            "crc": "ED2BAC7E"
+        },
+        {
+            "key": "/assets/css/style.css",
+            "at": 4086611,
+            "size": 11545,
+            "crc": "601AD654"
+        },
+        {
+            "key": "/kdf/low.js",
+            "at": 4098156,
+            "size": 464,
+            "crc": "590698E5"
+        },
+        {
+            "key": "/time/pt.js",
+            "at": 4098620,
+            "size": 452,
+            "crc": "663058C2"
+        },
+        {
+            "key": "/blocken.html",
+            "at": 4099072,
+            "size": 217,
+            "crc": "5E5AF0B5"
+        },
+        {
+            "key": "v31np index.txt",
+            "at": 4099289,
+            "size": 5005,
+            "crc": "20A4A84F"
+        }
+    ]
+}

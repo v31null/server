@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . '/integritie.php'; integritie_gate(__FILE__); $t = require __DIR__ . '/lang.php'; require_once __DIR__ . '/csp.php'; $nonce = v31n_csp(); ?>
+<?php require_once __DIR__ . '/integritie.php'; integritie_gate(__FILE__); $t = require __DIR__ . '/lang.php'; require_once __DIR__ . '/csp.php'; $nonce = v31n_csp(); require_once __DIR__ . '/v31np/page.php'; v31np('file', '', $nonce); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

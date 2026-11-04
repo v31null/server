@@ -876,6 +876,13 @@ const V31nSync = (() => {
         for (const k of keys) if (a && a.list && a.list[k] && !await file(name, k)) missing.push(k);
         if (missing.length) return run(name, 'want ' + missing.length, a.url, missing);
     });
+    const wantNow = async (name, keys) => {
+        await (chains.get(name) || Promise.resolve()).catch(() => {});
+        const a = await archive(name);
+        const missing = [];
+        for (const k of keys) if (a && a.list && a.list[k] && !await file(name, k)) missing.push(k);
+        if (missing.length) return run(name, 'want ' + missing.length, a.url, missing);
+    };
     const rows = async name => {
         const im = await file(name, INDEX_KEY);
         const ix = im ? readIndex(await bytesOf(im)) : null;
@@ -903,7 +910,7 @@ const V31nSync = (() => {
     };
     const notes = async () => request((await tx('log', 'readonly')).objectStore('log').getAll());
 
-    return { sync, load, file, blob, slice, need, want: wantKeys, rows, remote, listed: listedSize, held, query, note, notes, heads };
+    return { sync, load, file, blob, slice, need, want: wantKeys, wantNow, rows, remote, listed: listedSize, held, query, note, notes, heads };
 })();
 const V31nShow = (() => {
     const INDEX_KEY = 'v31np index.txt';
@@ -943,7 +950,20 @@ const V31nShow = (() => {
         for (const m of String(text).matchAll(cssPattern())) out.push(m[2] !== undefined ? m[2] : m[4]);
         return out;
     };
-    const srcsetRefs = value => String(value).split(',').map(s => s.trim().split(/\s+/)[0]).filter(Boolean);
+    const faces = () => /@font-face\s*\{[^}]*\}/gi;
+    const firstFont = face => {
+        const s = /(?:^|[;{\s])src\s*:\s*([^;}]*)/i.exec(face);
+        return s ? cssRefs(s[1])[0] : undefined;
+    };
+    const cssWants = text => {
+        const out = [];
+        for (const m of String(text).matchAll(faces())) {
+            const f = firstFont(m[0]);
+            if (f !== undefined) out.push(f);
+        }
+        return out.concat(cssRefs(String(text).replace(faces(), '')));
+    };
+    const srcsetRefs = value =>String(value).split(',').map(s => s.trim().split(/\s+/)[0]).filter(Boolean);
 
     const links = /(?:^|\s)(?:stylesheet|icon|shortcut|apple-touch-icon|mask-icon|preload|modulepreload|prefetch)(?:\s|$)/i;
     const kinds = el => {
@@ -964,6 +984,17 @@ const V31nShow = (() => {
         }
     };
 
+    const pinned = async (meta, bytes) => {
+        const algs = { sha256: 'SHA-256', sha384: 'SHA-384', sha512: 'SHA-512' };
+        const list = String(meta || '').trim().split(/\s+/).map(s => /^(sha256|sha384|sha512)-([A-Za-z0-9+/=]+)/.exec(s)).filter(Boolean);
+        if (!list.length) return true;
+        const best = ['sha512', 'sha384', 'sha256'].find(a => list.some(m => m[1] === a));
+        const sum = new Uint8Array(await crypto.subtle.digest(algs[best], bytes));
+        let bin = '';
+        for (const c of sum) bin += String.fromCharCode(c);
+        const got = btoa(bin);
+        return list.some(m => m[1] === best && m[2] === got);
+    };
     const report = entry => console.log('v31np', JSON.stringify(entry));
     const leave = async () => {
         if (!navigator.serviceWorker) return;
@@ -992,8 +1023,8 @@ const V31nShow = (() => {
             const t = target(raw, b);
             if (t && listed.has(t.key)) refs.add(t.key);
         };
-        const each = fn => {
-            for (const el of doc.querySelectorAll('*')) {
+        const each = (fn, els = doc.querySelectorAll('*')) => {
+            for (const el of els) {
                 const k = kinds(el);
                 for (const a of [...el.attributes]) {
                     if (a.name === 'style') fn(el, a, 'style');
@@ -1024,7 +1055,8 @@ const V31nShow = (() => {
             await fill();
             return true;
         };
-        await round([...refs]);
+        const levelOf = key => (listed.get(key) && listed.get(key).level) || 'Ù';
+        await round([...refs].filter(k => isCss(k) || levelOf(k) === 'S'));
         const read = new Set();
         for (;;) {
             const more = new Set();
@@ -1032,18 +1064,27 @@ const V31nShow = (() => {
                 if (!isCss(key) || read.has(key) || !held.has(key)) continue;
                 read.add(key);
                 const text = await (await V31nSync.blob(held.get(key))).text();
-                for (const u of cssRefs(text)) {
+                for (const u of cssWants(text)) {
                     const t = target(u, fileUrl(key));
                     if (!t || !listed.has(t.key)) continue;
                     refs.add(t.key);
-                    if (!held.has(t.key)) more.add(t.key);
+                    if (!held.has(t.key) && (isCss(t.key) || levelOf(t.key) === 'S')) more.add(t.key);
                 }
             }
             if (!more.size || !await round(more)) break;
         }
 
+        const order = ['A', 'B', 'Ú', 'U', 'Ù'];
+        const groupOf = new Map();
+        for (const k of refs) if (!held.has(k)) groupOf.set(k, order.includes(levelOf(k)) ? levelOf(k) : 'A');
+        for (const [k, row] of listed) if (row.level === 'A' && !held.has(k)) groupOf.set(k, 'A');
+        const coming = order.map(level => [level, [...groupOf].filter(([, l]) => l === level).map(([k]) => k)])
+            .filter(([, keys]) => keys.length)
+            .map(([level, keys]) => [level, keys.length, V31nSync.wantNow(archive, keys)]);
+        const done = new Set();
+        const ready = key => held.has(key) && (!groupOf.has(key) || done.has(groupOf.get(key)));
+
         const urls = new Map();
-        const making = new Set();
         const map = (raw, b, absolute = false) => {
             const t = target(raw, b);
             if (!t) return raw;
@@ -1060,24 +1101,66 @@ const V31nShow = (() => {
             const at = s.search(/\s/);
             return at < 0 ? map(s, b) : map(s.slice(0, at), b) + s.slice(at);
         }).join(', ');
-        const makeCss = async key => {
-            if (urls.has(key) || making.has(key)) return;
-            making.add(key);
+        const cssSource = new Map();
+        const cssMade = new Map();
+        const swaps = [];
+        const makeCss = async (key, seen) => {
+            if (seen.has(key)) return;
+            seen.add(key);
             const own = fileUrl(key);
-            const text = await (await V31nSync.blob(held.get(key))).text();
+            const m = held.get(key);
+            if (!cssSource.has(key) || cssSource.get(key)[0] !== m.id) cssSource.set(key, [m.id, await (await V31nSync.blob(m)).text()]);
+            const text = cssSource.get(key)[1];
             for (const u of cssRefs(text)) {
                 const t = target(u, own);
-                if (t && isCss(t.key) && held.has(t.key)) await makeCss(t.key);
+                if (t && isCss(t.key) && held.has(t.key)) await makeCss(t.key, seen);
             }
-            urls.set(key, URL.createObjectURL(new Blob([cssMap(text, own, true)], { type: typeOf(key) })));
+            const out = cssMap(String(text).replace(faces(), face => {
+                const f = firstFont(face);
+                const t = f === undefined ? null : target(f, own);
+                return t && listed.has(t.key) && !ready(t.key) ? '' : face;
+            }), own, true);
+            if (cssMade.get(key) === out) return;
+            cssMade.set(key, out);
+            const old = urls.get(key);
+            urls.set(key, URL.createObjectURL(new Blob([out], { type: typeOf(key) })));
+            if (old) swaps.push([old, urls.get(key)]);
         };
         const make = async () => {
             for (const [key, m] of held) if (!isCss(key) && !urls.has(key)) urls.set(key, URL.createObjectURL(await V31nSync.blob(m, typeOf(key))));
-            for (const key of held.keys()) if (isCss(key)) await makeCss(key);
+            const seen = new Set();
+            for (const key of held.keys()) if (isCss(key)) await makeCss(key, seen);
         };
         await make();
 
-        each((el, a, kind) => {
+        for (const el of doc.querySelectorAll('link[integrity]')) {
+            const t = target(el.getAttribute('href') || '', base);
+            if (!t || !isCss(t.key) || !held.has(t.key)) continue;
+            if (await pinned(el.getAttribute('integrity'), await (await V31nSync.blob(held.get(t.key))).arrayBuffer())) el.removeAttribute('integrity');
+            else el.remove();
+        }
+
+        const scripts = [...doc.querySelectorAll('script')];
+        for (const s of scripts) s.remove();
+        const later = [];
+        for (const el of doc.querySelectorAll('*')) {
+            const k = kinds(el);
+            const attrs = [], keys = new Set();
+            for (const a of [...el.attributes]) {
+                if (k[a.name] !== 'take' && k[a.name] !== 'set') continue;
+                const waiting = (k[a.name] === 'set' ? srcsetRefs(a.value) : [a.value]).map(v => target(v, base))
+                    .filter(t => t && listed.has(t.key) && !isCss(t.key) && !ready(t.key));
+                if (!waiting.length) continue;
+                attrs.push([a.name, a.value]);
+                for (const t of waiting) keys.add(t.key);
+            }
+            if (!attrs.length) continue;
+            el.setAttribute('data-v31np', String(later.length));
+            for (const [n] of attrs) if (el.tagName === 'LINK') el.setAttribute(n, 'data:,'); else el.removeAttribute(n);
+            later.push({ attrs, keys, done: false });
+        }
+
+        const fix = (el, a, kind) => {
             if (kind === 'take' || kind === 'play') a.value = map(a.value, base);
             else if (kind === 'set') a.value = setMap(a.value, base);
             else if (kind === 'style') a.value = cssMap(a.value, base);
@@ -1090,9 +1173,10 @@ const V31nShow = (() => {
                 for (const [key, u] of urls) if (/\.m?js$/i.test(key)) o.imports[fileUrl(key)] = o.imports[fileUrl(key)] || u;
                 el.textContent = JSON.stringify(o);
             }
-        });
+        };
+        each(fix);
 
-        const fixAttr = (el, attr, value) => {
+        const fixAttr =(el, attr, value) => {
             if (attr === 'style') return cssMap(value, document.baseURI);
             const kind = kinds(el)[attr];
             if (kind === 'set') return setMap(value, document.baseURI);
@@ -1186,19 +1270,58 @@ const V31nShow = (() => {
         window.FontFace = new Proxy(window.FontFace, { construct: (t, args) => new t(...args.map((a, i) => i === 1 && typeof a === 'string' ? cssMap(a, document.baseURI) : a)) });
         if (window.Worker) window.Worker = new Proxy(window.Worker, { construct: (t, args) => new t(...args.map((a, i) => i === 0 && typeof a === 'string' ? map(a, document.baseURI) : a)) });
 
+        const nonce = (me && (me.nonce || me.getAttribute('nonce'))) || '';
         const out = (doc.doctype ? '<!DOCTYPE ' + doc.doctype.name + '>\n' : '') + doc.documentElement.outerHTML;
-        report({ what: 'page', ...logs, rounds, refs: refs.size, files: urls.size, listed: listed.size, ms: Math.round(performance.now() - started) });
+        report({ what: 'page', ...logs, rounds, refs: refs.size, files: urls.size, listed: listed.size, coming: coming.map(([level, n]) => level + ' ' + n), ms: Math.round(performance.now() - started) });
         document.open();
         document.write(out);
-        document.close();
 
-        const second = [...listed].filter(([key, row]) => row.level === 'A' && !held.has(key)).map(([key]) => key);
-        if (second.length) {
-            const got = await V31nSync.want(archive, second);
+        let closed = false;
+        const finish = () => {
+            if (closed) return;
+            closed = true;
+            each(fix, scripts);
+            if (nonce) for (const s of scripts) s.setAttribute('nonce', nonce);
+            document.write(scripts.map(s => s.outerHTML).join('\n'));
+            document.close();
+        };
+        const swap = () => {
+            for (const [old, now] of swaps.splice(0)) {
+                for (const link of document.querySelectorAll('link')) {
+                    if (link.getAttribute('href') !== old) continue;
+                    const next = link.cloneNode();
+                    next.setAttribute('href', now);
+                    const drop = () => link.remove();
+                    next.addEventListener('load', drop, { once: true });
+                    next.addEventListener('error', drop, { once: true });
+                    link.after(next);
+                }
+            }
+        };
+        const restore = all => {
+            for (const [i, w] of later.entries()) {
+                if (w.done || (!all && ![...w.keys].every(ready))) continue;
+                w.done = true;
+                const el = document.querySelector('[data-v31np="' + i + '"]');
+                if (!el) continue;
+                el.removeAttribute('data-v31np');
+                for (const [n, v] of w.attrs) el.setAttribute(n, v);
+            }
+        };
+
+        if (!coming.some(([level]) => level === 'A')) finish();
+        for (const [level, n, p] of coming) {
+            const got = await p.catch(() => null);
+            done.add(level);
             await fill();
             await make();
-            report({ what: 'level A', result: got && got.result, steps: got && got.steps, files: urls.size, ms: Math.round(performance.now() - started) });
+            swap();
+            if (level === 'A') finish();
+            restore(false);
+            report({ what: 'level ' + level, wanted: n, result: got && got.result, steps: got && got.steps, files: urls.size, ms: Math.round(performance.now() - started) });
         }
+        finish();
+        restore(true);
     };
 
     const me = document.currentScript;
