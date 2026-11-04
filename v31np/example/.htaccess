@@ -1,0 +1,4 @@
+<FilesMatch "^index\.(php|html)$">
+    SetHandler none
+    ForceType "text/plain; charset=utf-8"
+</FilesMatch>

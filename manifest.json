@@ -3,7 +3,7 @@
     "algo": "RSA ／ SHA‑256 De‑attachen‑signature ( manifest.sig is base64 of sign( SHA-256(manifest.json) ) )",
     "pubkey": "publickey.pem",
     "pubkey_spki_sha256": "261AF6EA33A67825250326CC64E5BC735BF3C010FCC4F4132D83F19B28D1DAD5",
-    "count": 101,
+    "count": 109,
     "files": {
         ".gitattributes": {
             "sha256": "3273581722446ffa8ba538c07adc08da799a77df208360a9c0ae1bad97c412ff",
@@ -509,6 +509,46 @@
             "sha256": "92e8d613afdcacdc74557db16c6079deb423843dbdf7db2431a1eafd437e6d8a",
             "sha384": "sha384-mlhMCCVDr93EHVsFRPmTeakx3Y0U4EQbjupBAtaJDV3TIF5wt9BKFvCxM1OsECXX",
             "size": 8753
+        },
+        "v31np/example/.htaccess": {
+            "sha256": "c8aff706298c462b7b5049392bedcc99ead16374b6ab1dc85ddbf4818c6f83b8",
+            "sha384": "sha384-Fhm01xRhpH0RytnexOcUzb8079OwHKXRk2skXIRbU/aNIfyw+ZK1VRWE+WTqgDT0",
+            "size": 111
+        },
+        "v31np/example/index.html": {
+            "sha256": "13b81810075153074be1c81a3f235c216624229dd0e72f78d83057f8291296dc",
+            "sha384": "sha384-510H0+LP4cKXApH0/KPSNMKeCmoNXiknyLk2Cc5eqozIROUYDlZu4byK2wbq1vEj",
+            "size": 283
+        },
+        "v31np/example/index.php": {
+            "sha256": "b146fb851e1c6b108425f815537af4537e43736e2b1f25855d9516f53d92f863",
+            "sha384": "sha384-rRC76JNJx0nCCdC5eDVqxW1UIv3CN8GJLLJNL+/FBmgNORBQtBqmyCD8dQQV9Ctn",
+            "size": 163
+        },
+        "v31np/index.html": {
+            "sha256": "6676be76ac22ed1b5e3a860cddb09a19abaf83db99931e8b8ec0be977722e2eb",
+            "sha384": "sha384-1ea1AcjB7My0XdosfZSb/h/GVPgRJzLt9qnyGpseur/+vjCK4BalXGM3m+AOtrNu",
+            "size": 1272
+        },
+        "v31np/v31np-code.pdf": {
+            "sha256": "70407b5bb8aa594761fe0718ccc774773aa267611f51322fcd6dad3919895e42",
+            "sha384": "sha384-PWmRRqwqlIaA1OUcgwQKw7bTe6TP5WKRGC2xlXwZF2nzw3X7mw9qL0VsXK0ABx+Z",
+            "size": 507100
+        },
+        "v31np/v31np-endpoints.pdf": {
+            "sha256": "0463ab80bd6a387b6dfc4f9e68863dde77c5f075600c6c6181e1edbac8c548cc",
+            "sha384": "sha384-u9z8YhZolXxujBYBFNw81CfoiSpWcDJqgf4cVNhnCTd/H44iflHow5P1Hy7IGD5q",
+            "size": 144217
+        },
+        "v31np/v31np.js": {
+            "sha256": "d2729acb71b9e46b855312dfec66d56dff69881ddf782d21f255c7ecd90f6fd6",
+            "sha384": "sha384-eRsdXL4Cf9mN32ejAb3ucTPBk41PIjTyXEK2WNT5tltzbwyOIet1QWi8bCL/dBOu",
+            "size": 68322
+        },
+        "v31np/v31np.v31np": {
+            "sha256": "44f8f7c95c2b9ca8babb3e9033c3663375dc8217bd70de48c4dfe84de8bc56f7",
+            "sha384": "sha384-srF7Or4/YqXmsQ9ZkVIe44NfaYzfz+2UBREQES6gehDuuEN0EobV56eyu1ukMlxj",
+            "size": 232016
         }
     }
 }
