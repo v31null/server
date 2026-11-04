@@ -3,7 +3,7 @@
     "algo": "RSA ／ SHA‑256 De‑attachen‑signature ( manifest.sig is base64 of sign( SHA-256(manifest.json) ) )",
     "pubkey": "publickey.pem",
     "pubkey_spki_sha256": "261AF6EA33A67825250326CC64E5BC735BF3C010FCC4F4132D83F19B28D1DAD5",
-    "count": 131,
+    "count": 129,
     "files": {
         ".gitattributes": {
             "sha256": "3273581722446ffa8ba538c07adc08da799a77df208360a9c0ae1bad97c412ff",
@@ -455,11 +455,6 @@
             "sha384": "sha384-aypn2RdEjq0y+vyPwgZG2mbWnU0ngCUbethYFwZWy/L3Hu4CapMcNfzAmfzoAz+n",
             "size": 7167
         },
-        "image.png": {
-            "sha256": "183feec3f75e0c7bf1eb743502f44ed6a1f7e8420f4b8adc934c24804cfd8672",
-            "sha384": "sha384-JmspZD4aO9a9hy4hkdw/pMjZ6LASwdkNjDggQDMQJEfi9ZGPAeLOz3cqVdBq2fBr",
-            "size": 27987
-        },
         "index.php": {
             "sha256": "b3e7748f6dcd1a4ca34db283c9b3240a4a208d33ea62c455ce217305a774ae45",
             "sha384": "sha384-7rvRV6Js9weEuZsDjaBwD7l9LFD/P1C/dURdoQPTrROu0KAJ7Rifcc14nXf8hQ4s",
@@ -546,9 +541,9 @@
             "size": 163
         },
         "v31np/index.html": {
-            "sha256": "6676be76ac22ed1b5e3a860cddb09a19abaf83db99931e8b8ec0be977722e2eb",
-            "sha384": "sha384-1ea1AcjB7My0XdosfZSb/h/GVPgRJzLt9qnyGpseur/+vjCK4BalXGM3m+AOtrNu",
-            "size": 1272
+            "sha256": "365d6eeee547121fd784bbf1bd2f9fc09db9110b360462de02e6180e27f7cdcc",
+            "sha384": "sha384-KUtr54eWm24uVok9Dclc+vR0vBfM5opKyXmvWsIQojw1K5i1W35O00O4WhIlR66y",
+            "size": 1276
         },
         "v31np/index.js": {
             "sha256": "39484bd4947de1ce8f9923d480d247f2c714c59d8f686cfa1c006d2b2f9c9630",
@@ -654,11 +649,6 @@
             "sha256": "3cdcaf73b4f8ae846c9ed1b93185f2399f6b8a2e662dc4d7250e88fd525427be",
             "sha384": "sha384-UZlODtAx24mAk1rB4BKFJgfjwekR9rLTJzfFuFnQmtdVisMo4+CYWEwb5pCBKQRg",
             "size": 8456
-        },
-        "v31np/v31np.v31np": {
-            "sha256": "44f8f7c95c2b9ca8babb3e9033c3663375dc8217bd70de48c4dfe84de8bc56f7",
-            "sha384": "sha384-srF7Or4/YqXmsQ9ZkVIe44NfaYzfz+2UBREQES6gehDuuEN0EobV56eyu1ukMlxj",
-            "size": 232016
         }
     }
 }
