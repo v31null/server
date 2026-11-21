@@ -391,9 +391,9 @@
             "size": 3890
         },
         "assets/img/secura1.png": {
-            "sha256": "2378c1494aa0cbf16d5a5cea17ab28dfff9d95b8c7003f99ade587ac0cb93a66",
-            "sha384": "sha384-z9uu9YrP3WKtAobaG/decW3n0YqxRNpDjAKxWMmEk+J6p+uFi/OizHh3AOokbGyU",
-            "size": 77857
+            "sha256": "84b5a503c8366c7b55b068a07c4b837798afd838421b34692057410e7292f516",
+            "sha384": "sha384-CSHfQJg8Blnr9nutsJURn+WFrFQrMFzJ/9uO/Jw792Ohqrblr+zIESUBSVCdosJy",
+            "size": 73111
         },
         "assets/img/secura2.png": {
             "sha256": "39f9c7e18ccd0e3ce3dce44d96efd889a339d52dcfe4caa87e50ce27f26f7c93",
@@ -511,9 +511,9 @@
             "size": 2321
         },
         "standartas.html": {
-            "sha256": "af017cdd373df314c75a4c353d56b19d74e24de9e260c7de2cbf3a6040e44767",
-            "sha384": "sha384-LcV3FZpy1HKCb4pShQDL0ZfhNmvCTPkVvWJRTSfiYfCQDcYTdelv6XqOGamnduhF",
-            "size": 4713
+            "sha256": "b863070267658fc7190e5cab48d11213a8b234cd07f85af1da0fd9653fc612ae",
+            "sha384": "sha384-cqu0gOr+JLaM6McmbtUDwuCaEmnJF2oXau5jb2OS3Dq3hO882p5oBGUH2oHcE6KH",
+            "size": 4725
         },
         "time/pt.js": {
             "sha256": "a07e2aa183678fce8f43593fd1cc5d89eb1cbbc318be576abe4f6b43914138e9",

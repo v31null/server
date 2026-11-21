@@ -109,7 +109,7 @@ Per-file sha256s ;
   fcd2738dbbbf2280937d814c0628cc8b1ab46e419e3813be141d9c1e5fe9312d  assets/img/Services for þe General populace Ministeria custodiae filaciorum ( Secura ) , aßervatio.2cm.png
   1f93978f886b09cc937982b40e669a915f968506d56abd8d287b84f433f188e8  assets/img/Services for þe General populace Ministeria custodiae filaciorum ( Secura ) , aßervatio.png
   9d2578af7a872b3ce1f9641406b08e8496093ef6de18fa9142ba004eb61148c7  assets/img/logomonochrome.ico
-  2378c1494aa0cbf16d5a5cea17ab28dfff9d95b8c7003f99ade587ac0cb93a66  assets/img/secura1.png
+  84b5a503c8366c7b55b068a07c4b837798afd838421b34692057410e7292f516  assets/img/secura1.png
   39f9c7e18ccd0e3ce3dce44d96efd889a339d52dcfe4caa87e50ce27f26f7c93  assets/img/secura2.png
   d89067a2b9dd5146ecc7537b673f694f00f9641b9922a7d6630d552d4bb88125  assets/js/app.js
   4cfb141d56e2c5644f5226e6b8709a3eadd39989fcec86a38c8150adb196d89b  assets/js/auto-render.js
@@ -133,7 +133,7 @@ Per-file sha256s ;
   9e454f2ae8df4f4029d4f389b4cf3cbc02bde7d6d8be7cf711c9804ab8dfe8c7  onion.txt
   aea7fa16965aed3de3803a270f1e2973d600c852511ecf04b59ace1a9026e13e  publickey.pem
   60662a32085c27712b8948ac212d6113c914916c4aefa60ebe376fd4481122fc  ratelimit.php
-  af017cdd373df314c75a4c353d56b19d74e24de9e260c7de2cbf3a6040e44767  standartas.html
+  b863070267658fc7190e5cab48d11213a8b234cd07f85af1da0fd9653fc612ae  standartas.html
   a07e2aa183678fce8f43593fd1cc5d89eb1cbbc318be576abe4f6b43914138e9  time/pt.js
   92e8d613afdcacdc74557db16c6079deb423843dbdf7db2431a1eafd437e6d8a  upload.php
   da370d49401440c14e3aa50867d50e195bbeb427a5499e8d5111771a9b0096f4  v31np/.htaccess
