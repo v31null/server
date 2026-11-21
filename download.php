@@ -48,9 +48,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $t['title'] ?></title>
-    <link rel="stylesheet" href="/assets/css/style.css?v=de54bf6c4c689c3f" integrity="sha384-cerGnvhsn1F6KpPo9+mLT2AkP8/3PrfIcKGbhHVXkUDooX7Q4EeIjlRvy/d1dNC6">
+    <link rel="stylesheet" href="/assets/css/style.css?v=70e3cf3f2354d09e" integrity="sha384-kt98BJRwQiL+9EiOHojMqUdM3+LaUg8jW0pZ2pJXLQfuO4MHjwUXCrfsCxZsyQ4M">
 </head>
 <body>
+    <header class="bar">
+        <a class="bar-mark" href="/">
+            <img src="/assets/img/Services for þe General populace Ministeria custodiae filaciorum ( Secura ) , aßervatio.2cm.png" alt="">
+        </a>
+        <div class="bar-end">
+            <a class="bar-link" href="standartas.html">Standartas</a>
+        </div>
+    </header>
     <div class="container">
         <main>
             <noscript><div class="error-container"><p><?= $t['nojs'] ?></p></div></noscript>
@@ -129,9 +137,17 @@ function showErrorPage($t, $title, $message) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $t['title'] ?></title>
-    <link rel="stylesheet" href="../assets/css/style.css?v=de54bf6c4c689c3f" integrity="sha384-cerGnvhsn1F6KpPo9+mLT2AkP8/3PrfIcKGbhHVXkUDooX7Q4EeIjlRvy/d1dNC6">
+    <link rel="stylesheet" href="../assets/css/style.css?v=70e3cf3f2354d09e" integrity="sha384-kt98BJRwQiL+9EiOHojMqUdM3+LaUg8jW0pZ2pJXLQfuO4MHjwUXCrfsCxZsyQ4M">
 </head>
 <body>
+    <header class="bar">
+        <a class="bar-mark" href="/">
+            <img src="/assets/img/Services for þe General populace Ministeria custodiae filaciorum ( Secura ) , aßervatio.2cm.png" alt="">
+        </a>
+        <div class="bar-end">
+            <a class="bar-link" href="standartas.html">Standartas</a>
+        </div>
+    </header>
     <div class="container">
         <main>
             <div class="encrypted-notice">

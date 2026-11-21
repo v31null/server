@@ -739,3 +739,63 @@ p.acta-body::first-letter {
   height: 100%;
   object-fit: cover;
 }
+
+.bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 2.5cm;
+  padding: 0.5cm 1.5rem;
+  background: transparent;
+  z-index: 9999;
+}
+
+.bar-mark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.bar-mark img {
+  height: 2cm;
+  display: block;
+}
+
+.bar-end {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bar-link {
+  text-decoration: none;
+  color: #444;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.bar-link:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #000;
+}
+
+@media (max-width: 600px) {
+  .bar {
+    padding: 0.25cm 1rem;
+    position: relative;
+    height: auto;
+  }
+  .bar-mark img {
+    height: 1.5cm;
+  }
+}
+

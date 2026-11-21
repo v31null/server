@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
     <title><?= $t['title'] ?></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/assets/css/style.css?v=de54bf6c4c689c3f" integrity="sha384-cerGnvhsn1F6KpPo9+mLT2AkP8/3PrfIcKGbhHVXkUDooX7Q4EeIjlRvy/d1dNC6">
+  <link rel="stylesheet" href="/assets/css/style.css?v=70e3cf3f2354d09e" integrity="sha384-kt98BJRwQiL+9EiOHojMqUdM3+LaUg8jW0pZ2pJXLQfuO4MHjwUXCrfsCxZsyQ4M">
 
 		<link rel="stylesheet" href="/assets/css/katex.css?v=042b367bf8d89aef" integrity="sha384-dyEuTchRIWTUUS5esbTCpMfx+B+xfO8EoTt5SiUbKmafuP0Gilzcq4YNJuy9EkCC" />
 		<script defer src="/assets/js/katex.min.js?v=fa140498b8cfc830" integrity="sha384-a1WQdjRj162i159OYq041X6I4K8NenkrI09LlPmiHg0YOb7CR+wJOraXwK9abpnE"></script>
@@ -29,7 +29,14 @@
 		</script>
 </head>
 <body>
-      <img src="/assets/img/Services for þe General populace Ministeria custodiae filaciorum ( Secura ) , aßervatio.2cm.png" alt="" style="height: 2cm;margin: 0.5cm;float:left;z-index: 9999;position: absolute;">
+  <header class="bar">
+    <a class="bar-mark" href="/">
+      <img src="/assets/img/Services for þe General populace Ministeria custodiae filaciorum ( Secura ) , aßervatio.2cm.png" alt="">
+    </a>
+    <div class="bar-end">
+      <a class="bar-link" href="standartas.html">Standartas</a>
+    </div>
+  </header>
   <div class="container">
 
     <header class="header">

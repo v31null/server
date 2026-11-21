@@ -1,4 +1,4 @@
-const V31N_TABLES = {"ranges":[[9,13,true],[32,32,true],[33,47,false],[58,64,false],[91,96,false],[123,126,false],[133,133,true],[160,160,true],[161,191,false],[215,215,false],[247,247,false],[894,894,false],[903,903,false],[1370,1375,false],[1417,1418,false],[1470,1470,false],[1472,1472,false],[1475,1475,false],[1478,1478,false],[1523,1524,false],[1545,1546,false],[1548,1549,false],[1563,1563,false],[1566,1567,false],[1642,1645,false],[1748,1748,false],[1792,1805,false],[2039,2041,false],[2404,2405,false],[2416,2416,false],[3572,3572,false],[3663,3663,false],[3674,3675,false],[3844,3858,false],[3898,3901,false],[3973,3973,false],[4048,4052,false],[4170,4175,false],[4347,4347,false],[4961,4968,false],[5741,5742,false],[5760,5760,true],[5787,5788,false],[5867,5869,false],[5941,5942,false],[6100,6102,false],[6104,6106,false],[6144,6154,false],[6158,6158,true],[6468,6469,false],[6622,6623,false],[6686,6687,false],[7002,7008,false],[7227,7231,false],[7294,7295,false],[8192,8202,true],[8208,8231,false],[8232,8233,true],[8239,8239,true],[8240,8259,false],[8261,8273,false],[8275,8286,false],[8287,8287,true],[8317,8318,false],[8333,8334,false],[9001,9002,false],[10088,10101,false],[10181,10182,false],[10214,10223,false],[10627,10648,false],[10712,10715,false],[10748,10749,false],[11513,11516,false],[11518,11519,false],[11776,11822,false],[11824,11824,false],[12288,12288,true],[12289,12291,false],[12296,12305,false],[12308,12319,false],[12336,12336,false],[12349,12349,false],[12448,12448,false],[12539,12539,false],[42509,42511,false],[42611,42611,false],[42622,42622,false],[43124,43127,false],[43214,43215,false],[43310,43311,false],[43359,43359,false],[43612,43615,false],[62827,62828,false],[64830,64831,false],[65040,65049,false],[65072,65106,false],[65108,65121,false],[65123,65123,false],[65128,65128,false],[65130,65131,false],[65279,65279,true],[65281,65283,false],[65285,65290,false],[65292,65295,false],[65306,65307,false],[65311,65312,false],[65339,65341,false],[65343,65343,false],[65371,65371,false],[65373,65373,false],[65375,65381,false]],"slots":[[48,0,0],[49,1,0],[50,2,0],[51,3,0],[52,4,0],[53,5,0],[54,6,0],[55,7,0],[56,8,0],[57,9,0],[97,10,0],[1072,10,1],[98,11,0],[1073,11,1],[250,12,0],[118,12,1],[1074,12,2],[117,13,0],[1091,13,1],[249,14,0],[119,14,1],[103,15,0],[1075,15,1],[100,16,0],[1076,16,1],[254,16,2],[101,17,0],[1077,17,1],[1101,17,2],[380,18,0],[106,18,1],[1078,18,2],[122,19,0],[1079,19,1],[105,20,0],[1080,20,1],[237,21,0],[121,21,1],[1081,21,2],[107,22,0],[1082,22,1],[108,23,0],[1083,23,1],[109,24,0],[1084,24,1],[110,25,0],[1085,25,1],[111,26,0],[1086,26,1],[112,27,0],[1087,27,1],[114,28,0],[1088,28,1],[115,29,0],[1089,29,1],[116,30,0],[1090,30,1],[102,31,0],[1092,31,1],[539,32,0],[1094,32,1],[269,33,0],[1095,33,1],[537,34,0],[1096,34,1],[99,35,0],[113,36,0],[120,37,0],[104,38,0],[1093,38,1],[8216,38,2]],"lower":[[65,90,1,32],[192,214,1,32],[216,222,1,32],[256,302,2,1],[304,304,1,-199],[306,310,2,1],[313,327,2,1],[330,374,2,1],[376,376,1,-121],[377,381,2,1],[385,385,1,210],[386,388,2,1],[390,390,1,206],[391,391,1,1],[393,394,1,205],[395,395,1,1],[398,398,1,79],[399,399,1,202],[400,400,1,203],[401,401,1,1],[403,403,1,205],[404,404,1,207],[406,406,1,211],[407,407,1,209],[408,408,1,1],[412,412,1,211],[413,413,1,213],[415,415,1,214],[416,420,2,1],[422,422,1,218],[423,423,1,1],[425,425,1,218],[428,428,1,1],[430,430,1,218],[431,431,1,1],[433,434,1,217],[435,437,2,1],[439,439,1,219],[440,440,1,1],[444,444,1,1],[452,452,1,2],[453,453,1,1],[455,455,1,2],[456,456,1,1],[458,458,1,2],[459,475,2,1],[478,494,2,1],[497,497,1,2],[498,500,2,1],[502,502,1,-97],[503,503,1,-56],[504,542,2,1],[544,544,1,-130],[546,562,2,1],[570,570,1,10795],[571,571,1,1],[573,573,1,-163],[574,574,1,10792],[577,577,1,1],[579,579,1,-195],[580,580,1,69],[581,581,1,71],[582,590,2,1],[880,882,2,1],[886,886,1,1],[895,895,1,116],[902,902,1,38],[904,906,1,37],[908,908,1,64],[910,911,1,63],[913,929,1,32],[931,939,1,32],[975,975,1,8],[984,1006,2,1],[1012,1012,1,-60],[1015,1015,1,1],[1017,1017,1,-7],[1018,1018,1,1],[1021,1023,1,-130],[1024,1039,1,80],[1040,1071,1,32],[1120,1152,2,1],[1162,1214,2,1],[1216,1216,1,15],[1217,1229,2,1],[1232,1326,2,1],[1329,1366,1,48],[4256,4293,1,7264],[4295,4295,1,7264],[4301,4301,1,7264],[5024,5103,1,38864],[5104,5109,1,8],[7305,7305,1,1],[7312,7354,1,-3008],[7357,7359,1,-3008],[7680,7828,2,1],[7838,7838,1,-7615],[7840,7934,2,1],[7944,7951,1,-8],[7960,7965,1,-8],[7976,7983,1,-8],[7992,7999,1,-8],[8008,8013,1,-8],[8025,8031,2,-8],[8040,8047,1,-8],[8072,8079,1,-8],[8088,8095,1,-8],[8104,8111,1,-8],[8120,8121,1,-8],[8122,8123,1,-74],[8124,8124,1,-9],[8136,8139,1,-86],[8140,8140,1,-9],[8152,8153,1,-8],[8154,8155,1,-100],[8168,8169,1,-8],[8170,8171,1,-112],[8172,8172,1,-7],[8184,8185,1,-128],[8186,8187,1,-126],[8188,8188,1,-9],[8486,8486,1,-7517],[8490,8490,1,-8383],[8491,8491,1,-8262],[8498,8498,1,28],[8544,8559,1,16],[8579,8579,1,1],[9398,9423,1,26],[11264,11311,1,48],[11360,11360,1,1],[11362,11362,1,-10743],[11363,11363,1,-3814],[11364,11364,1,-10727],[11367,11371,2,1],[11373,11373,1,-10780],[11374,11374,1,-10749],[11375,11375,1,-10783],[11376,11376,1,-10782],[11378,11378,1,1],[11381,11381,1,1],[11390,11391,1,-10815],[11392,11490,2,1],[11499,11501,2,1],[11506,11506,1,1],[42560,42604,2,1],[42624,42650,2,1],[42786,42798,2,1],[42802,42862,2,1],[42873,42875,2,1],[42877,42877,1,-35332],[42878,42886,2,1],[42891,42891,1,1],[42893,42893,1,-42280],[42896,42898,2,1],[42902,42920,2,1],[42922,42922,1,-42308],[42923,42923,1,-42319],[42924,42924,1,-42315],[42925,42925,1,-42305],[42926,42926,1,-42308],[42928,42928,1,-42258],[42929,42929,1,-42282],[42930,42930,1,-42261],[42931,42931,1,928],[42932,42946,2,1],[42948,42948,1,-48],[42949,42949,1,-42307],[42950,42950,1,-35384],[42951,42953,2,1],[42955,42955,1,-42343],[42956,42970,2,1],[42972,42972,1,-42561],[42973,42973,1,-42342],[42978,42978,1,-42342],[42997,42997,1,1],[43884,43885,1,-33],[65313,65338,1,32],[66560,66599,1,40],[66736,66771,1,40],[66928,66938,1,39],[66940,66954,1,39],[66956,66962,1,39],[66964,66965,1,39],[68736,68786,1,64],[68944,68965,1,32],[71840,71871,1,32],[93760,93791,1,32],[93856,93880,1,27],[122688,122688,1,1],[122696,122698,2,1],[122701,122701,1,1],[122705,122705,1,1],[122728,122734,2,1],[122738,122750,2,1],[125184,125217,1,34]]};
+﻿const V31N_TABLES = {"ranges":[[9,13,true],[32,32,true],[33,47,false],[58,64,false],[91,96,false],[123,126,false],[133,133,true],[160,160,true],[161,191,false],[215,215,false],[247,247,false],[894,894,false],[903,903,false],[1370,1375,false],[1417,1418,false],[1470,1470,false],[1472,1472,false],[1475,1475,false],[1478,1478,false],[1523,1524,false],[1545,1546,false],[1548,1549,false],[1563,1563,false],[1566,1567,false],[1642,1645,false],[1748,1748,false],[1792,1805,false],[2039,2041,false],[2404,2405,false],[2416,2416,false],[3572,3572,false],[3663,3663,false],[3674,3675,false],[3844,3858,false],[3898,3901,false],[3973,3973,false],[4048,4052,false],[4170,4175,false],[4347,4347,false],[4961,4968,false],[5741,5742,false],[5760,5760,true],[5787,5788,false],[5867,5869,false],[5941,5942,false],[6100,6102,false],[6104,6106,false],[6144,6154,false],[6158,6158,true],[6468,6469,false],[6622,6623,false],[6686,6687,false],[7002,7008,false],[7227,7231,false],[7294,7295,false],[8192,8202,true],[8208,8231,false],[8232,8233,true],[8239,8239,true],[8240,8259,false],[8261,8273,false],[8275,8286,false],[8287,8287,true],[8317,8318,false],[8333,8334,false],[9001,9002,false],[10088,10101,false],[10181,10182,false],[10214,10223,false],[10627,10648,false],[10712,10715,false],[10748,10749,false],[11513,11516,false],[11518,11519,false],[11776,11822,false],[11824,11824,false],[12288,12288,true],[12289,12291,false],[12296,12305,false],[12308,12319,false],[12336,12336,false],[12349,12349,false],[12448,12448,false],[12539,12539,false],[42509,42511,false],[42611,42611,false],[42622,42622,false],[43124,43127,false],[43214,43215,false],[43310,43311,false],[43359,43359,false],[43612,43615,false],[62827,62828,false],[64830,64831,false],[65040,65049,false],[65072,65106,false],[65108,65121,false],[65123,65123,false],[65128,65128,false],[65130,65131,false],[65279,65279,true],[65281,65283,false],[65285,65290,false],[65292,65295,false],[65306,65307,false],[65311,65312,false],[65339,65341,false],[65343,65343,false],[65371,65371,false],[65373,65373,false],[65375,65381,false]],"slots":[[48,0,0],[49,1,0],[50,2,0],[51,3,0],[52,4,0],[53,5,0],[54,6,0],[55,7,0],[56,8,0],[57,9,0],[97,10,0],[1072,10,1],[98,11,0],[1073,11,1],[250,12,0],[118,12,1],[1074,12,2],[117,13,0],[1091,13,1],[249,14,0],[119,14,1],[103,15,0],[1075,15,1],[100,16,0],[1076,16,1],[254,16,2],[101,17,0],[1077,17,1],[1101,17,2],[380,18,0],[106,18,1],[1078,18,2],[122,19,0],[1079,19,1],[105,20,0],[1080,20,1],[237,21,0],[121,21,1],[1081,21,2],[107,22,0],[1082,22,1],[108,23,0],[1083,23,1],[109,24,0],[1084,24,1],[110,25,0],[1085,25,1],[111,26,0],[1086,26,1],[112,27,0],[1087,27,1],[114,28,0],[1088,28,1],[115,29,0],[1089,29,1],[116,30,0],[1090,30,1],[102,31,0],[1092,31,1],[539,32,0],[1094,32,1],[269,33,0],[1095,33,1],[537,34,0],[1096,34,1],[99,35,0],[113,36,0],[120,37,0],[104,38,0],[1093,38,1],[8216,38,2]],"lower":[[65,90,1,32],[192,214,1,32],[216,222,1,32],[256,302,2,1],[304,304,1,-199],[306,310,2,1],[313,327,2,1],[330,374,2,1],[376,376,1,-121],[377,381,2,1],[385,385,1,210],[386,388,2,1],[390,390,1,206],[391,391,1,1],[393,394,1,205],[395,395,1,1],[398,398,1,79],[399,399,1,202],[400,400,1,203],[401,401,1,1],[403,403,1,205],[404,404,1,207],[406,406,1,211],[407,407,1,209],[408,408,1,1],[412,412,1,211],[413,413,1,213],[415,415,1,214],[416,420,2,1],[422,422,1,218],[423,423,1,1],[425,425,1,218],[428,428,1,1],[430,430,1,218],[431,431,1,1],[433,434,1,217],[435,437,2,1],[439,439,1,219],[440,440,1,1],[444,444,1,1],[452,452,1,2],[453,453,1,1],[455,455,1,2],[456,456,1,1],[458,458,1,2],[459,475,2,1],[478,494,2,1],[497,497,1,2],[498,500,2,1],[502,502,1,-97],[503,503,1,-56],[504,542,2,1],[544,544,1,-130],[546,562,2,1],[570,570,1,10795],[571,571,1,1],[573,573,1,-163],[574,574,1,10792],[577,577,1,1],[579,579,1,-195],[580,580,1,69],[581,581,1,71],[582,590,2,1],[880,882,2,1],[886,886,1,1],[895,895,1,116],[902,902,1,38],[904,906,1,37],[908,908,1,64],[910,911,1,63],[913,929,1,32],[931,939,1,32],[975,975,1,8],[984,1006,2,1],[1012,1012,1,-60],[1015,1015,1,1],[1017,1017,1,-7],[1018,1018,1,1],[1021,1023,1,-130],[1024,1039,1,80],[1040,1071,1,32],[1120,1152,2,1],[1162,1214,2,1],[1216,1216,1,15],[1217,1229,2,1],[1232,1326,2,1],[1329,1366,1,48],[4256,4293,1,7264],[4295,4295,1,7264],[4301,4301,1,7264],[5024,5103,1,38864],[5104,5109,1,8],[7305,7305,1,1],[7312,7354,1,-3008],[7357,7359,1,-3008],[7680,7828,2,1],[7838,7838,1,-7615],[7840,7934,2,1],[7944,7951,1,-8],[7960,7965,1,-8],[7976,7983,1,-8],[7992,7999,1,-8],[8008,8013,1,-8],[8025,8031,2,-8],[8040,8047,1,-8],[8072,8079,1,-8],[8088,8095,1,-8],[8104,8111,1,-8],[8120,8121,1,-8],[8122,8123,1,-74],[8124,8124,1,-9],[8136,8139,1,-86],[8140,8140,1,-9],[8152,8153,1,-8],[8154,8155,1,-100],[8168,8169,1,-8],[8170,8171,1,-112],[8172,8172,1,-7],[8184,8185,1,-128],[8186,8187,1,-126],[8188,8188,1,-9],[8486,8486,1,-7517],[8490,8490,1,-8383],[8491,8491,1,-8262],[8498,8498,1,28],[8544,8559,1,16],[8579,8579,1,1],[9398,9423,1,26],[11264,11311,1,48],[11360,11360,1,1],[11362,11362,1,-10743],[11363,11363,1,-3814],[11364,11364,1,-10727],[11367,11371,2,1],[11373,11373,1,-10780],[11374,11374,1,-10749],[11375,11375,1,-10783],[11376,11376,1,-10782],[11378,11378,1,1],[11381,11381,1,1],[11390,11391,1,-10815],[11392,11490,2,1],[11499,11501,2,1],[11506,11506,1,1],[42560,42604,2,1],[42624,42650,2,1],[42786,42798,2,1],[42802,42862,2,1],[42873,42875,2,1],[42877,42877,1,-35332],[42878,42886,2,1],[42891,42891,1,1],[42893,42893,1,-42280],[42896,42898,2,1],[42902,42920,2,1],[42922,42922,1,-42308],[42923,42923,1,-42319],[42924,42924,1,-42315],[42925,42925,1,-42305],[42926,42926,1,-42308],[42928,42928,1,-42258],[42929,42929,1,-42282],[42930,42930,1,-42261],[42931,42931,1,928],[42932,42946,2,1],[42948,42948,1,-48],[42949,42949,1,-42307],[42950,42950,1,-35384],[42951,42953,2,1],[42955,42955,1,-42343],[42956,42970,2,1],[42972,42972,1,-42561],[42973,42973,1,-42342],[42978,42978,1,-42342],[42997,42997,1,1],[43884,43885,1,-33],[65313,65338,1,32],[66560,66599,1,40],[66736,66771,1,40],[66928,66938,1,39],[66940,66954,1,39],[66956,66962,1,39],[66964,66965,1,39],[68736,68786,1,64],[68944,68965,1,32],[71840,71871,1,32],[93760,93791,1,32],[93856,93880,1,27],[122688,122688,1,1],[122696,122698,2,1],[122701,122701,1,1],[122705,122705,1,1],[122728,122734,2,1],[122738,122750,2,1],[125184,125217,1,34]]};
 const V31N_KEY = (k => /^[0-9A-Fa-f]{64}$/.test(k) ? k.toUpperCase() : '')(String((document.currentScript && document.currentScript.dataset.key) || ''));
 const V31nSha256 = (() => {
     const K = new Uint32Array([
@@ -876,13 +876,6 @@ const V31nSync = (() => {
         for (const k of keys) if (a && a.list && a.list[k] && !await file(name, k)) missing.push(k);
         if (missing.length) return run(name, 'want ' + missing.length, a.url, missing);
     });
-    const wantNow = async (name, keys) => {
-        await (chains.get(name) || Promise.resolve()).catch(() => {});
-        const a = await archive(name);
-        const missing = [];
-        for (const k of keys) if (a && a.list && a.list[k] && !await file(name, k)) missing.push(k);
-        if (missing.length) return run(name, 'want ' + missing.length, a.url, missing);
-    };
     const rows = async name => {
         const im = await file(name, INDEX_KEY);
         const ix = im ? readIndex(await bytesOf(im)) : null;
@@ -910,7 +903,7 @@ const V31nSync = (() => {
     };
     const notes = async () => request((await tx('log', 'readonly')).objectStore('log').getAll());
 
-    return { sync, load, file, blob, slice, need, want: wantKeys, wantNow, rows, remote, listed: listedSize, held, query, note, notes, heads };
+    return { sync, load, file, blob, slice, need, want: wantKeys, rows, remote, listed: listedSize, held, query, note, notes, heads };
 })();
 const V31nShow = (() => {
     const INDEX_KEY = 'v31np index.txt';
@@ -950,20 +943,7 @@ const V31nShow = (() => {
         for (const m of String(text).matchAll(cssPattern())) out.push(m[2] !== undefined ? m[2] : m[4]);
         return out;
     };
-    const faces = () => /@font-face\s*\{[^}]*\}/gi;
-    const firstFont = face => {
-        const s = /(?:^|[;{\s])src\s*:\s*([^;}]*)/i.exec(face);
-        return s ? cssRefs(s[1])[0] : undefined;
-    };
-    const cssWants = text => {
-        const out = [];
-        for (const m of String(text).matchAll(faces())) {
-            const f = firstFont(m[0]);
-            if (f !== undefined) out.push(f);
-        }
-        return out.concat(cssRefs(String(text).replace(faces(), '')));
-    };
-    const srcsetRefs = value =>String(value).split(',').map(s => s.trim().split(/\s+/)[0]).filter(Boolean);
+    const srcsetRefs = value => String(value).split(',').map(s => s.trim().split(/\s+/)[0]).filter(Boolean);
 
     const links = /(?:^|\s)(?:stylesheet|icon|shortcut|apple-touch-icon|mask-icon|preload|modulepreload|prefetch)(?:\s|$)/i;
     const kinds = el => {
@@ -984,17 +964,6 @@ const V31nShow = (() => {
         }
     };
 
-    const pinned = async (meta, bytes) => {
-        const algs = { sha256: 'SHA-256', sha384: 'SHA-384', sha512: 'SHA-512' };
-        const list = String(meta || '').trim().split(/\s+/).map(s => /^(sha256|sha384|sha512)-([A-Za-z0-9+/=]+)/.exec(s)).filter(Boolean);
-        if (!list.length) return true;
-        const best = ['sha512', 'sha384', 'sha256'].find(a => list.some(m => m[1] === a));
-        const sum = new Uint8Array(await crypto.subtle.digest(algs[best], bytes));
-        let bin = '';
-        for (const c of sum) bin += String.fromCharCode(c);
-        const got = btoa(bin);
-        return list.some(m => m[1] === best && m[2] === got);
-    };
     const report = entry => console.log('v31np', JSON.stringify(entry));
     const leave = async () => {
         if (!navigator.serviceWorker) return;
@@ -1023,8 +992,8 @@ const V31nShow = (() => {
             const t = target(raw, b);
             if (t && listed.has(t.key)) refs.add(t.key);
         };
-        const each = (fn, els = doc.querySelectorAll('*')) => {
-            for (const el of els) {
+        const each = fn => {
+            for (const el of doc.querySelectorAll('*')) {
                 const k = kinds(el);
                 for (const a of [...el.attributes]) {
                     if (a.name === 'style') fn(el, a, 'style');
@@ -1055,8 +1024,7 @@ const V31nShow = (() => {
             await fill();
             return true;
         };
-        const levelOf = key => (listed.get(key) && listed.get(key).level) || 'Ù';
-        await round([...refs].filter(k => isCss(k) || levelOf(k) === 'S'));
+        await round([...refs]);
         const read = new Set();
         for (;;) {
             const more = new Set();
@@ -1064,27 +1032,18 @@ const V31nShow = (() => {
                 if (!isCss(key) || read.has(key) || !held.has(key)) continue;
                 read.add(key);
                 const text = await (await V31nSync.blob(held.get(key))).text();
-                for (const u of cssWants(text)) {
+                for (const u of cssRefs(text)) {
                     const t = target(u, fileUrl(key));
                     if (!t || !listed.has(t.key)) continue;
                     refs.add(t.key);
-                    if (!held.has(t.key) && (isCss(t.key) || levelOf(t.key) === 'S')) more.add(t.key);
+                    if (!held.has(t.key)) more.add(t.key);
                 }
             }
             if (!more.size || !await round(more)) break;
         }
 
-        const order = ['A', 'B', 'Ú', 'U', 'Ù'];
-        const groupOf = new Map();
-        for (const k of refs) if (!held.has(k)) groupOf.set(k, order.includes(levelOf(k)) ? levelOf(k) : 'A');
-        for (const [k, row] of listed) if (row.level === 'A' && !held.has(k)) groupOf.set(k, 'A');
-        const coming = order.map(level => [level, [...groupOf].filter(([, l]) => l === level).map(([k]) => k)])
-            .filter(([, keys]) => keys.length)
-            .map(([level, keys]) => [level, keys.length, V31nSync.wantNow(archive, keys)]);
-        const done = new Set();
-        const ready = key => held.has(key) && (!groupOf.has(key) || done.has(groupOf.get(key)));
-
         const urls = new Map();
+        const making = new Set();
         const map = (raw, b, absolute = false) => {
             const t = target(raw, b);
             if (!t) return raw;
@@ -1101,68 +1060,32 @@ const V31nShow = (() => {
             const at = s.search(/\s/);
             return at < 0 ? map(s, b) : map(s.slice(0, at), b) + s.slice(at);
         }).join(', ');
-        const cssSource = new Map();
-        const cssMade = new Map();
-        const swaps = [];
-        const makeCss = async (key, seen) => {
-            if (seen.has(key)) return;
-            seen.add(key);
+        const makeCss = async key => {
+            if (urls.has(key) || making.has(key)) return;
+            making.add(key);
             const own = fileUrl(key);
-            const m = held.get(key);
-            if (!cssSource.has(key) || cssSource.get(key)[0] !== m.id) cssSource.set(key, [m.id, await (await V31nSync.blob(m)).text()]);
-            const text = cssSource.get(key)[1];
+            const text = await (await V31nSync.blob(held.get(key))).text();
             for (const u of cssRefs(text)) {
                 const t = target(u, own);
-                if (t && isCss(t.key) && held.has(t.key)) await makeCss(t.key, seen);
+                if (t && isCss(t.key) && held.has(t.key)) await makeCss(t.key);
             }
-            const out = cssMap(String(text).replace(faces(), face => {
-                const f = firstFont(face);
-                const t = f === undefined ? null : target(f, own);
-                return t && listed.has(t.key) && !ready(t.key) ? '' : face;
-            }), own, true);
-            if (cssMade.get(key) === out) return;
-            cssMade.set(key, out);
-            const old = urls.get(key);
-            urls.set(key, URL.createObjectURL(new Blob([out], { type: typeOf(key) })));
-            if (old) swaps.push([old, urls.get(key)]);
+            urls.set(key, URL.createObjectURL(new Blob([cssMap(text, own, true)], { type: typeOf(key) })));
         };
         const make = async () => {
             for (const [key, m] of held) if (!isCss(key) && !urls.has(key)) urls.set(key, URL.createObjectURL(await V31nSync.blob(m, typeOf(key))));
-            const seen = new Set();
-            for (const key of held.keys()) if (isCss(key)) await makeCss(key, seen);
+            for (const key of held.keys()) if (isCss(key)) await makeCss(key);
         };
         await make();
 
-        for (const el of doc.querySelectorAll('link[integrity]')) {
-            const t = target(el.getAttribute('href') || '', base);
-            if (!t || !isCss(t.key) || !held.has(t.key)) continue;
-            if (await pinned(el.getAttribute('integrity'), await (await V31nSync.blob(held.get(t.key))).arrayBuffer())) el.removeAttribute('integrity');
-            else el.remove();
-        }
-
-        const scripts = [...doc.querySelectorAll('script')];
-        for (const s of scripts) s.remove();
-        const later = [];
-        for (const el of doc.querySelectorAll('*')) {
-            const k = kinds(el);
-            const attrs = [], keys = new Set();
-            for (const a of [...el.attributes]) {
-                if (k[a.name] !== 'take' && k[a.name] !== 'set') continue;
-                const waiting = (k[a.name] === 'set' ? srcsetRefs(a.value) : [a.value]).map(v => target(v, base))
-                    .filter(t => t && listed.has(t.key) && !isCss(t.key) && !ready(t.key));
-                if (!waiting.length) continue;
-                attrs.push([a.name, a.value]);
-                for (const t of waiting) keys.add(t.key);
-            }
-            if (!attrs.length) continue;
-            el.setAttribute('data-v31np', String(later.length));
-            for (const [n] of attrs) if (el.tagName === 'LINK') el.setAttribute(n, 'data:,'); else el.removeAttribute(n);
-            later.push({ attrs, keys, done: false });
-        }
-
-        const fix = (el, a, kind) => {
-            if (kind === 'take' || kind === 'play') a.value = map(a.value, base);
-            else if (kind === 'set') a.value = setMap(a.value, base);
+        each((el, a, kind) => {
+            if (kind === 'take' || kind === 'play') {
+                const prev = a.value;
+                a.value = map(a.value, base);
+                // Strip integrity when src is remapped to blob: (SRI cannot verify blob: URLs)
+                if (a.value !== prev && a.value.startsWith('blob:') && el.hasAttribute('integrity')) {
+                    el.removeAttribute('integrity');
+                }
+            } else if (kind === 'set') a.value = setMap(a.value, base);
             else if (kind === 'style') a.value = cssMap(a.value, base);
             else if (kind === 'sheet') el.textContent = cssMap(el.textContent, base);
             else if (kind === 'importmap') {
@@ -1173,10 +1096,23 @@ const V31nShow = (() => {
                 for (const [key, u] of urls) if (/\.m?js$/i.test(key)) o.imports[fileUrl(key)] = o.imports[fileUrl(key)] || u;
                 el.textContent = JSON.stringify(o);
             }
-        };
-        each(fix);
+        });
+        // Convert inline scripts to blob: URLs so they execute under the page's script-src blob: policy
+        // without requiring a nonce (which is gone after document.write))
+        const jsType = /^(|text\/javascript|application\/javascript|module)$/i;
+        for (const el of doc.querySelectorAll('script:not([src])')) {
+            const t = (el.getAttribute('type') || '').trim();
+            if (!jsType.test(t)) continue; // skip importmap, json, etc.
+            const code = el.textContent;
+            if (!code.trim()) continue;
+            const blobUrl = URL.createObjectURL(new Blob([code], { type: 'text/javascript' }));
+            el.textContent = '';
+            el.setAttribute('src', blobUrl);
+            el.removeAttribute('nonce');
+            el.removeAttribute('integrity');
+        }
 
-        const fixAttr =(el, attr, value) => {
+        const fixAttr = (el, attr, value) => {
             if (attr === 'style') return cssMap(value, document.baseURI);
             const kind = kinds(el)[attr];
             if (kind === 'set') return setMap(value, document.baseURI);
@@ -1270,58 +1206,19 @@ const V31nShow = (() => {
         window.FontFace = new Proxy(window.FontFace, { construct: (t, args) => new t(...args.map((a, i) => i === 1 && typeof a === 'string' ? cssMap(a, document.baseURI) : a)) });
         if (window.Worker) window.Worker = new Proxy(window.Worker, { construct: (t, args) => new t(...args.map((a, i) => i === 0 && typeof a === 'string' ? map(a, document.baseURI) : a)) });
 
-        const nonce = (me && (me.nonce || me.getAttribute('nonce'))) || '';
         const out = (doc.doctype ? '<!DOCTYPE ' + doc.doctype.name + '>\n' : '') + doc.documentElement.outerHTML;
-        report({ what: 'page', ...logs, rounds, refs: refs.size, files: urls.size, listed: listed.size, coming: coming.map(([level, n]) => level + ' ' + n), ms: Math.round(performance.now() - started) });
+        report({ what: 'page', ...logs, rounds, refs: refs.size, files: urls.size, listed: listed.size, ms: Math.round(performance.now() - started) });
         document.open();
         document.write(out);
+        document.close();
 
-        let closed = false;
-        const finish = () => {
-            if (closed) return;
-            closed = true;
-            each(fix, scripts);
-            if (nonce) for (const s of scripts) s.setAttribute('nonce', nonce);
-            document.write(scripts.map(s => s.outerHTML).join('\n'));
-            document.close();
-        };
-        const swap = () => {
-            for (const [old, now] of swaps.splice(0)) {
-                for (const link of document.querySelectorAll('link')) {
-                    if (link.getAttribute('href') !== old) continue;
-                    const next = link.cloneNode();
-                    next.setAttribute('href', now);
-                    const drop = () => link.remove();
-                    next.addEventListener('load', drop, { once: true });
-                    next.addEventListener('error', drop, { once: true });
-                    link.after(next);
-                }
-            }
-        };
-        const restore = all => {
-            for (const [i, w] of later.entries()) {
-                if (w.done || (!all && ![...w.keys].every(ready))) continue;
-                w.done = true;
-                const el = document.querySelector('[data-v31np="' + i + '"]');
-                if (!el) continue;
-                el.removeAttribute('data-v31np');
-                for (const [n, v] of w.attrs) el.setAttribute(n, v);
-            }
-        };
-
-        if (!coming.some(([level]) => level === 'A')) finish();
-        for (const [level, n, p] of coming) {
-            const got = await p.catch(() => null);
-            done.add(level);
+        const second = [...listed].filter(([key, row]) => row.level === 'A' && !held.has(key)).map(([key]) => key);
+        if (second.length) {
+            const got = await V31nSync.want(archive, second);
             await fill();
             await make();
-            swap();
-            if (level === 'A') finish();
-            restore(false);
-            report({ what: 'level ' + level, wanted: n, result: got && got.result, steps: got && got.steps, files: urls.size, ms: Math.round(performance.now() - started) });
+            report({ what: 'level A', result: got && got.result, steps: got && got.steps, files: urls.size, ms: Math.round(performance.now() - started) });
         }
-        finish();
-        restore(true);
     };
 
     const me = document.currentScript;
